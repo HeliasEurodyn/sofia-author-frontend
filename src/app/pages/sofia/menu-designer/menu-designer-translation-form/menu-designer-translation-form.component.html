@@ -1,0 +1,307 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          Menu Language Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Select or Add languages from the <i class="fas fa-globe-europe"></i>
+          <b>Available Languages</b> section & Translate on the <b>Menu Descriptions</b> area.</p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card main-card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title" style="margin-bottom: 0px;">
+                <i class="fa fa-th-list"></i>
+                Menu Info</h5>
+            </div>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" style="padding-top: 3px;">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>id</label>
+              <input type="text" readonly class="form-control" value="{{menuDTO.id}}">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Name</label>
+              <input type="text" readonly class="form-control" value="{{menuDTO.name}}">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card main-card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-globe-europe"></i>
+                Available Languages</h5>
+            </div>
+            <div class="pull-right">
+              <button
+                data-target="#selectLanguageModal"
+                data-toggle="modal"
+                class="btn btn-outline-primary">
+                <i class="fas fa-plus"></i> Add Language
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th></th>
+                <th>Code</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.menuDTO == undefined || this.menuDTO?.translations?.length === 0 || this.menuDTO?.translations == undefined ">
+                <td colspan="7" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.menuDTO?.translations">
+                <td>
+                  <button style="margin-right: 4px;" title="Remove" (click)="removeTranslation(column.language)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button title="Remove" (click)="selectLanguage(column.language)" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-pencil-alt"></i>
+                  </button>
+                </td>
+
+                <td>
+                  <img style="width: 18px; padding-bottom: 4px; margin-right: 4px;"
+                       src="../../../assets/img/flags/4x3/{{column.language.image}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control" value="{{column.language.code}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control" value="{{column.language.code}}">
+                </td>
+                <td>
+                  <input type="text" class="form-control" readonly value="{{column.language.name}}">
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button style="color: #959595 !important;" *ngIf="language == null" type="button"
+              class="btn btn-outline-inactive btn-round btn-white header-tab">
+        <i class="fa fa-globe-europe"></i>
+        Menu Descriptions
+      </button>
+      <button *ngIf="language != null" type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+        <img style="width: 18px; padding-bottom: 4px; margin-right: 4px;"
+             src="../../../assets/img/flags/4x3/{{this.language?.image}}">
+        Menu Descriptions
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'empty'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user"  style="min-height: 200px;">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title"></h5>
+            </div>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'general'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <h5 class="card-title pull-left">Menu Items</h5>
+          </div>
+          <div class="col-sm-5">
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-body">
+
+        <ul>
+          <ng-template #recursiveList let-list>
+            <li *ngFor="let item of list">
+        <table>
+          <tr>
+            <td>
+              <button (click)="hideChildren(item)"
+                      *ngIf="hasChildren(item) && (item.expanded === true)"
+                      style="margin: 5px;"
+                      type="button" title="Compress"
+                      class="btn btn-outline-primary btn-icon btn-sm">
+                <i class="fa fa-compress"></i>
+              </button>
+
+              <button (click)="showChildren(item)"
+                      *ngIf="hasChildren(item) && (item.expanded !== true)"
+                      style="margin: 5px;"
+                      type="button"
+                      title="Expand"
+                      class="btn btn-outline-primary btn-icon btn-sm last-menu-item-button">
+                <i class="fa fa-expand"></i>
+              </button>
+
+              <i class="fa {{item.icon}}" style="margin: 5px;"></i>
+            </td>
+            <td>
+              <ng-container *ngFor="let translation of item.translations">
+                <ng-container *ngIf="translation.language.id === this.language.id">
+                  <input type="text"
+                         class="form-control transparent-input"
+                         style="margin: 5px;"
+                         [(ngModel)]="translation.name">
+                </ng-container>
+              </ng-container>
+            </td>
+          </tr>
+        </table>
+
+
+
+
+              <ul *ngIf="(item.menuFieldList != undefined) && item.expanded === true">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: item.menuFieldList }">
+                </ng-container>
+              </ul>
+            </li>
+          </ng-template>
+          <ng-container
+            *ngTemplateOutlet="recursiveList; context:{ $implicit: menuDTO.menuFieldList }"></ng-container>
+        </ul>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectLanguageModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">
+          <i class="fa fa-globe-europe"></i>
+          Languages
+        </h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <i class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th></th>
+                  <th>Code</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let language of languages" style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Delete" class="btn btn-outline-primary btn-icon btn-sm"
+                            data-dismiss="modal"
+                            (click)="addLanguage(language)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <img  style="width: 18px; padding-bottom: 4px; margin-right: 4px;"
+                          src="../../../assets/img/flags/4x3/{{language.image}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{language.code}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{language.name}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

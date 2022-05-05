@@ -1,0 +1,94 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+    </div>
+    <div class="pull-right">
+    </div>
+  </div>
+</div>
+<div>
+  <div class="tab-pane form-area" style="{{this.marginStyle}}">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <div class="row formnav">
+              <div class="col-12">
+                <div class="pull-left">
+                  <h5 class="card-title">
+                    <i class="fa fa-link"></i>
+                    Find Products for Vendor <b>{{this.vendor}}</b>
+                  </h5>
+                  <p class="card-category">Online Vendor search from <a href="https://cvepremium.circl.lu/browse" target="_blank">cvepremium.circl.lu</a></p>
+                </div>
+                <div class="pull-right">
+                  <li class="nav-item loading-nav-item" style="padding: 1px 5px 0px 5px;">
+                    <div class="spinner stopped-spinner" style="border: 1px solid #DDDDDD;padding: 10px;"
+                         [ngClass]="{'running-spinner':loading,'stopped-spinner':!loading}">
+                      <div class="rect rect1"></div>
+                      <div class="rect rect2"></div>
+                      <div class="rect rect3"></div>
+                      <div class="rect rect4"></div>
+                      <div class="rect rect5"></div>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped table-fixed" style="margin-bottom: 0rem;">
+              <thead class="text-primary">
+              <tr>
+                <th style="max-width: fit-content;">
+                  <button type="button"
+                          style="visibility: hidden;height: 2px;"
+                          class="btn btn-icon btn-outline-success btn-icon btn-sm">
+                  </button>
+                </th>
+                <th>
+                  Product
+                </th>
+              </tr>
+              <tr>
+                <th style="max-width: fit-content;">
+                  <button type="button"
+                          style="visibility: hidden"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                  </button>
+                </th>
+                <th>
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend white-field">
+                        <span class="input-group-text white-field search-span-border">
+                          <i class="fa fa-search" style="opacity: 0.8; color: #00bbbf !important;"></i>
+                        </span>
+                    </div>
+                    <input [(ngModel)]="productFilter"
+                           type="text"
+                           class="form-control white-field header-filter-vendor"
+                           (keydown)="columnFilterRefreshData($event)">
+                  </div>
+                </th>
+              </tr>
+              </thead>
+              <tbody id="listTableBody" style="height: calc(100vh - 293px );">
+              <tr *ngFor="let row of this.results">
+                <td class="text-center" style="max-width: fit-content;">
+                  <button type="button" title="Select" (click)="listButtonClick(row)"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input" readonly value="{{row}}">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

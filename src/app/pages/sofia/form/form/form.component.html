@@ -1,0 +1,422 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa {{this.dto.icon}}" style="padding-right: 5px;"></i>{{this.dto.title}}
+        </h3>
+        <p style=" margin-bottom: 5px;" [innerHTML]="this.dto.description"></p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <ng-container *ngFor="let actionButton of this.dto?.formActionButtons">
+        <ng-container *ngIf="actionButton.visible">
+          <button
+            style="margin: 16px 2px 0px !important;"
+            *ngIf="actionButton.editor !== '#parent-menu#' && actionButton.editor !== '#parent-menu-min#'"
+            [disabled]="!actionButton.editable"
+            (click)="headerActionButtonClicked(actionButton)"
+            class="btn {{actionButton.cssClass}}">
+            <i class="fa {{actionButton.icon}}"></i>
+            {{actionButton.description}}
+          </button>
+
+          <div *ngIf="actionButton.editor === '#parent-menu-min#'"
+               ngbDropdown class="d-inline-block"
+               #myDrop="ngbDropdown">
+
+            <button
+              style="margin: 16px 2px 0px !important;padding-right: 15px; padding-left: 15px;"
+              [disabled]="!actionButton.editable"
+              (click)="myDrop.open();"
+              class="btn {{actionButton.cssClass}}">
+              <i class="fa {{actionButton.icon}}"></i>
+            </button>
+
+            <div ngbDropdownMenu class="dropdown-menu-right">
+              <ng-container *ngFor="let subActionButton of actionButton?.formActionButtons">
+                <div *ngIf="subActionButton.editor === '#divider#'" class="dropdown-divider"></div>
+
+                <button ngbDropdownItem
+                        class="submenu-button"
+                        *ngIf="subActionButton.editor !== '#divider#'"
+                        (click)="headerActionButtonClicked(subActionButton)">
+                  <i
+                    class="fa {{subActionButton.icon}} {{subActionButton.cssClass}}"></i> {{subActionButton.description}}
+                </button>
+              </ng-container>
+            </div>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div *ngIf="this.dto?.formTabs.length > 1" class="pull-left">
+      <button *ngFor="let formTab of this.dto?.formTabs"
+              [disabled]="!formTab.editable"
+              [ngClass]="{'selected-tab': selectedFormTabId === formTab.id }"
+              (click)="selectFormTab(formTab)"
+              type="button "
+              class="btn btn-outline-default btn-round">
+        <i class="fa {{formTab?.icon}}"></i>
+        {{formTab.description}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngFor="let formTab of this.dto?.formTabs"
+     [ngClass]="{'is-hidden': selectedFormTabId !== formTab.id }">
+
+  <ng-container
+    *ngTemplateOutlet="recursiveSection; context:{ $implicit: formTab }"></ng-container>
+
+</div>
+
+<ng-template #recursiveSection let-formSection>
+  <div *ngFor="let formArea of formSection.formAreas" class="{{formArea.cssclass}} form-area form-area-{{formArea.id}}">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col-12">
+            <div class="pull-left">
+              <h5 class="card-title" [ngClass]="{'no-card-title-bottom-margin': formArea?.description?.length > 0}">
+                <i class="fa {{formArea.icon}}"></i>
+                <span style="padding-left: 5px;" [innerHTML]="formArea.title"></span>
+              </h5>
+              <p class="card-category" style="margin-bottom: 0rem;" [innerHTML]="formArea.description"></p>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <ng-container *ngFor="let formcontrol of formArea?.formControls">
+
+            <ng-container *ngIf="formcontrol.type === 'button'">
+              <div class="form-group {{formcontrol.cssclass}}">
+                <button
+                  (click)="formButtonClicked(formcontrol.formControlButton)"
+                  style="margin-top: 17px;"
+                  title="{{formcontrol.formControlButton.description}}"
+                  type="button"
+                  class="btn {{formcontrol.formControlButton.cssClass}} btn-{{formcontrol.id}}">
+                  <i
+                    class="fa {{formcontrol.formControlButton.icon}}"></i> {{formcontrol.formControlButton.description}}
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="formcontrol.type === 'field'">
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'varchar'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+
+                    <app-varchar-input class="form-input-field"
+                                       [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                       [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                       (eventOccured)="fieldEventOccured($event)"
+                                       [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:''"
+                                       [editable]="formcontrol.formControlField.editable">
+                    </app-varchar-input>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'checkbox'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <div style="height: 27px;"></div>
+                    <app-check-box class="form-input-field"
+                                   [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                   [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                   (eventOccured)="fieldEventOccured($event)"
+                                   [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:''"
+                                   [editable]="formcontrol.formControlField.editable">
+                    </app-check-box>
+                    <span
+                      style="position:absolute;top: 37px;font-weight: bolder;">{{formcontrol.formControlField.description}}</span>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'text'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-text-input class="form-input-field"
+                                    [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                    [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                    (eventOccured)="fieldEventOccured($event)"
+                                    [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:''"
+                                    [editable]="formcontrol.formControlField.editable">
+                    </app-text-input>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'combo'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}} "
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+
+                    <app-combo-box class="form-input-field"
+                                   [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                   [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                   (eventOccured)="fieldEventOccured($event)"
+                                   [editable]="formcontrol.formControlField.editable">
+                    </app-combo-box>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'autocomplete-combo'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}} "
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+
+                    <app-autocomplete-combo-box class="form-input-field"
+                                                [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                                [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                                (eventOccured)="fieldEventOccured($event)"
+                                                [editable]="formcontrol.formControlField.editable">
+                    </app-autocomplete-combo-box>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'double' ">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-numeric-input class="form-input-field"
+                                       [(inputValue)]="formcontrol.formControlField.componentPersistEntityField.value"
+                                       [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:'0*.0000'"
+                                       (eventOccured)="fieldEventOccured($event)"
+                                       [editable]="formcontrol.formControlField.editable"
+                                       [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                       [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"></app-numeric-input>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'int' ||
+                formcontrol.formControlField.componentPersistEntityField.assignment.type === 'bigint'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}} "
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-numeric-input class="form-input-field"
+                                       [(inputValue)]="formcontrol.formControlField.componentPersistEntityField.value"
+                                       [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:'0*'"
+                                       (eventOccured)="fieldEventOccured($event)"
+                                       [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                       [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                       [editable]="formcontrol.formControlField.editable">
+                    </app-numeric-input>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'list'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-list-selector class="form-input-field"
+                                       [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                                       [command]="formcontrol.formControlField.componentPersistEntityField.assignment.editor"
+                                       [editable]="formcontrol.formControlField.editable"
+                                       [component]="this.dto.component"
+                                       [(value)]="formcontrol.formControlField.componentPersistEntityField.value"
+                                       [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                       [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                       (eventOccured)="fieldEventOccured($event)"
+                    ></app-list-selector>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'cve'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-cve-search-selector
+                      [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                      [command]="formcontrol.formControlField.componentPersistEntityField.assignment.editor"
+                      [editable]="formcontrol.formControlField.editable"
+                      [component]="this.dto.component"
+                      [(value)]="formcontrol.formControlField.componentPersistEntityField.value"
+                      [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                      [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                      (eventOccured)="fieldEventOccured($event)"
+                    ></app-cve-search-selector>
+                    <div class="category">{{formcontrol.formControlField.message}}</div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'datetime'">
+                <div class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-date-picker class="form-input-field"
+                                     [(inputDate)]="formcontrol.formControlField.componentPersistEntityField.value"
+                                     [editable]="formcontrol.formControlField.editable"
+                                     [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                     [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                     [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:'dd/MM/yyyy'"
+                                     (eventOccured)="fieldEventOccured($event)">
+                    </app-date-picker>
+                    <div class="category">{{formcontrol.formControlField.message}}</div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'chips'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b><br>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                    <app-chips
+                      [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                      [editable]="formcontrol.formControlField.editable"
+                      [fieldClass]="formcontrol.id"
+                      (eventOccured)="fieldEventOccured($event)"
+                      [command]="formcontrol.formControlField.componentPersistEntityField.assignment.editor"
+                      [componentPersistEntity]="formcontrol.formControlField.componentPersistEntity"
+                      [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField">
+                    </app-chips>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="formcontrol.type === 'table'">
+              <div class="col-12" *ngIf="formcontrol != null">
+
+                <app-form-table
+                  [refreshUuid]="formcontrol.refreshUuid"
+                  [formcontrol]="formcontrol"
+                  [component]="this.dto.component"
+                  [form]="this">
+                </app-form-table>
+
+              </div>
+            </ng-container>
+
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<app-yes-no-dialog #yesNoDialog></app-yes-no-dialog>
+
+<app-ok-dialog #okDialog></app-ok-dialog>
+
+<button id="formPopupModalHandlerId"
+        data-target="#formPopupModal"
+        data-toggle="modal"
+        style="display: none;">
+</button>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="formPopupModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: #ffffffad !important;">
+      <div class="modal-header justify-content-center">
+        <ng-container *ngFor="let formPopup of this.dto?.formPopups">
+          <ng-container *ngIf="selectedFormPopupCode === formPopup.code">
+            <h5 class="title title-up modal-title" style="margin: 0;">
+              <i class="fa {{formPopup.icon}}"></i>
+              {{formPopup.description}}</h5>
+            <button aria-label="Close" data-dismiss="modal" id="formPopupCloseModalHandlerId" type="button"
+                    class="close modal-dialog-button">
+              <i class="nc-icon nc-simple-remove"></i>
+            </button>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="modal-body modal-dialog-body">
+        <ng-container *ngFor="let formPopup of this.dto?.formPopups">
+          <ng-container *ngIf="selectedFormPopupCode === formPopup.code">
+            <ng-container
+              *ngTemplateOutlet="recursiveSection; context:{ $implicit: formPopup }"></ng-container>
+            <br>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedActionButtonModal" role="dialog" aria-hidden="true">
+  <div
+    *ngIf="this.selectedActionButton?.formActionButtons != undefined"
+    class="modal-dialog modal-dialog-centered modal-select-fields"
+    style="max-width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 style="margin-top: 0px;" class="title title-up modal-title">
+          <i class="fa {{this.selectedActionButton?.icon}}"></i>
+          {{this.selectedActionButton?.description}}</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row" *ngFor="let actionButton of this.selectedActionButton?.formActionButtons">
+          <div class="col-md-12"
+               data-dismiss="modal"
+               style="cursor: pointer;"
+               (click)="headerActionButtonClicked(actionButton)">
+            <h5 class="{{actionButton.cssClass}}" style="margin: 2px;">
+              <i class="fa {{actionButton.icon}}"></i>
+              {{actionButton.description}}</h5>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-success" data-dismiss="modal" type="button">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

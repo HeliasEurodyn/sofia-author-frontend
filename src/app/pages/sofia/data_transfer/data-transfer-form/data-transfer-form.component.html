@@ -1,0 +1,1162 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cloud" style="padding-right: 5px;"></i>
+          Data Transfer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Select the entities that will be transfered and save. </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button (click)="save()" class="btn btn-outline-success">
+        <i class="fa fa-save"></i> save
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button (click)="setVisibleSection('general');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-sliders-h"></i>
+        General
+      </button>
+      <button (click)="setVisibleSection('forms');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-object-group"></i>
+        Forms
+      </button>
+      <button (click)="setVisibleSection('lists');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-list"></i>
+        Lists
+      </button>
+      <button (click)="setVisibleSection('users');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-users"></i>
+        Users
+      </button>
+      <button (click)="setVisibleSection('roles');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-users"></i>
+        Roles
+      </button>
+      <button (click)="setVisibleSection('menus');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-bars"></i>
+        Menus
+      </button>
+      <button (click)="setVisibleSection('components');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-code-branch"></i>
+        Components
+      </button>
+      <button (click)="setVisibleSection('tables');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-table"></i>
+        Tables
+      </button>
+      <button (click)="setVisibleSection('views');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-table"></i>
+        Views
+      </button>
+      <button (click)="setVisibleSection('app_views');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-table"></i>
+        <i class="fa fa-chart"></i>
+        App Views
+      </button>
+      <button (click)="setVisibleSection('charts');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-chart-bar"></i>
+        charts
+      </button>
+      <button (click)="setVisibleSection('info_cards');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fas fa-info-circle"></i>
+        Info Cards
+      </button>
+      <button (click)="setVisibleSection('html_parts');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-cogs"></i>
+        Html Parts
+      </button>
+      <button (click)="setVisibleSection('dashboards');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-cogs"></i>
+        Dashbords
+      </button>
+      <button (click)="setVisibleSection('reports');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-file-invoice"></i>
+        Reports
+      </button>
+      <button (click)="setVisibleSection('xls_imports');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-file-excel"></i>
+        Xls Imports
+      </button>
+      <button (click)="setVisibleSection('searches');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-search"></i>
+        Searches
+      </button>
+      <button (click)="setVisibleSection('custom_queries');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-code"></i>
+        Custom Queries
+      </button>
+      <button (click)="setVisibleSection('languages');" class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <i class="fa fa-globe"></i>
+        Languages
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'general'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-sliders-h"></i>
+                Settings</h5>
+            </div>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Id</label>
+              <input class="form-control" readonly type="text" value="{{dto.id}}">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-10">
+            <div class="form-group">
+              <label>Name</label>
+              <input [(ngModel)]="dto.name" class="form-control" type="text">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Version</label>
+              <input [(ngModel)]="dto.currentVersion" class="form-control" type="number">
+              <code></code>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group"><b>Description</b>
+              <textarea class="form-control code-textarea ng-pristine ng-valid ng-touched" [(ngModel)]="dto.description"></textarea>
+              <div class="category"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'forms'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Created at</th>
+              <th>Component Id</th>
+              <th>Component Name</th>
+              <th>Json Url</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.formList == undefined || this.formList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of formList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['component']['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                       type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['jsonUrl']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'lists'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+              <th>Component Id</th>
+              <th>Component Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.listList == undefined || this.listList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.listList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['component']['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                       type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'menus'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.menusList == undefined || this.menusList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.menusList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'components'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.componentsList == undefined || this.componentsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.componentsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'tables'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.tableList == undefined || this.tableList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.tableList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'views'" class="row form-area">
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.viewList == undefined || this.viewList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.viewList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'app_views'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.appViewList == undefined || this.appViewList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.appViewList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'users'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.usersList == undefined || this.usersList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.usersList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['username']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'roles'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.rolesList == undefined || this.rolesList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.rolesList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'charts'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.chartsList == undefined || this.chartsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.chartsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['title']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'info_cards'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.infoCardsList == undefined || this.infoCardsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.infoCardsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['title']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'html_parts'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.htmlPartsList == undefined || this.htmlPartsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.htmlPartsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'dashboards'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.dashboardsList == undefined || this.dashboardsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.dashboardsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['description']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'reports'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.reportsList == undefined || this.reportsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.reportsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'xls_imports'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.xlsImportsList == undefined || this.xlsImportsList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.xlsImportsList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'searches'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.searchesList == undefined || this.searchesList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.searchesList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'custom_queries'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.customQueriesList == undefined || this.customQueriesList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.customQueriesList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'languages'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="numbers pull-left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left"></th>
+              <th>id</th>
+              <th>name</th>
+              <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.languagesList == undefined || this.languagesList.length === 0 ">
+              <td class="empty-table-row" colspan="12">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.languagesList">
+              <td class="text-center">
+                <label class="checkbox">
+                  <input [(ngModel)]="row['checked']" type="checkbox"/>
+                  <span class="info"></span>
+                </label>
+              </td>
+              <td>
+                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+              </td>
+              <td>
+                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

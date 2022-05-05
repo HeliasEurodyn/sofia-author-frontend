@@ -1,0 +1,187 @@
+<div class="row formnav">
+    <div class="col-sm-12">
+      <div class="pull-left">
+        <div class="col-12">
+          <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+            <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+            Table Designer
+          </h3>
+          <p style=" margin-bottom: 5px;">Table Designer Form </p>
+        </div>
+      </div>
+      <div class="pull-right">
+        <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+          <i class="fa fa-save"></i> Save
+        </button>
+        <button class="btn btn-outline-danger"  style="margin-top: 0px;" [hidden]="mode === 'new-record'" (click)="delete()">
+          <i class="fa fa-times"></i> Delete
+        </button>
+        <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showPreviousPageButton()" (click)="navigateToPreviousPage()">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+        <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()" (click)="navigateToNextPage()">
+          <i class="fa fa-chevron-right"></i> Next
+        </button>
+      </div>
+    </div>
+  </div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <!-- <div class="card-header">
+        <h5 class="card-title">Table Designer</h5>
+      </div> -->
+      <div class="card-body">
+        <form>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" >
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" name="name" (focusout)="checkIfTableAlreadyExists()" [(ngModel)]="dto.name" [readonly]="mode === 'edit-record'" >
+                <small class="text-info" *ngIf="tableExists"> Table already exists. </small>
+                <code ></code>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Indexes</label>
+                <input type="text" class="form-control" placeholder="Indexes" name="indexes" [(ngModel)]="dto.indexes"  >
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+              <h5 class="card-title pull-left">Fields</h5>
+          </div>
+          <div class="col-sm-5">
+            <div class="pull-right">
+              <button class="btn btn-outline-primary" (click)="generateTableFields()">
+                <i class="fa fa-plus-circle"></i> Generate fields
+              </button>
+              <button class="btn btn-outline-primary" (click)="addLine()">
+                <i class="fa fa-plus-circle"></i> New
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-right">Actions</th>
+              <th *ngFor="let cell of tableHeaders">{{ cell }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of this.dto.tableFieldList">
+              <td>
+                <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"  (click)="removeLine(row)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+
+              <td>
+                <input type="text" class="form-control transparent-input" [(ngModel)]="row.name">
+              </td>
+              <td>
+                <select [(ngModel)]="row.type" class="transparent-input">
+                  <option value=""></option>
+                  <option value="bigint">bigint</option>
+                  <option value="int">int</option>
+                  <option value="double">double</option>
+                  <option value="datetime">datetime</option>
+                  <option value="varchar">varchar</option>
+                  <option value="text">text</option>
+                </select>
+              </td>
+              <td>
+                <input class="form-control ng-dirty ng-valid ng-touched transparent-input" number="true"
+                       type="number" [(ngModel)]="row.size"  >
+              </td>
+
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.autoIncrement">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+
+              </td>
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.primaryKey">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </td>
+
+
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.hasDefault">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </td>
+
+              <td>
+                <input class="form-control ng-dirty ng-valid ng-touched transparent-input"
+                        [(ngModel)]="row.defaultValue"  >
+              </td>
+
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.isUnsigned">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </td>
+
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.hasNotNull">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </td>
+
+
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+

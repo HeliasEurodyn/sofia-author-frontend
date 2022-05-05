@@ -1,0 +1,1 @@
+window['backend_url'] = '';

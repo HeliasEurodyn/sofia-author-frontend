@@ -1,0 +1,1026 @@
+<div class="row dashboard-entity main-dashboard-row">
+  <div class="col-6">
+
+    <div class="row">
+
+      <div class="col-6 dashboard-entity">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-left">
+                  <h5 class="card-title" style="margin-bottom: 0px;">
+                    <i class="fas fa-info-circle"></i> Welcome to SOFIA
+                  </h5>
+                  <p style="margin-bottom: 8px;"><b>Dynamic Content Management System</b> Control Panel</p>
+                </div>
+                <div class="pull-right"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top: 6px;padding-bottom: 0px;">
+            <div class="row">
+              <div class="col-md-12">
+                <i class="fas fa-bookmark"></i> Click here to download the <b>
+                <a
+                  href="https://redmine.iccs.gr/login?back_url=https%3A%2F%2Fredmine.iccs.gr%2Fprojects%2Fcityscape%2Fdmsf"
+                  target="_blank">
+                  <i class="fas fa-download"></i> Author's Manual</a></b>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 dashboard-entity">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-left">
+                  <h5 class="card-title" style="margin-bottom: 0px;">
+                    <i class="fa fa-right-left"></i> Data Transfer
+                  </h5>
+                  <p style="margin-bottom: 8px;">Import <b>.sofia</b> configuration files using the file selector</p>
+                </div>
+                <div class="pull-right"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top: 0px;padding-bottom: 0px;">
+            <div class="row">
+              <div class="col-md-12">
+                <input #fileUploader
+                       (change)="handleFileInput($event)"
+                       accept=".sofia"
+                       style="display: none;"
+                       type="file">
+                <div class="form-group" style="min-width: 350px; margin-bottom: 9px;" title="Import Data File">
+                  <div class="input-group input-group-selector no-border">
+                    <div (click)="fileUploader.click()"
+                         class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fas fa-upload"></i>
+                 </span>
+                    </div>
+                    <input (click)="fileUploader.click()"
+                           class="form-control"
+                           readonly
+                           type="text"
+                           value="{{this?.filename}}">
+                    <div (click)="clearFile()" class="input-group-append">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-4 dashboard-entity">
+        <div class="card card-pricing">
+          <div class="card-header">
+            <h5 class="card-title"> Tables </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-pe">
+              <i class="fa-solid fa-table-list"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label" style="font-size: 13px;">
+                 <i class="fa fa-circle text-empty" style="font-size: 11px;"></i> Create tables to the database or hook to existing database tables with Sofia.
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Views </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-pe">
+              <i class="fa-solid fa-rectangle-list"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                Create views to the database.
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> App Views </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-pe">
+              <i class="fa-solid fa-rectangle-list"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Components </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-component">
+              <i class="fa-solid fa-timeline"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label" style="font-size: 10px;">
+                  <i class="fa fa-circle text-empty" style="font-size: 9px;" ></i>
+                  Each component has a group of Persist Entities (Tables, Views & App Views) linked together in a logical way representing the business login of your application.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Lists </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-fl">
+              <i class="fa fa-list"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label" style="font-size: 10px;">
+                  <i class="fa fa-circle text-empty" style="font-size: 9px;" ></i>
+                  Each component is a group of Persist Entities (Tables, Views & App Views) linked together in a logical way representing the business login of your application.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Forms </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-fl">
+              <i class="fa fa fa-object-group"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label" style="font-size: 10px;">
+                  <i class="fa fa-circle text-empty" style="font-size: 9px;" ></i>
+                  Each component is a group of Persist Entities (Tables, Views & App Views) linked together in a logical way representing the business login of your application.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-4 dashboard-entity">
+        <div class="card card-pricing">
+          <div class="card-header">
+            <h5 class="card-title"> Users </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-u">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label" style="font-size: 13px;">
+                  <i class="fa fa-circle text-empty" style="font-size: 11px;"></i> Create tables to the database or hook to existing database tables with Sofia.
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Roles </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-u">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create views to the database.
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Menus </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-u">
+              <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Languages </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-u">
+              <i class="fa-solid fa-earth-europe"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Chart </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-d">
+              <i class="fa-solid fa-chart-area"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Info Card </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-d">
+              <i class="fa-solid fa-tarp"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Html Part </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-d">
+              <i class="fa-brands fa-html5"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Dashboard </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-d">
+              <i class="fa fa-chart-bar"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Reports </h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-other">
+              <i class="fa fa fa-file-invoice"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title"> Xls Imports</h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-other">
+              <i class="fa fa-file-excel"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title">Searches</h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-other">
+              <i class="fa fa-search"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title">Custom Queries</h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-other">
+              <i class="fa fa-code"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title">Data Transfer</h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-other">
+              <i class="fa fa-right-left"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 dashboard-entity" >
+        <div class="card card-pricing ">
+          <div class="card-header">
+            <h5 class="card-title">Expression Viewer</h5>
+          </div>
+          <div class="card-body">
+            <div class="card-icon icon-other">
+              <i class="fa fa-calculator"></i>
+            </div>
+            <ul>
+              <li>
+                <div class="label">
+                  <i class="fa fa-circle text-empty" ></i>
+                  Create Application Views.
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button title="View All" class="btn btn-sm btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button title="Add New" class="btn btn-sm btn-outline-success btn-round btn-icon">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-6">
+    <div class="row">
+
+      <div class="col-md-12 dashboard-entity">
+        <div class="card">
+          <div class="card-header">
+            <div class="row formnav">
+              <div class="col-12">
+                <div class="pull-left">
+                  <h5 class="card-title" style="margin-bottom: 0px;">
+                    <i class="fa fa-users"></i>
+                    Users </h5>
+                  <p style="margin-bottom: 5px;">10 latest Users</p></div>
+                <div class="pull-right">
+                  <button (click)="openList('STATICPAGE[NAME:user-list]')"
+                          class="btn btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th class="text-left"></th>
+                  <th>id</th>
+                  <th>username</th>
+                  <th>email</th>
+                  <th>status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngIf="usersList == undefined || usersList.length === 0 ">
+                  <td class="empty-table-row" colspan="12">Empty!</td>
+                </tr>
+                <tr *ngFor="let row of usersList">
+                  <td>
+                    <button (click)="openForm( row['id'], 'user-form')" class="btn btn-outline-success btn-icon btn-sm"
+                            title="Edit"
+                            type="button">
+                      <i class="fa fa-pencil-alt"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['username']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['email']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['status']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 dashboard-entity">
+        <div class="card">
+          <div class="card-header">
+            <div class="row formnav">
+              <div class="col-12">
+                <div class="pull-left">
+                  <h5 class="card-title" style="margin-bottom: 0px;">
+                    <i class="fa fa-list"></i>
+                    Lists </h5>
+                  <p style="margin-bottom: 5px;"> 10 Latest Lists</p></div>
+                <div class="pull-right">
+                  <button (click)="openList('STATICPAGE[NAME:list-designer-list]')"
+                          class="btn btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th class="text-left"></th>
+                  <th>id</th>
+                  <th>name</th>
+                  <th>Component</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngIf="listsList == undefined || listsList.length === 0 ">
+                  <td class="empty-table-row" colspan="12">Empty!</td>
+                </tr>
+                <tr *ngFor="let row of listsList">
+                  <td>
+                    <button (click)="openForm( row['id'], 'list-designer-form')"
+                            class="btn btn-outline-success btn-icon btn-sm" title="Edit"
+                            type="button">
+                      <i class="fa fa-pencil-alt"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                           type="text">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 dashboard-entity">
+        <div class="card">
+          <div class="card-header">
+            <div class="row formnav">
+              <div class="col-12">
+                <div class="pull-left">
+                  <h5 class="card-title" style="margin-bottom: 0px;">
+                    <i class="fa fa-object-group"></i>
+                    Forms </h5>
+                  <p style="margin-bottom: 5px;"> 10 Latest FOrms</p></div>
+                <div class="pull-right">
+                  <button (click)="openList('STATICPAGE[NAME:form-designer-list]')"
+                          class="btn btn-outline-info btn-round btn-icon">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th class="text-left"></th>
+                  <th>id</th>
+                  <th>Name</th>
+                  <th>Component</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngIf="formsList == undefined || formsList.length === 0 ">
+                  <td class="empty-table-row" colspan="12">Empty!</td>
+                </tr>
+                <tr *ngFor="let row of formsList">
+                  <td>
+                    <button (click)="openForm( row['id'], 'form-designer-form')"
+                            class="btn btn-outline-success btn-icon btn-sm" title="Edit"
+                            type="button">
+                      <i class="fa fa-pencil-alt"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+                  </td>
+                  <td>
+                    <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                           type="text">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

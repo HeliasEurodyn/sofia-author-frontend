@@ -1,0 +1,77 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="numbers pull-left">  </div>
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          User Groups
+        </h3>
+        <p style=" margin-bottom: 5px;"> User Groups List </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" (click)="createNew()">
+        <i class="fa fa-plus-circle"></i> New
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="numbers pull-left"> </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left">Actions</th>
+              <th>id</th>
+              <th>name</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngIf="tableData.length == 0">
+              <td colspan="3" class="empty-list">
+                Empty!
+              </td>
+            </tr>
+
+            <tr *ngFor="let row of tableData">
+              <td>
+                <button type="button" title="Edit" class="btn btn-outline-success btn-icon btn-sm"
+                        (click)="edit(row['id'])">
+                  <i class="fa fa-pencil-alt"></i>
+                </button>
+                <button type="button" title="Delete" class="btn btn-outline-danger btn-icon btn-sm" (click)="delete(row['id'])">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['id']">
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['name']">
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,605 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-user" style="padding-right: 5px;"></i>
+          User
+        </h3>
+        <p style=" margin-bottom: 5px;"> User Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i>
+        Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i>
+        Delete
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showPreviousPageButton()"
+              (click)="navigateToPreviousPage()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()"
+              (click)="navigateToNextPage()">
+        <i class="fa fa-chevron-right"></i> Next
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+        <i class="fa fa-sliders-h"></i>
+        General
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('languages');">
+        <i class="fa fa-globe-europe"></i>
+        Languages
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('roles');">
+        <i class="fa fa-key"></i>
+        Roles
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-sliders-h"></i>
+          General
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" class="form-control" name="username" [(ngModel)]="userDTO.username">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" name="email" [(ngModel)]="userDTO.email">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Status</label>
+              <input type="text" class="form-control" name="status" [(ngModel)]="userDTO.status">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Date Format</label>
+              <input type="text" class="form-control" name="dateFormat" [(ngModel)]="userDTO.dateFormat">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Navigation command on Login</label>
+              <input type="text" class="form-control" name="status" [(ngModel)]="userDTO.loginNavCommand">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Navigation command on Search</label>
+              <input type="text" class="form-control" name="status" [(ngModel)]="userDTO.searchNavCommand">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Header Menu</label>
+              <div class="input-group input-group-selector no-border">
+                <div data-target="#insertHeaderMenuModal" data-toggle="modal" class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                </div>
+                <input readonly data-target="#insertHeaderMenuModal" data-toggle="modal" type="text" class="form-control"
+                       value="{{userDTO?.headerMenu?.id}} {{userDTO?.headerMenu?.name}}">
+                <div class="input-group-append" (click)="selectHeaderMenu(null)">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Sidebar Menu</label>
+              <div class="input-group input-group-selector no-border">
+                <div data-target="#insertSidebarMenuModal" data-toggle="modal" class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                </div>
+                <input readonly data-target="#insertSidebarMenuModal" data-toggle="modal" type="text" class="form-control"
+                       value="{{userDTO?.sidebarMenu?.id}} {{userDTO?.sidebarMenu?.name}}">
+                <div class="input-group-append" (click)="selectSidebarMenu(null)">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-key"></i>
+          Password Update
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Password</label>
+              <input type="text" class="form-control" name="password" [(ngModel)]="userDTO.password">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Repeat Password</label>
+              <input type="text" class="form-control" name="repeatPassword" [(ngModel)]="userDTO.repeatPassword">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'languages' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-globe-europe"></i>
+          Default Language
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Default Language</label>
+              <div class="input-group input-group-selector no-border">
+                <div data-target="#insertHeaderMenuModal" data-toggle="modal" class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                </div>
+                <input readonly data-target="#insertDefaultLanguageModal" data-toggle="modal" type="text" class="form-control"
+                       value="{{userDTO?.defaultLanguage?.id}} {{userDTO?.defaultLanguage?.name}}">
+                <div class="input-group-append" (click)="selectDefaultLanguage(null)">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'languages' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left"><h5 class="card-title pull-left">
+              <i class="fa fa-globe-europe"></i>
+              Available Languages
+            </h5>
+            </div>
+            <div class="pull-right">
+              <button
+                data-target="#insertLanguageModal"
+                data-toggle="modal"
+                class="btn btn-outline-primary">
+                <i class="fa fa-plus-circle"></i> Add Language
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.userDTO == undefined || this.userDTO?.languages?.length === 0 || this.userDTO?.languages == undefined ">
+                <td colspan="3" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let language of this.userDTO?.languages">
+                <td>
+                  <button title="Remove" (click)="removeLanguage(language)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="{{language.name}}">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'roles' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left"><h5 class="card-title pull-left">
+              <i class="fa fa-key"></i>
+              Roles
+            </h5>
+            </div>
+            <div class="pull-right">
+              <button
+                data-target="#insertRoleMenuModal"
+                data-toggle="modal"
+                class="btn btn-outline-primary">
+                <i class="fa fa-plus-circle"></i> Add Role
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.userDTO == undefined || this.userDTO?.roles?.length === 0 || this.userDTO?.roles == undefined ">
+                <td colspan="3" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let role of this.userDTO?.roles">
+                <td>
+                  <button title="Remove" (click)="removeRole(role)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="{{role.name}}">
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="insertSidebarMenuModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Sidebar Menu</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let menu of menuDTOS" style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Delete" class="btn btn-outline-success btn-icon btn-sm"
+                            data-dismiss="modal"
+                            (click)="selectSidebarMenu(menu)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{menu['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{menu['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="insertHeaderMenuModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Header Menu</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let menu of menuDTOS" style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Delete" class="btn btn-outline-success btn-icon btn-sm"
+                            data-dismiss="modal"
+                            (click)="selectHeaderMenu(menu)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{menu['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{menu['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="insertRoleMenuModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Role</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let role of roleDTOS" style="cursor: pointer;">
+                  <td>
+                    <button
+                      data-dismiss="modal"
+                      type="button"
+                      title="Delete"
+                      class="btn btn-outline-primary btn-icon btn-sm"
+                      (click)="selectRole(role)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{role['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{role['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="insertLanguageModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Language</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let languageDTO of languageDTOS" data-dismiss="modal"
+                    style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Delete" class="btn btn-outline-success btn-icon btn-sm"
+                            (click)="addLanguage(languageDTO)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{languageDTO['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{languageDTO['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="insertDefaultLanguageModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Language</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let languageDTO of languageDTOS" data-dismiss="modal"
+                    style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Delete" class="btn btn-outline-success btn-icon btn-sm"
+                            (click)="selectDefaultLanguage(languageDTO)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{languageDTO['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{languageDTO['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

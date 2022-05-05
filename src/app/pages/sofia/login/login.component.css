@@ -1,0 +1,83 @@
+.container{
+  padding-top: 21vh;
+}
+
+.form{
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.49),
+  0 16px 24px 2px rgba(0, 0, 0, 0.31),
+  0 6px 30px 5px rgba(0, 0, 0, 0.19);
+}
+
+.background{
+  background-image: url('/assets/img/bg/dark-material-bg.jpg');
+  background-size: cover;
+}
+
+.wrapper.wrapper-full-page {
+ z-index: 999;
+}
+
+.btn-outline-success {
+  border: 1px solid #51cbce !important;
+  color: #51cbce !important;
+}
+
+.btn-outline-success:hover{
+  border: 1px solid #837c7c !important;
+  background-color: #51cbce !important;
+  color: #fff !important;
+}
+
+.content{
+  z-index: 999;
+}
+
+.footer{
+  z-index: -1 !important;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  border-top: none;
+  color: white;
+  z-index: 99;
+}
+
+.navbar{
+  padding-top: 30px;
+  border-bottom: none;
+}
+
+.navbar.navbar-transparent a:not(.dropdown-item):not(.btn) {
+  color: #ffffff;
+}
+
+.footer {
+  padding: 24px 0;
+  padding-top: 0px;
+}
+
+.social a{
+  padding: 0px 2px 0px 2px;
+}
+
+.social-google {
+  color: #dc3545;
+}
+
+.social-facebook {
+  color: #0e4194;
+}
+
+.social-github {
+  color: #342333;
+}
+
+.social-linkedin {
+  color: #0881b0;
+}
+
+
+
+/*.navbar.navbar-transparent .nav-item .nav-link:not(.btn) {*/
+/*  color: #ffffff;*/
+/*}*/

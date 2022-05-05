@@ -1,0 +1,65 @@
+::ng-deep ngb-typeahead-window.dropdown-menu {
+  background-color: #e4e4e4 !important;
+  border-radius: 0px !important;
+  border: 1px solid #84b6c7;
+}
+
+::ng-deep ngb-typeahead-window.dropdown-menu .dropdown-item:first-child {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+::ng-deep ngb-typeahead-window.dropdown-menu .dropdown-item:last-child {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+::ng-deep ngb-typeahead-window {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+::ng-deep ngb-typeahead-window.dropdown-menu .dropdown-item.active {
+  background-color: #0084b391 !important;
+}
+
+.input-group-prepend .input-group-text {
+  border: 1px solid #51cbce;
+  border-right: none;
+}
+
+.input-group-append .input-group-text {
+  border: 1px solid #51cbce;
+  border-left: none;
+}
+
+.input-group, .form-control {
+  cursor: pointer;
+}
+
+.input-group{
+  margin-bottom: 0px !important;
+}
+
+.requider-field {
+  border-top: 1px solid #f28157 !important;
+  border-bottom: 1px solid #f28157 !important;
+}
+
+.requider-field-left {
+  border-top: 1px solid #f28157 !important;
+  border-bottom: 1px solid #f28157 !important;
+  border-left: 1px solid #f28157 !important;
+}
+
+.requider-field-right {
+  border-top: 1px solid #f28157 !important;
+  border-bottom: 1px solid #f28157 !important;
+  border-right: 1px solid #f28157 !important;
+}
+
+.white-field{
+  background-color: white;
+}
+

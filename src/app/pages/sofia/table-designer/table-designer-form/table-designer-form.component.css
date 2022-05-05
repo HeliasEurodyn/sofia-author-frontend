@@ -1,0 +1,9 @@
+select {
+  padding: 4px;
+}
+
+.transparent-input {
+  border: 1px solid #cccccc70!important;
+  background-color: #ffffff8c;
+}
+

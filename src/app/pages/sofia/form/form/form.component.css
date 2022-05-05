@@ -1,0 +1,84 @@
+.is-hidden {
+  display: none;
+}
+
+.requider-field {
+  border: 1px solid #f28157;
+}
+
+.requider-field-empty {
+  border: 1px solid #137f82;
+}
+
+.btn {
+  margin: 2px;
+}
+
+.table {
+  margin-bottom: 0rem;
+}
+
+.hidden-field{
+  display: none;
+}
+
+.modal-dialog {
+  max-width: 1500px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.selected-tab{
+  border: 2px solid #2596da !important;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs-navigation{
+  padding-top: 10px;
+}
+
+.nav-tabs .nav-item {
+  border-bottom: 2px solid #66615b;
+  font-weight: 600;
+  font-size: 0.8571em;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color: #66615b #66615b #fff;
+  border: 1px solid;
+}
+
+.btn-round {
+  border-radius: 0px 30px 0px 20px;
+  margin: 10px 1px 0px !important;
+}
+
+.no-card-title-bottom-margin{
+  margin-bottom: 0px;
+}
+
+.formnav .submenu-button {
+   margin: 0px !important;
+   background-color: inherit;
+}
+
+.formnav .submenu-button:hover {
+  margin: 0px !important;
+  background-color: #cccccc !important;
+}
+
+.dropdown-menu:before {
+  border-bottom: 11px solid #FFFFFF;
+  border-left: 11px solid rgba(0, 0, 0, 0);
+  border-right: 11px solid rgba(0, 0, 0, 0);
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 15px;
+  top: -11px;
+}

@@ -1,0 +1,372 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          Menu Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Menu Designer Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i>
+        Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i>
+        Delete
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showPreviousPageButton()" (click)="navigateToPreviousPage()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()" (click)="navigateToNextPage()">
+        <i class="fa fa-chevron-right"></i> Next
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+              <i class="fa fa-sliders-h"></i>
+        General
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+      (click)="setVisibleSection('access_control');">
+        <i class="fa fa-sliders-h"></i>
+        Access Control
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'general'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <!-- <h5 class="card-title">Menu</h5> -->
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="menuComponent.name">
+                <code></code>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'general'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <h5 class="card-title pull-left">Menu Items</h5>
+          </div>
+          <div class="col-sm-5">
+            <div class="pull-right">
+              <button class="btn btn-outline-primary" (click)="addParentMenuField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                New Menu </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-body">
+
+        <ul>
+          <ng-template #recursiveList let-list>
+            <li *ngFor="let item of list">
+              <h6>
+                <button (click)="upItemInList(item,list)"   type="button" title="New Submenu"
+                        class="btn btn-outline-warning btn-icon btn-sm">
+                  <i class="fa fa-angle-up"></i>
+                </button>
+                <button (click)="downItemInList(item, list)"   type="button" title="New Submenu"
+                        class="btn btn-outline-warning btn-icon btn-sm">
+                  <i class="fa fa-angle-down"></i>
+                </button>
+                <button (click)="addChildMenuField(item)"  data-target="#menuModal" data-toggle="modal"  type="button" title="New Submenu"
+                        class="btn btn-outline-primary btn-icon btn-sm">
+                  <i class="fa fa-plus-circle"></i>
+                </button>
+                <button (click)="editExistingMenuField(item)" data-target="#menuModal" data-toggle="modal" type="button" title="Edit"
+                        class="btn btn-outline-success btn-icon btn-sm" tabindex="0"
+                        ng-reflect-router-link="/table-designer-form/5">
+                  <i class="fa fa-pencil-alt"></i>
+                </button>
+                <button (click)="removeMenuFieldLine(item,menuComponent.menuFieldList )"  type="button" title="Delete"
+                        class="btn btn-outline-danger btn-icon btn-sm">
+                  <i class="fa fa-times"></i>
+                </button>
+
+                <button (click)="hideChildren(item)" *ngIf="hasChildren(item) && (item.expanded === true)" type="button" title="Compress"
+                        class="btn btn-outline-primary btn-icon btn-sm">
+                  <i class="fa fa-compress"></i>
+                </button>
+
+                <button (click)="showChildren(item)" *ngIf="hasChildren(item) && (item.expanded !== true)" type="button" title="Expand"
+                        class="btn btn-outline-primary btn-icon btn-sm last-menu-item-button">
+                  <i class="fa fa-expand"></i>
+                </button>
+
+                <i class="fa {{item.icon}}"></i>
+                {{item.name}}
+              </h6>
+              <ul *ngIf="(item.menuFieldList != undefined) && item.expanded === true">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: item.menuFieldList }">
+                </ng-container>
+              </ul>
+            </li>
+          </ng-template>
+          <ng-container
+            *ngTemplateOutlet="recursiveList; context:{ $implicit: menuComponent.menuFieldList }"></ng-container>
+        </ul>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'access_control'" class="row  form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-key"></i>
+                Access Control
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="this.menuComponent.accessControls = addRuleButton(this.menuComponent.accessControls)"
+                      class="btn btn-outline-primary">
+                <i class="fa fa-plus-circle"></i> Add Rule
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-check-label">
+                <label class="checkbox" style="margin-bottom: 0px;">
+                  <input type="checkbox" [(ngModel)]="this.menuComponent.accessControlEnabled"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 9px;">Enable Access Control</span>
+              </label>
+            </div></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th></th>
+                <th>Role</th>
+                <th class="text-center">Create</th>
+                <th class="text-center">Update</th>
+                <th class="text-center">Read</th>
+                <th class="text-center">Delete</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.menuComponent == undefined || this.menuComponent?.accessControls?.length === 0 || this.menuComponent?.accessControls == undefined ">
+                <td colspan="8" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let securityRow of this.menuComponent?.accessControls">
+                <td>
+                  <button title="Remove" (click)="menuComponent.accessControls = removeAccessControl(this.menuComponent.accessControls, securityRow)"
+                          type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+                <td>
+                  <div
+                    class="input-group input-group-alternative"
+                    style="margin-bottom: 0px;cursor: pointer;"
+                    (click)="setSelectedSecurityRow(securityRow)">
+                    <div style="background-color: #ffffff;"
+                         data-target="#selectRulesModal"
+                         data-toggle="modal"
+                         class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                    </div>
+                    <input readonly
+                           style="background-color: #ffffff;margin-bottom: 0px;cursor: pointer;"
+                           data-target="#selectRulesModal"
+                           data-toggle="modal"
+                           type="text" class="form-control"
+                           value="{{securityRow.role?.name}}">
+                    <div style="background-color: #ffffff;"
+                         class="input-group-append"
+                         (click)="securityRow.role = null;">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  --
+                </td>
+                <td class="text-center">
+                  --
+                </td>
+                <td class="text-center">
+                  <label class="checkbox">
+                    <input type="checkbox" [(ngModel)]="securityRow.readEntity"/>
+                    <span class="info"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                 --
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="menuModal" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 *ngIf="fieldListMode === 'insert'" class="title title-up modal-title">Insert menu</h4>
+        <h4 *ngIf="fieldListMode === 'edit'" class="title title-up modal-title">Edit menu</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+                  <label>Name</label>
+                  <input type="text" class="form-control" name="name" [(ngModel)]="menuFieldComponent.name">
+                  <code></code>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10">
+                <div class="form-group" [ngClass]="{'has-danger': tableExists}">
+                  <label>Icon</label>
+                  <input type="text" class="form-control" name="icon" [(ngModel)]="menuFieldComponent.icon">
+                  <div class="category">Find icons codes from  <a href="https://fontawesome.com/icons?d=gallery" target="_blank">here</a></div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group" [ngClass]="{'has-danger': tableExists}">
+                  <label>Prev</label>
+                  <i style="font-size: 35px;" class="fa {{menuFieldComponent.icon}}"></i>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group" >
+                  <label>Command</label>
+                  <textarea class="form-control" name="command" [(ngModel)]="menuFieldComponent.command"></textarea>
+                  <code></code>
+                </div>
+              </div>
+            </div>
+
+          </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+        <div class="divider">
+        </div>
+        <div *ngIf="fieldListMode === 'insert'" class="right-side">
+          <button class="btn btn-outline-primary" data-dismiss="modal" (click)="saveNewMenuItem()" type="button">Insert</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectRulesModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Role</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of this.roles" style="cursor: pointer;">
+                  <td>
+                    <button
+                      type="button"
+                      data-dismiss="modal"
+                      class="btn btn-outline-success btn-icon btn-sm"
+                      (click)="selectRole(row)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{row['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

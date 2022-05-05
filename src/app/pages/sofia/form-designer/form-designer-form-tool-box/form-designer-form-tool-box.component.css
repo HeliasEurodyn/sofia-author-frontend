@@ -1,0 +1,14 @@
+.fixed-plugin {
+  position: fixed;
+  right: 0;
+  width: 64px;
+  background: rgb(31 108 181);
+  z-index: 1031;
+  border-radius: 4px 0 0 4px;
+  text-align: center;
+  top: 70px;
+}
+
+.fixed-plugin .dropdown .dropdown-menu {
+  transform: translate(0px, 0px) !important;
+}

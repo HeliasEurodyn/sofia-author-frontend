@@ -1,0 +1,445 @@
+<div class="row formnav" *ngIf="showTopHeader()">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa {{this.listDto.headerIcon}}" style="padding-right: 5px;"></i>{{this.listDto.headerTitle}}
+        </h3>
+        <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.headerDescription"></p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button *ngFor="let actionButton of this.listDto?.listActionButtons"
+              (click)="headerActionButtonClicked(actionButton)"
+              class="btn {{actionButton.cssClass}}"
+              style="margin-top: 0px;">
+        <i class="fa {{actionButton.icon}}"></i>
+        {{actionButton.description}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane form-area" [ngClass]="{'is-hidden': this.listResultsData == null }">
+  <div class="row">
+    <div class="col">
+
+        <div class="row" style="padding-right: 10px;padding-left: 10px;">
+
+          <!-- Groups & Filters -->
+          <div *ngIf="isGroupContentDivVisible() || this.listDto.filterVisible" class="col-md-3 col-sm-12 col-12 entity-parent-col" style="padding-right: 5px;padding-left: 5px;">
+            <div class="row" >
+
+              <!-- Groups -->
+              <div *ngIf="isGroupContentDivVisible()" style="margin-bottom: 10px;" class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row formnav">
+                    <div class="col-12">
+                      <div class="pull-left">
+                        <h5 class="card-title" style="margin-bottom: 0px;">
+                          <i class="fas fa-stream"></i>
+                          {{this.listDto.groupingTitle}}
+                        </h5>
+                        <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.groupingDescription"> Navigate to <b>Mechanisms
+                          of attack</b> categorization <b>tree <i
+                          class="fas fa-stream"></i></b> of Capecs</p>
+                      </div>
+                      <div class="pull-right">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul *ngIf="groupContent?.length > 0">
+                    <ng-template #recursiveList let-list>
+                      <li *ngFor="let item of list">
+                        <ng-container *ngIf="(item['value']==null?'':item['value']) != ''">
+                          <div class="btn-group">
+                            <button *ngIf="groupHasChildred(item['children'])" (click)="updateVisibility(item)"
+                                    type="button"
+                                    class="btn left-group-button btn-outline-info active-header"
+                                    style="padding: 2px;font-size: 10px;">
+                              <i class="fa fa-plus"></i>
+                            </button>
+                            <button *ngIf="!groupHasChildred(item['children'])"
+                                    type="button"
+                                    class="btn left-group-button btn-outline-default active-header"
+                                    style="padding: 2px;font-size: 10px;border: 2px solid #959494 !important; color: #959494;">
+                              <i class="fas fa-circle"
+                                 style="color: #959494;"
+                              ></i>
+                            </button>
+                            <button (click)="filterGroup(item)"
+                                    class="btn left-group-button btn-outline-default"
+                                    style="border: 1px solid #66615b !important; text-align: left;">
+                              {{item['value']}}
+                            </button>
+                          </div>
+                          <ul *ngIf="item['children'] != undefined && item['childrenVisible']">
+                            <ng-container
+                              *ngTemplateOutlet="recursiveList; context:{ $implicit: item['children'] }">
+                            </ng-container>
+                          </ul>
+                        </ng-container>
+                      </li>
+                    </ng-template>
+                    <ng-container
+                      *ngTemplateOutlet="recursiveList; context:{ $implicit: groupContent}"></ng-container>
+                  </ul>
+
+                  <div class="row"
+                       *ngIf="hasSelections(this.listDto.listComponentLeftGroupFieldList)">
+                    <div class="col-12">
+                      <h6 class="float-left"> Selections
+                        <span (click)="clearFilterGroup()"
+                              style="color: #ff733e;cursor: pointer;">
+                      <i class="fas fa-trash"></i> Clear
+                    </span>
+                      </h6>
+                    </div>
+                  </div>
+
+                  <div class="row" style="padding-right: 15px;padding-left: 15px;">
+                    <ng-container *ngFor="let item of this.listDto?.listComponentLeftGroupFieldList; first as isFirst">
+                      <div class="col-md-auto" style="padding-left: 0px;padding-right: 0px;"
+                           *ngIf="(item.fieldValue==null?'':item.fieldValue) != '' && !isFirst">
+                        <i class="fas fa-angle-double-right" style="padding-top: 8px;"></i>
+                      </div>
+                      <div class="col-md-auto" style="padding-left: 0px;padding-right: 0px;padding-top: 2px;"
+                           *ngIf="(item.fieldValue==null?'':item.fieldValue) != ''">
+                        <div class="text-center">
+                          <button (click)="filterGroupOnField(item)" class="btn left-group-button btn-outline-default"
+                                  style="border: 1px solid #66615b !important">
+                            {{item.fieldValue}}
+                          </button>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+              <!-- Filters -->
+              <div *ngIf="this.listDto?.filterVisible" style="margin-bottom: 10px;" class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row formnav">
+                    <div class="col-12">
+                      <div class="pull-left">
+                        <h5 class="card-title" style="margin-bottom: 0px;">
+                          <i class="fas fa-filter"></i>
+                          Filters
+                        </h5>
+                        <p style=" margin-bottom: 5px;"> Select & <b>Refine Seach</b></p>
+                      </div>
+                      <div class="pull-right">
+                        <button
+                          (click)="getListResultData();"
+                          class="btn btn-outline-success"
+                          style="margin-top: 0px;">
+                          <i class="fa fa-filter"></i>
+                          Filter
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <ng-container *ngFor="let row of this.listDto?.listComponentFilterFieldList">
+                      <ng-container *ngIf="row.type === 'varchar' || row.type === 'text' ">
+                        <div class="{{row.bclass}}  L{{listDto.id}}-{{this.listDto.code}}-{{row.code}} filter-col"
+                             [ngClass]="{'is-hidden': !row.visible}"
+                             style="{{row.css}}">
+                          <div class="form-group">
+                            <div [ngClass]="{'text-danger': row.required}">{{row.description}}</div>
+                            <input type="text" class="form-control" [(ngModel)]="row.fieldValue">
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="row.type === 'double' ">
+                        <div class="{{row.bclass}} L{{listDto.id}}-{{this.listDto.code}}-{{row.code}} filter-col"
+                             [ngClass]="{'is-hidden': !row.visible}"
+                             style="{{row.css}}">
+                          <div class="form-group">
+                            <div [ngClass]="{'text-danger': row.required}" class="text-danger">{{row.description}}</div>
+                            <app-numeric-input [(inputValue)]="row.fieldValue" [mask]="'0*.0000'"
+                                               [editable]="row.editable"></app-numeric-input>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="row.type === 'int' || row.type === 'bigint'">
+                        <div class="{{row.bclass}} L{{listDto.id}}-{{this.listDto.code}}-{{row.code}} filter-col"
+                             [ngClass]="{'is-hidden': !row.visible}"
+                             style="{{row.css}}">
+                          <div class="form-group">
+                            <div [ngClass]="{'text-danger': row.required}">{{row.description}}</div>
+                            <app-numeric-input readonly [(inputValue)]="row.fieldValue" [mask]="'0*'"
+                                               [editable]="row.editable"></app-numeric-input>
+
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="row.type === 'list'">
+                        <div class="{{row.bclass}} L{{listDto.id}}-{{this.listDto.code}}-{{row.code}} filter-col"
+                             [ngClass]="{'is-hidden': !row.visible}"
+                             style="{{row.css}}">
+                          <div class="form-group">
+                            <div [ngClass]="{'text-danger': row.required}">{{row.description}}</div>
+                            <app-list-selector
+                              [editable]="row.editable"
+                              [command]="row.editor"
+                              [defaultValue]="row.defaultValue"
+                              [displayValue]="row.displayValue"
+                              [(value)]="row.fieldValue"></app-list-selector>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="row.type === 'datetime'">
+                        <div class="{{row.bclass}} L{{listDto.id}}-{{this.listDto.code}}-{{row.code}} filter-col"
+                             [ngClass]="{'is-hidden': !row.visible}"
+                             style="{{row.css}}">
+                          <div class="form-group">
+                            <div [ngClass]="{'text-danger': row.required}">{{row.description}}</div>
+                            <app-date-picker [(inputDate)]="row.fieldValue"
+                                                  [mask]="'dd/MM/yyyy'"
+                                                  [editable]="row.editable">
+                            </app-date-picker>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="col" style="padding-right: 5px;padding-left: 5px;" >
+            <div class="card">
+              <div class="card-header">
+                <div class="row formnav">
+                  <div class="col-12">
+                    <div class="pull-left">
+                      <h5 class="card-title" style="margin-bottom: 0px;">
+                        <i *ngIf="this.listDto.icon != null && this.listDto.icon != ''"
+                           class="fa {{this.listDto.icon}}"></i>
+                        {{this.listDto.title}}
+                      </h5>
+                      <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.description"></p>
+                    </div>
+                    <div class="pull-right">
+                      <button *ngIf="this.listDto?.exportExcel" type="button" title="Excel" (click)="dataExcel()"
+                              class="btn btn-outline-primary btn-icon btn-sm">
+                        <i class="fa fa-file-excel-o"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <button *ngIf="isGroupContentDivVisible()" type="button"
+                        style="position: absolute; top: 15px; left: 17px;display: none;"
+                        class="btn btn-outline-default btn-icon btn-sm"><i class="fas fa-stream"></i>
+                </button>
+                <table class="table table-striped table-fixed" style="margin-bottom: 0rem;">
+                  <thead class="text-primary">
+                  <tr>
+                    <ng-container *ngIf="this.listDto?.listComponentActionFieldList.length > 0">
+                      <th class="table-title-buttons" style="max-width: fit-content;">
+                        <ng-container *ngFor="let field of this.listDto?.listComponentActionFieldList">
+                          <button type="button"
+                                  style="visibility: hidden;height: 2px;"
+                                  class="btn {{field.code}} {{field.bclass}} btn-icon btn-sm">
+                          </button>
+                        </ng-container>
+                      </th>
+                    </ng-container>
+                    <ng-container *ngFor="let col of this.listDto?.listComponentColumnFieldList">
+                      <th *ngIf="col.visible" class="th-header-{{col.id}} th-header-pointer" (click)="shortByColumnField(col.code)">
+                        {{col.description}}
+                        <i aria-hidden="true" class="fa fa-caret-down"
+                        *ngIf="col.code === this.selectedShortCode && this.selectedShortOrder === 'desc'"></i>
+                        <i aria-hidden="true" class="fa fa-caret-up"
+                           *ngIf="col.code === this.selectedShortCode && this.selectedShortOrder === 'asc'"></i>
+                      </th>
+                    </ng-container>
+                  </tr>
+                  <tr *ngIf="this.listDto?.headerFilters">
+                    <ng-container *ngIf="this.listDto?.listComponentActionFieldList.length > 0">
+                      <th style="max-width: fit-content;" class="header-action-corner">
+                        <ng-container *ngFor="let field of this.listDto?.listComponentActionFieldList">
+                          <button type="button"
+                                  style="visibility: hidden"
+                                  class="btn {{field.code}} btn-icon btn-sm">
+                          </button>
+                        </ng-container>
+                      </th>
+                    </ng-container>
+                    <ng-container *ngFor="let column of filterHiddenColumns(this.listDto?.listComponentColumnFieldList) ; let colIndex = index">
+                      <th *ngIf="column.visible" class="th-header-filter-{{column.id}} header-col-{{colIndex}} th-header-filter-{{column.code}}">
+                        <input type="text"
+                               class="form-control transparent-input header-filter-{{column.code}} ctrl-field"
+                               *ngIf="column.headerFilter"
+                               [readonly]="false"
+                               [(ngModel)]="column.fieldValue"
+                               (keydown)="columnFilterRefreshData($event, colIndex)">
+                      </th>
+                    </ng-container>
+                  </tr>
+                  </thead>
+                  <tbody class="list-table-body list-table-body-{{this.listDto.id}}" #ltb>
+                  <tr *ngIf="this.listResultsData?.listContent.length === 0">
+                    <td
+                      rowspan="{{calcColSpan(listDto?.listComponentActionFieldList, listDto?.listComponentColumnFieldList)}}"
+                      class="empty-table">
+                      Empty!
+                    </td>
+                  </tr>
+                  <ng-container *ngFor="let row of filterHiddenRows(this.listResultsData?.listContent); let rowIndex = index">
+                    <tr class="{{row['bclass']}}">
+                      <td class="td-action"
+                          style="max-width: fit-content;"
+                          *ngIf="this.listDto?.listComponentActionFieldList.length > 0">
+                        <ng-container *ngFor="let field of this.listDto?.listComponentActionFieldList">
+
+                          <button *ngIf="field.editor !== '#parent-menu#'" type="button" title="{{field.description}}"
+                                  (click)="listRowButtonClick(row, listDto,  field)"
+                                  style="margin-top: 4px;"
+                                  class="btn {{field.bclass}} {{field.code}} btn-icon btn-sm">
+                            <i class="fa {{field.defaultValue}}"></i>
+                          </button>
+
+                          <div *ngIf="field.editor === '#parent-menu#'" ngbDropdown class="d-inline-block"
+                               style="margin-top: 4px;"
+                               #myDrop="ngbDropdown">
+                            <button title="{{field.description}}"
+                                    (click)="myDrop.open();"
+                                    class="btn {{field.bclass}} {{field.code}} btn-icon btn-sm">
+                              <i class="fa {{field.defaultValue}}"></i>
+                            </button>
+                            <div ngbDropdownMenu>
+                              <ng-container *ngFor="let subField of field?.listComponentActionFieldList">
+                                <div *ngIf="subField.editor === '#divider#'"
+                                     class="dropdown-divider {{subField.code}}"></div>
+
+                                <button ngbDropdownItem *ngIf="subField.editor !== '#divider#'"
+                                        (click)="listRowButtonClick(row, listDto,  subField)"
+                                        class="{{subField.code}}">
+                                  <i
+                                    class="fa {{subField.defaultValue}} {{subField.bclass}}"></i> {{subField.description}}
+                                </button>
+                              </ng-container>
+                            </div>
+                          </div>
+
+                        </ng-container>
+                      </td>
+                      <ng-container *ngFor="let column of filterHiddenColumns(this.listDto?.listComponentColumnFieldList) ; let colIndex = index" >
+                        <td (focusout)="listFieldFocusOut(column, row)"
+                            (focusin)="listFieldFocusIn(row[column.code])"
+                          (keydown)="cellsKeyDown($event, rowIndex, colIndex, row)"
+                          class="
+                               {{column.bclass}}
+                               col-{{column.id}}
+                               col-{{column.code}}
+                               col-{{column.code}}-{{rowIndex}}
+                               row-{{rowIndex}}-col-{{colIndex}}
+                               row-col">
+
+                          <ng-container *ngIf="column.type === 'list'">
+                                <app-list-selector
+                                  [editable]="column.editable"
+                                  [command]="column.editor"
+                                  [listRow]="row"
+                                  (eventOccured)="listEventOccured($event, column, row)"
+                                  [(value)]="row[column.code]">
+                                </app-list-selector>
+                          </ng-container>
+
+                          <ng-container *ngIf="column.type === 'datetime'">
+                              <app-date-picker
+                                [editable]="column.editable"
+                                [(inputDate)]="row[column.code]"
+                                [mask]="'dd/MM/yyyy'">
+                              </app-date-picker>
+                          </ng-container>
+
+                          <ng-container *ngIf="column.type === 'int' || column.type === 'bigint'">
+                            <div class="form-group">
+                            <app-numeric-input class="form-input-field"
+                                [editable]="column.editable"
+                                [(inputValue)]="row[column.code]"
+                                [mask]="'0*'">
+                              </app-numeric-input>
+                            </div>
+                          </ng-container>
+                          <ng-container *ngIf="column.type === 'double'">
+                            <app-numeric-input
+                              [editable]="column.editable"
+                              [(inputValue)]="row[column.code]"
+                              [mask]="'0*.0000'">
+                            </app-numeric-input>
+                          </ng-container>
+                          <ng-container *ngIf="column.type === 'varchar' || column.type === 'text'">
+                            <input type="text"
+                                   [readonly]="!column.editable"
+                                   mask=""
+                                   [(ngModel)]="row[column.code]"
+                                   class="form-control transparent-input ctrl-field">
+                          </ng-container>
+                          <ng-container *ngIf="column.type === 'field'">
+                          <input type="text"
+                                 readonly
+                                 class="form-control transparent-input ctrl-field"
+                                 value="{{row[column.code]}}">
+                          </ng-container>
+
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+                <!-- Pagination -->
+                <ul *ngIf="this.listDto?.hasPagination" class="pagination pull-right">
+                  <li class="page-item">
+                    <a aria-label="Previous" (click)="navigateToPage(this.listResultsData?.currentPage-1)"
+                       class="page-link"
+                       disabled="">
+                      <span aria-hidden="true"><i aria-hidden="true" class="fa fa-angle-left"></i></span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" (click)="navigateToPage(this.listResultsData?.currentPage-1)"
+                       *ngIf="this.showPrevPagination">{{this.listResultsData?.currentPage}}</a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link"
+                       (click)="navigateToPage(this.listResultsData?.currentPage)">{{listResultsData?.currentPage + 1}}</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" (click)="navigateToPage(this.listResultsData?.currentPage+1)"
+                       *ngIf="this.showNextPagination">{{listResultsData?.currentPage + 2}}</a>
+                  </li>
+                  <li class="page-item">
+                    <a aria-label="Next" (click)="navigateToPage(this.listResultsData?.currentPage+1)"
+                       class="page-link">
+                      <span aria-hidden="true"><i aria-hidden="true" class="fa fa-angle-right"></i></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+</div></div></div>
+
+
+

@@ -1,0 +1,177 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-calculator" style="padding-right: 5px;"></i>
+          Expression Calculator
+        </h3>
+        <p style=" margin-bottom: 5px;"> Write Expression & Press Enter </p>
+      </div>
+    </div>
+    <div class="pull-right">
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+                <i class="fa fa-code" style="padding-right: 5px;"></i>
+                Expression Section
+              </h3>
+              <p style=" margin-bottom: 5px;"> Write your expression on the area below and click Run </p>
+            </div>
+            <div class="pull-right">
+              <button (click)="run()" class="btn btn-outline-primary">
+                <i class="fa fa-play"></i> Run
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <ace style="width: 100%;height: 300px;border: 1px solid #51cbce;"
+                   [config]="aceJavascriptEditorConfig"
+                   [(value)]="expressionValue"></ace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fa fa-play"></i> Results
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="text"
+                   readonly class="form-control"
+                   placeholder="Result"
+                   value="{{resultValue}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fa fa-list"></i> Expression Tree Structure
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul>
+          <ng-template #recursiveList let-exprUnit>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+
+                    <div *ngIf="exprUnit.hideFieldList == true"
+                      (click)="showChildren(exprUnit)"
+                      class="input-group-prepend">
+                         <span class="input-group-text textfield-button-info expand-button">
+                              <i class="fa fa-compress"></i>
+                         </span>
+                    </div>
+
+                    <div *ngIf="exprUnit.hideFieldList != true"
+                      (click)="hideChildren(exprUnit)"
+                      class="input-group-prepend ">
+                         <span class="input-group-text textfield-button-info expand-button"
+                         style="cursor: pointer">
+                              <i class="fa fa-expand" style="color: #36499f;"></i>
+                         </span>
+
+                    </div>
+
+                    <div class="input-group-prepend">
+                      <input type="text"
+                             readonly
+                             placeholder="Code"
+                             class="form-control textfield-area expr-unit-type"
+                             value="{{exprUnit.type}}">
+                    </div>
+
+                    <input type="text"
+                           readonly
+                           placeholder="Custom Join Selector"
+                           class="form-control textfield-area"
+                           style="background-color: #f9f9f9;border: 1px solid #DDDDDD;border-left: 1px solid #51cbce;"
+                           value="{{exprUnit.expressionPart}}">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <ul
+              *ngIf="(exprUnit.childExprUnit != undefined || exprUnit.leftChildExprUnit != undefined || exprUnit.rightChildExprUnit != undefined )
+              && exprUnit.hideFieldList != true">
+              <ng-container *ngIf="(exprUnit.childExprUnit != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: exprUnit.childExprUnit }">
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="(exprUnit.leftChildExprUnit != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: exprUnit.leftChildExprUnit }">
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="(exprUnit.rightChildExprUnit != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: exprUnit.rightChildExprUnit }">
+                </ng-container>
+              </ng-container>
+            </ul>
+
+          </ng-template>
+
+          <ng-container *ngIf="this.exprUnitTree != null">
+            <ng-container
+              *ngTemplateOutlet="recursiveList; context:{ $implicit: this.exprUnitTree }"></ng-container>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

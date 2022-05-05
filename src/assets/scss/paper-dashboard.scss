@@ -1,0 +1,116 @@
+
+@import 'paper-dashboard/variables';
+@import 'paper-dashboard/mixins';
+
+// Plugins CSS
+@import "paper-dashboard/plugins/plugin-animate-bootstrap-notify";
+@import "paper-dashboard/plugins/plugin-perfect-scrollbar";
+
+// Core CSS
+@import "paper-dashboard/buttons";
+@import "paper-dashboard/inputs";
+@import "paper-dashboard/typography";
+@import "paper-dashboard/misc";
+@import "paper-dashboard/checkboxes-radio";
+
+
+// components
+@import "paper-dashboard/navbar";
+@import "paper-dashboard/page-header";
+@import "paper-dashboard/dropdown";
+@import "paper-dashboard/alerts";
+@import "paper-dashboard/images";
+@import "paper-dashboard/nucleo-outline";
+@import "paper-dashboard/tables";
+@import "paper-dashboard/sidebar-and-main-panel";
+@import "paper-dashboard/footers";
+@import "paper-dashboard/fixed-plugin";
+
+// cards
+@import "paper-dashboard/cards";
+@import "paper-dashboard/cards/card-plain";
+@import "paper-dashboard/cards/card-chart";
+@import "paper-dashboard/cards/card-user";
+@import "paper-dashboard/cards/card-map";
+@import "paper-dashboard/cards/card-stats";
+
+// angular differences
+@import "paper-dashboard/angular/plugin-ngx-toastr";
+@import "paper-dashboard/angular/sidebar-and-main-panel";
+@import "paper-dashboard/angular/dropdown";
+@import "paper-dashboard/angular/inputs";
+@import "paper-dashboard/angular/fixed-plugin";
+
+@import "paper-dashboard/responsive";
+
+.row > div{
+  //padding-top: 10px !important;
+}
+
+@media (min-width: 991px) {
+  .main-panel, .sidebar, .sidebar-wrapper {
+    transition-property: top, bottom, width;
+    transition-duration: .2s, .2s, .35s;
+    transition-timing-function: linear, linear, ease;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.formnav button{
+  margin: 10px 2px 0px !important;
+  background-color: white !important;
+}
+
+.form-area{
+  margin-top: 10px;
+}
+
+.empty-table-row{
+  padding: 30px !important;
+  text-align: center !important;
+  font-style: italic !important;
+}
+
+.list-action-button{
+  margin: 2px !important;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0084b3;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #02698e;
+}
+
+.sub-nav{
+  margin-left: 10px;
+}
+
+.header-tab{
+  border-radius: 0px 30px 0px 20px !important;
+  margin: 10px 1px 0px !important;
+}
+
+.svgline:hover {
+  stroke: rgb(83 159 209);
+}
+
+.svgline {
+  stroke: rgb(127 197 243);
+  stroke-width: 2px;
+  padding: 10px;
+  cursor: pointer;
+}

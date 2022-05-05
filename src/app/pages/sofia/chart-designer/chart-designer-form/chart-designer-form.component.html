@@ -1,0 +1,594 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          Chart Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Chart Designer Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i> Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+        <i class="fa fa-sliders-h"></i>
+        general
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('data');">
+        <i class="fa fa-database"></i>
+        Data
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-default btn-round btn-white header-tab"
+        (click)="setVisibleSection('filters');">
+        <i class="fa fa-filter"></i>
+        Filters
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-sliders-h"></i>
+          General
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group ">
+              <label>Title</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="dto.title">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group ">
+              <label>Icon</label>
+              <input type="text" class="form-control" name="secondtitle" [(ngModel)]="dto.icon">
+              <code></code>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group ">
+              <label>Second Title</label>
+              <input type="text" class="form-control" name="secondtitle" [(ngModel)]="dto.secondTitle">
+              <code></code>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <label style="padding-bottom: 20px;"></label>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="this.dto.refreshButton"> Show refresh button
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-clock-o"></i>
+          Execute Periodically
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group ">
+              <label>Every (in seconds)</label>
+              <input type="number" class="form-control" name="title" [(ngModel)]="dto.executionInterval">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label style="padding-bottom: 20px;"></label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="this.dto.executePeriodically"> Enable time execution
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'data' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-code"></i>
+          Sql Query
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <ace style="width: 100%;height: 300px;border: 1px solid #51cbce;"
+                   [config]="{ mode: 'javascript',theme: 'github', readOnly : false }"
+                   [(value)]="dto.query"></ace>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'data' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <h5 class="card-title pull-left">
+              <div class="pull-left">
+                <i class="fa fa-th-list"></i>
+                Fields
+              </div>
+            </h5>
+            <div class="pull-right">
+              <button class="btn btn-outline-primary" (click)="generateFields()">
+                <i class="fa fa-plus-circle"></i>Generate fields
+              </button>
+              <button type="button" (click)="clearFields()" title="Clear" class="btn btn-outline-danger">
+                <i class="fa fa-times"></i>Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Description</th>
+                <th>Json</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.chartFieldList?.length === 0 || this.dto?.chartFieldList == undefined ">
+                <td colspan="6" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let chartField of this.dto.chartFieldList">
+                <td>
+                  <button data-target="#selectedChartFieldFieldModal" (click)="setSelectedChartField(chartField);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="chartField.name">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="chartField.type">
+                </td>
+                <td>
+                  <input readonly class="form-control ng-dirty ng-valid ng-touched transparent-input"
+                         number="true"
+                         type="number" [(ngModel)]="chartField.size">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input" [(ngModel)]="chartField.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input" [(ngModel)]="chartField.chartJson">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Field name for horizontal axe</label>
+              <input type="text" class="form-control textarea" name="xAxe" [(ngModel)]="dto.horizontalAxe">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'data' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <h5 class="card-title pull-left">
+              <div class="pull-left">
+                <i class="fa fa-file-code-o"></i>
+                Options Json
+              </div>
+            </h5>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <ace style="width: 100%;height: 300px;border: 1px solid #51cbce;"
+                   [config]="{ mode: 'javascript',theme: 'github', readOnly : false }"
+                   [(value)]="dto.optionsJson"></ace>
+              <small class="text-danger" *ngIf="checkJsonOptionsFormatError(dto.optionsJson)"> Json format
+                error! </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" *ngIf="this.mode === 'edit-record'" class="row">
+  <div class="col form-area">
+    <div class="card ">
+      <div class="card-body" style="padding: 0px 15px 0px 15px;">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <button style="background-color: white" class="btn btn-outline-primary"
+                      (click)="displayGraph()">
+                <i class="fa fa-plus-circle"></i> Run preview
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" *ngIf="this.mode === 'edit-record'" class="row">
+  <div class="col-md-12 form-area">
+    <div class="card ">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa {{this.dto.icon}}" *ngIf="this.dto.icon != null && this.dto.icon != ''"></i>
+
+          {{dto.title}}</h5>
+        <p class="card-category">{{dto.secondTitle}}</p>
+      </div>
+      <div class="card-body graph-prev-body">
+        <canvas id="{{chartInstanceId}}" width="400" height="100"></canvas>
+      </div>
+      <div class="card-footer" *ngIf="this.dto.refreshButton">
+        <hr>
+        <div class="stats" >
+          <i class="fa fa-refresh"></i> Refresh
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" *ngIf="this.mode === 'edit-record'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <h5 class="card-title pull-left">
+              <div class="pull-left">
+                <i class="fa fa-th-list"></i>
+                Dataset
+              </div>
+            </h5>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <table
+              *ngIf="this.dto != undefined && this.dto?.chartFieldList?.length !== 0 && this.dto?.chartFieldList != undefined"
+              class="table table-striped">
+
+              <tr *ngFor="let chartField of this.dto.chartFieldList">
+                <td>
+                  <b>{{chartField.name}}</b>
+                </td>
+                <td style="padding: 5px;" *ngFor="let fieldDataValue of chartField.dataset">
+                  <input type="text" readonly class="form-control transparent-input"
+                        value="{{fieldDataValue}}">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'filters' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="pull-left">
+          <h5 class="card-title">
+            <i class="fa fa-filter"></i>
+            Filters
+          </h5>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn btn-outline-success" (click)="addFilter()">
+            <i class="fa fa fa-plus-circle"></i> Add Filter
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <table class="table table-striped">
+                <thead class="text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Code</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Editor</th>
+                  <th>Default</th>
+                  <th>Visible</th>
+                  <th>Editable</th>
+                  <th>Required</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngIf="this.dto == undefined || this.dto?.filterList == undefined || this.dto?.filterList.length === 0 ">
+                  <td colspan="12" class="empty-table-row">Empty!</td>
+                </tr>
+                <tr *ngFor="let filter of this.dto?.filterList">
+                  <td style="min-width: 150px;" class="tool-btns">
+                    <button (click)="removeFilter(filter)" title="Remove" type="button"
+                            class="btn btn-outline-danger btn-icon btn-sm">
+                      <i class="fa fa-times"></i>
+                    </button>
+                    <button (click)="moveUp(filter, this.dto?.filterList)" type="button" title="Move Up"
+                            class="btn btn-outline-warning btn-icon btn-sm">
+                      <i class="fa fa-angle-up"></i>
+                    </button>
+                    <button (click)="moveDown(filter, this.dto?.filterList)" type="button"
+                            title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                      <i class="fa fa-angle-down"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           (focusout)="filter.code = defineComponentCode(this.dto?.filterList, filter);"
+                           [(ngModel)]="filter.code">
+                  </td>
+                  <td>
+                    <select [(ngModel)]="filter.type" name="type" class="transparent-input">
+                      <option value=""></option>
+                      <option value="bigint">bigint</option>
+                      <option value="int">int</option>
+                      <option value="double">double</option>
+                      <option value="datetime">datetime</option>
+                      <option value="datetimerange">datetimerange</option>
+                      <option value="varchar">varchar</option>
+                      <option value="text">text</option>
+                      <option value="list">list</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.description">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.editor">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.defaultValue">
+                  </td>
+                  <td>
+                    <select class="transparent-input" [(ngModel)]="filter.visible">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="transparent-input" [(ngModel)]="filter.editable">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="transparent-input" [(ngModel)]="filter.required">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="selectedChartField != null"
+     aria-labelledby="ModalLabel"
+     class="modal fade"
+     id="selectedChartFieldFieldModal"
+     role="dialog"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <label>Name</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="this.selectedChartField.name">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="this.selectedChartField.type">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Size</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="this.selectedChartField.size">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <input type="text" class="form-control" [(ngModel)]="this.selectedChartField.description">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Json</label>
+            <textarea class="form-control code-textarea"
+                      [(ngModel)]="this.selectedChartField.chartJson"></textarea>
+            <small class="text-danger" *ngIf="checkJsonOptionsFormatError(this.selectedChartField.chartJson)"> Json
+              format error! </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedChartField != null"
+     aria-labelledby="ModalLabel"
+     class="modal fade"
+     id="selectedChartFieldFieldDatasetModal"
+     role="dialog"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>Data</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.selectedChartField == undefined || this.selectedChartField?.dataset?.length === 0 || this.selectedChartField?.dataset == undefined ">
+                <td colspan="1" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let datarow of this.selectedChartField.dataset">
+                <td>
+                  <input type="text" readonly class="form-control transparent-input" value="{{datarow}}">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

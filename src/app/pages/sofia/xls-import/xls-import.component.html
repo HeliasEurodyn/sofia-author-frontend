@@ -1,0 +1,86 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="import()">
+        <i class="fa fa-play"></i> Run
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-file-code"></i> Select Xls File
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="file"
+                   accept=".xls"
+                   #reportFileUploader
+                   style="display: none;"
+                   (change)="handleFileInput($event)">
+            <div  class="form-group">
+              <label>File</label>
+              <div class="input-group input-group-selector no-border">
+                <div (click)="reportFileUploader.click()"
+                     class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fas fa-upload"></i>
+                 </span>
+                </div>
+                <input readonly (click)="reportFileUploader.click()"
+                       data-target="#selectComponentModal"
+                       data-toggle="modal"
+                       type="text" class="form-control"
+                       value="{{this?.reportFilename}}">
+                <div class="input-group-append" (click)="clearFile()">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                </div>
+              </div>
+            </div>
+            <code *ngIf="fileRequiredWarning != ''">{{fileRequiredWarning}}</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-exclamation"></i> Usage Information
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" [innerHtml]="this.dto.description">
+      </div>
+    </div>
+  </div>
+</div>

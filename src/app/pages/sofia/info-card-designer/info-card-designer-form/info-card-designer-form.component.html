@@ -1,0 +1,202 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          Info Card Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Info Card Designer Form </p>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i> Delete
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+        <i class="fa fa-sliders-h"></i>
+        general
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-sliders-h"></i>
+          General
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group ">
+              <label>Title</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="dto.title">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group ">
+              <label>Icon</label>
+              <input type="text" class="form-control" name="icon" [(ngModel)]="dto.icon">
+              <code></code>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group ">
+              <label>Command description</label>
+              <input type="text" class="form-control" name="command" [(ngModel)]="dto.description">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group ">
+              <label>Command Icon</label>
+              <input type="text" class="form-control" name="icon" [(ngModel)]="dto.commandIcon">
+              <code></code>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group ">
+              <label>Command</label>
+              <input type="text" class="form-control" name="command" [(ngModel)]="dto.command">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title" style="margin-bottom: 0px;">
+          <i class="fa fa-code"></i>
+          Sql Query
+        </h5>
+        <p style=" margin-bottom: 5px;"> Query must contain 1 Row & 4 Columns for 1.<b>Card Body</b>, 2.<b>Title</b>, 3.<b>Icon</b>, 4.<b>Icon Color</b> </p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <textarea
+                class="form-control textarea code-textarea"
+                name="query"
+                [(ngModel)]="dto.query"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-clock-o"></i>
+          Execute Periodically
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group ">
+              <label>Every (in seconds)</label>
+              <input type="number" class="form-control" name="title" [(ngModel)]="dto.executionInterval">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label style="padding-bottom: 20px;"></label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="this.dto.executePeriodically"> Enable time execution
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" *ngIf="this.mode === 'edit-record'" class="row">
+  <div class="col form-area">
+    <div class="card ">
+      <div class="card-body" style="padding: 0px 15px 0px 15px;">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <button style="background-color: white" class="btn btn-outline-primary"
+                      (click)="displayInfoCard()">
+                <i class="fa fa-plus-circle"></i> Run preview
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" class="row">
+  <div class="col-lg-3 col-md-6 col-sm-6 form-area">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon {{this.dto.icon}}"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">{{this.dto.title}}</p>
+              <p class="card-title">{{this.dto.cardText}}
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <hr>
+        <div class="stats" (click)="openPage()" style="cursor: pointer;">
+
+            <i class="fa {{this.dto.commandIcon}}"></i>
+            {{this.dto.description}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

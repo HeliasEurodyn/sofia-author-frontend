@@ -1,0 +1,2726 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          List Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> List Designer Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i> Delete
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;"
+              *ngIf="showPreviousPageButton()"
+              (click)="navigateToPreviousPage()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()"
+              (click)="navigateToNextPage()">
+        <i class="fa fa-chevron-right"></i> Next
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('settings');">
+        <i class="fa fa-sliders-h"></i>
+        settings
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('designer');">
+        <i class="fab fa-trello"></i>
+        Design
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('scripts');">
+        <i class="fa fa-code"></i>
+        Scripts
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('css');">
+        <i class="fas fa-paint-brush"></i>
+        Css
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('access_control');">
+        <i class="fas fa-key"></i>
+        Access Control
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-sliders-h"></i>
+                Settings</h5>
+            </div>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>id</label>
+              <input type="text" readonly class="form-control" value="{{dto.id}}">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Name</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.name">
+              <code></code>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Component</label>
+              <div class="input-group input-group-selector no-border">
+                <div
+                  data-target="#selectComponentModal"
+                  data-toggle="modal"
+                  class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                </div>
+                <input readonly
+                       data-target="#selectComponentModal"
+                       data-toggle="modal"
+                       type="text" class="form-control"
+                       value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
+                <div class="input-group-append" (click)="selectComponent(null)">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Page Size</label>
+              <input type="number" class="form-control" [(ngModel)]="this.dto.pageSize">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.hasPagination"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Use Pagination</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-10">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Max Size</label>
+              <input type="number" class="form-control" [(ngModel)]="this.dto.maxSize">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.hasMaxSize"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Set Max Rows Size</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Default page</label>
+              <select [(ngModel)]="this.dto.defaultPage" class="form-control" data-size="7"
+                      data-style="btn btn-primary btn-round" title="Single Select">
+                <option class="bs-title-option" value="filter">Filter</option>
+                <option class="bs-title-option" value="list">List</option>
+              </select>
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.autoRun"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Auto run</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.filterVisible"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Filter is Visible</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.listVisible"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">List is Visible</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.exportExcel"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Excel Export</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.headerFilters"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Use Header Filters</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-pencil-alt"></i> Header Labels</h5>
+            </div>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Title</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.headerTitle">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Description</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.headerDescription">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Icon</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="dto.headerIcon">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-pencil-alt"></i> Body Labels</h5>
+            </div>
+            <div class="pull-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Title</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.title">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Description</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.description">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Icon</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="dto.icon">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Grouping Title</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="dto.groupingTitle">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+              <label>Grouping Description</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="dto.groupingDescription">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left"><h5 class="card-title pull-left">
+              <i class="fas fa-dice-one"></i>
+
+              Action Buttons</h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="addActionButton(this.dto.listActionButtons)" class="btn btn-outline-primary">
+                <i class="fa fa-plus-circle"></i> Add action Button
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Class</th>
+                <th>Visible</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listActionButtons?.length === 0 || this.dto?.listActionButtons == undefined ">
+                <td colspan="7" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listActionButtons">
+                <td>
+                  <button title="Remove" (click)="this.dto.listActionButtons = removeActionButton(this.dto.listActionButtons, column)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listActionButtons)" type="button" title="Move Up"
+                          class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listActionButtons)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                  <button data-target="#selectedActionButtonModal" (click)="setSelectedActionButton(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fas fa-clone"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="{{column.code}}">
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="column.icon">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.cssClass">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-code"></i> Json Settings
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Json Url</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="dto.jsonUrl">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'designer'" class="row form-area">
+  <div [ngClass]="{'col-md-12':showAllFieldsDiv === false,'col-md-8':showAllFieldsDiv}">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fa fa-th-list"></i>
+                Design</h5>
+            </div>
+            <div class="pull-right">
+              <button class="btn btn-outline-primary" data-target="#insertFieldsModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i> Insert Fields
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <ul class="nav nav-tabs" id="tabs" role="tablist">
+              <li class="nav-item">
+                <a aria-expanded="true" class="nav-link active" data-toggle="tab" href="#columns"
+                   role="tab" aria-selected="false">Columns</a>
+              </li>
+              <li class="nav-item">
+                <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#filters"
+                   role="tab" aria-selected="true" style="color: #f08a64;">Filters
+                </a>
+              </li>
+              <li class="nav-item">
+                <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#grouping"
+                   role="tab" aria-selected="false" style="color: #13b0ff;">Left Grouping</a>
+              </li>
+              <li class="nav-item">
+                <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#topGrouping"
+                   role="tab" aria-selected="false" style="color: #8913ff;">Top Grouping</a>
+              </li>
+              <li class="nav-item">
+                <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#orderby"
+                   role="tab" aria-selected="false" style="color: #0aca57;">Order By</a>
+              </li>
+              <li class="nav-item">
+                <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#actionButtons"
+                   role="tab" aria-selected="false">Action Buttons</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content text-center" id="my-tab-content">
+
+          <div aria-expanded="true" class="tab-pane active" id="columns" role="tabpanel">
+            <div class="row formnav" style="padding-bottom: 10px;">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button (click)="addCommandFormulaFieldToColumns()" class="btn btn-outline-warning">
+                    <i class="fa fa-plus-circle"></i> Command Formula field
+                  </button>
+                  <button (click)="addSqlFormulaFieldToColumns()" class="btn btn-outline-success">
+                    <i class="fa fa-plus-circle"></i> Sql Formula field
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Component / Table</th>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Default</th>
+                <th>Visible</th>
+                <th>Editable</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listComponentColumnFieldList.length === 0 ">
+                <td colspan="10" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listComponentColumnFieldList"
+                  [ngClass]="{'command-field': column.formulaType === 'command', 'sql-field': column.formulaType === 'sql'}">
+                <td style="min-width: 150px;">
+                  <button (click)="removeColumn(column)" title="Delete" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button data-target="#selectedColumnFieldModal" (click)="setSelectedFilterField(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listComponentColumnFieldList)" type="button" title="Move Up"
+                          class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listComponentColumnFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text"
+                         (focusout)=
+                           "column.code = defineComponentCode( this.dto.listComponentColumnFieldList, column);"
+                         class="form-control transparent-input"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="[{{column?.componentPersistEntity?.code}}] {{column?.componentPersistEntity?.persistEntity.name}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="column?.componentPersistEntityField?.persistEntityField.name">
+                </td>
+                <td>
+                  <select [(ngModel)]="column.type" class="transparent-input">
+                    <option value=""></option>
+                    <option value="field">field</option>
+                    <option value="bigint">bigint</option>
+                    <option value="int">int</option>
+                    <option value="double">double</option>
+                    <option value="datetime">datetime</option>
+                    <option value="varchar">varchar</option>
+                    <option value="text">text</option>
+                    <option value="list">list</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.defaultValue">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.editable">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+              </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+          <div aria-expanded="false" class="tab-pane" id="filters" role="tabpanel">
+
+            <div class="row formnav" style="padding-bottom: 10px;">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button class="btn btn-outline-primary" data-target="#customFilterStructureModal" data-toggle="modal">
+                    <i class="fa fa-wrench"></i> Custom filter structure
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Component / Table</th>
+                <th>Field</th>
+                <th>Type</th>
+                <th>operator</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Default</th>
+                <th>Visible</th>
+                <th>Editable</th>
+                <th>Required</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listComponentFilterFieldList.length === 0 ">
+                <td colspan="12" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listComponentFilterFieldList">
+                <td style="min-width: 150px;">
+                  <button (click)="removeFilter(column)" title="Remove" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button data-target="#selectedFilterFieldModal" (click)="setSelectedFilterField(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listComponentFilterFieldList)" type="button" title="Move Up"
+                          class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listComponentFilterFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         (focusout)="column.code = defineComponentCode(this.dto?.listComponentFilterFieldList, column);"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value=" [{{column?.componentPersistEntity?.code}}] {{column?.componentPersistEntity?.persistEntity?.name}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="column?.componentPersistEntityField?.persistEntityField.name">
+                </td>
+                <td>
+                  <select [(ngModel)]="column.type" name="type" class="transparent-input">
+                    <option value=""></option>
+                    <option value="bigint">bigint</option>
+                    <option value="int">int</option>
+                    <option value="double">double</option>
+                    <option value="datetime">datetime</option>
+                    <option value="datetimerange">datetimerange</option>
+                    <option value="varchar">varchar</option>
+                    <option value="text">text</option>
+                    <option value="list">list</option>
+                  </select>
+                </td>
+                <td>
+                  <select [(ngModel)]="column.operator" name="type" class="transparent-input">
+                    <option value=""></option>
+                    <option value="=">=</option>
+                    <option value="<">&#60;</option>
+                    <option value=">">&#62;</option>
+                    <option value="<=">&#60;=</option>
+                    <option value=">=">&#62;=</option>
+                    <option value="like">like</option>
+                    <option value="<>">&#60;&#62;</option>
+                    <option value="in">in</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.defaultValue">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.editable">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.required">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <div aria-expanded="false" class="tab-pane" id="grouping" role="tabpanel">
+
+            <div class="row formnav" style="padding-bottom: 10px;">
+
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button class="btn btn-outline-primary">
+                    <i class="fa fa-plus-circle"></i> Formula field
+                  </button>
+                  <button (click)="addSqlFormulaFieldToLeftGroup()" class="btn btn-outline-success">
+                    <i class="fa fa-plus-circle"></i> Sql Formula field
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Component / Table</th>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Visible</th>
+                <th>Editable</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listComponentLeftGroupFieldList.length === 0 ">
+                <td colspan="9" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listComponentLeftGroupFieldList"
+                  [ngClass]="{'command-field': column.formulaType === 'command', 'sql-field': column.formulaType === 'sql'}">
+                <td>
+                  <button title="Remove" (click)="removeLeftGroupField(column)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button data-target="#selectedLeftGroupFieldModal" (click)="setSelectedFilterField(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listComponentLeftGroupFieldList)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listComponentLeftGroupFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         (focusout)="column.code = defineComponentCode(this.dto?.listComponentLeftGroupFieldList, column);"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="[{{column?.componentPersistEntity?.code}}] {{column?.componentPersistEntity?.persistEntity.name}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="column?.componentPersistEntityField?.persistEntityField.name">
+                </td>
+                <td>
+                  <select [(ngModel)]="column.type" class="transparent-input">
+                    <option value=""></option>
+                    <option value="bigint">bigint</option>
+                    <option value="int">int</option>
+                    <option value="double">double</option>
+                    <option value="datetime">datetime</option>
+                    <option value="varchar">varchar</option>
+                    <option value="text">text</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.editable">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+              </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+          <div aria-expanded="false" class="tab-pane" id="topGrouping" role="tabpanel">
+
+            <div class="row formnav" style="padding-bottom: 10px;">
+
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button class="btn btn-outline-primary">
+                    <i class="fa fa-plus-circle"></i> Formula field
+                  </button>
+                  <button (click)="addSqlFormulaFieldToTopGroup()" class="btn btn-outline-success">
+                    <i class="fa fa-plus-circle"></i> Sql Formula field
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Component / Table</th>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Visible</th>
+                <th>Editable</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listComponentTopGroupFieldList.length === 0 ">
+                <td colspan="9" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listComponentTopGroupFieldList"
+                  [ngClass]="{'command-field': column.formulaType === 'command', 'sql-field': column.formulaType === 'sql'}">
+                <td>
+                  <button title="Remove" (click)="removeTopGroupField(column)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button data-target="#selectedTopGroupFieldModal" (click)="setSelectedFilterField(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listComponentTopGroupFieldList)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listComponentTopGroupFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         (focusout)="column.code = defineComponentCode(this.dto?.listComponentTopGroupFieldList, column);"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="[{{column?.componentPersistEntity?.code}}] {{column?.componentPersistEntity?.persistEntity.name}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="column?.componentPersistEntityField?.persistEntityField.name">
+                </td>
+                <td>
+                  <select [(ngModel)]="column.type" class="transparent-input">
+                    <option value=""></option>
+                    <option value="bigint">bigint</option>
+                    <option value="int">int</option>
+                    <option value="double">double</option>
+                    <option value="datetime">datetime</option>
+                    <option value="varchar">varchar</option>
+                    <option value="text">text</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.editable">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <div aria-expanded="false" class="tab-pane" id="orderby" role="tabpanel">
+
+            <div class="row" style="padding-bottom: 10px;">
+            </div>
+
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Component / Table</th>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>ASC/DESC</th>
+                <th>Visible</th>
+                <th>Editable</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listComponentOrderByFieldList?.length === 0 ">
+                <td colspan="9" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listComponentOrderByFieldList">
+                <td>
+                  <button title="Remove" (click)="removeOrderByField(column)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button data-target="#selectedOrderByFieldModal" (click)="setSelectedFilterField(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listComponentOrderByFieldList)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listComponentOrderByFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text"
+                         (focusout)="column.code = defineComponentCode(this.dto?.listComponentOrderByFieldList, column);"
+                         class="form-control transparent-input"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="[{{column?.componentPersistEntity?.code}}] {{column?.componentPersistEntity?.persistEntity.name}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="column?.componentPersistEntityField?.persistEntityField.name">
+                </td>
+                <td>
+                  <select [(ngModel)]="column.type" disabled="true" class="transparent-input">
+                    <option value=""></option>
+                    <option value="bigint">bigint</option>
+                    <option value="int">int</option>
+                    <option value="double">double</option>
+                    <option value="datetime">datetime</option>
+                    <option value="varchar">varchar</option>
+                    <option value="text">text</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.editable">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+              </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+          <div aria-expanded="false" class="tab-pane" id="actionButtons" role="tabpanel">
+            <div class="row formnav" style="padding-bottom: 10px;">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button (click)="addActionField(this.dto.listComponentActionFieldList)" class="btn btn-outline-primary">
+                    <i class="fa fa-plus-circle"></i> Add action Button
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Class</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Visible</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.listComponentActionFieldList.length === 0 ">
+                <td colspan="7" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.listComponentActionFieldList">
+                <td>
+                  <button title="Remove" (click)="removeActionField(column)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button data-target="#selectedActionFieldFieldModal" (click)="setSelectedFilterField(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.dto?.listComponentActionFieldList)" type="button" title="Move Up"
+                          class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.dto?.listComponentActionFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                  <button data-target="#selectedListComponentActionField" (click)="setSelectedListComponentActionFieldList(column);"
+                          data-toggle="modal" title="Details" type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fas fa-clone"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" class="form-control"
+                         [(ngModel)]="column.defaultValue">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.bclass">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4" [ngClass]="{'hide':showAllFieldsDiv === false}">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <h5 class="card-title pull-left">Available Fields</h5>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-body">
+        <ul style="padding: 0px;">
+          <li *ngFor="let row of this.dto?.component?.componentPersistEntityList">
+            <div class="row">
+              <div class="col-md-12">
+                <h6 style="margin: 0px;">
+                  <button style="margin: 0px;" *ngIf="row.persistEntity != null && row.showFieldList === true"
+                          (click)="hideChildren(row)"
+                          type="button" title="Hide"
+                          class="btn btn-outline-default btn-icon btn-sm">
+                    <i class="fa fa-compress"></i>
+                  </button>
+
+                  <button style="margin: 0px;" *ngIf="row.persistEntity != null && row.showFieldList !== true"
+                          (click)="showChildren(row)"
+                          type="button" title="Show"
+                          class="btn btn-outline-default btn-icon btn-sm">
+                    <i class="fa fa-expand"></i>
+                  </button>
+                  [{{row.code}}] {{row.persistEntity.name}}
+                </h6>
+              </div>
+            </div>
+
+            <table *ngIf="row.persistEntity != null && row.showFieldList === true" class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>actions</th>
+                <th>id</th>
+                <th>Type</th>
+                <th>Editor</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let field of row.componentPersistEntityFieldList"
+                  data-dismiss="modal" style="cursor: pointer;">
+                <td>
+                  <button title="Add to columns" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                          (click)="addFieldToColumns(row, field)">
+                    <i class="fa fa-plus-circle" style="color: #4f5057;"></i>
+                  </button>
+                  <button title="Add to Filters" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                          (click)="addFieldToFilters(row, field)">
+                    <i class="fa fa-plus-circle" style="color: #f08a64;"></i>
+                  </button>
+                  <button title="Add to Grouping" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                          (click)="addFieldToLeftGrouping(row, field)">
+                    <i class="fa fa-plus-circle" style="color: #13b0ff;"></i>
+                  </button>
+
+                </td>
+                <td>{{field.persistEntityField.id}}</td>
+                <td>{{field.persistEntityField.type}}</td>
+                <td>{{field.editor}}</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'scripts'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-code"></i> Scripts
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="addScript()"
+                      type="button" class="btn btn-outline-success">
+                <i class="fa fa-plus-circle"></i> New
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>actions</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto?.listScripts == undefined || this.dto?.listScripts?.length === 0">
+                <td colspan="2" class="empty-table-row">Empty!</td>
+              </tr>
+
+              <tr *ngFor="let listScript of this.dto?.listScripts">
+                <td>
+
+                  <button title="Remove" (click)="removeListScriptByField(listScript)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="setSelectedListScript(listScript);"
+                          title="Details"
+                          type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(listScript, this.dto?.listScripts)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(listScript, this.dto?.listScripts)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="listScript.name">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'scripts' && selectedListScript != null" class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <ace style="width: 100%;height: 800px;border: 1px solid #51cbce;"
+                   [config]="aceJavascriptEditorConfig"
+                   [(value)]="selectedListScript.script"></ace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'css'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fas fa-paint-brush"></i> Css
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="addCss()"
+                      type="button" class="btn btn-outline-success">
+                <i class="fa fa-plus-circle"></i> New
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>actions</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto?.listCssList == undefined || this.dto?.listCssList?.length === 0">
+                <td colspan="2" class="empty-table-row">Empty!</td>
+              </tr>
+
+              <tr *ngFor="let formCss of this.dto?.listCssList">
+                <td>
+
+                  <button title="Remove" (click)="removeListCssByField(formCss)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="setSelectedFormCss(formCss);"
+                          title="Details"
+                          type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(formCss, this.dto?.listCssList)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(formCss, this.dto?.listCssList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="formCss.name">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'css' && selectedListCss != null" class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <ace style="width: 100%;height: 800px;border: 1px solid #51cbce;"
+                   [config]="aceJavascriptEditorConfig"
+                   [(value)]="selectedListCss.script"></ace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'access_control'" class="row  form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-key"></i>
+                Access Control
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="this.dto.accessControls = addRuleButton(this.dto.accessControls)"
+                      class="btn btn-outline-primary">
+                <i class="fa fa-plus-circle"></i> Add Rule
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-check-label">
+                <label class="checkbox" style="margin-bottom: 0px;">
+                  <input type="checkbox" [(ngModel)]="this.dto.accessControlEnabled"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 9px;">Enable Access Control</span>
+              </label>
+            </div></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th></th>
+                <th>Role</th>
+                <th class="text-center">Create</th>
+                <th class="text-center">Update</th>
+                <th class="text-center">Read</th>
+                <th class="text-center">Delete</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.accessControls?.length === 0 || this.dto?.accessControls == undefined ">
+                <td colspan="8" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let securityRow of this.dto?.accessControls">
+                <td>
+                  <button title="Remove" (click)="dto.accessControls = removeAccessControl(this.dto.accessControls, securityRow)"
+                          type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+                <td>
+                  <div
+                    class="input-group input-group-alternative"
+                    style="margin-bottom: 0px;cursor: pointer;"
+                    (click)="setSelectedSecurityRow(securityRow)">
+                    <div style="background-color: #ffffff;"
+                         data-target="#selectUserGroupsModal"
+                         data-toggle="modal"
+                         class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                    </div>
+                    <input readonly
+                           style="background-color: #ffffff;margin-bottom: 0px;cursor: pointer;"
+                           data-target="#selectUserGroupsModal"
+                           data-toggle="modal"
+                           type="text" class="form-control"
+                           value="{{securityRow.role?.name}}">
+                    <div style="background-color: #ffffff;"
+                         class="input-group-append"
+                         (click)="securityRow.role = null;">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  --
+                </td>
+                <td class="text-center">
+                  --
+                </td>
+                <td class="text-center">
+                  <label class="checkbox">
+                    <input type="checkbox" [(ngModel)]="securityRow.readEntity"/>
+                    <span class="info"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                  --
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectComponentModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Component</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of components" (click)="selectComponent(row)" data-dismiss="modal"
+                    style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Delete" class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="selectComponent(row)">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{row['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{row['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="insertFieldsModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Fields</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <ul style="padding: 0px;">
+          <ng-template #recursiveList let-componentPersistEntityList>
+            <li *ngFor="let componentPersistEntity of componentPersistEntityList">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 style="margin: 0px;">
+                    <button style="margin: 0px;"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                            (click)="hideChildren(componentPersistEntity)"
+                            type="button" title="Hide"
+                            class="btn btn-outline-default btn-icon btn-sm">
+                      <i class="fa fa-compress"></i>
+                    </button>
+                    <button style="margin: 0px;"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList !== true"
+                            (click)="showChildren(componentPersistEntity)"
+                            type="button" title="Show"
+                            class="btn btn-outline-default btn-icon btn-sm">
+                      <i class="fa fa-expand"></i>
+                    </button>
+                    [{{componentPersistEntity.code}}] {{componentPersistEntity.persistEntity.name}}
+                  </h6>
+                </div>
+              </div>
+
+              <table
+                *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>actions</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let field of componentPersistEntity.componentPersistEntityFieldList"
+                    style="cursor: pointer;">
+                  <td>
+                    <button title="Add To Columns" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="addFieldToColumns(componentPersistEntity, field)">
+                      <i class="fa fa-plus-circle" style="color: #4f5057;"></i>
+                    </button>
+                    <button title="Add to Filters" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="addFieldToFilters(componentPersistEntity, field)">
+                      <i class="fa fa-plus-circle" style="color: #f08a64;"></i>
+                    </button>
+                    <button title="Add to Grouping" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="addFieldToLeftGrouping(componentPersistEntity, field)">
+                      <i class="fa fa-plus-circle" style="color: #13b0ff;"></i>
+                    </button>
+                    <button title="Add to Grouping" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="addFieldToTopGrouping(componentPersistEntity, field)">
+                      <i class="fa fa-plus-circle" style="color: #b163ff;"></i>
+                    </button>
+                    <button title="Add to Order By" type="button" class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="addFieldToOrderBy(componentPersistEntity, field)">
+                      <i class="fa fa-plus-circle" style="color: #0aca57;"></i>
+                    </button>
+
+                  </td>
+                  <td>{{field.persistEntityField.id}}</td>
+                  <td>{{field.persistEntityField.name}}</td>
+                  <td>{{field.persistEntityField.type}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+              <ul *ngIf="(componentPersistEntity.componentPersistEntityList != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: componentPersistEntity.componentPersistEntityList }">
+                </ng-container>
+              </ul>
+
+            </li>
+          </ng-template>
+
+          <ng-container
+            *ngTemplateOutlet="recursiveList; context:{ $implicit: this.dto?.component?.componentPersistEntityList }"></ng-container>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="customFilterStructureModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Custom filter structure</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-check mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox"
+                         [(ngModel)]="this.dto.customFilterFieldStructure">
+                  Use Custom Filter Field Structure <span class="form-check-sign"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button class="pull-left" class="btn btn-outline-primary" (click)="generateDefaultFilterStructure()">
+              <i class="fa fa-plus-circle"></i> Generate default filter structure
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom Filter structure</label>
+            <textarea style="min-height: 200px;" [readonly]="!this.dto?.customFilterFieldStructure"
+                      class="form-control" [(ngModel)]="this.dto.filterFieldStructure"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedColumnFieldModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Column Field Details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="selectedFilterField.code">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input type="text" class="form-control" readonly
+                   value=" {{selectedFilterField?.componentPersistEntity?.code}} {{selectedFilterField?.componentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input type="text" class="form-control" readonly
+                   [(ngModel)]="selectedFilterField?.componentPersistEntityField?.persistEntityField.name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Mask</label>
+            <input type="text" class="form-control" readonly
+                   [(ngModel)]="selectedFilterField.mask">
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label><br>
+            <select [(ngModel)]="selectedFilterField.type" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="field">field</option>
+              <option value="bigint">bigint</option>
+              <option value="int">int</option>
+              <option value="double">double</option>
+              <option value="datetime">datetime</option>
+              <option value="datetimerange">datetimerange</option>
+              <option value="varchar">varchar</option>
+              <option value="text">text</option>
+              <option value="list">list</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editor</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Use Header filter</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.headerFilter">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Header filter Default</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.defaultValue"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Header filter Operator</label><br>
+            <select [(ngModel)]="selectedFilterField.operator" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="=">=</option>
+              <option value="<">&#60;</option>
+              <option value=">">&#62;</option>
+              <option value="<=">&#60;=</option>
+              <option value=">=">&#62;=</option>
+              <option value="like">like</option>
+              <option value="<>">&#60;&#62;</option>
+              <option value="in">in</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Header filter Editable</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.headerEditable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.css"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Bootstrap Column Class</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.bclass">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.visible">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.editable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable Related Field</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.editableRelFieldCode">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedFilterFieldModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Filter field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="selectedFilterField.code">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input type="text" class="form-control" readonly
+                   value=" {{selectedFilterField?.componentPersistEntity?.code}} {{selectedFilterField?.componentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input type="text" class="form-control" readonly name="code"
+                   [(ngModel)]="selectedFilterField?.componentPersistEntityField?.persistEntityField.name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label><br>
+            <select [(ngModel)]="selectedFilterField.type" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="bigint">bigint</option>
+              <option value="int">int</option>
+              <option value="double">double</option>
+              <option value="datetime">datetime</option>
+              <option value="datetimerange">datetimerange</option>
+              <option value="varchar">varchar</option>
+              <option value="text">text</option>
+              <option value="list">list</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Operator</label><br>
+            <select [(ngModel)]="selectedFilterField.operator" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="="> =</option>
+              <option value="<"> &#60;</option>
+              <option value=">">&#62;</option>
+              <option value="<=">&#60;=</option>
+              <option value=">=">&#62;=</option>
+              <option value="like">like</option>
+              <option value="<>">&#60;&#62;</option>
+              <option value="in">in</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editor</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Default Value</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.defaultValue"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.css"></textarea>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Bootstrap Column Class</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.bclass">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.visible">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.editable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Required</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.required">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedTopGroupFieldModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Top Grouping field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="selectedFilterField.code">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input type="text" class="form-control" readonly
+                   value=" {{selectedFilterField?.componentPersistEntity?.code}} {{selectedFilterField?.componentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input type="text" class="form-control" readonly name="code"
+                   [(ngModel)]="selectedFilterField?.componentPersistEntityField?.persistEntityField.name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label><br>
+            <select [(ngModel)]="selectedFilterField.type" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="bigint">bigint</option>
+              <option value="int">int</option>
+              <option value="double">double</option>
+              <option value="datetime">datetime</option>
+              <option value="datetimerange">datetimerange</option>
+              <option value="varchar">varchar</option>
+              <option value="text">text</option>
+              <option value="list">list</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editor</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Default Value</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.defaultValue"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.css"></textarea>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Bootstrap Column Class</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.bclass">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.visible">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.editable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedLeftGroupFieldModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Left Grouping field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="selectedFilterField.code">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input type="text" class="form-control" readonly
+                   value=" {{selectedFilterField?.componentPersistEntity?.code}} {{selectedFilterField?.componentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input type="text" class="form-control" readonly name="code"
+                   [(ngModel)]="selectedFilterField?.componentPersistEntityField?.persistEntityField.name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label><br>
+            <select [(ngModel)]="selectedFilterField.type" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="bigint">bigint</option>
+              <option value="int">int</option>
+              <option value="double">double</option>
+              <option value="datetime">datetime</option>
+              <option value="datetimerange">datetimerange</option>
+              <option value="varchar">varchar</option>
+              <option value="text">text</option>
+              <option value="list">list</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editor</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Default Value</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.defaultValue"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.css"></textarea>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Bootstrap Column Class</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.bclass">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.visible">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.editable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedOrderByFieldModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Grouping field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="selectedFilterField.code">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input type="text" class="form-control" readonly
+                   value=" {{selectedFilterField?.componentPersistEntity?.code}} {{selectedFilterField?.componentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input type="text" class="form-control" readonly name="code"
+                   [(ngModel)]="selectedFilterField?.componentPersistEntityField?.persistEntityField.name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label><br>
+            <select disabled [(ngModel)]="selectedFilterField.type" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="bigint">bigint</option>
+              <option value="int">int</option>
+              <option value="double">double</option>
+              <option value="datetime">datetime</option>
+              <option value="datetimerange">datetimerange</option>
+              <option value="varchar">varchar</option>
+              <option value="text">text</option>
+              <option value="list">list</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>ASC/DESC</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.css"></textarea>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Bootstrap Column Class</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.bclass">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.visible">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.editable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedActionFieldFieldModal" role="dialog"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Action field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="selectedFilterField.code">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>EDITOR</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea class="form-control" [(ngModel)]="selectedFilterField.css"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Icon Class</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedFilterField.bclass">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select class="transparent-input" [(ngModel)]="selectedFilterField.visible">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedActionButtonModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields" style="max-width: 1200px;">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Submenu Buttons</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Class</th>
+                <th>Visible</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.selectedActionButton?.listActionButtons == undefined || this.selectedActionButton?.listActionButtons?.length === 0">
+                <td colspan="7" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.selectedActionButton?.listActionButtons">
+                <td>
+                  <button title="Remove"
+                          (click)="this.selectedActionButton.listActionButtons = removeActionButton(this.selectedActionButton.listActionButtons, column)"
+                          type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.selectedActionButton?.listActionButtons)" type="button"
+                          title="Move Up"
+                          class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.selectedActionButton?.listActionButtons)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="column.icon">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.cssClass">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button
+            (click)="this.selectedActionButton.listActionButtons = addActionButton(this.selectedActionButton?.listActionButtons)"
+            class="btn btn-outline-primary">
+            <i class="fa fa-plus-circle"></i> Add action Button
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectedListComponentActionField" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields" style="max-width: 1200px;">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Submenu Buttons</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <i class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Description</th>
+                <th>Editor</th>
+                <th>Class</th>
+                <th>Visible</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.selectedListComponentActionField?.listComponentActionFieldList == undefined || this.selectedListComponentActionField?.listComponentActionFieldList?.length === 0">
+                <td colspan="7" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.selectedListComponentActionField?.listComponentActionFieldList">
+                <td>
+                  <button title="Remove"
+                          (click)="this.selectedListComponentActionField.listComponentActionFieldList = removeListComponentActionField(this.selectedListComponentActionField.listComponentActionFieldList, column)"
+                          type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="moveUp(column, this.selectedListComponentActionField?.listComponentActionFieldList)" type="button"
+                          title="Move Up"
+                          class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(column, this.selectedListComponentActionField?.listComponentActionFieldList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.code">
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="column.defaultValue">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.description">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.editor">
+                </td>
+                <td>
+                  <input type="text" class="form-control transparent-input"
+                         [(ngModel)]="column.bclass">
+                </td>
+                <td>
+                  <select class="transparent-input" [(ngModel)]="column.visible">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button
+            (click)="this.selectedListComponentActionField.listComponentActionFieldList = addActionField(this.selectedListComponentActionField?.listComponentActionFieldList)"
+            class="btn btn-outline-primary">
+            <i class="fa fa-plus-circle"></i> Add action Button
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectUserGroupsModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Role</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of this.roles" style="cursor: pointer;">
+                  <td>
+                    <button
+                      type="button"
+                      data-dismiss="modal"
+                      class="btn btn-outline-success btn-icon btn-sm"
+                      (click)="selectRole(row)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{row['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

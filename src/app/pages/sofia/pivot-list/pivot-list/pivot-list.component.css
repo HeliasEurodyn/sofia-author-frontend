@@ -1,0 +1,77 @@
+.side-field-button{
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 2px;
+}
+
+.col-no-padding{
+  padding: 0px;
+}
+
+.row-small-padding{
+  padding-left: 15px;
+  padding-left: 15px;
+}
+
+.top-row-padding{
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.top-card{
+  height: 100%;
+}
+
+
+/*table {*/
+/*  min-width:700px;*/
+/*}*/
+/*tr {*/
+/*  min-width:120px;*/
+/*}*/
+/*th,td {*/
+/*  min-width:20px;*/
+/*}*/
+
+/*.table th, .table td {*/
+/*   border-top: 0px solid #dee2e6;*/
+/*  !*border: 1px solid #b3d7ff;*!*/
+/*  !*padding: 3px;*!*/
+/*}*/
+
+.top-cells{
+  cursor: pointer;
+  border: 1px solid #b3d7ff;
+  background-color: #f7f7f7;
+  padding: 3px;
+}
+
+.left-cells{
+  cursor: pointer;
+  border: 1px solid #b3d7ff;
+  background-color: #f7f7f7;
+  padding: 3px;
+}
+
+.value-cells{
+  border: 1px solid #b3d7ff;
+  padding: 3px;
+}
+
+.col-header-cells{
+  cursor: pointer;
+  border: 1px solid #b3d7ff;
+  background-color: #e9e8e8;
+  padding: 3px;
+}
+
+.btn-expand {
+  padding: 1px;
+  font-size: 9px;
+  border: 1px solid #51bcda !important;
+  color: #51bcda;
+  margin: 0px;
+  margin-bottom: 2px;
+}

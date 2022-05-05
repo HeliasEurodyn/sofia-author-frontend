@@ -1,0 +1,52 @@
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <div class="logo-image-small"><img src="./assets/img/angular2-logo.png"></div>
+  </div>
+  <ul class="nav">
+
+    <li *ngFor="let menuItem of menuHeaders" routerLinkActive="active" class="header-menu">
+      <a (click)="parentMenuUnselection(menuItem.id);">
+        <i class="fa {{menuItem.icon}} header-menu"></i>
+        <p>{{menuItem.name}}</p>
+      </a>
+    </li>
+
+    <br *ngIf="menuHeaders?.length > 0 ">
+
+    <ng-template #recursiveList let-list>
+      <li *ngFor="let menuItem of list" routerLinkActive="active">
+
+        <a *ngIf="menuItem.command !== '#parent-menu#' && menuItem.command !== '#parent-collapse#' "
+           (click)="navigate(menuItem);">
+          <i class="fa {{menuItem.icon}}"></i>
+          <p>{{menuItem.name}}</p>
+        </a>
+
+        <a *ngIf="menuItem.command === '#parent-menu#'" (click)="parentMenuSelection(menuItem.id);">
+          <i class="parent-menu fa {{menuItem.icon}}"></i>
+          <p>{{menuItem.name}}</p>
+        </a>
+
+        <ng-container *ngIf="menuItem.command === '#parent-collapse#'">
+          <a data-toggle="collapse" href="#components-collapse-{{menuItem.id}}">
+            <i class="parent-menu fa {{menuItem.icon}}"></i>
+            <p>{{menuItem.name}}</p>
+          </a>
+          <div class="collapse" id="components-collapse-{{menuItem.id}}" style="">
+            <ul class="nav sub-nav">
+              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: menuItem.menuFieldList }">
+              </ng-container>
+            </ul>
+          </div>
+        </ng-container>
+
+      </li>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: selectedMenuItems }"></ng-container>
+
+  </ul>
+
+
+</div>
+

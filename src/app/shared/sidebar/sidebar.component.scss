@@ -1,0 +1,42 @@
+.parent-menu{
+  color: #319e9e !important;
+}
+
+.parent-menu > a{
+  color: #319e9e !important;
+}
+
+.header-menu {
+  color: #dc3545 !important;
+}
+
+.header-menu > a{
+  color: #dc3545 !important;
+}
+
+.header-menu > a{
+  color: #dc3545 !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0084b3;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #02698e;
+}
+
+.sub-nav{
+  margin-left: 10px;
+}

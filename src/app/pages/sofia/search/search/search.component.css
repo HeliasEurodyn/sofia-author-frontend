@@ -1,0 +1,45 @@
+.form-group, .input-group {
+  margin-bottom: 0px;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.table-fixed tr {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.table-fixed th,
+.table-fixed td {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.icon-td {
+  max-width: fit-content !important;
+  padding: 1px 15px 1px 15px;
+}
+
+.title-td {
+  max-width: fit-content !important;
+  padding: 5px 15px 1px 1px;
+}
+
+.description-td {
+  padding-top: 5px;
+}
+
+.table-fixed thead,
+.table-fixed tbody {
+  display: block;
+  height: calc(100vh  - 264px);
+  overflow-y: auto;
+}
+
+
+
+
+

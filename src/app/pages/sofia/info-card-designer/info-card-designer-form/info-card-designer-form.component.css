@@ -1,0 +1,20 @@
+.empty-table-row {
+  padding: 30px;
+  text-align: center;
+}
+
+.code-textarea {
+  font-family: 'Tahoma';
+  height: 400px;
+  max-height: 400px;
+  line-height: 1.4;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.graph-prev-body {
+  height: 450px;
+}
+

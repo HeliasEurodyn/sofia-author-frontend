@@ -1,0 +1,178 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          User Group
+        </h3>
+        <p style=" margin-bottom: 5px;"> User Group Form </p>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i> Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-sliders-h"></i>
+          General
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-12">
+            <div class="form-group ">
+              <label>User Group Name</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="dto.name">
+              <code></code>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left"><h5 class="card-title pull-left">
+              <i class="fa fa-users"></i>
+              Users
+            </h5>
+            </div>
+            <div class="pull-right">
+              <button
+                data-target="#usersModal"
+                data-toggle="modal"
+                class="btn btn-outline-primary">
+                <i class="fa fa-plus-circle"></i> Add User
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Username</th>
+                <th>Email</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.users?.length === 0 || this.dto?.users == undefined ">
+                <td colspan="3" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngFor="let user of this.dto?.users">
+                <td>
+                  <button title="Remove" (click)="removeUser(user)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="{{user.username}}">
+                </td>
+                <td>
+                  <input type="text" readonly class="form-control transparent-input"
+                         value="{{user.email}}">
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="usersModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">
+          <i class="fa fa-users"></i>
+          Insert User
+        </h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of this.users"
+                    style="cursor: pointer;">
+                  <td>
+                    <button
+                      data-dismiss="modal"
+                      type="button"
+                      title="Delete"
+                      class="btn btn-outline-primary btn-icon btn-sm"
+                            (click)="addUser(user)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{user.id}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{user.username}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{user.email}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

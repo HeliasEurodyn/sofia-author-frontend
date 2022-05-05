@@ -1,0 +1,99 @@
+<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent"
+     style="padding-top: 30px;border-bottom: none;background-color: #ffffff00 !important; ">
+  <div class="container" style="color: white;padding: 0px">
+    <div class="navbar-wrapper">
+      <ul class="navbar-nav">
+        <li class="nav-item  active ">
+         <img style="width: 210px; margin-left: 20px; margin-right: 20px;" src="./assets/img/logo_ed.png">
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      <ul class="navbar-nav">
+        <li class="nav-item  active ">
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="wrapper wrapper-full-page background">
+  <div class="full-page section-image" filter-color="black">
+    <div class="content">
+      <div class="container">
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <div class="card card-login">
+            <div class="card-header ">
+              <div class="card-header ">
+                <h3 class="header text-center" style="margin-top: 30px;margin-bottom: 17px;">
+                  <img src="./assets/img/angular2-logo.png">
+                </h3>
+              </div>
+            </div>
+            <div class="card-body ">
+              <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i
+                  class="nc-icon nc-single-02"></i></span></div>
+                <input class="form-control" placeholder="Username" name="username" type="text" [(ngModel)]="username"
+                       (keyup.enter)="onEnterMethod()">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text">
+                    <i class="nc-icon nc-key-25"></i></span>
+                </div>
+                <input class="form-control" placeholder="Password" name="password" [(ngModel)]="password"
+                       type="password" (keyup.enter)="onEnterMethod()">
+              </div>
+              <br>
+            </div>
+            <div class="card-footer ">
+              <a class="btn btn-outline-success btn-block mb-3" href="javascript:void(0)" (click)="authenticateUser()">
+                <i class="fa fa-sign-in"> </i>
+                Login
+              </a>
+<!--                <p class="social-login text-center social">-->
+<!--                 or log in with:-->
+<!--                  <a href="{{ keycloakURL }}">-->
+<!--                    <img src="./assets/img/keycloak.png" alt="Login with Keycloak">-->
+<!--                  </a>-->
+<!--                  <a href="{{ googleURL }}" alt="Login with Google" >-->
+<!--                    <img src="../../../../assets/img/google.png" >-->
+<!--                  </a>-->
+<!--                  <a href="{{ githubURL }}">-->
+<!--                    <img src="../../../../assets/img/github.png" alt="Login with Github">-->
+<!--                  </a>-->
+<!--                </p>-->
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer footer-black  footer-white " style="
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    border-top: none;
+    color: white;
+    background-color: #ffffff00 !important;
+">
+      <div class="container" style="padding-top:0px;">
+        <div class="row">
+          <nav class="footer-nav">
+            <ul>
+              <li><img style="width: 300px;" src="./assets/img/logo-H2020.png"></li>
+            </ul>
+          </nav>
+          <div class="credits ml-auto">
+            <span class="copyright" style="padding-top: 40px;"> © {{currentDate | date: 'yyyy'}}, European Dynamics </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <div class="full-page-background"></div>
+  </div>
+</div>

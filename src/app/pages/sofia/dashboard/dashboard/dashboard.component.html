@@ -1,0 +1,38 @@
+<div class="row dashboard-entity main-dashboard-row">
+  <ng-container *ngFor="let dashboardArea of this.dto?.dashboardAreaList">
+    <div class="{{dashboardArea.cssclass}}">
+      <div class="row">
+        <ng-container *ngFor="let dashboardItem of dashboardArea?.dashboardItemList">
+
+          <div *ngIf="dashboardItem.type === 'chart'" class="{{dashboardItem.cssclass}} dashboard-entity">
+            <app-chart
+              [extraParamsMap]="this.extraParamsMap"
+              [id]="dashboardItem.entityId">
+            </app-chart>
+          </div>
+
+          <div *ngIf="dashboardItem.type === 'html'" class="{{dashboardItem.cssclass}} dashboard-entity">
+            <app-html-dashboard
+              [extraParamsMap]="this.extraParamsMap"
+              [id]="dashboardItem.entityId">
+            </app-html-dashboard>
+          </div>
+
+          <div *ngIf="dashboardItem.type === 'infoCard'" class="{{dashboardItem.cssclass}} dashboard-entity">
+            <app-info-card
+              [extraParamsMap]="this.extraParamsMap"
+              [id]="dashboardItem.entityId">
+            </app-info-card>
+          </div>
+
+          <div *ngIf="dashboardItem.type === 'list'" class="{{dashboardItem.cssclass}} dashboard-entity"
+               style="padding-top: 0px;">
+            <app-list [embeded]="true"
+                      [presetCommand]="'LIST[LOCATE:(ID='+dashboardItem.entityId+'),SHOWTITLE:NO'+this.extraParams+']'">
+            </app-list>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</div>

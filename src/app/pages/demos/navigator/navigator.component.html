@@ -1,0 +1,41 @@
+<div #pageDiv ></div>
+
+
+<button data-target="#popupModal"  style="display: none" id="popupSelector" data-toggle="modal" type="button" title="Edit"
+        class="btn btn-outline-success btn-icon btn-sm" tabindex="0"
+        ng-reflect-router-link="/table-designer-form/5">
+  <i class="fa fa-pencil-alt"></i>
+</button>
+
+<div aria-labelledby="ModalLabel" class="modal"  id="popupModal" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Test</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i class="nc-icon nc-simple-remove"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" >
+                <code></code>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" type="button">Close</button>
+        </div>
+        <div class="divider">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

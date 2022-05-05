@@ -1,0 +1,124 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          App View Designer
+        </h3>
+        <p style=" margin-bottom: 5px;">App View Designer Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-outline-danger"  style="margin-top: 0px;" [hidden]="mode === 'new-record'" (click)="delete()">
+        <i class="fa fa-times"></i> Delete
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showPreviousPageButton()" (click)="navigateToPreviousPage()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()" (click)="navigateToNextPage()">
+        <i class="fa fa-chevron-right"></i> Next
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">App View Designer</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group " [ngClass]="{'has-danger': tableExists}">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" name="name"  [(ngModel)]="dto.name" [readonly]="mode === 'edit-record'" >
+                <small class="text-danger" *ngIf="tableExists"> Error! Table name already exists. </small>
+                <code ></code>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Query</label>
+                <textarea style="min-height: 280px;"
+                          class="form-control textarea" name="query" [(ngModel)]="dto.query"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <h5 class="card-title pull-left">Fields</h5>
+          </div>
+          <div class="col-sm-5">
+            <div class="pull-right">
+              <button class="btn btn-outline-primary" (click)="generateViewFields()">
+                <i class="fa fa-plus-circle"></i> Generate fields
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="this.dto == undefined || this.dto?.appViewFieldList?.length === 0 || this.dto?.appViewFieldList == undefined ">
+              <td colspan="4" class="empty-table-row">Empty!</td>
+            </tr>
+            <tr *ngFor="let row of this.dto.appViewFieldList">
+              <td>
+                <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.name">
+              </td>
+              <td>
+                <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.type">
+              </td>
+              <td>
+                <input readonly class="form-control ng-dirty ng-valid ng-touched transparent-input" number="true"
+                       type="number" [(ngModel)]="row.size"  >
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

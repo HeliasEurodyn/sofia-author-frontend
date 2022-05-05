@@ -1,0 +1,35 @@
+
+<button
+  type="button"
+  id="{{uuid}}"
+  data-target="#yesNoModal"
+  data-toggle="modal"
+  style="display: none;">
+</button>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="yesNoModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 700px !important;">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 style="margin-top: 0px;" class="title title-up modal-title">
+          {{title}}</h4>
+      </div>
+      <div class="modal-body ">
+        <div class="row">
+          <div class="col-12">
+            <h6>
+              {{description}}
+            </h6>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-success" data-dismiss="modal" (click)="yesClicked()" type="button">Yes</button>
+          <button class="btn btn-outline-danger" data-dismiss="modal" (click)="noClicked()" type="button">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

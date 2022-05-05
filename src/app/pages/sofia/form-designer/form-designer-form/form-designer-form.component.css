@@ -1,0 +1,168 @@
+.fixed-plugin {
+  position: fixed;
+  right: 0;
+  width: 64px;
+  background: rgb(31 108 181);
+  z-index: 1031;
+  border-radius: 4px 0 0 4px;
+  text-align: center;
+  top: 136px;
+}
+
+.fixed-plugin .dropdown .dropdown-menu {
+  transform: translate(0px, 33px) !important;
+}
+
+.fixed-plugin .dropdown .dropdown-menu::before, .fixed-plugin .dropdown .dropdown-menu::after {
+  right: -16px;
+  bottom: -30px;
+}
+
+.newTabStyle {
+   position: relative !important;
+   display: inline-flex !important;
+   vertical-align: middle !important;
+   background-color: #FFFFFF;
+   border: 1px solid #51cbce;
+   padding: 7px;
+   border-radius: 4px;
+   color: #66615b;
+   line-height: normal;
+   font-size: 14px;
+   transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+   box-shadow: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li{
+  list-style-type: none;
+}
+
+.white-tab {
+  background-color: white;
+}
+
+.green-tab {
+  background-color: #fafffc;
+}
+
+.blue-tab {
+  background-color: #f0fcff;
+}
+
+.red-tab {
+  background-color: #fffcfb;
+}
+
+.modal-select-fields{
+  max-width: 700px;
+}
+
+.table > thead > tr > th > .btn {
+  margin: 2px;
+}
+
+.table > tbody > tr > td > .btn  {
+  margin: 2px;
+}
+
+.textfield-button-danger {
+  padding: 10px 5px 10px 5px !important;
+  border: 2px solid #ef8157 !important;
+  color: #ff0000;
+}
+
+.textfield-button-warning{
+  padding: 10px 5px 10px 5px !important;
+  border: 2px solid #fbc658 !important;
+  color: #d28e00;
+}
+
+.textfield-button-info{
+  padding: 10px 5px 10px 5px !important;
+  border: 2px solid #17a2b8 !important;
+  color: #17a2b8;
+}
+
+.textfield-button-success{
+  padding: 10px 5px 10px 5px !important;
+  border: 2px solid #28a745 !important;
+  color: #28a745;
+}
+
+.textfield-area{
+  border: 1px solid #DDDDDD !important;
+}
+
+
+.card label {
+  font-size: 0.8571em;
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+
+.btn-white{
+  background-color: white;
+}
+
+.btn-muted{
+  margin: 1px;
+  border: 2px solid #b5b5b5 !important;
+}
+.btn-muted:hover{
+  background-color: #7d7d7d !important;
+}
+
+.modal-title {
+  margin-top: 0px !important;
+}
+
+.empty-table-row {
+  padding: 10px;
+  text-align: center;
+}
+
+.code-textarea {
+  min-height: 800px;
+  padding: 1px 5px 1px 5px;
+  font-family: 'Tahoma';
+  max-height: 400px;
+  line-height: 1.4;
+}
+
+@keyframes check {0% {height: 0;width: 0;}
+  25% {height: 0;width: 10px;}
+  50% {height: 20px;width: 10px;}
+}
+.checkbox{background-color:#fff;display:inline-block;height:28px;margin:4px;width:28px;border-radius:4px;border:1px solid #ccc;cursor: pointer;}
+.checkbox span{display:block;height:28px;position:relative;width:28px;padding:0}
+.checkbox span:after{-moz-transform:scaleX(-1) rotate(135deg);-ms-transform:scaleX(-1) rotate(135deg);-webkit-transform:scaleX(-1) rotate(135deg);transform:scaleX(-1) rotate(135deg);-moz-transform-origin:left top;-ms-transform-origin:left top;-webkit-transform-origin:left top;transform-origin:left top;border-right:4px solid #fff;border-top:4px solid #fff;content:'';display:block;height:20px;left:3px;position:absolute;top:15px;width:10px}
+.checkbox span:hover:after{border-color:#999}
+.checkbox input{display:none}
+.checkbox input:checked + span:after{-webkit-animation:check .8s;-moz-animation:check .8s;-o-animation:check .8s;animation:check .8s;border-color:#555}
+.checkbox input:checked + .default:after{border-color:#444}
+.checkbox input:checked + .primary:after{border-color:#2196F3}
+.checkbox input:checked + .success:after{border-color:#8bc34a}
+.checkbox input:checked + .info:after{border-color:#3de0f5}
+.checkbox input:checked + .warning:after{border-color:#FFC107}
+.checkbox input:checked + .danger:after{border-color:#f44336}
+
+.form-control {
+  border: 1px solid #51cbce;
+}
+
+.input-group-prepend .input-group-text {
+  border: 1px solid #51cbce;
+  border-right: none;
+  color: #00bbbf !important;
+}
+
+.input-group-append .input-group-text {
+  border: 1px solid #51cbce;
+  border-left: none;
+  color: #ff0018 !important
+}
