@@ -29,7 +29,7 @@ import {TableComponentService} from '../../../../services/crud/sofia/table-compo
 export class FormComponent extends PageComponent implements OnInit {
 
   public dto: FormDto;
-  public selectedFormTabId: number;
+  public selectedFormTabId: string;
   public selectedFormPopupCode: string;
   public test = '';
   @ViewChild('yesNoDialog') yesNoDialog: YesNoDialogComponent;
@@ -84,7 +84,7 @@ export class FormComponent extends PageComponent implements OnInit {
   }
 
   loadDynamicCssScript(id: any): Promise<any> {
-    return this.dynamicCssScriptLoader.addScript(Number(id), 'form');
+    return this.dynamicCssScriptLoader.addScript(id, 'form');
   }
 
   retrieveAndAssignData(id: string, selectionId: string) {
@@ -284,7 +284,7 @@ export class FormComponent extends PageComponent implements OnInit {
   }
 
   setDefaultSelectedTab() {
-    this.selectedFormTabId = 0;
+    this.selectedFormTabId = '';
 
     if (this.dto.formTabs.length > 0) {
       this.selectedFormTabId = this.dto.formTabs[0].id;

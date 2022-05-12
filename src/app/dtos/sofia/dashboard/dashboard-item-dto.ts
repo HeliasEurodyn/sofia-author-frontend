@@ -4,7 +4,7 @@ export class DashboardItemDTO extends BaseDTO {
 
   public type: string;
 
-  public entityId: number;
+  public entityId: string;
 
   public cssclass: string;
 

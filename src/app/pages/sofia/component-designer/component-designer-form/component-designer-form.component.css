@@ -89,3 +89,57 @@ li{
 .checkbox input:checked + .info:after{border-color:#3de0f5}
 .checkbox input:checked + .warning:after{border-color:#FFC107}
 .checkbox input:checked + .danger:after{border-color:#f44336}
+
+.modal-dialog {
+  max-width: 700px;
+}
+
+.table-fixed tbody {
+  width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody {
+  display: block;
+}
+
+.table-fixed tbody {
+  border-top: 1px solid #caeff0;
+  border-bottom: 1px solid #caeff0;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+.empty-table {
+  padding: 20px !important;
+  text-align: center !important;
+  font-style: italic !important;
+}
+.table-fixed tr {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.table-fixed th,
+.table-fixed td {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  padding: 1px;
+}
+
+.table-fixed .sortable:after {
+  content: "\f0dc";
+  position: relative;
+  bottom: 1px;
+  display: inline-block;
+  right: -7px;
+  font-family: FontAwesome;
+  opacity: 0.4;
+  font-size: 11px;
+}
+
+.table-fixed tbody {
+  max-height: 400px;
+  overflow-y: auto;
+}

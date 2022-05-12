@@ -57,7 +57,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
     this.dto.tableFieldList = [];
 
     const tableFieldDTO = new TableFieldDTO();
-    tableFieldDTO.id = 0;
+  //  tableFieldDTO.id = 0;
     tableFieldDTO.shortOrder = this.shortOrder;
     tableFieldDTO.name = '';
     tableFieldDTO.description = '';

@@ -81,7 +81,11 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Status</label>
-              <input type="text" class="form-control" name="status" [(ngModel)]="userDTO.status">
+              <select [(ngModel)]="userDTO.status" class="form-control" data-size="7"
+                      data-style="btn btn-primary btn-round" title="Single Select">
+                <option class="bs-title-option" value="enabled">Enabled</option>
+                <option class="bs-title-option" value="disabled">Disabled</option>
+              </select>
               <code></code>
             </div>
           </div>
@@ -339,7 +343,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h4 class="title title-up modal-title">Insert Sidebar Menu</h4>
+        <h4 class="title title-up modal-title" style="margin: 0;">Insert Sidebar Menu</h4>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
           class="nc-icon nc-simple-remove"></i></button>
       </div>
@@ -347,7 +351,7 @@
         <form>
           <div class="row">
             <div class="col-12">
-              <table class="table table-striped">
+              <table class="table table-striped table-fixed">
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
@@ -392,7 +396,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h4 class="title title-up modal-title">Insert Header Menu</h4>
+        <h4 class="title title-up modal-title" style="margin: 0;">Insert Header Menu</h4>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
           class="nc-icon nc-simple-remove"></i></button>
       </div>
@@ -400,7 +404,7 @@
         <form>
           <div class="row">
             <div class="col-12">
-              <table class="table table-striped">
+              <table class="table table-striped table-fixed">
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
@@ -445,7 +449,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h4 class="title title-up modal-title">Insert Role</h4>
+        <h4 class="title title-up modal-title" style="margin: 0;">Insert Role</h4>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
           class="nc-icon nc-simple-remove"></i></button>
       </div>
@@ -453,7 +457,7 @@
         <form>
           <div class="row">
             <div class="col-12">
-              <table class="table table-striped">
+              <table class="table table-striped table-fixed">
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
@@ -502,7 +506,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h4 class="title title-up modal-title">Insert Language</h4>
+        <h4 class="title title-up modal-title" style="margin: 0;">Insert Language</h4>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
           class="nc-icon nc-simple-remove"></i></button>
       </div>
@@ -510,7 +514,7 @@
         <form>
           <div class="row">
             <div class="col-12">
-              <table class="table table-striped">
+              <table class="table table-striped table-fixed">
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
@@ -555,7 +559,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h4 class="title title-up modal-title">Insert Language</h4>
+        <h4 class="title title-up modal-title" style="margin: 0;">Insert Language</h4>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
           class="nc-icon nc-simple-remove"></i></button>
       </div>
@@ -563,7 +567,7 @@
         <form>
           <div class="row">
             <div class="col-12">
-              <table class="table table-striped">
+              <table class="table table-striped table-fixed">
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>

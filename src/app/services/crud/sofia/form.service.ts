@@ -17,16 +17,16 @@ export class FormService extends CrudService<FormDto> {
     super(http, 'form');
   }
 
-  saveData(id: number, data: Map<any, any>) {
+  saveData(id: string, data: Map<any, any>) {
     const componentValues = this.mapTreeToArrays(data);
     return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues);
   }
 
-  deleteData(id: number, selectionId: any) {
+  deleteData(id: string, selectionId: any) {
     return this.http.delete<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}&selection-id=${selectionId}`);
   }
 
-  updateData(id: number, data: Map<any, any>) {
+  updateData(id: string, data: Map<any, any>) {
     const componentValues = this.mapTreeToArrays(data);
     return this.http.put<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues);
   }

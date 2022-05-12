@@ -14,7 +14,7 @@ export class FormControlFieldDTO extends BaseDTO {
   mask: string
   public componentPersistEntity: ComponentPersistEntityDTO;
   public componentPersistEntityField: ComponentPersistEntityFieldDTO;
-  public fieldId: number;
+  public fieldId: string;
 
   constructor() {
     super();

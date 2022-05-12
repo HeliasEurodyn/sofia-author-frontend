@@ -123,7 +123,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
         this.filterHeaderVisible = this.listDto.filterVisible;
 
         this.setDafaultCommandParams();
-        this.dynamicCssScriptLoader.addScript(Number(id), 'list');
+        this.dynamicCssScriptLoader.addScript(id, 'list');
         this.defineTitle();
 
         this.listScriptsService.loadWithPromise(this).then(data => {

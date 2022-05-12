@@ -124,7 +124,7 @@ export class ListComponent extends PageComponent implements OnInit, AfterViewIni
         this.filterHeaderVisible = this.listDto.filterVisible;
 
         this.setDafaultCommandParams();
-        this.dynamicCssScriptLoader.addScript(Number(id), 'list');
+        this.dynamicCssScriptLoader.addScript(id, 'list');
         this.defineTitle();
         this.focusElement();
 

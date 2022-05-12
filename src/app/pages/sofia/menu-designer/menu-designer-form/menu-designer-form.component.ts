@@ -227,7 +227,7 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
 
   delete() {
     this.menuDesignerService.delete(this.menuComponent.id).subscribe(data => {
-      this.navigatorService.closeAndBack(this.pageId);
+      this.location.back();
     });
   }
 

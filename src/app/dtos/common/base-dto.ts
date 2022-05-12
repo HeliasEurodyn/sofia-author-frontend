@@ -1,6 +1,6 @@
 export class BaseDTO {
 
-  id: number;
+  id: string;
 
   createdOn: Date;
 

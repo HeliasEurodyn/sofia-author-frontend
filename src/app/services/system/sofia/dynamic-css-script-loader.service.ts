@@ -11,11 +11,11 @@ export class DynamicCssScriptLoaderService {
   constructor() {
   }
 
-  public addScript(scriptId: number, type: string): Promise<any> {
+  public addScript(scriptId: string, type: string): Promise<any> {
     return Promise.resolve(this.loadScript(scriptId, type));
   }
 
-  private loadScript(scriptId: number, type: string) {
+  private loadScript(scriptId: string, type: string) {
     return new Promise((resolve, reject) => {
       const jwtToken = localStorage.getItem('jwt_token');
       const script = document.createElement('link');

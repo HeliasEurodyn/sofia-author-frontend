@@ -22,8 +22,7 @@ export class UserComponent extends PageComponent implements OnInit {
               private menuService: MenuService,
               private navigatorService: CommandNavigatorService,
               private activatedRoute: ActivatedRoute,
-              private location: Location
-  ) {
+              private location: Location) {
     super();
   }
 

@@ -26,7 +26,7 @@ export class FormAssignmentsService {
       if (cpe.multiDataLine === true && cpe.componentPersistEntityDataLines != null) {
         let cpeDatalineTempId = 0;
         for (const cpeDl of cpe.componentPersistEntityDataLines) {
-          cpeDl.id = cpeDatalineTempId;
+          cpeDl.id = cpeDatalineTempId.toString();
           let position = 0;
           for (const cpeF of cpeDl.componentPersistEntityFieldList) {
             cpeF.assignment = cpe.defaultComponentPersistEntityFieldList[position].assignment;
@@ -73,7 +73,7 @@ export class FormAssignmentsService {
     return dto;
   }
 
-  public assignComponentFieldsToTableFieldsByPersistEntityIds(dto: FormDto, ids: number[]): FormDto {
+  public assignComponentFieldsToTableFieldsByPersistEntityIds(dto: FormDto, ids: string[]): FormDto {
     const formSections = dto.formTabs.concat(dto.formPopups);
     for (const formTab of formSections) {
       for (const formArea of formTab.formAreas) {

@@ -23,7 +23,7 @@ export class FormTableLinesService {
   //   // this.formAssignmentsService.assignComponentFieldsToTableFieldsByPersistEntityIds(this.form.dto, ids);
   // }
 
-  public getChildPersistEntityIds(componentPersistEntityList: ComponentPersistEntityDTO[], ids: number[]): number[] {
+  public getChildPersistEntityIds(componentPersistEntityList: ComponentPersistEntityDTO[], ids: string[]): string[] {
     componentPersistEntityList.forEach(cpe => {
       ids.push(cpe.id);
       if (cpe.componentPersistEntityList != null) {

@@ -7,7 +7,7 @@ export class AccessControlDto extends BaseDTO {
 
   type: string;
 
-  entityId: number;
+  entityId: string;
 
   createEntity: boolean;
 

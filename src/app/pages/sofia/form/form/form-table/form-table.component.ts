@@ -53,7 +53,7 @@ export class FormTableComponent implements OnInit, OnChanges {
   }
 
   public tableFieldKeyDown(event: KeyboardEvent,
-                           cellId: number,
+                           cellId: string,
                            formControlTableLineDTO: FormControlTableLineDTO,
                            formControlTableLineDTOS: FormControlTableLineDTO[],
                            formControlTableDTO: FormControlTableDTO) {
@@ -282,14 +282,14 @@ export class FormTableComponent implements OnInit, OnChanges {
     return false;
   }
 
-  public tableFocusPrevLineSameField(cellId: number, formControlTableLineDTOS: FormControlTableLineDTO[],
+  public tableFocusPrevLineSameField(cellId: string, formControlTableLineDTOS: FormControlTableLineDTO[],
                                      formControlTableLineDTO: FormControlTableLineDTO) {
 
     let prevFormControlTableLineDTO: FormControlTableLineDTO = null;
     for (const CurFormControlTableLineDTO of formControlTableLineDTOS) {
       if (CurFormControlTableLineDTO === formControlTableLineDTO && prevFormControlTableLineDTO !== null) {
 
-        let formControlId = 0;
+        let formControlId = '';
         for (const formControlCell of CurFormControlTableLineDTO.formControlCells) {
           if (cellId === formControlCell.id) {
             formControlId = formControlCell.formControl.id;
@@ -309,11 +309,11 @@ export class FormTableComponent implements OnInit, OnChanges {
     return false;
   }
 
-  public tableFocusNextLineSameField(cellId: number, formControlTableLineDTOS: FormControlTableLineDTO[],
+  public tableFocusNextLineSameField(cellId: string, formControlTableLineDTOS: FormControlTableLineDTO[],
                                      formControlTableLineDTO: FormControlTableLineDTO) {
 
     let currentElementIdFound = false;
-    let formControlId = 0;
+    let formControlId = '0';
     for (const curFormControlTableLineDTO of formControlTableLineDTOS) {
 
       if (currentElementIdFound) {
@@ -338,7 +338,7 @@ export class FormTableComponent implements OnInit, OnChanges {
     return false;
   }
 
-  public tableFocusPrevField(id: number, formControlTableLineDTO: FormControlTableLineDTO) {
+  public tableFocusPrevField(id: string, formControlTableLineDTO: FormControlTableLineDTO) {
     let prevElementId = '';
     for (const formControlCell of formControlTableLineDTO.formControlCells) {
 
@@ -370,7 +370,7 @@ export class FormTableComponent implements OnInit, OnChanges {
     return false;
   }
 
-  public tableFocusNextField(id: number, formControlTableLineDTO: FormControlTableLineDTO) {
+  public tableFocusNextField(id: string, formControlTableLineDTO: FormControlTableLineDTO) {
     let currentElementIdFound = false;
     for (const formControlCell of formControlTableLineDTO.formControlCells) {
 

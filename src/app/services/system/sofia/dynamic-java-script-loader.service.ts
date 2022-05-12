@@ -11,7 +11,7 @@ export class DynamicJavaScriptLoaderService {
   constructor() {
   }
 
-  public addScript(scriptId: number, type: string) {
+  public addScript(scriptId: string, type: string) {
     // this.removeScriptIfExists(type);
 
     if (this.checkIfScriptExists(scriptId, type)) {
@@ -23,7 +23,7 @@ export class DynamicJavaScriptLoaderService {
     return Promise.resolve(this.loadScript(scriptId, type));
   }
 
-  private loadScript(scriptId: number, type: string) {
+  private loadScript(scriptId: String, type: string) {
     return new Promise((resolve, reject) => {
       const jwtToken = localStorage.getItem('jwt_token');
       const script = document.createElement('script');
@@ -54,7 +54,7 @@ export class DynamicJavaScriptLoaderService {
   //   }
   // }
 
-  public checkIfScriptExists(scriptId: number, type: string) {
+  public checkIfScriptExists(scriptId: string, type: string) {
     if (document.getElementById(type + '-dynamic-javascript_' + scriptId) != null) {
       return true;
     }

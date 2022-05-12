@@ -58,8 +58,8 @@ export class UserListComponent extends PageComponent implements OnInit {
     });
   }
 
-  delete(row: any) {
-    this.service.delete(row['id']).subscribe(data => {
+  delete(id: string) {
+    this.service.delete(id).subscribe(data => {
       this.refresh();
     });
   }

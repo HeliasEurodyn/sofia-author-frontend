@@ -4,7 +4,7 @@ import {ComponentPersistEntityDTO} from './component-persist-entity-dto';
 
 export class ComponentPersistEntityDataLineDTO extends BaseDTO {
 
-  public componentPersistEntityId = 0;
+  public componentPersistEntityId = '';
 
   public componentPersistEntityFieldList: ComponentPersistEntityFieldDTO[] = [];
 

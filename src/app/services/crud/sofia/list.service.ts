@@ -43,7 +43,7 @@ export class ListService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/instance-version?id=${id}`, requestOptions);
   }
 
-  getListResult(parametersMap: Map<string, string>, page: number, id: number) {
+  getListResult(parametersMap: Map<string, string>, page: number, id: string) {
     let parameters = '?id=' + id;
     for (const key of parametersMap.keys()) {
       parameters += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(parametersMap.get(key));
@@ -58,7 +58,7 @@ export class ListService extends CrudService<any> {
     return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}/data-excel`, listDto, httpOptions);
   }
 
-  getGroupResult(parametersMap: Map<string, string>, id: number) {
+  getGroupResult(parametersMap: Map<string, string>, id: string) {
     let parameters = '?id=' + id;
     for (const key of parametersMap.keys()) {
       parameters += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(parametersMap.get(key));

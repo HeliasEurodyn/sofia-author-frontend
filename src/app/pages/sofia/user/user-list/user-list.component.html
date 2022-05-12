@@ -29,8 +29,6 @@
               <th>id</th>
               <th>username</th>
               <th>email</th>
-              <th>dateFormat</th>
-              <th>Menu</th>
               <th>status</th>
             </tr>
             </thead>
@@ -53,7 +51,7 @@
                     <i class="fa fa-ellipsis-v"></i>
                   </button>
                   <div ngbDropdownMenu>
-                    <button (click)="delete(row)"
+                    <button (click)="delete(row['id'])"
                             class="text-danger"
                             ngbDropdownItem>
                       <i class="fa fa-times"></i> Delete
@@ -75,12 +73,6 @@
               </td>
               <td>
                 <input [(ngModel)]="row['email']" class="form-control transparent-input" readonly type="text">
-              </td>
-              <td>
-                <input [(ngModel)]="row['dateFormat']" class="form-control transparent-input" readonly type="text">
-              </td>
-              <td>
-                <input class="form-control transparent-input" readonly type="text" value="{{row['menu']?.name}}">
               </td>
               <td>
                 <input [(ngModel)]="row['status']" class="form-control transparent-input" readonly type="text">
