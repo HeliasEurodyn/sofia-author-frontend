@@ -31,6 +31,21 @@ declare function defineSetFieldEditable(id, callback: ((code: string, editable: 
 
 declare function defineGetFromBackend(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
 
+declare function defineGetFromUrl(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+declare function definePostToBackend(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function definePostToUrl(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function definePutToBackend(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function definePutToUrl(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function defineDeleteFromBackend(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+declare function defineDeleteFromUrl(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+
 declare function defineAppendLineToTable(id, callback: ((code: string, fieldValue: any) => any)): void;
 
 declare function defineClearTableLines(id, callback: ((code: string, fieldValue: any) => any)): void;
@@ -139,7 +154,18 @@ export class FormScriptsService {
         registerFormDynamicScript(form.dto.id, form);
 
         defineSetFieldEditable(form.dto.id, this.setFieldEditable);
+
         defineGetFromBackend(form.dto.id, this.getFromBackend);
+        defineGetFromUrl(form.dto.id, this.getFromUrl);
+
+        definePostToBackend(form.dto.id, this.postToBackend);
+        definePostToUrl(form.dto.id, this.postToUrl);
+        definePutToBackend(form.dto.id, this.putToBackend);
+        definePutToUrl(form.dto.id, this.putToUrl);
+        defineDeleteFromBackend(form.dto.id, this.deleteFromBackend);
+        defineDeleteFromUrl(form.dto.id, this.deleteFromUrl);
+
+
         defineAppendLineToTable(form.dto.id, this.appendLineToTable);
         defineClearTableLines(form.dto.id, this.clearTableLines);
         defineAppendLineToComponent(form.dto.id, this.appendLineToComponent);
@@ -342,6 +368,48 @@ export class FormScriptsService {
    * */
   public getFromBackend = (url: string, callback: (n: any) => any) => {
     this.dynamicRequestService.getFromBackend(url).subscribe(data => {
+      callback(data);
+    });
+  };
+
+  public getFromUrl = (url: string, callback: (n: any) => any) => {
+    this.dynamicRequestService.getFromUrl(url).subscribe(data => {
+      callback(data);
+    });
+  };
+
+  public postToBackend = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.postToBackend(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public postToUrl = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.postToUrl(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public putToBackend = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.putToBackend(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public putToUrl = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.putToUrl(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public deleteFromBackend = (url: string, callback: (n: any) => any) => {
+    this.dynamicRequestService.deleteFromBackend(url).subscribe(data => {
+      callback(data);
+    });
+  };
+
+  public deleteFromUrl = (url: string, callback: (n: any) => any) => {
+    this.dynamicRequestService.deleteFromUrl(url).subscribe(data => {
       callback(data);
     });
   };

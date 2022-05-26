@@ -31,7 +31,7 @@ export class FormService extends CrudService<FormDto> {
     return this.http.put<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues);
   }
 
-  private mapTreeToArrays(data: Map<any, any>) {
+  public mapTreeToArrays(data: Map<any, any>) {
     const componentValues = {};
     data.forEach((componentMap: Map<any, any>, componentName: string) => {
 

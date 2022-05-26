@@ -29,32 +29,23 @@
 <div class="row form-area">
   <div class="col-md-12">
     <div class="card card-user">
-      <!-- <div class="card-header">
-        <h5 class="card-title">Table Designer</h5>
-      </div> -->
       <div class="card-body">
-        <form>
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group" >
                 <label>Name</label>
-                <input type="text" class="form-control" placeholder="Name" name="name" (focusout)="checkIfTableAlreadyExists()" [(ngModel)]="dto.name" [readonly]="mode === 'edit-record'" >
+                <input type="text"
+                       class="form-control"
+                       (focusout)="checkIfTableAlreadyExists()"
+                       [(ngModel)]="dto.name"
+                       mask="{{customTableNameMask}}"
+                       [patterns]="customTableNamePattern"
+                       [readonly]="mode === 'edit-record'" >
                 <small class="text-info" *ngIf="tableExists"> Table already exists. </small>
                 <code ></code>
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Indexes</label>
-                <input type="text" class="form-control" placeholder="Indexes" name="indexes" [(ngModel)]="dto.indexes"  >
-              </div>
-            </div>
-          </div>
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -64,8 +55,6 @@
               </div>
             </div>
           </div>
-
-        </form>
       </div>
     </div>
   </div>
@@ -82,10 +71,19 @@
           <div class="col-sm-5">
             <div class="pull-right">
               <button class="btn btn-outline-primary" (click)="generateTableFields()">
-                <i class="fa fa-plus-circle"></i> Generate fields
+                <i class="fa fa-plus-circle"></i> Generate Fields From Database
               </button>
-              <button class="btn btn-outline-primary" (click)="addLine()">
-                <i class="fa fa-plus-circle"></i> New
+              <button class="btn btn-outline-success" (click)="addDefaultFields()">
+                <i class="fa fa-plus-circle"></i> Default Fields
+              </button>
+              <button class="btn btn-outline-success" (click)="addVersionField()">
+                <i class="fa fa-plus-circle"></i> Version Field
+              </button>
+              <button class="btn btn-outline-success" (click)="addShortOrderField()">
+                <i class="fa fa-plus-circle"></i> Short Order Field
+              </button>
+              <button class="btn btn-outline-success" (click)="addField()">
+                <i class="fa fa-plus-circle"></i> Empty Field
               </button>
             </div>
           </div>

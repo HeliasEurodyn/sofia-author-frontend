@@ -32,7 +32,44 @@ function defineGetFromBackend(id, getFromBackend) {
   formDynamicScripts[id].defineGetFromBackend(getFromBackend);
 }
 
+function defineGetFromUrl(id, getFromUrl) {
+  if (typeof formDynamicScripts[id].defineGetFromUrl == "function")
+  formDynamicScripts[id].defineGetFromUrl(getFromUrl);
+}
+
+function definePostToBackend(id, postToBackend) {
+  if (typeof formDynamicScripts[id].definePostToBackend == "function")
+  formDynamicScripts[id].definePostToBackend(postToBackend);
+}
+
+function definePostToUrl(id, postToUrl) {
+  if (typeof formDynamicScripts[id].definePostToUrl == "function")
+  formDynamicScripts[id].definePostToUrl(postToUrl);
+}
+
+function definePutToBackend(id, putToBackend) {
+  if (typeof formDynamicScripts[id].definePutToBackend == "function")
+  formDynamicScripts[id].definePutToBackend(putToBackend);
+}
+
+function definePutToUrl(id, putToUrl) {
+  if (typeof formDynamicScripts[id].definePutToUrl == "function")
+  formDynamicScripts[id].definePutToUrl(putToUrl);
+}
+
+function defineDeleteFromBackend(id, deleteFromBackend) {
+  if (typeof formDynamicScripts[id].defineDeleteFromBackend == "function")
+  formDynamicScripts[id].defineDeleteFromBackend(deleteFromBackend);
+}
+
+function defineDeleteFromUrl(id, deleteFromUrl) {
+  if (typeof formDynamicScripts[id].defineDeleteFromUrl == "function")
+  formDynamicScripts[id].defineDeleteFromUrl(deleteFromUrl);
+}
+
+
 function defineAppendLineToTable(id, appendLineToTable) {
+  if (typeof formDynamicScripts[id].defineAppendLineToTable == "function")
   formDynamicScripts[id].defineAppendLineToTable(appendLineToTable);
 }
 

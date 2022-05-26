@@ -12,16 +12,12 @@ import {PageComponent} from '../../page/page-component';
   styleUrls: ['./view-designer-form.component.css']
 })
 export class ViewDesignerFormComponent extends PageComponent implements OnInit {
-
   public dto: ViewDTO;
   shortOrder = 0;
   public tableExists = false;
-
   public mode: string;
-  userDto: ViewDTO;
-  title = 'appBootstrap';
-
-  public isCollapsed = false;
+  public customTableNameMask = '0*';
+  public customTableNamePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: ViewService,

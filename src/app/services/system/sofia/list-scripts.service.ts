@@ -17,6 +17,21 @@ declare function defineListNavigator(id, callback: ((command: string) => any)): 
 
 declare function defineListGetFromBackend(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
 
+declare function defineListGetFromUrl(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+declare function defineListPostToBackend(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function defineListPostToUrl(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function defineListPutToBackend(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function defineListPutToUrl(id, callback: ((url: string, data: any, callback: (n: any) => any) => any)): void;
+
+declare function defineListDeleteFromBackend(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+declare function defineListDeleteFromUrl(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +50,13 @@ export class ListScriptsService {
           registerListDynamicScript(list.listDto.id, list);
           defineListNavigator(list.listDto.id, this.navigateToCommand);
           defineListGetFromBackend(list.listDto.id, this.getFromBackend);
+          defineListGetFromUrl(list.listDto.id, this.getFromUrl);
+          defineListPostToBackend(list.listDto.id, this.postToBackend);
+          defineListPostToUrl(list.listDto.id, this.postToUrl);
+          defineListPutToBackend(list.listDto.id, this.putToBackend);
+          defineListPutToUrl(list.listDto.id, this.putToUrl);
+          defineListDeleteFromBackend(list.listDto.id, this.deleteFromBackend);
+          defineListDeleteFromUrl(list.listDto.id, this.deleteFromUrl);
           this.triggerListEvent(list.listDto.id, 'onListOpen', '');
           resolve({script: 'listScript', loaded: true, status: 'Loaded'});
         }).catch(error => console.log(error));
@@ -76,5 +98,54 @@ export class ListScriptsService {
       callback(data);
     });
   };
+
+
+  /*
+ *  Get data from  url
+ * */
+  public getFromUrl = (url: string, callback: (n: any) => any) => {
+    this.dynamicRequestService.getFromUrl(url).subscribe(data => {
+      callback(data);
+    });
+  };
+
+
+
+  public postToBackend = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.postToBackend(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public postToUrl = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.postToUrl(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public putToBackend = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.putToBackend(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public putToUrl = (url: string, data: any, callback: (n: any) => any) => {
+    this.dynamicRequestService.putToUrl(url, data).subscribe(response => {
+      callback(response);
+    });
+  };
+
+  public deleteFromBackend = (url: string, callback: (n: any) => any) => {
+    this.dynamicRequestService.deleteFromBackend(url).subscribe(data => {
+      callback(data);
+    });
+  };
+
+  public deleteFromUrl = (url: string, callback: (n: any) => any) => {
+    this.dynamicRequestService.deleteFromUrl(url).subscribe(data => {
+      callback(data);
+    });
+  };
+
 
 }

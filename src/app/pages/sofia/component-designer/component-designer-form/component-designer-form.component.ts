@@ -57,7 +57,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
     this.mode = 'new-record';
     this.componentDTO = new ComponentDTO();
 
-
     const locateParams = this.getLocateParams();
     if (locateParams.has('ID')) {
       id = locateParams.get('ID');
@@ -71,7 +70,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
       });
     }
 
-
     this.refreshComponents();
   }
 
@@ -81,12 +79,10 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
         this.location.back();
       });
     } else {
-
       this.service.save(this.componentDTO).subscribe(data => {
         this.location.back();
       });
     }
-
   }
 
   delete() {
@@ -170,7 +166,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
     this.roleService.get().subscribe(data => {
       this.roles = data;
     });
-
   }
 
 
@@ -215,7 +210,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
       const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
       componentTableFieldDTO.persistEntityField = appViewDesignField;
       componentTableFieldDTO.assignment.editor = '';
-      // componentTableFieldDTO.assignment.value = appViewDesignField.value;
       componentTableFieldDTO.shortOrder = shortOrder;
       componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
       shortOrder++;
@@ -244,7 +238,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
       const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
       componentTableFieldDTO.persistEntityField = tableDesignField;
       componentTableFieldDTO.assignment.editor = '';
-      //  componentTableFieldDTO.assignment.value = tableDesignField.value;
       componentTableFieldDTO.shortOrder = shortOrder;
       componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
       shortOrder++;
@@ -261,7 +254,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   }
 
   genNextComponentCode(componentsList: ComponentPersistEntityDTO[], defaultCode: string) {
-
     let prefixCount = 0;
     let code = defaultCode;
 
@@ -287,7 +279,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
             }
           }
         });
-
       }
 
       if (codeAlreadyExists === false) {
@@ -297,7 +288,6 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
       prefixCount++;
       code = defaultCode + '_' + prefixCount;
     }
-
   }
 
   removeComponentPersistEntity(componentPersistEntity: ComponentPersistEntityDTO, componentPersistEntityList: ComponentPersistEntityDTO[]) {
@@ -313,13 +303,13 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
     }
 
     if (componentPersistEntityList.indexOf(row) > 0) {
-
       const position = componentPersistEntityList.indexOf(row);
       const item = componentPersistEntityList[position];
       const prevItem = componentPersistEntityList[position - 1];
       componentPersistEntityList[position] = prevItem;
       componentPersistEntityList[position - 1] = item;
     }
+
     this.setShortOrders(componentPersistEntityList);
   }
 

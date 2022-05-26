@@ -43,7 +43,7 @@ export class FormComponent extends PageComponent implements OnInit {
               private previousRouteService: PreviousRouteService,
               private navigatorService: CommandNavigatorService,
               private dynamicCssScriptLoader: DynamicCssScriptLoaderService,
-              public  datepipe: DatePipe,
+              public datepipe: DatePipe,
               private title: Title,
               private formScriptsService: FormScriptsService,
               private formAssignmentsService: FormAssignmentsService,
@@ -175,6 +175,37 @@ export class FormComponent extends PageComponent implements OnInit {
       this.service.updateData(this.dto.id, componentValues).subscribe(data => {
         callback(data);
       });
+    }
+  }
+
+  makeReadOnly() {
+    if (this.dto.formActionButtons != null) {
+      this.dto.formActionButtons.forEach(formActionButton => {
+        formActionButton.editable = false;
+      });
+    }
+
+    if (this.dto.formTabs != null) {
+      this.dto.formTabs
+        .filter(formTab => formTab.formAreas != null)
+        .forEach(formTab => {
+          formTab.formAreas
+            .filter(formArea => formArea.formControls != null)
+            .forEach(formArea => {
+              formArea.formControls
+                .forEach(formControl => {
+                  if (formControl.type === 'field') {
+                    formControl.formControlField.editable = false;
+                  }
+                  if (formControl.type === 'table') {
+                    formControl.formControlTable.editable = false;
+                  }
+                  if (formControl.type === 'table') {
+                    formControl.formControlTable.formControlButtons = [];
+                  }
+                });
+            });
+        });
     }
   }
 
@@ -368,4 +399,9 @@ export class FormComponent extends PageComponent implements OnInit {
       event.eventtype,
       event.event);
   }
+
+  mapTreeToArrays(data: Map<any, any>) {
+    return this.service.mapTreeToArrays(data);
+  }
+
 }

@@ -26,12 +26,17 @@
         <h5 class="card-title">View Designer</h5>
       </div>
       <div class="card-body">
-        <form>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group " [ngClass]="{'has-danger': tableExists}">
                <label>Name</label>
-                <input type="text" class="form-control" placeholder="Name" name="name"  [(ngModel)]="dto.name" [readonly]="mode === 'edit-record'" >
+                <input
+                  type="text"
+                  class="form-control"
+                  mask="{{customTableNameMask}}"
+                  [patterns]="customTableNamePattern"
+                  [(ngModel)]="dto.name"
+                  [readonly]="mode === 'edit-record'" >
                 <small class="text-danger" *ngIf="tableExists"> Error! Table name already exists. </small>
                 <code ></code>
               </div>
@@ -55,7 +60,6 @@
               </div>
             </div>
           </div>
-        </form>
       </div>
     </div>
   </div>
