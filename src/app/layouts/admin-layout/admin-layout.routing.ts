@@ -72,6 +72,7 @@ import {MenuDesignerTranslationFormComponent} from '../../pages/sofia/menu-desig
 import {DataTransferFormComponent} from '../../pages/sofia/data_transfer/data-transfer-form/data-transfer-form.component';
 import {DataTransferListComponent} from '../../pages/sofia/data_transfer/data-transfer-list/data-transfer-list.component';
 import {AuthorDashboardComponent} from '../../pages/sofia/author-dashboard/author-dashboard.component';
+import {SettingsComponent} from '../../pages/sofia/settings/settings.component';
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -146,7 +147,8 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'language-designer-list', component: LanguageDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'data-transfer-form', component: DataTransferFormComponent, canActivate: [AuthGuard]},
   {path: 'data-transfer-list', component: DataTransferListComponent, canActivate: [AuthGuard]},
-  {path: 'author-dashboard', component: AuthorDashboardComponent, canActivate: [AuthGuard]}
+  {path: 'author-dashboard', component: AuthorDashboardComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]}
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;
