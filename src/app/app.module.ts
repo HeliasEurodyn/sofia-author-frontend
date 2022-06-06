@@ -116,6 +116,7 @@ import { MenuDesignerTranslationFormComponent } from './pages/sofia/menu-designe
 import { DataTransferListComponent } from './pages/sofia/data_transfer/data-transfer-list/data-transfer-list.component';
 import { DataTransferFormComponent } from './pages/sofia/data_transfer/data-transfer-form/data-transfer-form.component';
 import { AuthorDashboardComponent } from './pages/sofia/author-dashboard/author-dashboard.component';
+import { SettingsComponent } from './pages/sofia/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -209,7 +210,8 @@ import { AuthorDashboardComponent } from './pages/sofia/author-dashboard/author-
     MenuDesignerTranslationFormComponent,
     DataTransferListComponent,
     DataTransferFormComponent,
-    AuthorDashboardComponent
+    AuthorDashboardComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserAnimationsModule,

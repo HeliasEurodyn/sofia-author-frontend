@@ -13,13 +13,14 @@ import {NotificationService} from './services/system/sofia/notification.service'
 
 export class AppComponent implements OnInit {
 
-  public backendUrl;
+  // public backendUrl;
+  favIcon: HTMLLinkElement = document.querySelector('#appIcon');
 
   public constructor(private activatedRoute: ActivatedRoute,
                      private httpErrorResponceService: HttpErrorResponceService,
                      private notificationService: NotificationService,
                      private title: Title) {
-    this.backendUrl = environment.serverUrl;
+    // this.backendUrl = environment.serverUrl;
   }
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
       this.title.setTitle('CityScape');
     });
     this.listenToHttpErrors();
+   // this.changeIcon();
   }
 
   listenToHttpErrors(): void {
@@ -38,43 +40,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  // private loadScript() {
-  //   return new Promise((resolve, reject) => {
-  //     const script = document.createElement('script');
-  //     script.type = 'text/javascript';
-  //     script.src = `${environment.serverUrl}/form/dynamic-javascripts/factory.js`;
-  //
-  //     if (script.readyState) {  // IE
-  //       script.onreadystatechange = () => {
-  //         if (script.readyState === 'loaded' || script.readyState === 'complete') {
-  //           script.onreadystatechange = null;
-  //           resolve({script: name, loaded: true, status: 'Loaded'});
-  //         }
-  //       };
-  //     } else {
-  //       script.onload = () => {
-  //         resolve({script: name, loaded: true, status: 'Loaded'});
-  //       };
-  //     }
-  //     script.onerror = (error: any) => resolve({script: name, loaded: false, status: 'Loaded'});
-  //     document.getElementsByTagName('head')[0].appendChild(script);
-  //   });
-  // }
-
-
-  // public removeScripts() {
-  //   if (document.getElementById('form-dynamic-javascript') != null) {
-  //     document.getElementById('form-dynamic-javascript').remove();
-  //   }
-  //   if (document.getElementById('list-dynamic-javascript') != null) {
-  //     document.getElementById('list-dynamic-javascript').remove();
-  //   }
-  //   if (document.getElementById('form-dynamic-cssscript') != null) {
-  //     document.getElementById('form-dynamic-cssscript').remove();
-  //   }
-  //   if (document.getElementById('list-dynamic-cssscript') != null) {
-  //     document.getElementById('list-dynamic-cssscript').remove();
-  //   }
-  // }
-
+  changeIcon() {
+    this.favIcon.href = 'https://www.google.com/favicon.ico';
+  }
 }
