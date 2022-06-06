@@ -15,9 +15,6 @@ node
             sh 'npm install --save-dev @angular-devkit/build-angular --legacy-peer-deps'
             sh 'npm --version'
             sh 'node --version'
-            sh 'ng --version'
-            sh 'pwd'
-            sh 'ls -al'
             sh 'npm update --legacy-peer-deps'
             sh 'ng build --prod'
         }
