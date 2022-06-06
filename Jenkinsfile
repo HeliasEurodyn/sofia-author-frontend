@@ -7,7 +7,7 @@ node
     stage("Clone From GIT")
     {
         git branch: 'master',
-            url: 'https://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@github.com/HeliasEurodyn/sofia-frontend.git'
+            url: 'https://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@github.com/HeliasEurodyn/sofia-author-frontend.git'
     }
     stage("Build")
     {
