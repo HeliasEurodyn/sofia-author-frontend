@@ -16,7 +16,7 @@ node
             sh 'npm --version'
             sh 'node --version'
             sh 'npm update --legacy-peer-deps'
-            sh 'ng build --prod'
+            sh 'ng build --configuration production'
         }
     }
     stage("Deploy")
