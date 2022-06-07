@@ -16,7 +16,8 @@ node
             sh 'npm --version'
             sh 'node --version'
             sh 'npm update --legacy-peer-deps'
-            sh 'ng build --configuration production'
+            sh 'ng config -g cli.warnings.versionMismatch false'
+            sh 'ng build --no-aot --no-build-optimizer --base-href ./ --configuration production'
         }
     }
     stage("Deploy")
