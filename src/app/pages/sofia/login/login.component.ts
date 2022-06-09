@@ -5,6 +5,8 @@ import {AuthService} from '../../../services/system/sofia/auth/auth.service';
 import {NotificationService} from '../../../services/system/sofia/notification.service';
 import {Router} from '@angular/router';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {SettingsService} from '../../../services/crud/sofia/settings.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -22,14 +24,29 @@ export class LoginComponent implements OnInit {
   githubURL = environment.serverUrl + '/oauth2/authorization/github?redirect_uri=' + environment.frontendUrl + '/callback';
   linkedinURL = environment.serverUrl + '/oauth2/authorization/linkedin?redirect_uri=' + environment.frontendUrl + '/callback';
 
+  loginImage = '';
+
   constructor(private authService: AuthService,
               private notificationService: NotificationService,
               private userService: UserService,
               private router: Router,
-              private navigatorService: CommandNavigatorService) {
+              private navigatorService: CommandNavigatorService,
+              private settingsService: SettingsService,
+              private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
+    this.defineLoginLogo();
+  }
+
+  defineLoginLogo() {
+    this.settingsService.getLoginImage().subscribe(icon => {
+      if (icon != null) {
+        this.loginImage = icon;
+      } else {
+        this.loginImage = './assets/img/sofia.png';
+      }
+    });
   }
 
   authenticateUser(): void {
@@ -55,14 +72,13 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/d-dashboard');
         } else {
           this.navigatorService.navigate(loginNavCommand);
-        //  console.log(loginNavCommand);
         }
       }
-      // err => {
-      //   this.notificationService.showNotification('top', 'center', 'alert-danger', 'fa-id-card',
-      //     err.error.message);
-      // }
     );
+  }
+
+  trustResource(resource) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(resource);
   }
 
   onEnterMethod() {

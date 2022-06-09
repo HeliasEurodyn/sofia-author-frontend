@@ -3,6 +3,8 @@ import {CommandNavigatorService} from '../../services/system/sofia/command-navig
 import {MenuService} from '../../services/crud/sofia/menu.service';
 import {MenuDTO} from '../../dtos/sofia/menu/menuDTO';
 import {LanguageService} from '../../services/system/sofia/language.service';
+import {SettingsService} from '../../services/crud/sofia/settings.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 export interface RouteInfo {
@@ -38,10 +40,13 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   public menuHeaders: any[];
   public sidebarMenu: MenuDTO;
   public languageSelectionSubject;
+  public sidebarImage = '';
 
   constructor(private navigatorService: CommandNavigatorService,
               private languageService: LanguageService,
-              private menuService: MenuService) {
+              private menuService: MenuService,
+              private settingsService: SettingsService,
+              private sanitizer: DomSanitizer) {
 
     navigatorService.sidebarMenuEmmiter.subscribe(id => {
 
@@ -59,6 +64,18 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.selectedMenuItems = this.sidebarMenu.menuFieldList;
     this.defaultMenuItems = this.sidebarMenu.menuFieldList;
+
+    this.defineSidebarImage();
+  }
+
+  defineSidebarImage() {
+    this.settingsService.getSidebarImage().subscribe(icon => {
+      if (icon != null) {
+        this.sidebarImage = icon;
+      } else {
+        this.sidebarImage = './assets/img/sofia.png';
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -137,7 +154,10 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigate(menuItem) {
     this.navigatorService.navigate(menuItem.command);
-    // this.internalMessageService.publishMessage('openTabEvent', {path: menuItem.path, title: menuItem.title});
+  }
+
+  trustResource(resource) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(resource);
   }
 
 }

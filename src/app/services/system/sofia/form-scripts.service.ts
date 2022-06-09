@@ -145,7 +145,7 @@ export class FormScriptsService {
               private formObjService: FormObjService,
               private navigatorService: CommandNavigatorService,
               private staticJavascriptLoader: DynamicStaticJavascriptLoaderService,
-              private notificationService: NotificationService,) {
+              private notificationService: NotificationService) {
   }
 
   public load(form: FormComponent) {

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
-import {environment} from '../environments/environment';
 import {HttpErrorResponceService} from './services/system/sofia/http-error-responce.service';
 import {NotificationService} from './services/system/sofia/notification.service';
+import {SettingsService} from './services/crud/sofia/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -13,22 +13,23 @@ import {NotificationService} from './services/system/sofia/notification.service'
 
 export class AppComponent implements OnInit {
 
-  // public backendUrl;
   favIcon: HTMLLinkElement = document.querySelector('#appIcon');
+  appTitle = '';
 
   public constructor(private activatedRoute: ActivatedRoute,
                      private httpErrorResponceService: HttpErrorResponceService,
                      private notificationService: NotificationService,
-                     private title: Title) {
-    // this.backendUrl = environment.serverUrl;
+                     private title: Title,
+                     private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe(params => {
-      this.title.setTitle('CityScape');
+      this.title.setTitle(this.appTitle);
     });
     this.listenToHttpErrors();
-   // this.changeIcon();
+    this.defineIcon();
+    this.defineTitle();
   }
 
   listenToHttpErrors(): void {
@@ -40,7 +41,24 @@ export class AppComponent implements OnInit {
       });
   }
 
-  changeIcon() {
-    this.favIcon.href = 'https://www.google.com/favicon.ico';
+  defineIcon() {
+    this.settingsService.getIcon().subscribe(icon => {
+      if (icon != null) {
+        this.favIcon.href = icon;
+      } else {
+        this.favIcon.href = './assets/img/sofia_icon.png';
+      }
+    });
+  }
+
+  defineTitle() {
+    this.settingsService.getName().subscribe(name => {
+      if (name != null) {
+        this.appTitle = name;
+      } else {
+        this.appTitle = 'Sofia';
+      }
+      this.title.setTitle(this.appTitle);
+    });
   }
 }

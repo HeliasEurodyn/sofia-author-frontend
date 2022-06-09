@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../page/page-component';
-import {ListDTO} from '../../../dtos/sofia/list/list-dto';
-import {SearchDTO} from '../../../dtos/sofia/search/search-dto';
 import {SettingsDto} from '../../../dtos/sofia/settings/settings-dto';
+import {SettingsService} from '../../../services/crud/sofia/settings.service';
+import {Location} from '@angular/common';
+import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-settings',
@@ -11,22 +13,36 @@ import {SettingsDto} from '../../../dtos/sofia/settings/settings-dto';
 })
 export class SettingsComponent extends PageComponent implements OnInit {
 
-  loginImage: any;
-  icon: any;
-  ApplicationName = 'Sofia';
   public dto: SettingsDto = new SettingsDto();
 
-  constructor() {
+  constructor(private service: SettingsService,
+              private location: Location,
+              private notificationService: NotificationService,
+              private sanitizer: DomSanitizer) {
     super();
-    this.dto.sidebarImage = './assets/img/angular2-logo.svg';
-    this.dto.loginImage = './assets/img/sofia.png';
-    this.dto.icon = './assets/img/favicon.png';
+    this.dto.name = 'Sofia';
+    this.dto.sidebarImage = '';
+    this.dto.loginImage = '';
+    this.dto.icon = '';
   }
 
   ngOnInit(): void {
+    this.service.get().subscribe(dto => {
+      if (dto != null) {
+        this.dto = dto;
+      } else {
+        this.dto.name = 'Sofia';
+        this.dto.sidebarImage = './assets/img/sofia.png';
+        this.dto.loginImage = './assets/img/sofia.png';
+        this.dto.icon = './assets/img/sofia_icon.png';
+      }
+    });
   }
 
   save() {
+    this.service.save(this.dto).subscribe(data => {
+      this.notificationService.showNotification('top', 'center', 'alert-info', 'fa-save', 'Settings Saved.');
+    });
   }
 
   onSidebarImageFileSelect(event) {
@@ -64,5 +80,9 @@ export class SettingsComponent extends PageComponent implements OnInit {
         this.dto.icon = evnt.target.result;
       }
     }
+  }
+
+  trustResource(resource) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(resource);
   }
 }

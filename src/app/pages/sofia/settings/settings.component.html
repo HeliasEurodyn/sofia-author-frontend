@@ -45,14 +45,20 @@
           <div class="col-12">
             <div>
               <label>Sidebar Image</label>
-              <div class="img-div"><img [src]="dto.sidebarImage" height="200"></div>
-              <br/>
+              <div class="img-div"><img [src]="this.trustResource(dto.sidebarImage)" height="200"></div>
               <input #sidebarImageFileUploader (change)="onSidebarImageFileSelect($event)" class="form-control" style="display: none;"
-                     type='file'>
+                     type='file' accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
               <button (click)="sidebarImageFileUploader.click()" class="btn btn-info btn-round" style="cursor: pointer;"
                       type="button">
                 <i class="fa fa-save"></i>
-                Upload Image
+                Upload
+              </button>
+              <button (click)="this.dto.sidebarImage = './assets/img/sofia.png'"
+                class="btn btn-danger btn-round"
+                      style="cursor: pointer;"
+                      type="button">
+                <i class="fa fa-trash"></i>
+                Clear
               </button>
               <code></code>
             </div>
@@ -61,14 +67,20 @@
           <div class="col-12">
             <div>
               <label>Login Image</label>
-              <div class="img-div"><img [src]="dto.loginImage" height="200"></div>
-              <br/>
+              <div class="img-div"><img [src]="this.trustResource(dto.loginImage)" height="200"></div>
               <input #loginImageFileUploader (change)="onLoginImageFileSelect($event)" class="form-control" style="display: none;"
-                     type='file'>
+                     type='file' accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
               <button (click)="loginImageFileUploader.click()" class="btn btn-info btn-round" style="cursor: pointer;"
                       type="button">
                 <i class="fa fa-save"></i>
-                Upload Image
+                Upload
+              </button>
+              <button (click)="this.dto.loginImage = './assets/img/sofia.png'"
+                      class="btn btn-danger btn-round"
+                      style="cursor: pointer;"
+                      type="button">
+                <i class="fa fa-trash"></i>
+                Clear
               </button>
               <code></code>
             </div>
@@ -77,14 +89,20 @@
           <div class="col-12">
             <div>
               <label>Icon</label>
-              <div class="img-div"><img [src]="dto.icon" height="20"></div>
-              <br/>
+              <div class="img-div"><img [src]="this.trustResource(dto.icon)" height="20"></div>
               <input #iconImageFileUploader (change)="onIconFileSelect($event)" class="form-control" style="display: none;"
-                     type='file'>
+                     type='file' accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
               <button (click)="iconImageFileUploader.click()" class="btn btn-info btn-round" style="cursor: pointer;"
                       type="button">
                 <i class="fa fa-save"></i>
                 Upload
+              </button>
+              <button (click)="this.dto.icon = './assets/img/sofia_icon.png'"
+                      class="btn btn-danger btn-round"
+                      style="cursor: pointer;"
+                      type="button">
+                <i class="fa fa-trash"></i>
+                Clear
               </button>
               <code></code>
             </div>
