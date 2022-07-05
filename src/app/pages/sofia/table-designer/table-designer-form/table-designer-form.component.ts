@@ -14,7 +14,7 @@ import {NotificationService} from '../../../../services/system/sofia/notificatio
   styleUrls: ['./table-designer-form.component.css']
 })
 export class TableDesignerFormComponent extends PageComponent implements OnInit {
-  public tableHeaders = ['Name', 'Type', 'Size', 'Auto Increment', 'Primary key', 'Has default', 'Default', 'Unsigned', 'Not Null'];
+
   public dto: TableDTO;
   shortOrder = 0;
   public tableExists = false;

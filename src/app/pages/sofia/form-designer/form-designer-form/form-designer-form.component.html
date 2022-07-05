@@ -705,6 +705,7 @@
                       <th>Type</th>
                       <th>Editor</th>
                       <th>Default</th>
+                      <th>On Save</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -726,6 +727,7 @@
                       <td>{{field.assignment.type}}</td>
                       <td>{{field.assignment.editor}}</td>
                       <td>{{field.assignment.defaultValue}}</td>
+                      <td>{{field.assignment.onSaveValue}}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -1309,6 +1311,8 @@
               <option value="chips">Chips</option>
               <option value="autocomplete-combo">Autocomplete Combo</option>
               <option value="checkbox">Checkbox</option>
+              <option value="password">Password</option>
+              <option value="file-selector">File Selector</option>
               <option value="cve">Cve</option>
             </select>
           </div>
@@ -1327,6 +1331,14 @@
             <label>Default Value</label>
             <textarea class="form-control"
                       [(ngModel)]="this.selectedComponentPersistEntityField.assignment.defaultValue"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>On Save Value</label>
+            <textarea class="form-control"
+                      [(ngModel)]="this.selectedComponentPersistEntityField.assignment.onSaveValue"></textarea>
           </div>
         </div>
 

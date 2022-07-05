@@ -168,6 +168,7 @@ export class FormComponent extends PageComponent implements OnInit {
   save(callback) {
     const componentValues = this.mapComponentTreeForSaving(this.dto.component.componentPersistEntityList);
     if (this.selectionId === '') {
+
       this.service.saveData(this.dto.id, componentValues).subscribe(data => {
         callback(data);
       });

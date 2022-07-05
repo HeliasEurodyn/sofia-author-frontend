@@ -134,6 +134,44 @@
                   </div>
                 </div>
               </ng-container>
+
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'file-selector'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-file-selector class="form-input-field"
+                                        [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                        [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                        (eventOccured)="fieldEventOccured($event)"
+                                        [command]="formcontrol.formControlField.componentPersistEntityField.assignment.editor"
+                                        [editable]="formcontrol.formControlField.editable">
+                    </app-file-selector>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container
+                *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'password'">
+                <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
+                     class="{{formcontrol.cssclass}} form-field-{{formcontrol.id}}"
+                     style="{{formcontrol.formControlField.css}}">
+                  <div class="form-group">
+                    <b>{{formcontrol.formControlField.description}}</b>
+                    <app-password-input class="form-input-field"
+                                       [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
+                                       [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
+                                       (eventOccured)="fieldEventOccured($event)"
+                                       [mask]="(!!formcontrol.formControlField.mask)?formcontrol.formControlField.mask:''"
+                                       [editable]="formcontrol.formControlField.editable">
+                    </app-password-input>
+                    <div class="category" [innerHTML]="formcontrol.formControlField.message"></div>
+                  </div>
+                </div>
+              </ng-container>
               <ng-container
                 *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'checkbox'">
                 <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"

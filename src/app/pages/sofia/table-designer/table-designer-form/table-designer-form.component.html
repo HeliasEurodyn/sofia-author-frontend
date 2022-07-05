@@ -94,8 +94,17 @@
           <table class="table table-striped">
             <thead class=" text-primary">
             <tr>
-              <th class="text-right">Actions</th>
-              <th *ngFor="let cell of tableHeaders">{{ cell }}</th>
+              <th>Actions</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Auto Increment</th>
+              <th>Primary key</th>
+              <th>Has default</th>
+              <th>Default</th>
+              <th>Unsigned</th>
+              <th>Not Null</th>
+              <th>On Save</th>
             </tr>
             </thead>
             <tbody>
@@ -117,7 +126,10 @@
                   <option value="double">double</option>
                   <option value="datetime">datetime</option>
                   <option value="varchar">varchar</option>
+                  <option value="password">password</option>
                   <option value="text">text</option>
+                  <option value="bit">bit</option>
+
                 </select>
               </td>
               <td>
@@ -166,7 +178,10 @@
                 </select>
               </td>
 
-
+              <td>
+                <input class="form-control ng-dirty ng-valid ng-touched transparent-input"
+                       [(ngModel)]="row.onSaveValue"  >
+              </td>
             </tr>
 
 

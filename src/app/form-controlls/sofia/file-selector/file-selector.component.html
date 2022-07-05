@@ -1,0 +1,58 @@
+
+<input #sidebarImageFileUploader (change)="onFileSelect($event)" class="form-control" style="display: none;"
+       type='file'>
+
+<div class="input-group input-group-alternative">
+
+      <div class="input-group-prepend bg-color">
+        <span (click)="sidebarImageFileUploader.click()"
+              class="input-group-text bg-color">
+            <i class="fa fa-file-arrow-up" style="opacity: 0.8;color: #00bbbf !important;"
+               (click)="eventOccuredActions('click',$event)"
+               (change)="eventOccuredActions('change',$event)"
+               (focus)="eventOccuredActions('focus',$event)"
+               (focusout)="eventOccuredActions('focusout',$event)"
+               (drag)="eventOccuredActions('drag',$event)"
+               (dragend)="eventOccuredActions('dragend',$event)"
+               (mousemove)="eventOccuredActions('mousemove',$event)"
+               (mouseout)="eventOccuredActions('mouseout',$event)"
+               (mouseover)="eventOccuredActions('mouseover',$event)"
+               (mouseup)="eventOccuredActions('mouseup',$event)"
+               (resize)="eventOccuredActions('resize',$event)"></i>
+         </span>
+      </div>
+
+      <input readonly
+             (click)="sidebarImageFileUploader.click()"
+             type="text"
+             #selectorField
+             class="form-control bg-color ctrl-field"
+             [value]="this.fileName"
+             (click)="eventOccuredActions('click',$event)"
+             (change)="eventOccuredActions('change',$event)"
+             (focus)="eventOccuredActions('focus',$event)"
+             (focusout)="eventOccuredActions('focusout',$event)"
+             (drag)="eventOccuredActions('drag',$event)"
+             (dragend)="eventOccuredActions('dragend',$event)"
+             (mousemove)="eventOccuredActions('mousemove',$event)"
+             (mouseout)="eventOccuredActions('mouseout',$event)"
+             (mouseover)="eventOccuredActions('mouseover',$event)"
+             (mouseup)="eventOccuredActions('mouseup',$event)"
+             (resize)="eventOccuredActions('resize',$event)">
+
+      <div
+        class="input-group-append">
+        <span *ngIf="fileName != null"
+              (click)="download()"
+              class="input-group-text input-group-text-rm">
+           <i class="fa fa-file-arrow-down" style="opacity: 0.8;color: #006dff !important;"></i>
+        </span>
+        <span *ngIf="fileName == null"
+              class="input-group-text input-group-text-rm">
+           <i class="fa fa-file-arrow-down" style="opacity: 0.8;color: #9c9a9a !important;"></i>
+        </span>
+      </div>
+
+
+    </div>
+

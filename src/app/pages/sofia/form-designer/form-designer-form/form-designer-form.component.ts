@@ -456,7 +456,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     formControlDto.formControlField = formControlFieldDTO;
     formControlDto.formControlField.componentPersistEntity = componentPersistEntity;
     formControlDto.formControlField.componentPersistEntityField = componentPersistEntityField;
-    formControlDto.type = 'field';
+    formControlDto.formControlField.description = formControlDto.formControlField.componentPersistEntityField.persistEntityField.name;
+      formControlDto.type = 'field';
     formControlDto.shortOrder = this.getNextShortOrder(this.selectedFormArea.formControls);
     formControlDto.cssclass = 'col-12';
     this.selectedFormArea.formControls.push(formControlDto);

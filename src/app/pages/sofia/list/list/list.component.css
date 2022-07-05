@@ -250,3 +250,19 @@ li { /* styles all li elements*/
 .th-header-pointer{
   cursor: pointer;
 }
+
+/*.list-table-body, .list-table-head{*/
+/*  width: 100%;*/
+/*  display: block;*/
+/*}*/
+
+/*.list-table-body tr, .list-table-head tr{*/
+/*  display: flex;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.list-table-body tr td, .list-table-head tr td{*/
+/*  display: flex;*/
+/*  width: 100%;*/
+/*}*/
+

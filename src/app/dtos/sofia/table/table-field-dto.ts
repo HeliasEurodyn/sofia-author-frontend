@@ -16,4 +16,5 @@ export class TableFieldDTO extends PersistEntityFieldDTO {
 
   public entitytype = 'TableField';
 
+  onSaveValue: string;
 }

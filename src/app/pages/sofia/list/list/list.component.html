@@ -247,7 +247,7 @@
                         class="btn btn-outline-default btn-icon btn-sm"><i class="fas fa-stream"></i>
                 </button>
                 <table class="table table-striped table-fixed" style="margin-bottom: 0rem;">
-                  <thead class="text-primary">
+                  <thead class="text-primary list-table-head">
                   <tr>
                     <ng-container *ngIf="this.listDto?.listComponentActionFieldList.length > 0">
                       <th class="table-title-buttons" style="max-width: fit-content;">
@@ -397,6 +397,9 @@
                                  readonly
                                  class="form-control transparent-input ctrl-field"
                                  value="{{row[column.code]}}">
+                          </ng-container>
+                          <ng-container *ngIf="column.type === 'simple-field'">
+                            <span [innerHTML]="row[column.code]"> </span>
                           </ng-container>
 
                         </td>

@@ -6,6 +6,8 @@ export class ComponentPersistEntityFieldAssignmentDTO extends BaseDTO {
 
   defaultValue: string;
 
+  onSaveValue: string;
+
   decimals: number;
 
   fieldValue: any;

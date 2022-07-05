@@ -117,6 +117,8 @@ import { DataTransferListComponent } from './pages/sofia/data_transfer/data-tran
 import { DataTransferFormComponent } from './pages/sofia/data_transfer/data-transfer-form/data-transfer-form.component';
 import { AuthorDashboardComponent } from './pages/sofia/author-dashboard/author-dashboard.component';
 import { SettingsComponent } from './pages/sofia/settings/settings.component';
+import { PasswordInputComponent } from './form-controlls/sofia/password-input/password-input.component';
+import { FileSelectorComponent } from './form-controlls/sofia/file-selector/file-selector.component';
 
 @NgModule({
   declarations: [
@@ -211,7 +213,9 @@ import { SettingsComponent } from './pages/sofia/settings/settings.component';
     DataTransferListComponent,
     DataTransferFormComponent,
     AuthorDashboardComponent,
-    SettingsComponent
+    SettingsComponent,
+    PasswordInputComponent,
+    FileSelectorComponent
   ],
   imports: [
     BrowserAnimationsModule,

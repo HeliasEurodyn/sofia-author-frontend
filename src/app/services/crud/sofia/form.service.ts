@@ -18,8 +18,13 @@ export class FormService extends CrudService<FormDto> {
   }
 
   saveData(id: string, data: Map<any, any>) {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text'
+    }
     const componentValues = this.mapTreeToArrays(data);
-    return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues);
+    return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues, requestOptions);
   }
 
   deleteData(id: string, selectionId: any) {
@@ -27,8 +32,13 @@ export class FormService extends CrudService<FormDto> {
   }
 
   updateData(id: string, data: Map<any, any>) {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text'
+    }
     const componentValues = this.mapTreeToArrays(data);
-    return this.http.put<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues);
+    return this.http.put<any>(`${environment.serverUrl}/${this.endpoint}?id=${id}`, componentValues, requestOptions);
   }
 
   public mapTreeToArrays(data: Map<any, any>) {
