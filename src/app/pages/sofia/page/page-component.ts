@@ -79,7 +79,7 @@ export class PageComponent {
     if (this.params.has('TITLE')) {
       return this.params.get('TITLE');
     }
-    return 'OneNet';
+    return '';
   }
 
   public getFocusClass() {
