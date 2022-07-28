@@ -31,7 +31,6 @@ export class FormComponent extends PageComponent implements OnInit {
   public dto: FormDto;
   public selectedFormTabId: string;
   public selectedFormPopupCode: string;
-  public test = '';
   @ViewChild('yesNoDialog') yesNoDialog: YesNoDialogComponent;
   @ViewChild('okDialog') okDialog: OkDialogComponent;
   public selectedActionButton: FormActionButton
@@ -403,6 +402,24 @@ export class FormComponent extends PageComponent implements OnInit {
 
   mapTreeToArrays(data: Map<any, any>) {
     return this.service.mapTreeToArrays(data);
+  }
+
+  getFieldByCode(fieldCode) {
+    const formSections = this.dto.formTabs.concat(this.dto.formPopups);
+    for (const formTab of formSections) {
+      for (const formArea of formTab.formAreas) {
+        for (const formControl of formArea.formControls) {
+          if (formControl.type === 'field') {
+            const curFieldCode = formControl.formControlField.componentPersistEntity.code +
+              '.' +
+              formControl.formControlField.componentPersistEntityField.code;
+            if (fieldCode === curFieldCode) {
+              return formControl.formControlField;
+            }
+          }
+        }
+      }
+    }
   }
 
 }
