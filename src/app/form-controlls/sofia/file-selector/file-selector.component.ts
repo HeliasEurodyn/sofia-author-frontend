@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
 
@@ -16,15 +16,17 @@ export class FileSelectorComponent implements OnInit {
   @Input() command: string;
   fileName: string;
   cpeFieldFileName: ComponentPersistEntityFieldDTO;
+  @ViewChild('sidebarImageFileUploader') sidebarImageFileUploader: ElementRef;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
 
-   if (this.isJsonString(this.command)) {
-     const command = JSON.parse(this.command);
-     this.retrieveFileNameField(command.fileName)
-   }
+    if (this.isJsonString(this.command)) {
+      const command = JSON.parse(this.command);
+      this.retrieveFileNameField(command.fileName)
+    }
   }
 
   isJsonString(str) {
@@ -34,17 +36,6 @@ export class FileSelectorComponent implements OnInit {
       return false;
     }
     return true;
-  }
-
-  private retrieveFileNameField(fieldName: string): void {
-        this.componentPersistEntityDTO.componentPersistEntityFieldList
-          .forEach(cpef => {
-            const currentfield = this.componentPersistEntityDTO.code + '.' + cpef.code;
-            if (fieldName === currentfield) {
-              this.cpeFieldFileName = cpef;
-              this.fileName = cpef.value;
-            }
-          });
   }
 
   onFileSelect(event) {
@@ -82,4 +73,22 @@ export class FileSelectorComponent implements OnInit {
     element.click();
     document.body.removeChild(element);
   }
+
+  openFileSelector() {
+    if (this.editable) {
+      this.sidebarImageFileUploader.nativeElement.click();
+    }
+  }
+
+  private retrieveFileNameField(fieldName: string): void {
+    this.componentPersistEntityDTO.componentPersistEntityFieldList
+      .forEach(cpef => {
+        const currentfield = this.componentPersistEntityDTO.code + '.' + cpef.code;
+        if (fieldName === currentfield) {
+          this.cpeFieldFileName = cpef;
+          this.fileName = cpef.value;
+        }
+      });
+  }
+
 }
