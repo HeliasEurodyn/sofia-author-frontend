@@ -20,6 +20,14 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
 
     return next.handle(request)
       .pipe(catchError((errorResponce) => {
+        console.log(errorResponce);
+
+        if ( this.isJsonString(errorResponce.error)) {
+          const response = JSON.parse(errorResponce.error);
+          this.httpErrorResponceService.setNewErrorMessage(response.message);
+          return throwError(errorResponce);
+        }
+
         switch (errorResponce.status) {
           case 400:
             this.httpErrorResponceService.setNewErrorMessage('<b>400</b> Bad Request 400');
@@ -65,6 +73,14 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
 
   }
 
+  private isJsonString(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
 
   // intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
   //   return next.handle(request).pipe(catchError(this.handleError));
