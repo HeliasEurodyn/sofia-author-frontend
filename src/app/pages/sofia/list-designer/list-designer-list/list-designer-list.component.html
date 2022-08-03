@@ -51,7 +51,7 @@
               *ngIf="tableData == undefined || tableData.length === 0 ">
               <td class="empty-table-row" colspan="12">Empty!</td>
             </tr>
-            <tr *ngFor="let row of tableData">
+            <tr *ngFor="let row of tableData; ">
               <td>
                 <button (click)="openPage( row['id'])" class="btn btn-outline-success btn-icon btn-sm" title="Edit"
                         type="button">
@@ -63,22 +63,20 @@
                   <i class="fa fa-globe-europe"></i>
                 </button>
                 <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
-                     style="margin-top: 4px;">
-                  <button (click)="myDrop.open();"
+                     style="margin-top: 4px;display:none;">
+                  <button  (click)="myDrop.open();"
                           class="btn btn-outline-default btn-icon btn-sm"
                           title="More">
                     <i class="fa fa-ellipsis-v"></i>
                   </button>
                   <div ngbDropdownMenu>
-                    <button (click)="delete(row)"
-                            class="text-danger"
-                            ngbDropdownItem>
+                    <button ngbDropdownAnchor (click)="delete(row)"
+                            class="text-danger menu-button">
                       <i class="fa fa-times"></i> Delete
                     </button>
-                    <div class="dropdown-divider"></div>
+                    <div ngbDropdownAnchor class="dropdown-divider"></div>
                     <button (click)="clone( row['id'])"
-                            class="text-success"
-                            ngbDropdownItem>
+                            class="text-success menu-button">
                       <i class="fa fa-clone"></i> Copy As New
                     </button>
                   </div>

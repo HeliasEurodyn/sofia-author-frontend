@@ -118,3 +118,23 @@
 .dashboard-entity app-list .form-area{
   margin-top: 5px !important;
 }
+
+.menu-button{
+  border: none;
+  background-color: #f0f8ff00;
+  padding: 10px;
+}
+
+.menu-button:hover{
+  color: #555555 !important;
+  border: none;
+}
+
+.menu-button:after{
+  display: none;
+}
+
+.menu-button:focus{
+  outline:0;
+}
+

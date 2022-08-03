@@ -327,9 +327,9 @@
                                 <div *ngIf="subField.editor === '#divider#'"
                                      class="dropdown-divider {{subField.code}}"></div>
 
-                                <button ngbDropdownItem *ngIf="subField.editor !== '#divider#'"
+                                <button ngbDropdownAnchor *ngIf="subField.editor !== '#divider#'"
                                         (click)="listRowButtonClick(row, listDto,  subField)"
-                                        class="{{subField.code}}">
+                                        class="{{subField.code}} menu-button">
                                   <i
                                     class="fa {{subField.defaultValue}} {{subField.bclass}}"></i> {{subField.description}}
                                 </button>
