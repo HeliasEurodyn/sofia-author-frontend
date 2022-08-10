@@ -10,11 +10,18 @@
     </div>
     <div class="pull-right">
       <button *ngFor="let actionButton of this.listDto?.listActionButtons"
-              (click)="headerActionButtonClicked(actionButton)"
+              (click)="headerActionButtonClicked(actionButton);"
               class="btn {{actionButton.cssClass}}"
               style="margin-top: 0px;">
         <i class="fa {{actionButton.icon}}"></i>
         {{actionButton.description}}
+      </button>
+      <button
+              (click)="export_xls();"
+              class="btn btn-outline-info"
+              style="margin-top: 0px;">
+        <i class="fa fa-file-excel"></i>
+        Export Excel
       </button>
     </div>
   </div>
@@ -485,7 +492,7 @@
                 <tr *ngFor="let arrayLine of this.topViewArrayLines; let arrayLineIndex = index">
                   <td *ngIf="arrayLineIndex == 0"
                       [attr.rowspan]="this.topViewArrayLines.length+1"
-                      [attr.colspan]="this.leftViewArrayLines.length">
+                      [attr.colspan]="this.topLeftColspan">
                   </td>
                   <td class="top-cells" *ngFor="let row of arrayLine" [attr.colspan]="row.colspan">
                     <button *ngIf="row.bottomBranch != true" type="button" class="btn btn-outline-info btn-expand" >
