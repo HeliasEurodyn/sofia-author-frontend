@@ -33,7 +33,7 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Fields Selection Area -->
-        <div class="col-md-3 col-sm-12 col-12 top-row-padding">
+        <div class="col-md-2 col-sm-12 col-12 top-row-padding">
           <div class="card top-card">
             <div class="card-header">
               <div class="row formnav">
@@ -41,7 +41,7 @@
                   <div class="pull-left">
                     <h5 class="card-title" style="margin-bottom: 0px;">
                       <i class="fas fa-stream"></i>
-                      Fields
+                      Available Fields
                     </h5>
                   </div>
                   <div class="pull-right">
@@ -113,7 +113,7 @@
                     <div class="text-center">
                       <button (click)="filterGroupOnField(item)" class="btn left-group-button btn-outline-default"
                               style="border: 1px solid #66615b !important">
-                        {{item.fieldValue}}
+                        {{item.description}}jj
                       </button>
                     </div>
                   </div>
@@ -149,13 +149,11 @@
                 <div class="col-md-auto col-no-padding" *ngFor="let item of this.listDto.listComponentTopGroupFieldList">
                   <div class="btn-group">
                     <button type="button"
-                            class="btn left-group-button btn-outline-info active-header side-field-button"
-                            style="padding: 2px;font-size: 15px;">
+                            class="btn left-group-button btn-outline-info active-header side-field-button">
                       <i class="fa fa-chevron-circle-up"></i>
                     </button>
                     <button type="button"
-                            class="btn left-group-button btn-outline-info active-header side-field-button"
-                            style="padding: 2px;font-size: 15px;">
+                            class="btn left-group-button btn-outline-info active-header side-field-button">
                       <i class="fa fa-chevron-circle-right"></i>
                     </button>
 
@@ -244,7 +242,7 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Left Group & Filters -->
-        <div *ngIf="isGroupContentDivVisible() || this.listDto.filterVisible" class="col-md-3 col-sm-12 col-12 entity-parent-col" style="padding-right: 5px;padding-left: 5px;">
+        <div *ngIf="isGroupContentDivVisible() || this.listDto.filterVisible" class="col-md-2 col-sm-12 col-12 entity-parent-col" style="padding-right: 5px;padding-left: 5px;">
           <div class="row" >
 
             <!-- Left Group -->
@@ -256,7 +254,7 @@
                       <div class="pull-left">
                         <h5 class="card-title" style="margin-bottom: 0px;">
                           <i class="fas fa-stream"></i>
-                          {{this.listDto.groupingTitle}}
+                          Analysis Fields
                         </h5>
                         <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.groupingDescription"> Navigate to <b>Mechanisms
                           of attack</b> categorization <b>tree <i
@@ -272,13 +270,11 @@
                     <div class="col-12" *ngFor="let item of this.listDto.listComponentLeftGroupFieldList">
                       <div class="btn-group">
                         <button type="button"
-                                class="btn left-group-button btn-outline-info active-header side-field-button"
-                                style="padding: 2px;font-size: 15px;">
+                                class="btn left-group-button btn-outline-info active-header side-field-button">
                           <i class="fa fa-chevron-circle-up"></i>
                         </button>
                         <button type="button"
-                                class="btn left-group-button btn-outline-info active-header side-field-button"
-                                style="padding: 2px;font-size: 15px;">
+                                class="btn left-group-button btn-outline-info active-header side-field-button">
                           <i class="fa fa-chevron-circle-right"></i>
                         </button>
 
@@ -462,28 +458,11 @@
         <!-- List -->
         <div class="col" style="padding-right: 5px;padding-left: 5px;" >
           <div class="card">
-            <div class="card-header">
-              <div class="row formnav">
-                <div class="col-12">
-                  <div class="pull-left">
-                    <h5 class="card-title" style="margin-bottom: 0px;">
-                      <i *ngIf="this.listDto.icon != null && this.listDto.icon != ''"
-                         class="fa {{this.listDto.icon}}"></i>
-                      {{this.listDto.title}}
-                    </h5>
-                    <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.description"></p>
-                  </div>
-                  <div class="pull-right">
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="card-body">
               <button *ngIf="isGroupContentDivVisible()" type="button"
                       style="position: absolute; top: 15px; left: 17px;display: none;"
                       class="btn btn-outline-default btn-icon btn-sm"><i class="fas fa-stream"></i>
               </button>
-              <div class="container-fluid">
               <table class="" style="margin-bottom: 0rem;">
 
                 <tbody class="list-table-body list-table-body-{{this.listDto.id}}">
@@ -531,7 +510,6 @@
 
                 </tbody>
               </table>
-              </div>
             </div>
           </div>
         </div>
