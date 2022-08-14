@@ -5,7 +5,7 @@
         <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
           <i class="fa fa {{this.listDto.headerIcon}}" style="padding-right: 5px;"></i>{{this.listDto.headerTitle}}
         </h3>
-        <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.headerDescription"></p>
+        <p style="margin-bottom: 0px;" [innerHTML]="this.listDto.headerDescription"></p>
       </div>
     </div>
     <div class="pull-right">
@@ -33,7 +33,7 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Fields Selection Area -->
-        <div class="col-md-2 col-sm-12 col-12 top-row-padding">
+        <div [hidden]="this.hideSideMenus" class="col-md-2 col-sm-12 col-12 top-row-padding">
           <div class="card top-card">
             <div class="card-header">
               <div class="row formnav">
@@ -41,8 +41,9 @@
                   <div class="pull-left">
                     <h5 class="card-title" style="margin-bottom: 0px;">
                       <i class="fas fa-stream"></i>
-                      Available Fields
+                      Analysis Fields
                     </h5>
+                    <p style="margin-bottom: 21px;" ></p>
                   </div>
                   <div class="pull-right">
                   </div>
@@ -51,6 +52,23 @@
             </div>
             <div class="card-body">
               <div class="row row-small-padding">
+                <div class="col-md-auto col-no-padding" *ngFor="let item of this.listDto.listComponentColumnFieldList">
+                  <div class="btn-group">
+                    <button type="button"
+                            class="btn left-group-button btn-outline-info active-header side-field-button">
+                      <i class="fa fa-chevron-circle-up"></i>
+                    </button>
+                    <button type="button"
+                            class="btn left-group-button btn-outline-info active-header side-field-button">
+                      <i class="fa fa-chevron-circle-right"></i>
+                    </button>
+                    <button
+                      class="btn left-group-button btn-outline-default side-field-button"
+                      style="border: 1px solid #66615b !important">
+                      {{item.description}}
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <ul *ngIf="groupContent?.length > 0">
@@ -113,7 +131,7 @@
                     <div class="text-center">
                       <button (click)="filterGroupOnField(item)" class="btn left-group-button btn-outline-default"
                               style="border: 1px solid #66615b !important">
-                        {{item.description}}jj
+                        {{item.fieldValue}}
                       </button>
                     </div>
                   </div>
@@ -125,21 +143,24 @@
         </div>
 
         <!-- Top Group -->
-        <div style="margin-bottom: 10px;" class="col top-row-padding">
+        <div [hidden]="this.hideSideMenus" style="margin-bottom: 10px;" class="col top-row-padding">
           <div class="card top-card">
             <div class="card-header">
               <div class="row formnav">
                 <div class="col-12">
                   <div class="pull-left">
                     <h5 class="card-title" style="margin-bottom: 0px;">
-                      <i class="fas fa-stream"></i>
-                      {{this.listDto.groupingTitle}}
+                      <i class="fas {{this.listDto.icon}}"></i>
+                      {{this.listDto.title}}
                     </h5>
-                    <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.groupingDescription"> Navigate to <b>Mechanisms
-                      of attack</b> categorization <b>tree <i
-                      class="fas fa-stream"></i></b> of Capecs</p>
+                    <p style=" margin-bottom: 0px;" [innerHTML]="this.listDto.description"></p>
                   </div>
                   <div class="pull-right">
+                    <button
+                      title="Settings"
+                      class="btn btn-icon btn-sm btn-outline-info">
+                      <i class="fa fa-gear"></i>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -242,7 +263,7 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Left Group & Filters -->
-        <div *ngIf="isGroupContentDivVisible() || this.listDto.filterVisible" class="col-md-2 col-sm-12 col-12 entity-parent-col" style="padding-right: 5px;padding-left: 5px;">
+        <div [hidden]="this.hideSideMenus" *ngIf="isGroupContentDivVisible() || this.listDto.filterVisible" class="col-md-2 col-sm-12 col-12 entity-parent-col" style="padding-right: 5px;padding-left: 5px;">
           <div class="row" >
 
             <!-- Left Group -->
@@ -254,11 +275,9 @@
                       <div class="pull-left">
                         <h5 class="card-title" style="margin-bottom: 0px;">
                           <i class="fas fa-stream"></i>
-                          Analysis Fields
+                          {{this.listDto.groupingTitle}}
                         </h5>
-                        <p style=" margin-bottom: 5px;" [innerHTML]="this.listDto.groupingDescription"> Navigate to <b>Mechanisms
-                          of attack</b> categorization <b>tree <i
-                          class="fas fa-stream"></i></b> of Capecs</p>
+                        <p style="margin-bottom: 0px;" [innerHTML]="this.listDto.groupingDescription"></p>
                       </div>
                       <div class="pull-right">
                       </div>
@@ -346,8 +365,7 @@
                            *ngIf="(item.fieldValue==null?'':item.fieldValue) != ''">
                         <div class="text-center">
                           <button (click)="filterGroupOnField(item)" class="btn left-group-button btn-outline-default"
-                                  style="border: 1px solid #66615b !important">
-                            {{item.fieldValue}}
+                                  style="border: 1px solid #66615b !important" [innerHTML]="item.fieldValue">
                           </button>
                         </div>
                       </div>
@@ -374,10 +392,9 @@
                       <div class="pull-right">
                         <button
                           (click)="getListResultData();"
-                          class="btn btn-outline-success"
-                          style="margin-top: 0px;">
+                          title="Filter"
+                          class="btn btn-icon btn-sm btn-outline-success">
                           <i class="fa fa-filter"></i>
-                          Filter
                         </button>
                       </div>
                     </div>
@@ -456,25 +473,49 @@
         </div>
 
         <!-- List -->
-        <div class="col" style="padding-right: 5px;padding-left: 5px;" >
+        <div class="col"  style="padding-right: 5px;padding-left: 5px;" >
           <div class="card">
-            <div class="card-body">
+            <div  class="card-body">
               <button *ngIf="isGroupContentDivVisible()" type="button"
                       style="position: absolute; top: 15px; left: 17px;display: none;"
                       class="btn btn-outline-default btn-icon btn-sm"><i class="fas fa-stream"></i>
               </button>
-              <table class="" style="margin-bottom: 0rem;">
-
+              <div class="container" style="padding: 0px; margin: 0px;">
+                  <table style="margin-bottom: 0rem;">
                 <tbody class="list-table-body list-table-body-{{this.listDto.id}}">
 
                 <!-- Top Section -->
                 <tr *ngFor="let arrayLine of this.topViewArrayLines; let arrayLineIndex = index">
                   <td *ngIf="arrayLineIndex == 0"
+                      valign="top"
                       [attr.rowspan]="this.topViewArrayLines.length+1"
                       [attr.colspan]="this.topLeftColspan">
+                    <button
+                      [hidden]="this.hideSideMenus"
+                      title="Show Side Menus"
+                      (click)="showHideSideMenus()"
+                      class="btn btn-icon btn-sm btn-outline-default side-toggle">
+                      <i class="fa fa-up-right-and-down-left-from-center"></i>
+                    </button>
+                    <button
+                      [hidden]="!this.hideSideMenus"
+                      title="Hide Side Menus"
+                      (click)="showHideSideMenus()"
+                      class="btn btn-icon btn-sm btn-outline-default side-toggle">
+                      <i class="fa fa-down-left-and-up-right-to-center"></i>
+                    </button>
                   </td>
                   <td class="top-cells" *ngFor="let row of arrayLine" [attr.colspan]="row.colspan">
-                    <button *ngIf="row.bottomBranch != true" type="button" class="btn btn-outline-info btn-expand" >
+                    <button *ngIf="row.bottomBranch != true && row.visible"
+                            (click)="editBranchVisibility(row);"
+                            type="button"
+                            class="btn btn-outline-info btn-expand" >
+                      <i class="fa fa-minus"></i>
+                    </button>
+                    <button *ngIf="row.bottomBranch != true && !row.visible"
+                            (click)="editBranchVisibility(row);"
+                            type="button"
+                            class="btn btn-outline-info btn-expand" >
                       <i class="fa fa-plus"></i>
                     </button>
                     {{row.displayValue}}
@@ -497,9 +538,19 @@
                       *ngFor="let row of arrayLine"
                       [ngClass]="{'left-cells': row.type == 'group','value-cells': row.type == 'value'  }"
                       [attr.rowspan]="row.rowspan" >
-                      <button *ngIf="row.bottomBranch != true && row.type == 'group'" type="button" class="btn btn-outline-info btn-expand" >
+                      <button *ngIf="row.bottomBranch != true && row.type == 'group' && row.visible"
+                              (click)="editBranchVisibility(row);"
+                              type="button"
+                              class="btn btn-outline-info btn-expand" >
+                        <i class="fa fa-minus"></i>
+                      </button>
+                      <button *ngIf="row.bottomBranch != true && row.type == 'group' && !row.visible"
+                              (click)="editBranchVisibility(row);"
+                              type="button"
+                              class="btn btn-outline-info btn-expand" >
                         <i class="fa fa-plus"></i>
                       </button>
+
                       <span *ngIf="row.type != 'empty-value'">
                         {{row.displayValue}}
                       </span>
@@ -510,6 +561,7 @@
 
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
         </div>

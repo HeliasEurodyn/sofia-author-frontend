@@ -4,6 +4,7 @@ import {CommandNavigatorService} from './command-navigator.service';
 import {ListComponent} from '../../../pages/sofia/list/list/list.component';
 import {DynamicStaticJavascriptLoaderService} from './dynamic-static-javascript-loader.service';
 import {DynamicRequestService} from '../../crud/sofia/dynamic-request.service';
+import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
 
 declare function registerListDynamicScript(id, list): any;
 
@@ -30,6 +31,8 @@ declare function defineListPutToUrl(id, callback: ((url: string, data: any, call
 declare function defineListDeleteFromBackend(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
 
 declare function defineListDeleteFromUrl(id, callback: ((url: string, callback: (n: any) => any) => any)): void;
+
+declare function calcPivotValueBranch(id, field, rows: Array<string[]>, leftArrayLine, topArrayLine): any;
 
 
 @Injectable({
@@ -146,6 +149,14 @@ export class ListScriptsService {
       callback(data);
     });
   };
+
+  public calcPivotValueBranch( id,
+                              field,
+                              rows: Array<string[]>,
+                              leftArrayLine,
+                              topArrayLine) {
+   return calcPivotValueBranch(id, field, rows, leftArrayLine, topArrayLine);
+  }
 
 
 }
