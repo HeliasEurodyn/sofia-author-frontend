@@ -16,7 +16,7 @@ import {PageComponent} from '../../page/page-component';
 import {PivotListService} from '../../../../services/crud/sofia/pivot-list.service';
 
 class FieldBranch {
-  // id: number;
+
   code: string;
   displayValue: String;
   type: string;
@@ -24,12 +24,23 @@ class FieldBranch {
   rowspan: number;
   children: FieldBranch[];
   listRows: Array<string[]>;
-  bottomBranch: Boolean;
-  visible: Boolean;
+
+  isBottomBranch: Boolean;
+  isVisible: Boolean;
+  isHiddenByParrent: Boolean;
+  islineHidden: Boolean;
+
+  constructor() {
+    this.rowspan = 1;
+    this.colspan = 1;
+    this.isVisible = true;
+    this.isHiddenByParrent = false;
+    this.islineHidden = false;
+    this.children = [];
+  }
 
   // value: String;
 }
-
 
 @Component({
   selector: 'app-pivol-list',
@@ -65,6 +76,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
   public focusedFieldValue: any;
 
   public topLeftColspan = 0;
+  public topLeftRowspan = 0;
 
   @Input() public embeded = false;
   @Input() public embededParams = '';
@@ -204,11 +216,91 @@ export class PivotListComponent extends PageComponent implements OnInit {
     }
   }
 
-  createPivot() {
+  // createPivot() {
+  //
+  //   /* Create Left & Top Trees */
+  //   this.leftFieldTree = this.createFieldTree(this.listDto.listComponentLeftGroupFieldList, this.listResultsData);
+  //   this.topFieldTree = this.createFieldTree(this.listDto.listComponentTopGroupFieldList, this.listResultsData);
+  //
+  //   /* Create Left & Top View Array Lines */
+  //   this.leftViewArrayLines = [];
+  //   this.leftViewArrayLines = this.leftTreeToViewArray(this.leftFieldTree);
+  //
+  //   this.topViewArrayLines = [];
+  //   this.topTreeToViewArray(this.topFieldTree, this.topViewArrayLines, 0,
+  //     this.listDto.listComponentColumnFieldList.length);
+  //
+  //   /* Create Left & Top  Array Lines */
+  //   this.leftArrayLines = [];
+  //   this.leftArrayLines = this.treeToArray(this.leftFieldTree);
+  //
+  //   this.topArrayLines = [];
+  //   this.topArrayLines = this.treeToArray(this.topFieldTree);
+  //
+  //   /* Create Values Array */
+  //   this.valuesArray =
+  //     this.calcValueArray(this.leftArrayLines, this.topArrayLines, this.listDto.listComponentColumnFieldList);
+  //
+  //   /* Counters */
+  //   this.totalTopCols = this.topViewArrayLines[(this.topViewArrayLines.length - 1)].length;
+  //   this.topLeftColspan = this.findTopLeftColspan(this.leftViewArrayLines);
+  //
+  //   /* Combine Values Array to Left View Array Lines */
+  //   for (let i = 0; i < this.leftViewArrayLines.length; i++) {
+  //     this.leftViewArrayLines[i] = this.leftViewArrayLines[i].concat(this.valuesArray[i]);
+  //   }
+  // }
 
+  createPivot() {
+    this.createPivotTrees();
+    this.editPivotLinesVisibility();
+    this.createPivotViewArrays();
+    this.createPivotArrays();
+    this.createPivotValuesArray();
+
+    // /* Create Left & Top View Array Lines */
+    // this.leftViewArrayLines = [];
+    // this.leftViewArrayLines = this.leftTreeToViewArray(this.leftFieldTree);
+    //
+    // this.topViewArrayLines = [];
+    // this.topTreeToViewArray(this.topFieldTree, this.topViewArrayLines, 0,
+    //   this.listDto.listComponentColumnFieldList.length);
+
+    // /* Create Left & Top  Array Lines */
+    // this.leftArrayLines = [];
+    // this.leftArrayLines = this.treeToArray(this.leftFieldTree);
+    //
+    // this.topArrayLines = [];
+    // this.topArrayLines = this.treeToArray(this.topFieldTree);
+    //
+    // /* Create Values Array */
+    // this.valuesArray =
+    //   this.calcValueArray(this.leftArrayLines, this.topArrayLines, this.listDto.listComponentColumnFieldList);
+    //
+    // /* Counters */
+    // this.totalTopCols = this.topViewArrayLines[(this.topViewArrayLines.length - 1)].length;
+    // this.topLeftColspan = this.findTopLeftColspan(this.leftViewArrayLines);
+    //
+    // /* Combine Values Array to Left View Array Lines */
+    // for (let i = 0; i < this.leftViewArrayLines.length; i++) {
+    //   this.leftViewArrayLines[i] = this.leftViewArrayLines[i].concat(this.valuesArray[i]);
+    // }
+  }
+
+  refreshPivot() {
+    this.editPivotLinesVisibility();
+    this.createPivotViewArrays();
+    this.createPivotArrays();
+    this.createPivotValuesArray();
+  }
+
+  createPivotTrees() {
     /* Create Left & Top Trees */
     this.leftFieldTree = this.createFieldTree(this.listDto.listComponentLeftGroupFieldList, this.listResultsData);
     this.topFieldTree = this.createFieldTree(this.listDto.listComponentTopGroupFieldList, this.listResultsData);
+  }
+
+  createPivotViewArrays() {
 
     /* Create Left & Top View Array Lines */
     this.leftViewArrayLines = [];
@@ -218,20 +310,58 @@ export class PivotListComponent extends PageComponent implements OnInit {
     this.topTreeToViewArray(this.topFieldTree, this.topViewArrayLines, 0,
       this.listDto.listComponentColumnFieldList.length);
 
+  }
+
+  editPivotLinesVisibility() {
+
+    const topVisibilityLineArray = new Array<FieldBranch[]>();
+    this.treeToVisibilityLineArray(this.topFieldTree, topVisibilityLineArray, 0);
+
+    const leftVisibilityLineArray = new Array<FieldBranch[]>();
+    this.treeToVisibilityLineArray(this.leftFieldTree, leftVisibilityLineArray, 0);
+
+    topVisibilityLineArray.concat(leftVisibilityLineArray).forEach(line => {
+      let islineHidden = true;
+
+      if ( line.filter(field => !field.isHiddenByParrent).length > 0) {
+        islineHidden = false;
+      }
+
+      line.forEach(field => field.islineHidden = islineHidden);
+    });
+
+  }
+
+
+  createPivotArrays() {
+
     /* Create Left & Top  Array Lines */
     this.leftArrayLines = [];
     this.leftArrayLines = this.treeToArray(this.leftFieldTree);
 
     this.topArrayLines = [];
     this.topArrayLines = this.treeToArray(this.topFieldTree);
+  }
+
+  createPivotValuesArray() {
+
+    // console.log('this.topArrayLines');
+    // console.log(this.topArrayLines);
+    // console.log('this.topArrayLines end');
 
     /* Create Values Array */
     this.valuesArray =
       this.calcValueArray(this.leftArrayLines, this.topArrayLines, this.listDto.listComponentColumnFieldList);
 
     /* Counters */
-    this.totalTopCols = this.topViewArrayLines[(this.topViewArrayLines.length - 1)].length;
-    this.topLeftColspan = this.findTopLeftColspan(this.leftViewArrayLines);
+    this.totalTopCols = this.findTotalTopCols(this.topFieldTree, 0);
+
+    /* Calculate colspan & rowspan for Top Left td */
+    this.topLeftColspan = 0;
+    this.leftArrayLines[0].forEach(fieldBranch => this.topLeftColspan += fieldBranch.colspan);
+
+     this.topLeftRowspan = 1;
+     this.topArrayLines[0].forEach(field => this.topLeftRowspan += field.rowspan);
 
     /* Combine Values Array to Left View Array Lines */
     for (let i = 0; i < this.leftViewArrayLines.length; i++) {
@@ -239,37 +369,19 @@ export class PivotListComponent extends PageComponent implements OnInit {
     }
   }
 
-  findTopLeftColspan(leftViewArrayLines: FieldBranch[][]) {
-    let colspan = 0;
+  findTotalTopCols(branches: FieldBranch[], totalTopCols): number {
+    branches.forEach(branch => {
+      if (branch.isBottomBranch || !branch.isVisible) {
+        totalTopCols += 1;
+      }
 
-    if (leftViewArrayLines.length === 0) {
-      return 0;
-    }
-
-    leftViewArrayLines[0].forEach(fieldBranch => {
-      colspan += fieldBranch.colspan;
+      if (branch.children != null && branch.isVisible) {
+        totalTopCols = this.findTotalTopCols(branch.children, totalTopCols)
+      }
     });
 
-    return colspan;
+    return totalTopCols;
   }
-
-  // createResultsArray(columnFields: ListComponentFieldDTO[], listResultsData: ListResultsData) {
-  //   const calcFields: ListComponentFieldDTO[] = columnFields.filter(field => ['int', 'double', 'bigint'].indexOf(field.type) > -1);
-  //   const mainFieldArray: FieldBranch[][] = [[]];
-  //   this.topFieldArray.forEach(topBranches => {
-  //     const mainFieldLine: FieldBranch[] = [];
-  //     this.leftFieldArray.forEach(leftBranches => {
-  //       let curListContent = listResultsData.listContent;
-  //       topBranches.forEach(topBranch => {
-  //         curListContent = curListContent.filter(dataline => dataline[topBranch.code] === topBranch.value);
-  //       });
-  //       leftBranches.forEach(leftBranch => {
-  //         curListContent = curListContent.filter(dataline => dataline[leftBranch.code] === leftBranch.value);
-  //       });
-  //     });
-  //   });
-  //
-  // }
 
   createFieldTree(fieldList: ListComponentFieldDTO[], listResultsData: ListResultsData): FieldBranch[] {
     // let branchId = 1;
@@ -288,8 +400,8 @@ export class PivotListComponent extends PageComponent implements OnInit {
           branch.type = 'group';
           branch.children = [];
           branch.listRows = [];
-          branch.bottomBranch = false;
-          branch.visible = true;
+          branch.isBottomBranch = false;
+          branch.isVisible = true;
           curLeftFieldBranches.push(branch);
         } else {
           branch = selectedBranch[0];
@@ -298,7 +410,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
       });
 
       branch.listRows.push(row);
-      branch.bottomBranch = true;
+      branch.isBottomBranch = true;
     });
 
     return fieldTree;
@@ -324,7 +436,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
   getTopTreeValueLinesList(topFieldTree: FieldBranch[], rowLinesList: Array<Array<string[]>>) {
 
     topFieldTree
-      .filter(fieldBranch => fieldBranch.bottomBranch === true)
+      .filter(fieldBranch => fieldBranch.isBottomBranch === true)
       .forEach(fieldBranch => {
         rowLinesList.push(fieldBranch.listRows);
       });
@@ -335,42 +447,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
       }
     });
   }
-
-  // getLeftTreeValueLinesList(leftFieldTree: FieldBranch[],
-  //                           columns: ListComponentFieldDTO[]): Array<Array<Array<string[]>>> {
-  //
-  //   const leftArrayLines: Array<FieldBranch[]> = this.leftTreeToArray(leftFieldTree);
-  //
-  //   /* Get Tree ValueLinesList  */
-  //   const leftAndTopArray: Array<Array<string[]>> = new Array<Array<string[]>>();
-  //   this.getTopTreeValueLinesList(this.topFieldTree, leftAndTopArray);
-  //
-  //   const valueFilteredLines: Array<Array<Array<string[]>>> = new Array<Array<Array<string[]>>>();
-  //
-  //   // leftArrayLines table 2x2
-  //   leftArrayLines.forEach(arrayLine => {
-  //
-  //     const valueFilteredLine: Array<Array<string[]>> = new Array<Array<string[]>>();
-  //     // rowLinesList array of 8 with topLine selected Values
-  //     leftAndTopArray.forEach(rowLines => {
-  //
-  //       // 2 leftArrayLine cells
-  //       let filteredRowLines = rowLines;
-  //       arrayLine.forEach(lgField => {
-  //         filteredRowLines = filteredRowLines.filter(row => {
-  //           if (row[lgField.code] === lgField.displayValue) {
-  //             return true;
-  //           } else {
-  //             return false;
-  //           }
-  //         });
-  //       });
-  //       valueFilteredLine.push(filteredRowLines);
-  //     });
-  //     valueFilteredLines.push(valueFilteredLine);
-  //   });
-  //   return valueFilteredLines;
-  // }
 
   leftTreeToArray(leftFieldTree: FieldBranch[]): Array<FieldBranch[]> {
     const arrayLines: Array<FieldBranch[]> = new Array<FieldBranch[]>();
@@ -388,21 +464,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
     return arrayLines;
   }
 
-  topTreeToArray(fieldTree: FieldBranch[], arrayLines: Array<FieldBranch[]>, branchLevel: number) {
-    if (arrayLines[branchLevel] == null) {
-      arrayLines[branchLevel] = fieldTree;
-    } else {
-      const curArrayLines: FieldBranch[] = arrayLines[branchLevel];
-      arrayLines[branchLevel] = curArrayLines.concat(fieldTree);
-    }
-
-    fieldTree.forEach(fieldBranch => {
-      if (fieldBranch.children.length > 0) {
-        this.topTreeToArray(fieldBranch.children, arrayLines, (branchLevel + 1));
-      }
-    });
-  }
-
   topTreeToViewArray(fieldTree: FieldBranch[], arrayLines: Array<FieldBranch[]>, branchLevel: number, colSpanMultiplier) {
     if (arrayLines[branchLevel] == null) {
       arrayLines[branchLevel] = fieldTree;
@@ -412,10 +473,14 @@ export class PivotListComponent extends PageComponent implements OnInit {
     }
 
     fieldTree.forEach(fieldBranch => {
-      if (fieldBranch.children.length > 0) {
+      if (fieldBranch.children.length > 0 && fieldBranch.isVisible) {
         fieldBranch.rowspan = 1;
         fieldBranch.colspan = fieldBranch.children.length * colSpanMultiplier;
         this.topTreeToViewArray(fieldBranch.children, arrayLines, (branchLevel + 1), colSpanMultiplier);
+      } else if (fieldBranch.children.length > 0) {
+        const rowspan = this.findTreeRemainingDepth(fieldBranch, 1);
+        fieldBranch.rowspan = rowspan;
+        fieldBranch.colspan = colSpanMultiplier;
       } else {
         fieldBranch.rowspan = 1;
         fieldBranch.colspan = colSpanMultiplier;
@@ -423,37 +488,25 @@ export class PivotListComponent extends PageComponent implements OnInit {
     });
   }
 
-  //
-  // leftTreeToViewArray(fieldTree: FieldBranch[]): Array<FieldBranch[]> {
-  //   const arrayLines: Array<FieldBranch[]> = new Array<FieldBranch[]>();
-  //   fieldTree.forEach(fieldBranch => {
-  //     if (fieldBranch.children.length > 0) {
-  //       const childArrayLines: FieldBranch[][] = this.leftTreeToViewArray(fieldBranch.children);
-  //       let rowspan = 0;
-  //       childArrayLines.forEach(childLine => rowspan += childLine[0].rowspan);
-  //       let counter = 0;
-  //
-  //       childArrayLines.forEach(childLine => {
-  //         if (counter === 0) {
-  //           fieldBranch.rowspan = rowspan;
-  //           arrayLines.push([fieldBranch].concat(childLine));
-  //         } else {
-  //           arrayLines.push(childLine);
-  //         }
-  //         counter++;
-  //       });
-  //     } else {
-  //       fieldBranch.rowspan = 1
-  //       arrayLines.push([fieldBranch]);
-  //     }
-  //   });
-  //   return arrayLines;
-  // }
+  treeToVisibilityLineArray(fieldTree: FieldBranch[], arrayLines: Array<FieldBranch[]>, branchLevel: number) {
+    if (arrayLines[branchLevel] == null) {
+      arrayLines[branchLevel] = fieldTree;
+    } else {
+      const curArrayLines: FieldBranch[] = arrayLines[branchLevel];
+      arrayLines[branchLevel] = curArrayLines.concat(fieldTree);
+    }
+
+    fieldTree.forEach(fieldBranch => {
+      if (fieldBranch.children.length > 0) {
+        this.treeToVisibilityLineArray(fieldBranch.children, arrayLines, (branchLevel + 1));
+      }
+    });
+  }
 
   leftTreeToViewArray(fieldTree: FieldBranch[]): Array<FieldBranch[]> {
     const arrayLines: Array<FieldBranch[]> = new Array<FieldBranch[]>();
     fieldTree.forEach(fieldBranch => {
-      if (fieldBranch.children.length > 0 ) {
+      if (fieldBranch.children.length > 0 && fieldBranch.isVisible) {
         const childArrayLines: FieldBranch[][] = this.leftTreeToViewArray(fieldBranch.children);
         let rowspan = 0;
         fieldBranch.children.forEach(childBranch => rowspan += childBranch.rowspan);
@@ -469,6 +522,11 @@ export class PivotListComponent extends PageComponent implements OnInit {
           }
           counter++;
         });
+      } else if (fieldBranch.children.length > 0) {
+        const colspan = this.findTreeRemainingDepth(fieldBranch, 1);
+        fieldBranch.rowspan = 1;
+        fieldBranch.colspan = colspan;
+        arrayLines.push([fieldBranch]);
       } else {
         fieldBranch.rowspan = 1;
         fieldBranch.colspan = 1;
@@ -481,7 +539,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
   treeToArray(fieldTree: FieldBranch[]): Array<FieldBranch[]> {
     const arrayLines: Array<FieldBranch[]> = new Array<FieldBranch[]>();
     fieldTree.forEach(fieldBranch => {
-      if (fieldBranch.children.length > 0) {
+      if (fieldBranch.children.length > 0 && fieldBranch.isVisible) {
         const childArrayLines: FieldBranch[][] = this.treeToArray(fieldBranch.children);
         childArrayLines.forEach(childLine => {
           arrayLines.push([fieldBranch].concat(childLine));
@@ -537,32 +595,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
     return pathCount;
   }
 
-  // listRowButtonClick(row: string[], listDto: ListDTO, field: ListComponentFieldDTO) {
-  //   this.listScriptsService.listNativeRowButtonClickHandler(this.listDto.id, field.code, row);
-  //
-  //   let command = field.editor;
-  //   if (command === '#select') {
-  //     this.emitReturningValues(row);
-  //     return;
-  //   }
-  //
-  //   if (command.toUpperCase() === 'RETURN') {
-  //     this.emitReturningValues(row);
-  //     return;
-  //   }
-  //
-  //   if (command.toUpperCase() !== '') {
-  //     /* Do replacements */
-  //     listDto.listComponentColumnFieldList.forEach((column, index) => {
-  //       command = command.replace('#' + column.code, row[column.code]);
-  //     });
-  //     command = command.replace('$PAGEID', this.pageId);
-  //
-  //     this.listDeleteCommandExecute(command);
-  //     this.commandNavigatorService.navigate(command);
-  //   }
-  // }
-
   listDeleteCommandExecute(command) {
     const commandParameters: Map<string, string> = this.commandParserService.parse(command);
     const commandType = commandParameters.get('COMMAND-TYPE');
@@ -591,100 +623,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
     }
     this.getListResultData();
   }
-
-
-  // createLeftFieldTreePivot() {
-  //   this.leftFieldTree = [];
-  //   let branchId = 1;
-  //   this.listResultsData.listContent.forEach(row => {
-  //     let branch: FieldBranch;
-  //     let curLeftFieldBranches: FieldBranch[] = this.leftFieldTree;
-  //     this.listDto.listComponentLeftGroupFieldList.forEach( lgField => {
-  //         const fieldValue = row[lgField.code];
-  //         const selectedBranch = curLeftFieldBranches.filter(x => x.value === fieldValue);
-  //
-  //         if (selectedBranch.length === 0) {
-  //           branch = new FieldBranch();
-  //           branch.id = 0;
-  //           branch.value = fieldValue;
-  //           branch.children = [];
-  //         } else {
-  //           branch = selectedBranch[0];
-  //         }
-  //         curLeftFieldBranches = branch.children;
-  //     });
-  //     branch.id = branchId;
-  //     branchId ++;
-  //   });
-  // }
-  //
-  // createTopFieldTreePivot() {
-  //   this.topFieldTree = [];
-  //   this.listResultsData.listContent.forEach(row => {
-  //     let branch: FieldBranch;
-  //     let branchId = 1;
-  //     let curTopFieldBranches: FieldBranch[] = this.topFieldTree;
-  //     this.listDto.listComponentTopGroupFieldList.forEach( tgField => {
-  //       const fieldValue = row[tgField.code];
-  //       const selectedBranch = curTopFieldBranches.filter(x => x.value === fieldValue);
-  //       if (selectedBranch.length === 0) {
-  //         branch = new FieldBranch();
-  //         branch.id = 0;
-  //         branch.value = fieldValue;
-  //         branch.children = [];
-  //       } else {
-  //         branch = selectedBranch[0];
-  //       }
-  //       curTopFieldBranches = branch.children;
-  //     });
-  //     branch.id = branchId;
-  //     branchId ++;
-  //   });
-  // }
-
-  // createCentralPivotResults() {
-  //   this.leftFieldTree = [];
-  //   this.topFieldTree = [];
-  //   let branchId = 1;
-  //
-  //   for (const row of this.listResultsData.listContent) {
-  //
-  //     let curLeftFieldBranches: FieldBranch[] = this.leftFieldTree;
-  //     //  let leftBranchIdMap = '';
-  //     this.listDto.listComponentLeftGroupFieldList.forEach( lgField => {
-  //       let branch: FieldBranch;
-  //       const fieldValue = row[lgField.code];
-  //       const selectedBranch = curLeftFieldBranches.filter(x => x.value === fieldValue);
-  //       if (selectedBranch.length === 0) {
-  //         branch = new FieldBranch();
-  //         branch.id = branchId ++;
-  //         branch.value = fieldValue;
-  //         branch.children = [];
-  //       } else {
-  //         branch = selectedBranch[0];
-  //       }
-  //       curLeftFieldBranches = branch.children;
-  //     });
-  //
-  //     let curTopFieldBranches: FieldBranch[] = this.topFieldTree;
-  //     this.listDto.listComponentTopGroupFieldList.forEach( tgField => {
-  //       let branch: FieldBranch;
-  //       const fieldValue = row[tgField.code];
-  //       const selectedBranch = curTopFieldBranches.filter(x => x.value === fieldValue);
-  //       if (selectedBranch.length === 0) {
-  //         branch = new FieldBranch();
-  //         branch.id = branchId ++;
-  //         branch.value = fieldValue;
-  //         branch.children = [];
-  //       } else {
-  //         branch = selectedBranch[0];
-  //       }
-  //       curTopFieldBranches = branch.children;
-  //     });
-  //
-  //   }
-  //
-  // }
 
   filterGroupOnField(field: ListComponentFieldDTO) {
     let fieldFound = false;
@@ -866,75 +804,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
     });
   }
 
-  // cellsKeyDown(event: KeyboardEvent, rowIndex: number, colIndex: number, row: string[]) {
-  //   if (event.shiftKey && event.key === 'ArrowLeft') {
-  //     const tds = document.getElementsByClassName('row-' + rowIndex + '-col-' + (colIndex - 1));
-  //     if (tds.length > 0) {
-  //       this.findContorlField((tds[0] as HTMLElement).children);
-  //     }
-  //   }
-  //
-  //   if (event.shiftKey && event.key === 'ArrowRight') {
-  //     const tds = document.getElementsByClassName('row-' + rowIndex + '-col-' + (colIndex + 1));
-  //     if (tds.length > 0) {
-  //       this.findContorlField((tds[0] as HTMLElement).children);
-  //     }
-  //   }
-  //
-  //   if (event.shiftKey && event.key === 'ArrowUp') {
-  //     let tds;
-  //     if (rowIndex === 0) {
-  //       tds = document.getElementsByClassName('header-col-' + colIndex);
-  //     } else {
-  //       tds = document.getElementsByClassName('row-' + (rowIndex - 1) + '-col-' + colIndex);
-  //     }
-  //     if (tds.length > 0) {
-  //       this.findContorlField((tds[0] as HTMLElement).children);
-  //     }
-  //   }
-  //
-  //   if (event.shiftKey && event.key === 'ArrowDown') {
-  //     const tds = document.getElementsByClassName('row-' + (rowIndex + 1) + '-col-' + colIndex);
-  //     if (tds.length > 0) {
-  //       this.findContorlField((tds[0] as HTMLElement).children);
-  //     }
-  //   }
-  //
-  //   if (event.altKey && event.key === 'Enter') {
-  //     this.emitReturningValues(row);
-  //   }
-  //
-  // }
-
-  // listFieldFocusIn(focusedFieldValue: any) {
-  //   this.focusedFieldValue = focusedFieldValue;
-  // }
-
-  // listFieldFocusOut(column: ListComponentFieldDTO, row: string[]) {
-  //   if (!column.editable) {
-  //     return;
-  //   }
-  //
-  //   if (column.type === 'field' || column.type === 'list') {
-  //     return;
-  //   }
-  //
-  //   let focusedVal;
-  //   let newVal;
-  //   if (column.type === 'datetime') {
-  //     focusedVal = (this.focusedFieldValue == null ? '' : this.focusedFieldValue.toString())
-  //     newVal = (row[column.code] == null ? '' : row[column.code].toString())
-  //   } else {
-  //     focusedVal = this.focusedFieldValue;
-  //     newVal = row[column.code];
-  //   }
-  //
-  //   if (focusedVal === newVal) {
-  //     return;
-  //   }
-  //
-  // }
-
   listEventOccured(event: any, column: ListComponentFieldDTO, row: string[]) {
     if (['listselected', 'listcleared'].includes(event.eventtype)) {
       //  this.updateListField(column, row);
@@ -949,6 +818,28 @@ export class PivotListComponent extends PageComponent implements OnInit {
     }
   }
 
+  editBranchVisibility(branch: FieldBranch) {
+    if (branch.isVisible) {
+      branch.isVisible = false;
+      this.editChildBranchesVisibility(branch.children, true);
+    } else {
+      branch.isVisible = true;
+      this.editChildBranchesVisibility(branch.children, false);
+    }
+  }
+
+  private findTreeRemainingDepth(fieldBranch: FieldBranch, depth: number): number {
+    if (fieldBranch.children.length > 0) {
+      let newDepth = depth;
+      if ( !fieldBranch.children[0].islineHidden) {
+        newDepth += 1;
+      }
+
+      return this.findTreeRemainingDepth(fieldBranch.children[0], newDepth);
+    }
+    return depth;
+  }
+
   private calcValueArray(leftArrayLines: FieldBranch[][],
                          topArrayLines: FieldBranch[][],
                          listColumnFields: ListComponentFieldDTO[]): FieldBranch[][] {
@@ -956,7 +847,14 @@ export class PivotListComponent extends PageComponent implements OnInit {
     const id = 0;
 
     leftArrayLines.forEach(leftArrayLine => {
-      const listRows: Array<string[]> = leftArrayLine[leftArrayLine.length - 1].listRows;
+
+
+      const listRows: Array<string[]> = this.findListRowsOfArrayLine(leftArrayLine);
+      // console.log('listRows');
+      // console.log(leftArrayLine);
+      // console.log(listRows);
+      // console.log('listRows end');
+    //  const listRows: Array<string[]> = leftArrayLine[leftArrayLine.length - 1].listRows;
       const valueLine: FieldBranch[] = [];
 
       topArrayLines.forEach(topArrayLine => {
@@ -978,32 +876,42 @@ export class PivotListComponent extends PageComponent implements OnInit {
     return valueArray;
   }
 
-  private filterRows(listRows: Array<string[]>,
-                     arrayLine: FieldBranch[]): Array<string[]> {
+  private findListRowsOfArrayLine(arrayLines: FieldBranch[]): Array<string[]> {
+    const isBottomBranch = arrayLines[arrayLines.length - 1].isBottomBranch;
+    console.log('listRows');
+    console.log(arrayLines);
+    if (isBottomBranch) {
+      console.log('isBottomBranch true');
+      return arrayLines[arrayLines.length - 1].listRows;
+    }
 
-    const filteredListRows: Array<string[]> = [];
+    const listRows: Array<string[]> = new Array();
+    this.findListRowsOfBranches(arrayLines[arrayLines.length - 1].children, listRows );
 
-    arrayLine.forEach(topBranch => {
-
-      listRows.forEach(row => {
-        const fieldValue = row[topBranch.code];
-        if (fieldValue === topBranch.displayValue) {
-          filteredListRows.push(row);
-        }
-      });
-      listRows = filteredListRows;
-
-    });
-
+    console.log('listRows end');
     return listRows;
+  }
+
+  private findListRowsOfBranches(branches: FieldBranch[], listRows: Array<string[]>) {
+
+    branches.forEach(field => {
+      console.log(field.isBottomBranch);
+      console.log(field.listRows);
+       if (field.isBottomBranch) {
+         field.listRows.forEach(row => listRows.push(row));
+        // listRows = listRows.concat(field.listRows);
+       } else {
+         this.findListRowsOfBranches(field.children, listRows);
+       }
+    });
   }
 
   // private calcValues1(leftViewArrayLines: FieldBranch[][],
   //                    leftFieldTree: FieldBranch[],
   //                    topFieldTree: FieldBranch[],
   //                    listResultsData: ListResultsData) {
-  //
   // }
+  //
 
   // private calcValues(leftViewArrayLines: FieldBranch[][],
   //                    valueLinesList: Array<Array<Array<string[]>>>,
@@ -1053,6 +961,26 @@ export class PivotListComponent extends PageComponent implements OnInit {
   //     });
   //   }
   // }
+
+  private filterRows(listRows: Array<string[]>,
+                     arrayLine: FieldBranch[]): Array<string[]> {
+
+    const filteredListRows: Array<string[]> = [];
+
+    arrayLine.forEach(topBranch => {
+
+      listRows.forEach(row => {
+        const fieldValue = row[topBranch.code];
+        if (fieldValue === topBranch.displayValue) {
+          filteredListRows.push(row);
+        }
+      });
+      listRows = filteredListRows;
+
+    });
+
+    return listRows;
+  }
 
   private setDafaultCommandParams() {
     this.getParams('DEFAULTS')
@@ -1119,11 +1047,18 @@ export class PivotListComponent extends PageComponent implements OnInit {
     return branch;
   }
 
-  editBranchVisibility(branch: FieldBranch) {
-    if (branch.visible) {
-      branch.visible = false;
-    } else {
-      branch.visible = true;
-    }
+  private editChildBranchesVisibility(fields: FieldBranch[], isHidden: boolean) {
+    fields.forEach(field => {
+      field.isHiddenByParrent = isHidden;
+      this.editChildBranchesVisibility(field.children, isHidden);
+    });
   }
+
+  // private editVisibleChildBranches(children: FieldBranch[]) {
+  //   children.forEach(childBranch => {
+  //     childBranch.hiddenByParrent = false;
+  //     if (childBranch.visible)  this.editChildBranchVisibility(childBranch.children);
+  //   });
+  // }
+
 }
