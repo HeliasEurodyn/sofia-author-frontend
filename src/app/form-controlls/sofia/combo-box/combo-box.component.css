@@ -70,3 +70,9 @@ select *
 .disabled {
   background-color: #f9f9f9;
 }
+
+.input-group-prepend .disabled {
+  border-top: 1px solid #DDDDDD !important;
+  border-bottom: 1px solid #DDDDDD !important;
+  border-left: 1px solid #DDDDDD !important;
+}

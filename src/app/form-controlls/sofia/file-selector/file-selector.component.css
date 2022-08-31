@@ -52,14 +52,22 @@
   border: 1px solid #40b5b9;
 }
 
-/*.input-group-text:focus {*/
-/*  border: 1px solid #057da1;*/
-/*}*/
-
 .bg-color:focus {
   background-color: #e8feff;
 }
 
 .read-only {
   background-color: #f9f9f9 !important;
+  border-top: 1px solid #DDDDDD !important;
+  border-bottom: 1px solid #DDDDDD !important;
+}
+
+.input-group-prepend .read-only {
+  border-top: 1px solid #DDDDDD !important;
+  border-bottom: 1px solid #DDDDDD !important;
+  border-left: 1px solid #DDDDDD !important;
+}
+
+.input-group-append .read-only {
+  border-right: 1px solid #DDDDDD !important;
 }
