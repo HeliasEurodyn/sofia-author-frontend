@@ -2,8 +2,6 @@ import {PivotListComponentFieldDTO} from './pivot-list-component-field-dto';
 import {BaseDTO} from '../../common/base-dto';
 import {ComponentDTO} from '../component/componentDTO';
 import {ListActionButton} from '../list/list-action-button';
-import {ListScriptDTO} from '../list/list-script-dto';
-import {ListCssDTO} from '../list/list-css-dto';
 import {AccessControlDto} from '../security/access-control-dto';
 import {ListTranslationDTO} from '../list/translation/list-translation-dto';
 import {ListComponentFieldDTO} from '../list/list-component-field-d-t-o';
@@ -27,14 +25,11 @@ export class PivotListDTO extends BaseDTO {
   public autoRun: Boolean = false;
   public listVisible: Boolean = true;
   public filterVisible: Boolean = false;
-  public hasPagination: Boolean;
   public totalPages: number;
-  public currentPage: number;
   public pageSize: number;
   public hasMaxSize: Boolean;
   public maxSize: number;
   public headerFilters: Boolean;
-  public jsonUrl = '';
   public accessControlEnabled: Boolean;
   public component: ComponentDTO;
   public listActionButtons: ListActionButton[] = [];
@@ -44,8 +39,6 @@ export class PivotListDTO extends BaseDTO {
   public listComponentTopGroupFieldList: PivotListComponentFieldDTO[] = [];
   public listComponentOrderByFieldList: PivotListComponentFieldDTO[] = [];
   public listComponentActionFieldList: ListComponentFieldDTO[] = [];
-  public listScripts: ListScriptDTO[] = [];
-  public listCssList: ListCssDTO[] = [];
   public instanceVersion: number;
   public accessControls: AccessControlDto[] = [];
 
