@@ -1,13 +1,14 @@
+import {PivotListComponentFieldDTO} from './pivot-list-component-field-dto';
 import {BaseDTO} from '../../common/base-dto';
 import {ComponentDTO} from '../component/componentDTO';
-import {ListComponentFieldDTO} from './list-component-field-d-t-o';
-import {ListActionButton} from './list-action-button';
-import {ListCssDTO} from './list-css-dto';
-import {ListScriptDTO} from './list-script-dto';
+import {ListActionButton} from '../list/list-action-button';
+import {ListScriptDTO} from '../list/list-script-dto';
+import {ListCssDTO} from '../list/list-css-dto';
 import {AccessControlDto} from '../security/access-control-dto';
-import {ListTranslationDTO} from './translation/list-translation-dto';
+import {ListTranslationDTO} from '../list/translation/list-translation-dto';
+import {ListComponentFieldDTO} from '../list/list-component-field-d-t-o';
 
-export class ListDTO extends BaseDTO {
+export class PivotListDTO extends BaseDTO {
   public code = '';
   public name = '';
   public headerTitle = '';
@@ -37,11 +38,11 @@ export class ListDTO extends BaseDTO {
   public accessControlEnabled: Boolean;
   public component: ComponentDTO;
   public listActionButtons: ListActionButton[] = [];
-  public listComponentColumnFieldList: ListComponentFieldDTO[] = [];
-  public listComponentFilterFieldList: ListComponentFieldDTO[] = [];
-  public listComponentLeftGroupFieldList: ListComponentFieldDTO[] = [];
-  public listComponentTopGroupFieldList: ListComponentFieldDTO[] = [];
-  public listComponentOrderByFieldList: ListComponentFieldDTO[] = [];
+  public listComponentColumnFieldList: PivotListComponentFieldDTO[] = [];
+  public listComponentFilterFieldList: PivotListComponentFieldDTO[] = [];
+  public listComponentLeftGroupFieldList: PivotListComponentFieldDTO[] = [];
+  public listComponentTopGroupFieldList: PivotListComponentFieldDTO[] = [];
+  public listComponentOrderByFieldList: PivotListComponentFieldDTO[] = [];
   public listComponentActionFieldList: ListComponentFieldDTO[] = [];
   public listScripts: ListScriptDTO[] = [];
   public listCssList: ListCssDTO[] = [];

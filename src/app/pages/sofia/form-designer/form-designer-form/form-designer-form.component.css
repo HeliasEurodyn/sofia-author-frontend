@@ -180,6 +180,7 @@ li{
   text-align: center !important;
   font-style: italic !important;
 }
+
 .table-fixed tr {
   display: flex;
   flex-wrap: wrap;
