@@ -34,7 +34,6 @@ declare function defineListDeleteFromUrl(id, callback: ((url: string, callback: 
 
 declare function calcPivotValueBranch(id, field, rows: Array<string[]>, leftArrayLine, topArrayLine): any;
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -66,16 +65,6 @@ export class ListScriptsService {
       });
     });
   }
-
-  // load(list: ListComponent) {
-  //   this.staticJavascriptLoader.addScript('list').then(result => {
-  //     this.dynamicJavaScriptLoader.addScript(list.listDto.id, 'list').then(data => {
-  //       registerListDynamicScript(list.listDto.id, list);
-  //       defineListNavigator(list.listDto.id, this.navigateToCommand);
-  //       this.triggerListEvent(list.listDto.id, 'onListOpen', '');
-  //     }).catch(error => console.log(error));
-  //   });
-  // }
 
   public triggerListEvent(id, type: string, metadata: any) {
     nativeListEventsHandler(id, type, metadata);

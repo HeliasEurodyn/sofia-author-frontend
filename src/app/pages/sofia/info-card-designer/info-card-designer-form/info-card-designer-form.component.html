@@ -29,6 +29,11 @@
         <i class="fa fa-sliders-h"></i>
         general
       </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('scripts');">
+        <i class="fa fa-code"></i>
+        Scripts
+      </button>
     </div>
 
   </div>
@@ -45,26 +50,20 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-12">
             <div class="form-group ">
               <label>Title</label>
               <input type="text" class="form-control" name="title" [(ngModel)]="dto.title">
               <code></code>
             </div>
           </div>
-          <div class="col-md-2">
-            <div class="form-group ">
-              <label>Icon</label>
-              <input type="text" class="form-control" name="icon" [(ngModel)]="dto.icon">
-              <code></code>
-            </div>
-          </div>
         </div>
+
         <div class="row">
           <div class="col-md-10">
             <div class="form-group ">
-              <label>Command description</label>
-              <input type="text" class="form-control" name="command" [(ngModel)]="dto.description">
+              <label>Command</label>
+              <input type="text" class="form-control" name="command" [(ngModel)]="dto.command">
               <code></code>
             </div>
           </div>
@@ -72,15 +71,6 @@
             <div class="form-group ">
               <label>Command Icon</label>
               <input type="text" class="form-control" name="icon" [(ngModel)]="dto.commandIcon">
-              <code></code>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group ">
-              <label>Command</label>
-              <input type="text" class="form-control" name="command" [(ngModel)]="dto.command">
               <code></code>
             </div>
           </div>
@@ -150,51 +140,92 @@
   </div>
 </div>
 
-<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" *ngIf="this.mode === 'edit-record'" class="row">
-  <div class="col form-area">
-    <div class="card ">
-      <div class="card-body" style="padding: 0px 15px 0px 15px;">
-        <div class="row">
-          <div class="col-sm-12">
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'scripts' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
             <div class="pull-left">
-              <button style="background-color: white" class="btn btn-outline-primary"
-                      (click)="displayInfoCard()">
-                <i class="fa fa-plus-circle"></i> Run preview
+              <h5 class="card-title">
+                <i class="fa fa-code"></i> Scripts
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="addScript()"
+                      type="button" class="btn btn-outline-success">
+                <i class="fa fa-plus-circle"></i> New
               </button>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>actions</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto?.scripts == undefined || this.dto?.scripts?.length === 0">
+                <td colspan="2" class="empty-table-row">Empty!</td>
+              </tr>
+
+              <tr *ngFor="let listScript of this.dto?.scripts">
+                <td>
+                  <button title="Remove" (click)="removeScriptByField(listScript)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="setSelectedScript(listScript);"
+                          title="Details"
+                          type="button"
+                          class="btn btn-outline-success btn-icon btn-sm">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button (click)="moveUp(listScript, this.dto?.scripts)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(listScript, this.dto?.scripts)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="listScript.name">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div [ngClass]="{'is-hidden': this.visibleSection !== 'preview' }" class="row">
-  <div class="col-lg-3 col-md-6 col-sm-6 form-area">
-    <div class="card card-stats">
-      <div class="card-body ">
+<div *ngIf="this.visibleSection === 'scripts' && selectedScript != null" class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-body">
         <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon {{this.dto.icon}}"></i>
+          <div class="col-md-12">
+            <div class="form-group">
+              <ace style="width: 100%;height: 800px;border: 1px solid #51cbce;"
+                   [config]="{mode: 'javascript', theme: 'github', readOnly: false}"
+                   [(value)]="selectedScript.script"></ace>
             </div>
           </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">{{this.dto.title}}</p>
-              <p class="card-title">{{this.dto.cardText}}
-              <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="stats" (click)="openPage()" style="cursor: pointer;">
-
-            <i class="fa {{this.dto.commandIcon}}"></i>
-            {{this.dto.description}}
-
         </div>
       </div>
     </div>

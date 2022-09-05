@@ -24,8 +24,6 @@ import {LanguageService} from '../../../../services/system/sofia/language.servic
 })
 export class ListComponent extends PageComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  // @ViewChild('ltb') listTableBody: ElementRef;
-
   public listDto: ListDTO;
   public listResultsData: ListResultsData;
   public groupContent: Array<Map<string, any>>;
@@ -38,8 +36,6 @@ export class ListComponent extends PageComponent implements OnInit, AfterViewIni
 
   public filterBodyVisible: Boolean = false;
   public listBodyVisible: Boolean = true;
-  // public defaultPage: String = 'filter';
-  // public marginStyle = 'margin-top: 10px;';
   public focusedFieldValue: any;
 
   listSearchSubject;

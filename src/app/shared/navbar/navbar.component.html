@@ -72,7 +72,7 @@
           </li>
           <li *ngIf="menuField.command.startsWith('POPUPPAGE[') &&
           menuField.command.toUpperCase().includes('NAME:SEARCH') &&
-          menuField.command.toUpperCase().includes('##SEARCH##')" class="nav-item" style="padding: 0px 5px 0px 5px;">
+          menuField.command.toUpperCase().includes('##SEARCH##')" class="nav-item" style="padding: 0px 5px 0px 15px;">
             <div class="search-field">
               <div class="input-group no-border">
                 <input type="text"
@@ -138,9 +138,6 @@
               class="nav-item">
             <a class="nav-link btn-magnify" href="javascript:void(0)" (click)="navigate(menuField.command)">
               <i class="fas {{menuField.icon}}"></i>
-              <p>
-                <span class="d-lg-none d-md-block">{{menuField.name}}</span>
-              </p>
             </a>
           </li>
         </ng-container>

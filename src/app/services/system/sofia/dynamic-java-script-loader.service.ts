@@ -12,7 +12,6 @@ export class DynamicJavaScriptLoaderService {
   }
 
   public addScript(scriptId: string, type: string) {
-    // this.removeScriptIfExists(type);
 
     if (this.checkIfScriptExists(scriptId, type)) {
       return new Promise((resolve, reject) => {
@@ -47,12 +46,6 @@ export class DynamicJavaScriptLoaderService {
       document.getElementsByTagName('head')[0].appendChild(script);
     });
   }
-
-  // public removeScriptIfExists(type: string) {
-  //   if (document.getElementById(type + '-dynamic-javascript') != null) {
-  //     document.getElementById(type + '-dynamic-javascript').remove();
-  //   }
-  // }
 
   public checkIfScriptExists(scriptId: string, type: string) {
     if (document.getElementById(type + '-dynamic-javascript_' + scriptId) != null) {

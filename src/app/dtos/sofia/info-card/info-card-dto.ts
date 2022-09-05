@@ -1,12 +1,10 @@
 import {BaseDTO} from '../../common/base-dto';
+import {ListScriptDTO} from '../list/list-script-dto';
+import {InfoCardScriptDTO} from './info-card-script-dto';
 
 export class InfoCardDTO extends BaseDTO {
 
   title: string;
-
-  icon: string;
-
-  iconColor: string;
 
   description: string;
 
@@ -21,5 +19,7 @@ export class InfoCardDTO extends BaseDTO {
   executePeriodically: boolean;
 
   executionInterval: number;
+
+  scripts: InfoCardScriptDTO[] = [];
 
 }
