@@ -866,7 +866,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
 
   refreshIsCheckedFlag($event: Event, item: PivotListComponentFieldDTO) {
     const notCheckedFieldsCount = item.filterFields.filter(filterField => !filterField.isChecked).length;
-    console.log(notCheckedFieldsCount);
+
     if (notCheckedFieldsCount > 0) {
       item.isFullChecked = false;
     } else {
@@ -925,25 +925,20 @@ export class PivotListComponent extends PageComponent implements OnInit {
 
   private findListRowsOfArrayLine(arrayLines: FieldBranch[]): Array<string[]> {
     const isBottomBranch = arrayLines[arrayLines.length - 1].isBottomBranch;
-    console.log('listRows');
-    console.log(arrayLines);
     if (isBottomBranch) {
-      console.log('isBottomBranch true');
       return arrayLines[arrayLines.length - 1].listRows;
     }
 
     const listRows: Array<string[]> = [];
     this.findListRowsOfBranches(arrayLines[arrayLines.length - 1].children, listRows);
 
-    console.log('listRows end');
     return listRows;
   }
 
   private findListRowsOfBranches(branches: FieldBranch[], listRows: Array<string[]>) {
 
     branches.forEach(field => {
-      console.log(field.isBottomBranch);
-      console.log(field.listRows);
+
       if (field.isBottomBranch) {
         field.listRows.forEach(row => listRows.push(row));
       } else {

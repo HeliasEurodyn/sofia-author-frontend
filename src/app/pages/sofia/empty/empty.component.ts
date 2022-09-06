@@ -239,7 +239,7 @@ export class EmptyComponent implements OnInit, AfterContentInit {
       const sourceY = d.source.y + (sourcePadding * normY);
       const targetX = d.target.x - (targetPadding * normX);
       const targetY = d.target.y - (targetPadding * normY);
-       console.log(this.countTicks);
+
       return `M${sourceX},${sourceY}L${targetX},${targetY}`;
     });
 

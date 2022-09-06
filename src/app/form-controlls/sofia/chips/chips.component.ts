@@ -84,7 +84,6 @@ export class ChipsComponent implements OnInit {
 
   generateDisplayValuesForComponent() {
     this.displayValues = [];
-    console.log(this.selectedComponentPersistEntity);
     this.selectedComponentPersistEntity.componentPersistEntityDataLines.forEach(dataline => {
       const display = this.generateDisplayValueForDataline(this.selectedComponentPersistEntity.code, dataline);
       this.displayValues.push({'dataline': dataline, 'display': display});

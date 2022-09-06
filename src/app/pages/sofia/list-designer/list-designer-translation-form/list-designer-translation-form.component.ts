@@ -319,7 +319,7 @@ export class ListDesignerTranslationFormComponent extends PageComponent implemen
         x.editor = btoa((x.editor === null ? '' : x.editor));
       });
     }
-    console.log(dto);
+
   }
 
   scriptsFromBase64() {

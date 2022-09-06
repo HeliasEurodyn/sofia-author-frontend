@@ -306,7 +306,6 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
         x.editor = btoa((x.editor === null ? '' : x.editor));
       });
     }
-    console.log(dto);
   }
 
   partsFromBase64() {

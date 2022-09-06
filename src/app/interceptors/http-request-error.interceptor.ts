@@ -20,7 +20,6 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
 
     return next.handle(request)
       .pipe(catchError((errorResponce) => {
-        console.log(errorResponce);
 
         if ( this.isJsonString(errorResponce.error)) {
           const response = JSON.parse(errorResponce.error);
