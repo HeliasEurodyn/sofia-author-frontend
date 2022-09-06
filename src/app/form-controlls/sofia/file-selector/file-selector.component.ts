@@ -15,17 +15,25 @@ export class FileSelectorComponent implements OnInit {
   @Input() componentPersistEntityFieldDTO: ComponentPersistEntityFieldDTO;
   @Input() command: string;
   fileName: string;
-  cpeFieldFileName: ComponentPersistEntityFieldDTO;
+  fileSize = '0';
+  cpeFieldFileName: ComponentPersistEntityFieldDTO = null;
+  cpeFieldFileSize: ComponentPersistEntityFieldDTO = null;
   @ViewChild('sidebarImageFileUploader') sidebarImageFileUploader: ElementRef;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    if (!this.isJsonString(this.command)) {
+      return;
+    }
+    const command = JSON.parse(this.command);
 
-    if (this.isJsonString(this.command)) {
-      const command = JSON.parse(this.command);
-      this.retrieveFileNameField(command.fileName)
+    if (command['fileName'] != null) {
+      this.retrieveFileNameField(command.fileName);
+    }
+    if (command['fileSize'] != null) {
+      this.retrieveFileSizeField(command.fileSize);
     }
   }
 
@@ -46,8 +54,11 @@ export class FileSelectorComponent implements OnInit {
         if (typeof evnt.target.result === 'string') {
           this.componentPersistEntityFieldDTO.value = evnt.target.result;
           this.fileName = event.target.files[0].name;
-          this.cpeFieldFileName.value = event.target.files[0].name;
-          console.log(this.componentPersistEntityFieldDTO.value);
+          if (this.cpeFieldFileName != null) {  this.cpeFieldFileName.value = event.target.files[0].name; }
+
+          this.fileSize = event.target.files[0].size;
+          if (this.cpeFieldFileSize != null) { this.cpeFieldFileSize.value = event.target.files[0].size; }
+
         }
       }
     }
@@ -90,5 +101,18 @@ export class FileSelectorComponent implements OnInit {
         }
       });
   }
+
+  private retrieveFileSizeField(fieldName: string): void {
+    this.componentPersistEntityDTO.componentPersistEntityFieldList
+      .forEach(cpef => {
+        const currentfield = this.componentPersistEntityDTO.code + '.' + cpef.code;
+        if (fieldName === currentfield) {
+          this.cpeFieldFileSize = cpef;
+          this.fileSize = cpef.value;
+        }
+      });
+  }
+
+
 
 }
