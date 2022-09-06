@@ -58,11 +58,9 @@ export class FileSelectorComponent implements OnInit {
 
           this.fileSize = event.target.files[0].size;
           if (this.cpeFieldFileSize != null) { this.cpeFieldFileSize.value = event.target.files[0].size; }
-
+          this.eventOccuredActions('change', event);
         }
       }
-      this.eventOccuredActions('change', event)
-
     }
   }
 
