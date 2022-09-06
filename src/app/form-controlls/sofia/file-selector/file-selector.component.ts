@@ -61,6 +61,8 @@ export class FileSelectorComponent implements OnInit {
 
         }
       }
+      this.eventOccuredActions('change', event)
+
     }
   }
 
