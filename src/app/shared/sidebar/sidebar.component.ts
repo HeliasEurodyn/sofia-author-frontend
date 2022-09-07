@@ -39,6 +39,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   public defaultMenuItems: any[];
   public menuHeaders: any[];
   public sidebarMenu: MenuDTO;
+  public username: '';
   public languageSelectionSubject;
   public sidebarImage = '';
 
@@ -58,9 +59,13 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     if (sessionStorage.getItem('sidebarMenu') != null) {
       this.sidebarMenu = JSON.parse(sessionStorage.getItem('sidebarMenu'));
     } else {
-      const user = JSON.parse(localStorage.getItem('loggedin_user'));
-      this.sidebarMenu = user['sidebarMenu'];
+      const loggedinUser = JSON.parse(localStorage.getItem('loggedin_user'));
+      this.sidebarMenu = loggedinUser['sidebarMenu'];
+      this.username = loggedinUser['username'];
     }
+
+    const user = JSON.parse(localStorage.getItem('loggedin_user'));
+    this.username = user['username'];
 
     this.selectedMenuItems = this.sidebarMenu.menuFieldList;
     this.defaultMenuItems = this.sidebarMenu.menuFieldList;

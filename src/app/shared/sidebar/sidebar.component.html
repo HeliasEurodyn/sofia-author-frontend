@@ -2,9 +2,21 @@
   <div class="logo">
     <div class="logo-image-small"><img [src]="this.trustResource(this.sidebarImage)"></div>
   </div>
-  <ul class="nav">
 
-    <li *ngFor="let menuItem of menuHeaders" routerLinkActive="active" class="header-menu">
+  <div class="user">
+    <div class="photo">
+      <i class="fa-regular fa-circle-user" style="color: #236594;font-size: 32px;"></i>
+    </div>
+    <div class="info">
+      <a href="javascript:void(0)">
+        <span>{{this.username}}</span>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <ul class="nav">
+    <li *ngFor="let menuItem of menuHeaders" class="header-menu" routerLinkActive="active">
       <a (click)="parentMenuUnselection(menuItem.id);">
         <i class="fa {{menuItem.icon}} header-menu"></i>
         <p>{{menuItem.name}}</p>
@@ -16,13 +28,13 @@
     <ng-template #recursiveList let-list>
       <li *ngFor="let menuItem of list" routerLinkActive="active">
 
-        <a *ngIf="menuItem.command !== '#parent-menu#' && menuItem.command !== '#parent-collapse#' "
-           (click)="navigate(menuItem);">
+        <a (click)="navigate(menuItem);"
+           *ngIf="menuItem.command !== '#parent-menu#' && menuItem.command !== '#parent-collapse#' ">
           <i class="fa {{menuItem.icon}}"></i>
           <p>{{menuItem.name}}</p>
         </a>
 
-        <a *ngIf="menuItem.command === '#parent-menu#'" (click)="parentMenuSelection(menuItem.id);">
+        <a (click)="parentMenuSelection(menuItem.id);" *ngIf="menuItem.command === '#parent-menu#'">
           <i class="parent-menu fa {{menuItem.icon}}"></i>
           <p>{{menuItem.name}}</p>
         </a>
