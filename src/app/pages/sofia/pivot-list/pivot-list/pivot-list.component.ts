@@ -224,42 +224,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
       downloadLink.click();
     }
   }
-
-  // createPivot() {
-  //
-  //   /* Create Left & Top Trees */
-  //   this.leftFieldTree = this.createFieldTree(this.listDto.listComponentLeftGroupFieldList, this.listResultsData);
-  //   this.topFieldTree = this.createFieldTree(this.listDto.listComponentTopGroupFieldList, this.listResultsData);
-  //
-  //   /* Create Left & Top View Array Lines */
-  //   this.leftViewArrayLines = [];
-  //   this.leftViewArrayLines = this.leftTreeToViewArray(this.leftFieldTree);
-  //
-  //   this.topViewArrayLines = [];
-  //   this.topTreeToViewArray(this.topFieldTree, this.topViewArrayLines, 0,
-  //     this.listDto.listComponentColumnFieldList.length);
-  //
-  //   /* Create Left & Top  Array Lines */
-  //   this.leftArrayLines = [];
-  //   this.leftArrayLines = this.treeToArray(this.leftFieldTree);
-  //
-  //   this.topArrayLines = [];
-  //   this.topArrayLines = this.treeToArray(this.topFieldTree);
-  //
-  //   /* Create Values Array */
-  //   this.valuesArray =
-  //     this.calcValueArray(this.leftArrayLines, this.topArrayLines, this.listDto.listComponentColumnFieldList);
-  //
-  //   /* Counters */
-  //   this.totalTopCols = this.topViewArrayLines[(this.topViewArrayLines.length - 1)].length;
-  //   this.topLeftColspan = this.findTopLeftColspan(this.leftViewArrayLines);
-  //
-  //   /* Combine Values Array to Left View Array Lines */
-  //   for (let i = 0; i < this.leftViewArrayLines.length; i++) {
-  //     this.leftViewArrayLines[i] = this.leftViewArrayLines[i].concat(this.valuesArray[i]);
-  //   }
-  // }
-
+  
   createPivot() {
     this.createInitialPivotTrees();
     this.createDefaultPivotTrees();
@@ -272,7 +237,8 @@ export class PivotListComponent extends PageComponent implements OnInit {
 
   refreshPivot() {
     this.createPivotTrees();
-    //this.createDefaultPivotTrees()
+    if ( this.leftFieldTree.length === 0 || this.topFieldTree.length === 0 ) { return; }
+
     this.editPivotLinesVisibility();
     this.createPivotViewArrays();
     this.createPivotArrays();
@@ -304,11 +270,11 @@ export class PivotListComponent extends PageComponent implements OnInit {
     const plcField = pivotListComponentFieldList[fieldIndex];
 
     if ((plcField.isFullChecked == null ? false : plcField.isFullChecked)) {
-      filteredFieldTree = JSON.parse(JSON.stringify(initialFieldTree));
+      filteredFieldTree = initialFieldTree;
     } else {
       const activeValues = plcField.filterFields.filter(f => f.isChecked).map(f => f.displayValue);
       const filtered = initialFieldTree.filter(initialField => activeValues.indexOf(initialField.displayValue.toString()) !== -1);
-      filteredFieldTree = JSON.parse(JSON.stringify(filtered));
+      filteredFieldTree = filtered;
     }
 
     filteredFieldTree.forEach(f => {
