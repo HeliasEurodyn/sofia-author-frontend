@@ -26,6 +26,7 @@ class FieldBranch {
   rowspan: number;
   children: FieldBranch[];
   listRows: Array<string[]>;
+  class: string;
 
   isBottomBranch: Boolean;
   isVisible: Boolean;
@@ -39,6 +40,7 @@ class FieldBranch {
     this.isHiddenByParrent = false;
     this.islineHidden = false;
     this.children = [];
+    this.class = '';
   }
 
   // value: String;
@@ -224,7 +226,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
       downloadLink.click();
     }
   }
-  
+
   createPivot() {
     this.createInitialPivotTrees();
     this.createDefaultPivotTrees();

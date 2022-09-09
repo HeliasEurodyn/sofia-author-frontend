@@ -16,13 +16,13 @@
         <i class="fa {{actionButton.icon}}"></i>
         {{actionButton.description}}
       </button>
-      <button
-              (click)="export_xls();"
-              class="btn btn-outline-info"
-              style="margin-top: 0px;">
-        <i class="fa fa-file-excel"></i>
-        Export Excel
-      </button>
+<!--      <button-->
+<!--              (click)="export_xls();"-->
+<!--              class="btn btn-outline-info"-->
+<!--              style="margin-top: 0px;">-->
+<!--        <i class="fa fa-file-excel"></i>-->
+<!--        Export Excel-->
+<!--      </button>-->
     </div>
   </div>
 </div>
@@ -506,7 +506,7 @@
                       <i class="fa fa-down-left-and-up-right-to-center"></i>
                     </button>
                   </td>
-                  <td class="top-cells" *ngFor="let row of arrayLine"
+                  <td class="top-cells {{row.class}}" *ngFor="let row of arrayLine"
                       [attr.colspan]="row.colspan"
                       [attr.rowspan]="row.rowspan">
                     <button *ngIf="row.isBottomBranch != true && row.isVisible"
@@ -521,7 +521,7 @@
                             class="btn btn-outline-info btn-expand" >
                       <i class="fa fa-plus"></i>
                     </button>
-                    {{row.displayValue}}
+                    <span style="padding-left: 2px" [innerHTML]="row.displayValue"></span>
                   </td>
                 </tr>
 
@@ -542,7 +542,8 @@
                   <ng-container>
                     <td
                       *ngFor="let row of arrayLine"
-                      [ngClass]="{'left-cells': row.type == 'group','value-cells': row.type == 'value'  }"
+                      [ngClass]="{'left-cells': row.type == 'group','value-cells': row.type == 'value' }"
+                      class="{{row.class}}"
                       [attr.rowspan]="row.rowspan"
                       [attr.colspan]="row.colspan">
                       <button *ngIf="row.isBottomBranch != true && row.type == 'group' && row.isVisible"
@@ -557,11 +558,7 @@
                               class="btn btn-outline-info btn-expand" >
                         <i class="fa fa-plus"></i>
                       </button>
-
-                      <span *ngIf="row.type != 'empty-value'">
-                        {{row.displayValue}}
-                      </span>
-
+                      <span style="padding-left: 2px" *ngIf="row.type != 'empty-value'" [innerHTML]="row.displayValue"></span>
                     </td>
                   </ng-container>
                 </tr>
@@ -632,9 +629,7 @@
                         </label>
                       </label>
                   </td>
-                  <td>
-                    <input type="text" readonly class="form-control transparent-input"
-                           value="{{filterField.displayValue}}">
+                  <td [innerHTML]="filterField.displayValue" >
                   </td>
                 </tr>
 
