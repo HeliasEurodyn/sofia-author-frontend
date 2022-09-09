@@ -51,6 +51,9 @@ class FieldBranch {
 })
 export class PivotListComponent extends PageComponent implements OnInit {
 
+  public initialTopFieldTree: FieldBranch[] = [];
+  public initialLeftFieldTree: FieldBranch[] = [];
+
   public topFieldTree: FieldBranch[] = [];
   public leftFieldTree: FieldBranch[] = [];
 
@@ -258,7 +261,8 @@ export class PivotListComponent extends PageComponent implements OnInit {
   // }
 
   createPivot() {
-    this.createPivotTrees();
+    this.createInitialPivotTrees();
+    this.createDefaultPivotTrees();
     this.editPivotLinesVisibility();
     this.createFilterFields();
     this.createPivotViewArrays();
@@ -267,16 +271,54 @@ export class PivotListComponent extends PageComponent implements OnInit {
   }
 
   refreshPivot() {
+    this.createPivotTrees();
+    //this.createDefaultPivotTrees()
     this.editPivotLinesVisibility();
     this.createPivotViewArrays();
     this.createPivotArrays();
     this.createPivotValuesArray();
   }
 
-  createPivotTrees() {
+  createInitialPivotTrees() {
     /* Create Left & Top Trees */
-    this.leftFieldTree = this.createFieldTree(this.listDto.listComponentLeftGroupFieldList, this.listResultsData);
-    this.topFieldTree = this.createFieldTree(this.listDto.listComponentTopGroupFieldList, this.listResultsData);
+    this.initialLeftFieldTree = this.createFieldTree(this.listDto.listComponentLeftGroupFieldList, this.listResultsData);
+    this.initialTopFieldTree = this.createFieldTree(this.listDto.listComponentTopGroupFieldList, this.listResultsData);
+  }
+
+  createDefaultPivotTrees() {
+    this.leftFieldTree = this.initialLeftFieldTree;
+    this.topFieldTree = this.initialTopFieldTree;
+  }
+
+  createPivotTrees() {
+    this.leftFieldTree = this.applyFieldsFiltersToPivotTrees(this.listDto.listComponentLeftGroupFieldList, this.initialLeftFieldTree, 0);
+    this.topFieldTree = this.applyFieldsFiltersToPivotTrees(this.listDto.listComponentTopGroupFieldList, this.initialTopFieldTree, 0);
+  }
+
+  applyFieldsFiltersToPivotTrees(pivotListComponentFieldList: PivotListComponentFieldDTO[],
+                                 initialFieldTree: FieldBranch[],
+                                 fieldIndex: number) {
+
+    let filteredFieldTree: FieldBranch[];
+    const newFieldTree: FieldBranch[] = [];
+    const plcField = pivotListComponentFieldList[fieldIndex];
+
+    if ((plcField.isFullChecked == null ? false : plcField.isFullChecked)) {
+      filteredFieldTree = JSON.parse(JSON.stringify(initialFieldTree));
+    } else {
+      const activeValues = plcField.filterFields.filter(f => f.isChecked).map(f => f.displayValue);
+      const filtered = initialFieldTree.filter(initialField => activeValues.indexOf(initialField.displayValue.toString()) !== -1);
+      filteredFieldTree = JSON.parse(JSON.stringify(filtered));
+    }
+
+    filteredFieldTree.forEach(f => {
+      if (!f.isBottomBranch) { f.children = this.applyFieldsFiltersToPivotTrees(pivotListComponentFieldList, f.children, fieldIndex + 1); }
+      if (f.children.length > 0 || f.isBottomBranch) {
+        newFieldTree.push(f);
+      }
+    });
+
+    return newFieldTree;
   }
 
   createPivotViewArrays() {
@@ -361,10 +403,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
   }
 
   createPivotValuesArray() {
-
-    // console.log('this.topArrayLines');
-    // console.log(this.topArrayLines);
-    // console.log('this.topArrayLines end');
 
     /* Create Values Array */
     this.valuesArray =
@@ -880,6 +918,10 @@ export class PivotListComponent extends PageComponent implements OnInit {
     this.filterFieldSearch = '';
   }
 
+  returnVisibleFilterFields(filterFields: FilterField[]) {
+    return filterFields.filter(field => field.isVisibleOnList);
+  }
+
   private findTreeRemainingDepth(fieldBranch: FieldBranch, depth: number): number {
     if (fieldBranch.children.length > 0) {
       let newDepth = depth;
@@ -1037,9 +1079,5 @@ export class PivotListComponent extends PageComponent implements OnInit {
       field.isHiddenByParrent = isHidden;
       this.editChildBranchesVisibility(field.children, isHidden);
     });
-  }
-
-  returnVisibleFilterFields(filterFields: FilterField[]) {
-    return filterFields.filter(field => field.isVisibleOnList);
   }
 }
