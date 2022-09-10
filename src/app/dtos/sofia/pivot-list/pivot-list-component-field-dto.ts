@@ -4,4 +4,5 @@ import {FilterField} from './filter-field';
 export class PivotListComponentFieldDTO extends ListComponentFieldDTO {
   public filterFields: FilterField[] = [];
   public isFullChecked = true;
+  public isExpanded = true;
 }

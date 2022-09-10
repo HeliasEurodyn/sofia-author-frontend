@@ -128,10 +128,12 @@ export class PivotListComponent extends PageComponent implements OnInit {
         localStorage.setItem('cachedList' + id, JSON.stringify(dto));
 
         this.listDto = dto;
+        this.listDto.listComponentTopGroupFieldList.forEach(f => f.isExpanded = true);
+        this.listDto.listComponentLeftGroupFieldList.forEach(f => f.isExpanded = true);
         this.listHeaderVisible = this.listDto.listVisible;
         this.filterHeaderVisible = this.listDto.filterVisible;
 
-        this.setDafaultCommandParams();
+        this.setDefaultCommandParams();
         this.dynamicCssScriptLoader.addScript(id, 'list');
         this.defineTitle();
 
@@ -230,6 +232,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
   createPivot() {
     this.createInitialPivotTrees();
     this.createDefaultPivotTrees();
+    this.editInitialHiddenBranchesVisibility();
     this.editPivotLinesVisibility();
     this.createFilterFields();
     this.createPivotViewArrays();
@@ -406,7 +409,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
     return totalTopCols;
   }
 
-  createFieldTree(fieldList: ListComponentFieldDTO[], listResultsData: ListResultsData): FieldBranch[] {
+  createFieldTree(fieldList: PivotListComponentFieldDTO[], listResultsData: ListResultsData): FieldBranch[] {
     // let branchId = 1;
     const fieldTree: FieldBranch[] = [];
     listResultsData.listContent.forEach(row => {
@@ -424,7 +427,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
           branch.children = [];
           branch.listRows = [];
           branch.isBottomBranch = false;
-          branch.isVisible = true;
+          branch.isVisible = lgField.isExpanded;
           curLeftFieldBranches.push(branch);
         } else {
           branch = selectedBranch[0];
@@ -977,7 +980,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
     return listRows;
   }
 
-  private setDafaultCommandParams() {
+  private setDefaultCommandParams() {
     this.getParams('DEFAULTS')
       .forEach((value: string, key: string) => {
         this.listDto
@@ -1048,4 +1051,18 @@ export class PivotListComponent extends PageComponent implements OnInit {
       this.editChildBranchesVisibility(field.children, isHidden);
     });
   }
+
+  private editInitialHiddenBranchesVisibility() {
+    this.leftFieldTree.forEach(c => this.editInitialHiddenBranchVisibility(c));
+    this.topFieldTree.forEach(c => this.editInitialHiddenBranchVisibility(c));
+  }
+
+  private editInitialHiddenBranchVisibility(branch: FieldBranch) {
+    if (!branch.isVisible) {
+      branch.isVisible = false;
+      this.editChildBranchesVisibility(branch.children, true);
+    }
+    branch.children.forEach(c => this.editInitialHiddenBranchVisibility(c));
+  }
+
 }
