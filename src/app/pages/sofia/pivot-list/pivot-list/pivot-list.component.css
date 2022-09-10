@@ -147,3 +147,7 @@
   max-height: 400px;
   overflow-y: auto;
 }
+
+.is-hidden {
+  display: none;
+}
