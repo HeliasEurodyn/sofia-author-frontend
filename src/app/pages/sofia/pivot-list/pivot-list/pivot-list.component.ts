@@ -43,7 +43,6 @@ class FieldBranch {
     this.class = '';
   }
 
-  // value: String;
 }
 
 @Component({
@@ -103,7 +102,6 @@ export class PivotListComponent extends PageComponent implements OnInit {
               private listScriptsService: ListScriptsService,
               private dynamicCssScriptLoader: DynamicCssScriptLoaderService) {
     super();
-
   }
 
   counter(i: number) {
@@ -128,8 +126,13 @@ export class PivotListComponent extends PageComponent implements OnInit {
         localStorage.setItem('cachedList' + id, JSON.stringify(dto));
 
         this.listDto = dto;
+
+        this.listDto.listComponentTopGroupFieldList = this.listDto.listComponentTopGroupFieldList.filter(f => f.visible === true);
+        this.listDto.listComponentLeftGroupFieldList = this.listDto.listComponentLeftGroupFieldList.filter(f => f.visible === true);
+
         this.listDto.listComponentTopGroupFieldList.forEach(f => f.isExpanded = true);
         this.listDto.listComponentLeftGroupFieldList.forEach(f => f.isExpanded = true);
+
         this.listHeaderVisible = this.listDto.listVisible;
         this.filterHeaderVisible = this.listDto.filterVisible;
 
@@ -913,18 +916,15 @@ export class PivotListComponent extends PageComponent implements OnInit {
 
     leftArrayLines.forEach(leftArrayLine => {
 
-
       const listRows: Array<string[]> = this.findListRowsOfArrayLine(leftArrayLine);
       const valueLine: FieldBranch[] = [];
-
       topArrayLines.forEach(topArrayLine => {
 
         const filteredRows: Array<string[]> =
           this.filterRows(listRows, topArrayLine);
+
         listColumnFields.forEach(columnField => {
           const valueBranch = this.calcValueBranch(columnField, filteredRows, leftArrayLine, topArrayLine);
-          // const valueBranch =
-          //   this.listScriptsService.calcPivotValueBranch(this.listDto.id, columnField, filteredRows, leftArrayLine, topArrayLine);
           valueLine.push(valueBranch);
         });
 
@@ -963,21 +963,21 @@ export class PivotListComponent extends PageComponent implements OnInit {
   private filterRows(listRows: Array<string[]>,
                      arrayLine: FieldBranch[]): Array<string[]> {
 
-    const filteredListRows: Array<string[]> = [];
+    let selectedListRows: Array<string[]> = [];
+    let filteredListRows = listRows;
 
-    arrayLine.forEach(topBranch => {
-
-      listRows.forEach(row => {
-        const fieldValue = row[topBranch.code];
-        if (fieldValue === topBranch.displayValue) {
-          filteredListRows.push(row);
+    arrayLine.forEach(branch => {
+      filteredListRows.forEach(row => {
+        const fieldValue = row[branch.code];
+        if (fieldValue === branch.displayValue) {
+          selectedListRows.push(row);
         }
       });
-      listRows = filteredListRows;
-
+      filteredListRows = selectedListRows;
+      selectedListRows = [];
     });
 
-    return listRows;
+    return filteredListRows;
   }
 
   private setDefaultCommandParams() {
