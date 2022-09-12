@@ -62,7 +62,7 @@ export class PageComponent {
     this.presetCommand = command;
   }
 
-  getLocateParams() {
+  getLocateParams(): Map<string, string> {
     return this.commandParserService.parseMapPart(this.params, 'LOCATE');
   }
 
