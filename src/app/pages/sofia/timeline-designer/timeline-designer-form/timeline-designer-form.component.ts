@@ -4,6 +4,10 @@ import {ActivatedRoute} from '@angular/router';
 import {TimelineDesignerService} from '../../../../services/crud/sofia/timeline-designer.service';
 import {TimelineDTO} from '../../../../dtos/sofia/timeline/timeline-dto';
 import {Location} from '@angular/common';
+import {AceConfigInterface} from 'ngx-ace-wrapper';
+import 'brace';
+import 'brace/mode/sql';
+import 'brace/theme/sqlserver';
 
 @Component({
   selector: 'app-timeline-designer-form',
@@ -15,6 +19,12 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
   public dto: TimelineDTO;
   public mode: string;
   public visibleSection = 'general';
+
+  public aceSQLEditorConfig: AceConfigInterface = {
+    mode: 'sql',
+    theme: 'sqlserver',
+    readOnly : false
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: TimelineDesignerService,
