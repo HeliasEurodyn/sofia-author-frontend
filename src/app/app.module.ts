@@ -119,6 +119,7 @@ import { AuthorDashboardComponent } from './pages/sofia/author-dashboard/author-
 import { SettingsComponent } from './pages/sofia/settings/settings.component';
 import { PasswordInputComponent } from './form-controlls/sofia/password-input/password-input.component';
 import { FileSelectorComponent } from './form-controlls/sofia/file-selector/file-selector.component';
+import { TimelineComponent } from './pages/sofia/timeline/timeline/timeline.component';
 import { TimelineDesignerListComponent } from './pages/sofia/timeline-designer/timeline-designer-list/timeline-designer-list.component';
 import { TimelineDesignerFormComponent } from './pages/sofia/timeline-designer/timeline-designer-form/timeline-designer-form.component';
 @NgModule({
@@ -217,6 +218,7 @@ import { TimelineDesignerFormComponent } from './pages/sofia/timeline-designer/t
     SettingsComponent,
     PasswordInputComponent,
     FileSelectorComponent,
+    TimelineComponent,
     TimelineDesignerListComponent,
     TimelineDesignerFormComponent
   ],
