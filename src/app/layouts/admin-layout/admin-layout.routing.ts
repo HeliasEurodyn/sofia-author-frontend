@@ -73,6 +73,8 @@ import {DataTransferFormComponent} from '../../pages/sofia/data_transfer/data-tr
 import {DataTransferListComponent} from '../../pages/sofia/data_transfer/data-transfer-list/data-transfer-list.component';
 import {AuthorDashboardComponent} from '../../pages/sofia/author-dashboard/author-dashboard.component';
 import {SettingsComponent} from '../../pages/sofia/settings/settings.component';
+import {TimelineDesignerListComponent} from '../../pages/sofia/timeline-designer/timeline-designer-list/timeline-designer-list.component';
+import {TimelineDesignerFormComponent} from '../../pages/sofia/timeline-designer/timeline-designer-form/timeline-designer-form.component';
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -148,7 +150,9 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'data-transfer-form', component: DataTransferFormComponent, canActivate: [AuthGuard]},
   {path: 'data-transfer-list', component: DataTransferListComponent, canActivate: [AuthGuard]},
   {path: 'author-dashboard', component: AuthorDashboardComponent, canActivate: [AuthGuard]},
-  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]}
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+  {path: 'timeline-designer-list', component: TimelineDesignerListComponent, canActivate: [AuthGuard]},
+  {path: 'timeline-designer-form', component: TimelineDesignerFormComponent, canActivate: [AuthGuard]},
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;
