@@ -16,13 +16,6 @@
         <i class="fa {{actionButton.icon}}"></i>
         {{actionButton.description}}
       </button>
-      <button
-              (click)="export_xls();"
-              class="btn btn-outline-info"
-              style="margin-top: 0px;">
-        <i class="fa fa-file-excel"></i>
-        Export Excel
-      </button>
     </div>
   </div>
 </div>
@@ -153,11 +146,11 @@
                     <p style=" margin-bottom: 0px;" [innerHTML]="this.listDto.description"></p>
                   </div>
                   <div class="pull-right">
-                    <button
-                      title="Settings"
-                      class="btn btn-icon btn-sm btn-outline-info">
-                      <i class="fa fa-gear"></i>
-                    </button>
+<!--                    <button-->
+<!--                      title="Settings"-->
+<!--                      class="btn btn-icon btn-sm btn-outline-info">-->
+<!--                      <i class="fa fa-gear"></i>-->
+<!--                    </button>-->
                   </div>
                 </div>
               </div>
@@ -165,19 +158,25 @@
             <div class="card-body">
               <div class="row row-small-padding">
                 <div class="col-md-auto col-no-padding" *ngFor="let item of this.listDto.listComponentTopGroupFieldList">
-                  <div class="btn-group">
 
+
+                  <div class="btn-group">
                     <button type="button"
-                            class="btn left-group-button btn-outline-info active-header side-field-button">
+                            (click)="setSelectedListComponentField(item)"
+                            data-target="#filterRowValuesModal"
+                            data-toggle="modal"
+                            class="btn left-group-button btn-outline-info active-header side-field-button"
+                            [ngClass]="{'btn-outline-info': !item.isFullChecked,'btn-outline-default': item.isFullChecked  }">
                       <i class="fa fa-filter"></i>
                     </button>
-
                     <button
                       class="btn left-group-button btn-outline-default side-field-button"
                       style="border: 1px solid #66615b !important">
                       {{item.description}}
                     </button>
                   </div>
+
+
                 </div>
               </div>
 
@@ -500,7 +499,7 @@
                       <i class="fa fa-down-left-and-up-right-to-center"></i>
                     </button>
                   </td>
-                  <td class="top-cells" *ngFor="let row of arrayLine"
+                  <td class="top-cells {{row.class}}" *ngFor="let row of arrayLine"
                       [attr.colspan]="row.colspan"
                       [attr.rowspan]="row.rowspan">
                     <button *ngIf="row.isBottomBranch != true && row.isVisible"
@@ -515,7 +514,7 @@
                             class="btn btn-outline-info btn-expand" >
                       <i class="fa fa-plus"></i>
                     </button>
-                    {{row.displayValue}}
+                    <span style="padding-left: 2px" [innerHTML]="row.displayValue"></span>
                   </td>
                 </tr>
 
@@ -536,7 +535,8 @@
                   <ng-container>
                     <td
                       *ngFor="let row of arrayLine"
-                      [ngClass]="{'left-cells': row.type == 'group','value-cells': row.type == 'value'  }"
+                      [ngClass]="{'left-cells': row.type == 'group','value-cells': row.type == 'value' }"
+                      class="{{row.class}}"
                       [attr.rowspan]="row.rowspan"
                       [attr.colspan]="row.colspan">
                       <button *ngIf="row.isBottomBranch != true && row.type == 'group' && row.isVisible"
@@ -551,11 +551,7 @@
                               class="btn btn-outline-info btn-expand" >
                         <i class="fa fa-plus"></i>
                       </button>
-
-                      <span *ngIf="row.type != 'empty-value'">
-                        {{row.displayValue}}
-                      </span>
-
+                      <span style="padding-left: 2px" *ngIf="row.type != 'empty-value'" [innerHTML]="row.displayValue"></span>
                     </td>
                   </ng-container>
                 </tr>
@@ -592,7 +588,7 @@
                 </tr>
                 <tr>
                   <th>
-                    <label  *ngIf="!this.selectedListComponentField.isFullChecked" class="form-check-label">
+                    <label *ngIf="!this.selectedListComponentField.isFullChecked" class="form-check-label">
                       <label class="checkbox" style="margin-bottom: 0px;margin-top: 0px;">
                         <input type="checkbox"  (change)="setAllFilterFieldsChecked($event, this.selectedListComponentField)" >
                         <span class="info"></span>
@@ -626,9 +622,7 @@
                         </label>
                       </label>
                   </td>
-                  <td>
-                    <input type="text" readonly class="form-control transparent-input"
-                           value="{{filterField.displayValue}}">
+                  <td [innerHTML]="filterField.displayValue">
                   </td>
                 </tr>
 
@@ -640,7 +634,7 @@
       <div class="modal-footer">
         <div class="left-side">
           <button class="btn btn-outline-default" (click)="setAllFilterFieldsChecked($event, this.selectedListComponentField)"  type="button">Select All</button>
-          <button class="btn btn-outline-info" data-dismiss="modal" type="button">Apply</button>
+          <button class="btn btn-outline-info"  (click)="refreshPivot()" data-dismiss="modal" type="button">Apply</button>
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@
 .col-header-cells{
   cursor: pointer;
   border: 1px solid #b3d7ff;
-  background-color: #e9e8e8;
+  background-color: #d3eeff;
   padding: 3px;
 }
 
@@ -146,4 +146,8 @@
 .table-fixed tbody {
   max-height: 400px;
   overflow-y: auto;
+}
+
+.is-hidden {
+  display: none;
 }
