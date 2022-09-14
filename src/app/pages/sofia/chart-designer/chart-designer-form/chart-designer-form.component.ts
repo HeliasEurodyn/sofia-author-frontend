@@ -8,6 +8,10 @@ import {ChartFieldDTO} from '../../../../dtos/sofia/chart/chart-field-dto';
 // import Chart from 'chart.js';
 import * as uuid from 'uuid';
 import {ListComponentFieldDTO} from '../../../../dtos/sofia/list/list-component-field-d-t-o';
+import {AceConfigInterface} from 'ngx-ace-wrapper';
+import 'brace';
+import 'brace/mode/sql';
+import 'brace/theme/sqlserver';
 
 @Component({
   selector: 'app-chart-designer-form',
@@ -21,6 +25,12 @@ export class ChartDesignerFormComponent extends PageComponent implements OnInit 
   public mode: string;
   public visibleSection = 'general';
   public chartInstanceId = uuid.v4();
+
+  public aceSQLEditorConfig: AceConfigInterface = {
+    mode: 'sql',
+    theme: 'sqlserver',
+    readOnly : false
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: ChartDesignerService,

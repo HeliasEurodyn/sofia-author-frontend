@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ExpressionService} from '../../../services/crud/sofia/expression.service';
 import {ExprUnitDTO} from '../../../dtos/sofia/expression/expr-unit-dto';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
+import 'brace';
+import 'brace/mode/javascript';
+import 'brace/theme/github';
 
 @Component({
   selector: 'app-expression-viewer',

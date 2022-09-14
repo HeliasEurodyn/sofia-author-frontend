@@ -6,6 +6,10 @@ import {SearchDesignerService} from '../../../../services/crud/sofia/search-desi
 import {Location} from '@angular/common';
 import {AccessControlDto} from '../../../../dtos/sofia/security/access-control-dto';
 import {RoleService} from '../../../../services/crud/sofia/role.service';
+import {AceConfigInterface} from 'ngx-ace-wrapper';
+import 'brace';
+import 'brace/mode/sql';
+import 'brace/theme/sqlserver';
 
 @Component({
   selector: 'app-search-designer-form',
@@ -19,6 +23,12 @@ export class SearchDesignerFormComponent extends PageComponent implements OnInit
   public visibleSection = 'general';
   private selectedSecurityRow: AccessControlDto;
   public roles: any;
+
+  public aceSQLEditorConfig: AceConfigInterface = {
+    mode: 'sql',
+    theme: 'sqlserver',
+    readOnly : false
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: SearchDesignerService,

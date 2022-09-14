@@ -11,6 +11,12 @@ import {BaseDTO} from '../../../../dtos/common/base-dto';
 import {ListDTO} from '../../../../dtos/sofia/list/list-dto';
 import {FormScript} from '../../../../dtos/sofia/form/form-script';
 import {InfoCardScriptDTO} from '../../../../dtos/sofia/info-card/info-card-script-dto';
+import {AceConfigInterface} from 'ngx-ace-wrapper';
+import 'brace';
+import 'brace/mode/javascript';
+import 'brace/theme/github';
+import 'brace/mode/sql'
+import 'brace/theme/sqlserver'
 
 @Component({
   selector: 'app-info-card-designer-form',
@@ -23,6 +29,19 @@ export class InfoCardDesignerFormComponent extends PageComponent implements OnIn
   public mode: string;
   public visibleSection = 'general';
   public selectedScript: InfoCardScriptDTO;
+
+  public aceJavascriptEditorConfig: AceConfigInterface = {
+    mode: 'javascript',
+    theme: 'github',
+    readOnly : false
+  };
+
+  public aceSQLEditorConfig: AceConfigInterface = {
+    mode: 'sql',
+    theme: 'sqlserver',
+    readOnly : false
+  };
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: InfoCardDesignerService,

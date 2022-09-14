@@ -6,6 +6,10 @@ import {CustomQueryDesignerService} from '../../../../services/crud/sofia/custom
 import {Location} from '@angular/common';
 import {HtmlDashboardDTO} from '../../../../dtos/sofia/html-dashboard/html-dashboard-dto';
 import {HtmlDashboardDesignerService} from '../../../../services/crud/sofia/html-dashboard-designer.service';
+import {AceConfigInterface} from 'ngx-ace-wrapper';
+import 'brace';
+import 'brace/mode/html';
+import 'brace/theme/chrome';
 
 @Component({
   selector: 'app-html-dashboard-designer-form',
@@ -17,6 +21,12 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
   public dto: HtmlDashboardDTO;
   public mode: string;
   public visibleSection = 'general';
+
+  public aceHtmlEditorConfig: AceConfigInterface = {
+    mode: 'html',
+    theme: 'chrome',
+    readOnly : false
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: HtmlDashboardDesignerService,

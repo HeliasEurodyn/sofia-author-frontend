@@ -11,6 +11,10 @@ import {ComponentPersistEntityDTO} from '../../../../dtos/sofia/component/compon
 import {ComponentPersistEntityFieldAssignmentDTO} from '../../../../dtos/sofia/component/component-persist-entity-field-assignment-dto';
 import {AccessControlDto} from '../../../../dtos/sofia/security/access-control-dto';
 import {RoleService} from '../../../../services/crud/sofia/role.service';
+import 'brace';
+import 'brace/mode/html'
+import 'brace/theme/chrome'
+import {AceConfigInterface} from 'ngx-ace-wrapper';
 
 @Component({
   selector: 'app-xls-import-designer-form',
@@ -25,6 +29,14 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
   public visibleSection = 'general';
   private selectedSecurityRow: AccessControlDto;
   public roles: any;
+
+  public aceHtmlEditorConfig: AceConfigInterface = {
+    mode: 'html',
+    theme: 'chrome',
+    readOnly : false
+  };
+
+
 
   constructor(private tableComponentService: TableComponentDesignerService,
               private service: XlsImportDesignerService,

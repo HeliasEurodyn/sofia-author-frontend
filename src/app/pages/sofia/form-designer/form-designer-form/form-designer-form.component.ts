@@ -29,6 +29,7 @@ import 'brace/mode/javascript';
 import 'brace/mode/css';
 import 'brace/mode/text';
 import 'brace/theme/github';
+import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 
 
@@ -42,6 +43,12 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   public aceJavascriptEditorConfig: AceConfigInterface = {
     mode: 'javascript',
     theme: 'github',
+    readOnly : false
+  };
+
+  public aceCSSEditorConfig: AceConfigInterface = {
+    mode: 'css',
+    theme: 'chrome',
     readOnly : false
   };
 
