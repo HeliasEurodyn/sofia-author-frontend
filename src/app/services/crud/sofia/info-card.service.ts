@@ -14,7 +14,7 @@ export class InfoCardService extends CrudService<any> {
   }
 
   getByIdWithParams(id: any, extraParams: string): Observable<any> {
-    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/data?id=${id}${extraParams}`);
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-id?id=${id}${extraParams}`);
   }
 
 }
