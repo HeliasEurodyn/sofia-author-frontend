@@ -467,7 +467,9 @@
         </div>
 
         <!-- List -->
-        <div class="col-md-10 col-sm-12 col-12" style="padding-right: 5px;padding-left: 5px;" >
+        <div class=" col-sm-12 col-12"
+             [ngClass]="{'col-md-12': this.hideSideMenus,'col-md-10': !this.hideSideMenus }"
+             style="padding-right: 5px;padding-left: 5px;" >
           <div class="card">
             <div  class="card-body card-body-overflow">
               <button *ngIf="isGroupContentDivVisible()" type="button"
@@ -499,9 +501,12 @@
                       <i class="fa fa-down-left-and-up-right-to-center"></i>
                     </button>
                   </td>
-                  <td class="top-cells {{row.class}}" *ngFor="let row of arrayLine"
+                  <td class="top-cells {{row.class}}"
+                      style="{{row.css}}"
+                      *ngFor="let row of arrayLine"
                       [attr.colspan]="row.colspan"
-                      [attr.rowspan]="row.rowspan">
+                      [attr.rowspan]="row.rowspan"
+                      (click)="pivotCellClick(row);">
                     <button *ngIf="row.isBottomBranch != true && row.isVisible"
                             (click)="editBranchVisibility(row);refreshPivot();"
                             type="button"
@@ -537,8 +542,10 @@
                       *ngFor="let row of arrayLine"
                       [ngClass]="{'left-cells': row.type == 'group','value-cells': row.type == 'value' }"
                       class="{{row.class}}"
+                      style="{{row.css}}"
                       [attr.rowspan]="row.rowspan"
-                      [attr.colspan]="row.colspan">
+                      [attr.colspan]="row.colspan"
+                      (click)="pivotCellClick(row);">
                       <button *ngIf="row.isBottomBranch != true && row.type == 'group' && row.isVisible"
                               (click)="editBranchVisibility(row);refreshPivot();"
                               type="button"
@@ -555,7 +562,6 @@
                     </td>
                   </ng-container>
                 </tr>
-
                 </tbody>
               </table>
               </div>

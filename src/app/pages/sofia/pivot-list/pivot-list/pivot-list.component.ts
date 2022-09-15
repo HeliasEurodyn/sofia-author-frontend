@@ -27,6 +27,10 @@ class FieldBranch {
   children: FieldBranch[];
   listRows: Array<string[]>;
   class: string;
+  css: string;
+
+  leftArrayLine: FieldBranch[]
+  topArrayLine: FieldBranch[]
 
   isBottomBranch: Boolean;
   isVisible: Boolean;
@@ -41,8 +45,9 @@ class FieldBranch {
     this.islineHidden = false;
     this.children = [];
     this.class = '';
+    this.leftArrayLine = null;
+    this.topArrayLine = null;
   }
-
 }
 
 @Component({
@@ -1038,9 +1043,14 @@ export class PivotListComponent extends PageComponent implements OnInit {
       branch = new FieldBranch();
       branch.displayValue = '';
       branch.type = 'empty-value';
+    } else {
+      branch.colspan = 1;
+      branch.rowspan = 1;
+      branch.code = columnField.code;
+      branch.listRows = rows;
+      branch.leftArrayLine = leftArrayLine;
+      branch.topArrayLine = topArrayLine;
     }
-    branch.colspan = 1;
-    branch.rowspan = 1;
 
     return branch;
   }
@@ -1065,4 +1075,7 @@ export class PivotListComponent extends PageComponent implements OnInit {
     branch.children.forEach(c => this.editInitialHiddenBranchVisibility(c));
   }
 
+  pivotCellClick(row: FieldBranch) {
+    this.listScriptsService.pivotCellClick(this.listDto.id, row);
+  }
 }
