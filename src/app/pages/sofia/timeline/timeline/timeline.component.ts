@@ -5,6 +5,7 @@ import {TimelineDTO} from '../../../../dtos/sofia/timeline/timeline-dto';
 import {ActivatedRoute} from '@angular/router';
 import {TimelineService} from '../../../../services/crud/sofia/timeline.service';
 import {TimelineResponseDTO} from '../../../../dtos/sofia/timeline/timeline-response-dto';
+import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
 
 @Component({
   selector: 'app-timeline',
@@ -17,7 +18,8 @@ export class TimelineComponent extends  PageComponent implements OnInit {
   public extraParamsMap: Map<any, any>;
 
   constructor(private service: TimelineService,
-              private activatedRoute: ActivatedRoute, ) {
+              private activatedRoute: ActivatedRoute,
+              private navigatorService: CommandNavigatorService) {
     super();
   }
 
@@ -49,4 +51,7 @@ export class TimelineComponent extends  PageComponent implements OnInit {
     }
   }
 
+  minTitleClicked(nav: string) {
+    this.navigatorService.navigate(nav);
+  }
 }

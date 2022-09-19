@@ -4,7 +4,7 @@ export class TimelineContentDTO {
   icon: string;
   color: string;
   min_title: string;
-  min_title_nav: string;
+  nav: string;
   left_side: boolean;
 
 }

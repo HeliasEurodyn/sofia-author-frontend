@@ -31,7 +31,7 @@
                   <div class="timeline-body">
                     <p>{{content?.description}}</p>
                   </div>
-                  <h6 [innerHTML]="content?.min_title"></h6>
+                  <h6 (click)="minTitleClicked(content?.nav)" [innerHTML]="content?.min_title"></h6>
                 </div>
               </li>
             </ng-container>
