@@ -131,3 +131,7 @@
 
 .card-timeline .timeline-body > p + p {
   margin-top: 5px; }
+
+.min-title{
+  cursor: pointer;
+}

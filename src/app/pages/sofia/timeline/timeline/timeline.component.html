@@ -4,7 +4,7 @@
     <div class="pull-left">
       <div class="col-12">
         <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
-          <i class="{{dto?.timelineDTO?.icon}}" style="padding-right: 5px;"></i>
+          <i class="fa {{dto?.timelineDTO?.icon}}" style="padding-right: 5px;"></i>
              {{dto?.timelineDTO?.title}}
         </h3>
         <p style=" margin-bottom: 5px;"> {{dto?.timelineDTO?.description}} </p>
@@ -22,16 +22,16 @@
             <ng-container *ngFor="let content of dto?.resultList" >
               <li [ngClass]="{ 'timeline-inverted': !content?.left_side}">
                 <div class="timeline-badge" [style.background-color] ="content?.color">
-                  <i class="{{content.icon}}"></i>
+                  <i class="fa {{content.icon}}"></i>
                 </div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
                     <span class="badge badge-pill" [style.background-color] ="content?.color" style="color: white">{{content?.title}}</span>
                   </div>
                   <div class="timeline-body">
-                    <p>{{content?.description}}</p>
+                    <p [innerHTML]="content?.description"></p>
                   </div>
-                  <h6 (click)="minTitleClicked(content?.nav)" [innerHTML]="content?.min_title"></h6>
+                  <h6 class="min-title" (click)="minTitleClicked(content?.nav)" [innerHTML]="content?.min_title"></h6>
                 </div>
               </li>
             </ng-container>
