@@ -41,6 +41,20 @@
               <code></code>
             </div>
           </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" name="description" [(ngModel)]="dto.description">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Icon</label>
+              <input type="text" class="form-control" name="icon" [(ngModel)]="dto.icon">
+              <code></code>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +72,8 @@
                 <i class="fa fa-code" style="padding-right: 5px;"></i>
                 Query Section
               </h3>
-              <p style=" margin-bottom: 5px;"> Write your query on the area below </p>
+              <p style=" margin-bottom: 5px;"> Query must contain 7 Columns for
+                1.<b>title</b>, 2.<b>description</b>, 3.<b>icon</b>, 4.<b>color</b>, 5.<b>min_title</b>, 6.<b>min_title_nav</b>, 7.<b>left_side (boolean)</b> </p>
             </div>
           </div>
         </div>

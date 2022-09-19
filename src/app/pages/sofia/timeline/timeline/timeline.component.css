@@ -80,7 +80,10 @@
   border: 3px solid #f4f3ef; }
 .card-timeline .timeline > li > .timeline-badge [class^="fa-"],
 .card-timeline .timeline > li > .timeline-badge [class*=" fa-"] {
-  line-height: inherit; }
+  line-height: 2.1;
+  width: 25px;
+  text-align: center;
+  font-size: 21px; }
 .card-timeline .timeline > li > .timeline-badge .nc-icon {
   line-height: 2.1;
   width: 25px;

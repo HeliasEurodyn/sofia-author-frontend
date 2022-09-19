@@ -152,7 +152,7 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'data-transfer-list', component: DataTransferListComponent, canActivate: [AuthGuard]},
   {path: 'author-dashboard', component: AuthorDashboardComponent, canActivate: [AuthGuard]},
   {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
-  {path: 'time-line', component: TimelineComponent, canActivate: [AuthGuard]},
+  {path: 'timeline', component: TimelineComponent, canActivate: [AuthGuard]},
   {path: 'timeline-designer-list', component: TimelineDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'timeline-designer-form', component: TimelineDesignerFormComponent, canActivate: [AuthGuard]},
 ];
