@@ -11,7 +11,12 @@ function calcPivotValueBranch(id, field, rows, leftArrayLine, topArrayLine) {
   } else {
     return null;
   }
+}
 
+function pivotCellClick(id, field) {
+  if (typeof listDynamicScripts[id].pivotCellClick == "function"){
+    listDynamicScripts[id].pivotCellClick(field);
+  }
 }
 
 function defineListGetFromBackend(id, getFromBackend) {

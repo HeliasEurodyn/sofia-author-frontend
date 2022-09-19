@@ -34,6 +34,10 @@ declare function defineListDeleteFromUrl(id, callback: ((url: string, callback: 
 
 declare function calcPivotValueBranch(id, field, rows: Array<string[]>, leftArrayLine, topArrayLine): any;
 
+declare function pivotCellClick(id, field): any;
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -147,5 +151,8 @@ export class ListScriptsService {
    return calcPivotValueBranch(id, field, rows, leftArrayLine, topArrayLine);
   }
 
+  public pivotCellClick(id, field) {
+    pivotCellClick(id, field);
+  }
 
 }
