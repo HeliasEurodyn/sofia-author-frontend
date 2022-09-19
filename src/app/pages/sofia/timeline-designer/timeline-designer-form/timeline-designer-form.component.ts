@@ -48,18 +48,24 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
+        this.dto.query = atob(this.dto.query);
       });
     }
   }
 
   save() {
+    const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
+    const base64Query = btoa(dtoToBeSaved.query);
+    dtoToBeSaved.query = base64Query;
+
     if (this.mode === 'edit-record') {
-      this.service.update(this.dto).subscribe(data => {
+      console.log(dtoToBeSaved);
+      this.service.update(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
 
     } else {
-      this.service.save(this.dto).subscribe(data => {
+      this.service.save(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
     }
