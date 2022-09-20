@@ -13,7 +13,7 @@ export class TimelineService extends CrudService<any> {
     super(http, 'timeline');
   }
 
-  getByIdWithParams(id: any, extraParams: string): Observable<any> {
-    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/data/?id=${id}${extraParams}`);
+  getByIdWithParams(id: any, extraParams: string, currentPage: number): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/data/?id=${id}${extraParams}&currentPage=${currentPage}`);
   }
 }

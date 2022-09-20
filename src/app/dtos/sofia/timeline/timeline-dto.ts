@@ -5,4 +5,6 @@ export class TimelineDTO extends  BaseDTO {
   description: string;
   icon: string;
   query: string;
+  hasPagination: boolean;
+  pageSize: number;
 }

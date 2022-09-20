@@ -56,6 +56,28 @@
             </div>
           </div>
         </div>
+        <div class ="row">
+          <div class="col-md-10">
+            <div class="form-group ">
+              <label>Page Size</label>
+              <input type="number" class="form-control" [(ngModel)]="this.dto.pageSize">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div style="height: 27px;"></div>
+              <label class="form-check-label">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="this.dto.hasPagination"/>
+                  <span class="info"></span>
+                </label>
+                <span style="position:absolute;top: 37px;">Use Pagination</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

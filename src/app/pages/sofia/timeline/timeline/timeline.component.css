@@ -135,3 +135,27 @@
 .min-title{
   cursor: pointer;
 }
+
+.next-page-button{
+  color: white;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  margin-left: -25px;
+  background-color: #9A9A9A;
+  z-index: 100;
+  border-radius: 50%;
+  border: 3px solid #f4f3ef;
+  line-height: 2.1;
+  font-size: 21px;
+  padding: initial !important;
+}
+
+.next-page-button:hover {
+  background-color: forestgreen;
+}
+
+
