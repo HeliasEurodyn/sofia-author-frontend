@@ -53,7 +53,7 @@
 }
 
  .user {
-  padding-bottom: 20px;
+  padding-bottom: 17px;
   margin: 20px auto 0;
   position: relative;
 }
@@ -69,9 +69,13 @@
 }
 
 .user .info>a>span {
-  display: block;
+  display: block !important;
+  margin: 0;
+  line-height: 30px;
   position: relative;
-  opacity: 1;
+  height: auto;
+  white-space: nowrap;
+  font-weight: 600;
 }
 
 .user a{
@@ -84,4 +88,5 @@
 .user .info>a{
   display: block;
   line-height: 17px;
+  padding-top: 1px;
 }
