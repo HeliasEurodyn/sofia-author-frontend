@@ -7,4 +7,5 @@ export class TimelineDTO extends  BaseDTO {
   query: string;
   hasPagination: boolean;
   pageSize: number;
+  isTheLastPage: boolean;
 }

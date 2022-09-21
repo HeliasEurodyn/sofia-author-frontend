@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {TimelineService} from '../../../../services/crud/sofia/timeline.service';
 import {TimelineResponseDTO} from '../../../../dtos/sofia/timeline/timeline-response-dto';
 import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
+import {TimelineContentDTO} from '../../../../dtos/sofia/timeline/timeline-content-dto';
 
 @Component({
   selector: 'app-timeline',
@@ -17,6 +18,7 @@ export class TimelineComponent extends  PageComponent implements OnInit {
   public currentPage = 1
   public id = '0';
   public extraParams = '';
+  public resultList: Array<TimelineContentDTO> = new Array<TimelineContentDTO>();
 
   constructor(private service: TimelineService,
               private activatedRoute: ActivatedRoute,
@@ -52,6 +54,7 @@ export class TimelineComponent extends  PageComponent implements OnInit {
     if (this.id !== '0') {
       this.service.getByIdWithParams(this.id, this.extraParams, this.currentPage).subscribe(data => {
         this.dto = data;
+        this.resultList.push(...this.dto.resultList);
       });
     }
   }

@@ -145,7 +145,7 @@
   top: -50px;
   left: 50%;
   margin-left: -25px;
-  background-color: #9A9A9A;
+  background-color: darkgreen;
   z-index: 100;
   border-radius: 50%;
   border: 3px solid #f4f3ef;
@@ -155,7 +155,7 @@
 }
 
 .next-page-button:hover {
-  background-color: forestgreen;
+  background-color: forestgreen !important;
 }
 
 
