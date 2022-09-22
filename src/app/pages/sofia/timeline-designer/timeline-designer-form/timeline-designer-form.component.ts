@@ -8,6 +8,7 @@ import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';
 import 'brace/mode/sql';
 import 'brace/theme/sqlserver';
+import {ListComponentFieldDTO} from '../../../../dtos/sofia/list/list-component-field-d-t-o';
 
 @Component({
   selector: 'app-timeline-designer-form',
@@ -77,7 +78,98 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
     });
   }
 
+  // TODO : Duplicated Code needs refactoring
+
   setVisibleSection(visibleSection: string) {
     this.visibleSection = visibleSection;
+  }
+
+  addFilter() {
+    if (this.dto.filterList == null) {this.dto.filterList = []}
+    const dto = new ListComponentFieldDTO();
+    dto.editor = '';
+    dto.visible = true;
+    dto.required = false;
+    dto.editable = false;
+    dto.type = 'varchar';
+    dto.shortOrder = this.genNextShortOrder(this.dto.filterList);
+    dto.code = this.genNextComponentCode(this.dto.filterList);
+    dto.description = dto.code;
+    dto.formulaType = 'column';
+    this.dto.filterList.push(dto);
+  }
+
+  genNextComponentCode(componentsList: any[]) {
+    let prefixCount = 1;
+    let code = 'filter_' + prefixCount;
+    while (true) {
+      let codeAlreadyExists = false;
+      for (const currentComponent of componentsList) {
+        if (currentComponent.code === code) {
+          codeAlreadyExists = true;
+        }
+      }
+      if (codeAlreadyExists === false) {
+        return code;
+      }
+      prefixCount++;
+      code = 'filter_' + prefixCount;
+    }
+  }
+
+  genNextShortOrder(componentsList: any[]) {
+    if (componentsList === null
+      || componentsList === undefined
+      || componentsList.length === 0) {
+      return 1;
+    }
+
+    const curShortOrderObject = componentsList.reduce(function (prev, curr) {
+      return prev.shortOrder < curr.shortOrder ? curr : prev;
+    });
+
+    return (curShortOrderObject.shortOrder + 1);
+  }
+
+  removeFilter(filter: ListComponentFieldDTO) {
+    this.dto.filterList =
+      this.dto.filterList.filter(item => item !== filter);
+  }
+
+  moveUp(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && position > 0) {
+        const prevItem = list[position - 1];
+        list[position] = prevItem;
+        list[position - 1] = listItem;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
+  }
+
+  moveDown(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && (position + 1) < list.length) {
+        const nextItem = list[position + 1];
+        list[position] = nextItem;
+        list[position + 1] = listItem;
+        break;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
   }
 }

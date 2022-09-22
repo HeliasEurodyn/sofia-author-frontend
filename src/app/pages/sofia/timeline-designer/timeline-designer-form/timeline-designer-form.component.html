@@ -23,7 +23,26 @@
   </div>
 </div>
 
-<div  class="row form-area">
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+        <i class="fa fa-sliders-h"></i>
+        general
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-default btn-round btn-white header-tab"
+        (click)="setVisibleSection('filters');">
+        <i class="fa fa-filter"></i>
+        Filters
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
   <div class="col-md-12">
     <div class="card card-user">
       <div class="card-header">
@@ -83,7 +102,7 @@
   </div>
 </div>
 
-<div class="row form-area">
+<div  [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
   <div class="col-md-12">
     <div class="card card-user">
       <div class="card-header">
@@ -110,6 +129,122 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'filters' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="pull-left">
+          <h5 class="card-title">
+            <i class="fa fa-filter"></i>
+            Filters
+          </h5>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn btn-outline-success" (click)="addFilter()">
+            <i class="fa fa fa-plus-circle"></i> Add Filter
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <table class="table table-striped">
+                <thead class="text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Code</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Editor</th>
+                  <th>Default</th>
+                  <th>Visible</th>
+                  <th>Editable</th>
+                  <th>Required</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngIf="this.dto == undefined || this.dto?.filterList == undefined || this.dto?.filterList.length === 0 ">
+                  <td colspan="12" class="empty-table-row">Empty!</td>
+                </tr>
+                <tr *ngFor="let filter of this.dto?.filterList">
+                  <td style="min-width: 150px;" class="tool-btns">
+                    <button (click)="removeFilter(filter)" title="Remove" type="button"
+                            class="btn btn-outline-danger btn-icon btn-sm">
+                      <i class="fa fa-times"></i>
+                    </button>
+                    <button (click)="moveUp(filter, this.dto?.filterList)" type="button" title="Move Up"
+                            class="btn btn-outline-warning btn-icon btn-sm">
+                      <i class="fa fa-angle-up"></i>
+                    </button>
+                    <button (click)="moveDown(filter, this.dto?.filterList)" type="button"
+                            title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                      <i class="fa fa-angle-down"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.code">
+                  </td>
+                  <td>
+                    <select [(ngModel)]="filter.type" name="type" class="transparent-input">
+                      <option value=""></option>
+                      <option value="bigint">bigint</option>
+                      <option value="int">int</option>
+                      <option value="double">double</option>
+                      <option value="datetime">datetime</option>
+                      <option value="datetimerange">datetimerange</option>
+                      <option value="varchar">varchar</option>
+                      <option value="text">text</option>
+                      <option value="list">list</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.description">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.editor">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input"
+                           [(ngModel)]="filter.defaultValue">
+                  </td>
+                  <td>
+                    <select class="transparent-input" [(ngModel)]="filter.visible">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="transparent-input" [(ngModel)]="filter.editable">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="transparent-input" [(ngModel)]="filter.required">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

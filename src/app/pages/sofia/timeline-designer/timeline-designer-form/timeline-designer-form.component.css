@@ -56,3 +56,16 @@
 .checkbox input:checked + .warning:after{border-color:#FFC107}
 
 .checkbox input:checked + .danger:after{border-color:#f44336}
+
+.is-hidden {
+  display: none;
+}
+
+.empty-table-row {
+  padding: 30px;
+  text-align: center;
+}
+
+.tool-btns .btn {
+  margin: 2px;
+}
