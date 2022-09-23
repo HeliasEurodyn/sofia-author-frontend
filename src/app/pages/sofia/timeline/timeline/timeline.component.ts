@@ -55,6 +55,7 @@ export class TimelineComponent extends PageComponent implements OnInit {
     if (this.id !== '0') {
       this.service.getById(this.id).pipe(concatMap(timelineHeader => {
         this.timelineDTO = timelineHeader;
+        this.generateFilterParams();
         return this.service
           .getByIdWithParams(this.id, this.extraParams + this.filterParams, this.currentPage)
           .pipe(map(timelineResponse => {
@@ -76,16 +77,21 @@ export class TimelineComponent extends PageComponent implements OnInit {
   }
 
   fieldEventOccurred(event: any) {
-    this.filterParams = '';
-
-    this.timelineDTO?.filterList.forEach(filter => {
-      this.filterParams += '&' + encodeURI(filter.code) + '=' + encodeURI(filter.fieldValue)
-    });
-
-    if (event.eventtype === 'listselected') {
+    if (['listselected', 'listcleared'].includes(event.eventtype)) {
+      this.generateFilterParams();
+      this.resultList = [];
+      this.currentPage = 1;
       this.refresh();
     }
   }
+
+  generateFilterParams() {
+    this.filterParams = '';
+    this.timelineDTO?.filterList.forEach(filter => {
+      this.filterParams += '&' + encodeURI(filter.code) + '=' + encodeURI((filter.fieldValue == null ? '' : filter.fieldValue))
+    });
+  }
+
 
   minTitleClicked(nav: string) {
     this.navigatorService.navigate(nav);
