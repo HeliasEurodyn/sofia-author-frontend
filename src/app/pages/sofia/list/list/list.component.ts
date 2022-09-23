@@ -186,6 +186,8 @@ export class ListComponent extends PageComponent implements OnInit, AfterViewIni
         values.set(filterField.code, fieldValue);
       }
     }
+    console.log('values');
+    console.log(values);
 
     if (this.selectedShortCode !== '') {
       values.set('sel-sort-code', this.selectedShortCode);
@@ -461,7 +463,7 @@ export class ListComponent extends PageComponent implements OnInit, AfterViewIni
         .concat(this.listDto.listComponentColumnFieldList);
 
     for (const filterField of filterFieldList) {
-      if (filterField.fieldValue != null && filterField.fieldValue !== '' && filterField.editable) {
+      if (filterField.fieldValue != null && filterField.fieldValue !== '') {
         let fieldValue = '';
         if (filterField.type === 'datetime') {
           fieldValue = this.datepipe.transform(filterField.fieldValue, 'yyyyMMddHHmmss', 'UTC');
