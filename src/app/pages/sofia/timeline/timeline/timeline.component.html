@@ -1,14 +1,30 @@
 
 <div class="row formnav">
   <div class="col-sm-12">
-    <div class="numbers pull-left">  </div>
     <div class="pull-left">
       <div class="col-12">
         <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
-          <i class="fa {{dto?.timelineDTO?.icon}}" style="padding-right: 5px;"></i>
-             {{dto?.timelineDTO?.title}}
+          <i class="fa {{timelineDTO?.icon}}" style="padding-right: 5px;"></i>
+             {{timelineDTO?.title}}
         </h3>
-        <p style=" margin-bottom: 5px;"> {{dto?.timelineDTO?.description}} </p>
+        <p style=" margin-bottom: 5px;"> {{timelineDTO?.description}} </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <div class="row filter-row">
+        <ng-container *ngFor="let filter of this?.timelineDTO?.filterList">
+          <div *ngIf="filter.type === 'list'" class="form-group col" style="min-width: 300px;">
+            <app-list-selector
+              (eventOccured)="fieldEventOccurred($event)"
+              [(value)]="filter.fieldValue"
+              [command]="filter.editor"
+              [defaultValue]="filter.defaultValue"
+              [displayValue]="filter.displayValue"
+              [editable]="filter.editable"></app-list-selector>
+            <div class="category">{{filter.description}}</div>
+          </div>
+        </ng-container>
+
       </div>
     </div>
   </div>
@@ -42,8 +58,8 @@
     </div>
     <div  class="col-md-12">
       <button class="btn next-page-button "
-              [disabled]="dto?.timelineDTO?.isTheLastPage"
-              [ngStyle]="{ 'background-color': dto?.timelineDTO?.isTheLastPage ? '#9A9A9A' : 'darkgreen' }"
+              [disabled]="timelineResponseDTO?.isTheLastPage"
+              [ngStyle]="{ 'background-color': timelineResponseDTO?.isTheLastPage ? '#9A9A9A' : 'darkgreen' }"
               (click)="goToTheNextPage()">
         <i class="fa fa-chevron-down"></i>
       </button>

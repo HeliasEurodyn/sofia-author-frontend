@@ -1,23 +1,27 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {TimelineService} from '../../../../services/crud/sofia/timeline.service';
-import {TimelineResponseDTO} from '../../../../dtos/sofia/timeline/timeline-response-dto';
 import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
 import {TimelineContentDTO} from '../../../../dtos/sofia/timeline/timeline-content-dto';
+import {TimelineDTO} from '../../../../dtos/sofia/timeline/timeline-dto';
+import {concatMap, map} from 'rxjs/operators';
+import {TimelineResponseDTO} from '../../../../dtos/sofia/timeline/timeline-response-dto';
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.css']
 })
-export class TimelineComponent extends  PageComponent implements OnInit {
+export class TimelineComponent extends PageComponent implements OnInit {
 
-  public dto: TimelineResponseDTO = new TimelineResponseDTO();
+  public timelineResponseDTO: TimelineResponseDTO = new TimelineResponseDTO();
+  public timelineDTO = new TimelineDTO();
   public extraParamsMap: Map<any, any>;
   public currentPage = 1
   public id = '0';
   public extraParams = '';
+  public filterParams = '';
   public resultList: Array<TimelineContentDTO> = new Array<TimelineContentDTO>();
 
   constructor(private service: TimelineService,
@@ -27,19 +31,18 @@ export class TimelineComponent extends  PageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-       this.initNav(this.activatedRoute);
-       this.buildParameters()
-       this.refresh()
-
+    this.initNav(this.activatedRoute);
+    this.buildParameters()
+    this.getTimelineHeader()
   }
 
   buildParameters(): void {
     this.extraParamsMap = this.getParams('extraparams');
     const locateParams = this.getLocateParams();
 
-    if ( this.extraParamsMap != null) {
+    if (this.extraParamsMap != null) {
       this.extraParamsMap.forEach((value, key) => {
-        this.extraParams += '&' +  encodeURI(key) + '=' +  encodeURI(value);
+        this.extraParams += '&' + encodeURI(key) + '=' + encodeURI(value);
       });
     }
 
@@ -48,17 +51,41 @@ export class TimelineComponent extends  PageComponent implements OnInit {
     }
   }
 
+  getTimelineHeader(): void {
+    if (this.id !== '0') {
+      this.service.getById(this.id).pipe(concatMap(timelineHeader => {
+        this.timelineDTO = timelineHeader;
+        return this.service
+          .getByIdWithParams(this.id, this.extraParams + this.filterParams, this.currentPage)
+          .pipe(map(timelineResponse => {
+            this.timelineResponseDTO = timelineResponse;
+            this.resultList.push(...this.timelineResponseDTO?.resultList);
+          }));
+      })).subscribe();
+    }
+  }
 
   refresh(): void {
 
     if (this.id !== '0') {
-      this.service.getByIdWithParams(this.id, this.extraParams, this.currentPage).subscribe(data => {
-        this.dto = data;
-        this.resultList.push(...this.dto.resultList);
+      this.service.getByIdWithParams(this.id, this.extraParams + this.filterParams, this.currentPage).subscribe(timelineResponse => {
+        this.timelineResponseDTO = timelineResponse;
+        this.resultList.push(...this.timelineResponseDTO?.resultList);
       });
     }
   }
 
+  fieldEventOccurred(event: any) {
+    this.filterParams = '';
+
+    this.timelineDTO?.filterList.forEach(filter => {
+      this.filterParams += '&' + encodeURI(filter.code) + '=' + encodeURI(filter.fieldValue)
+    });
+
+    if (event.eventtype === 'listselected') {
+      this.refresh();
+    }
+  }
 
   minTitleClicked(nav: string) {
     this.navigatorService.navigate(nav);
@@ -67,9 +94,5 @@ export class TimelineComponent extends  PageComponent implements OnInit {
   goToTheNextPage() {
     this.currentPage += 1;
     this.refresh();
-  }
-
-  test() {
-    alert('this is a test')
   }
 }

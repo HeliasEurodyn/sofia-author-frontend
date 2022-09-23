@@ -1,8 +1,7 @@
-import {TimelineDTO} from './timeline-dto';
 import {TimelineContentDTO} from './timeline-content-dto';
 
 export class TimelineResponseDTO {
 
-  timelineDTO: TimelineDTO;
+  isTheLastPage: boolean;
   resultList: Array<TimelineContentDTO>;
 }
