@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {FormService} from '../../../../services/crud/sofia/form.service';
 import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
@@ -28,6 +28,7 @@ import {TableComponentService} from '../../../../services/crud/sofia/table-compo
 })
 export class FormComponent extends PageComponent implements OnInit {
 
+  @ViewChildren('formFields') formFields: QueryList<any>;
   public dto: FormDto;
   public selectedFormTabId: string;
   public selectedFormPopupCode: string;
@@ -47,7 +48,8 @@ export class FormComponent extends PageComponent implements OnInit {
               private formScriptsService: FormScriptsService,
               private formAssignmentsService: FormAssignmentsService,
               private formTableLinesService: FormTableLinesService,
-              private tableComponentService: TableComponentService
+              private tableComponentService: TableComponentService,
+              private el: ElementRef,
   ) {
     super();
   }
@@ -80,6 +82,12 @@ export class FormComponent extends PageComponent implements OnInit {
         this.retrieveCloneAndAssignData(id, this.selectionId);
       }
     });
+  }
+
+  refreshFormField(code: string): void {
+    this.formFields
+      .filter((formField: any) => formField.componentPersistEntityDTO.code + '.' + formField.componentPersistEntityFieldDTO.code  === code)
+      .forEach((formField: any) => formField.refresh());
   }
 
   loadDynamicCssScript(id: any): Promise<any> {

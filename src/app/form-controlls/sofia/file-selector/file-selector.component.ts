@@ -8,7 +8,6 @@ import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/comp
   styleUrls: ['./file-selector.component.css']
 })
 export class FileSelectorComponent implements OnInit {
-
   @Output() eventOccured = new EventEmitter<any>();
   @Input() editable: Boolean;
   @Input() componentPersistEntityDTO: ComponentPersistEntityDTO;
@@ -24,6 +23,10 @@ export class FileSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  public refresh() {
     if (!this.isJsonString(this.command)) {
       return;
     }

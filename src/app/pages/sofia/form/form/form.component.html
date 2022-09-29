@@ -134,7 +134,6 @@
                   </div>
                 </div>
               </ng-container>
-
               <ng-container
                 *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'file-selector'">
                 <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
@@ -142,7 +141,7 @@
                      style="{{formcontrol.formControlField.css}}">
                   <div class="form-group">
                     <b>{{formcontrol.formControlField.description}}</b>
-                    <app-file-selector class="form-input-field"
+                    <app-file-selector #formFields class="form-input-field"
                                         [componentPersistEntityDTO]="formcontrol.formControlField.componentPersistEntity"
                                         [componentPersistEntityFieldDTO]="formcontrol.formControlField.componentPersistEntityField"
                                         (eventOccured)="fieldEventOccured($event)"
@@ -153,7 +152,6 @@
                   </div>
                 </div>
               </ng-container>
-
               <ng-container
                 *ngIf="formcontrol.formControlField.componentPersistEntityField.assignment.type === 'password'">
                 <div [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
@@ -291,7 +289,7 @@
                      style="{{formcontrol.formControlField.css}}">
                   <div class="form-group">
                     <b>{{formcontrol.formControlField.description}}</b>
-                    <app-list-selector class="form-input-field"
+                    <app-list-selector  #formFields class="form-input-field"
                                        [ngClass]="{'hidden-field': !formcontrol.formControlField.visible}"
                                        [command]="formcontrol.formControlField.componentPersistEntityField.assignment.editor"
                                        [editable]="formcontrol.formControlField.editable"

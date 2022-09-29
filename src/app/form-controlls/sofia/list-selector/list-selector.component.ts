@@ -68,6 +68,8 @@ export class ListSelectorComponent implements OnInit {
     this.setDefaultListValue();
   }
 
+  public refresh() {}
+
   private setDefaultValue() {
     if (this.defaultValue == null) {
       return;
