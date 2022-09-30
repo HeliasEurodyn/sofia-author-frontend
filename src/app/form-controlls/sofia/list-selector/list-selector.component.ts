@@ -58,17 +58,16 @@ export class ListSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.uuid = uuid.v4();
+    this.refresh();
+  }
+
+  public refresh() {
     this.retrieveCommand();
-    // if (this.value != null && this.value !== '') {
-    //   this.refreshComponent();
-    // }
     this.retrieveDisplayFields();
     this.setComponentDislpayValue();
     this.setDefaultValue();
     this.setDefaultListValue();
   }
-
-  public refresh() {}
 
   private setDefaultValue() {
     if (this.defaultValue == null) {
