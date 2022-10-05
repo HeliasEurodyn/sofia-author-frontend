@@ -76,6 +76,7 @@ import {SettingsComponent} from '../../pages/sofia/settings/settings.component';
 import {TimelineComponent} from '../../pages/sofia/timeline/timeline/timeline.component';
 import {TimelineDesignerListComponent} from '../../pages/sofia/timeline-designer/timeline-designer-list/timeline-designer-list.component';
 import {TimelineDesignerFormComponent} from '../../pages/sofia/timeline-designer/timeline-designer-form/timeline-designer-form.component';
+import {NotificationComponent} from "../../pages/sofia/notification/notification/notification.component";
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -155,6 +156,7 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'timeline', component: TimelineComponent, canActivate: [AuthGuard]},
   {path: 'timeline-designer-list', component: TimelineDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'timeline-designer-form', component: TimelineDesignerFormComponent, canActivate: [AuthGuard]},
+  {path: 'notification', component: NotificationComponent, canActivate: [AuthGuard]},
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;

@@ -43,6 +43,7 @@
     "express": "4.17.1",
     "jquery": "3.4.1",
     "moment": "2.24.0",
+    "ng-event-source": "^1.0.14",
     "ng2-charts": "2.3.0",
     "ngx-ace-wrapper": "^11.0.1",
     "ngx-mask": "^9.1.4",
