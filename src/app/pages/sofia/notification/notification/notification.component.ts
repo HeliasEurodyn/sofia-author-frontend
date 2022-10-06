@@ -5,7 +5,6 @@ import {NotificationService} from '../../../../services/crud/sofia/notification.
 import {PageComponent} from '../../page/page-component';
 import {EventSourcePolyfill} from 'ng-event-source';
 import {UserDto} from '../../../../dtos/sofia/user/user-dto';
-import {concatMap} from 'rxjs/operators';
 
 
 @Component({
@@ -17,7 +16,7 @@ export class NotificationComponent extends PageComponent implements OnInit, OnDe
 
   public endpoint = 'notification';
   public notificationDTO: NotificationDTO = new NotificationDTO('Hello world')
-  public userDto: UserDto;
+  public loggedUser: UserDto;
   public eventSource: EventSourcePolyfill;
 
   constructor(private notificationService: NotificationService) {
@@ -25,42 +24,35 @@ export class NotificationComponent extends PageComponent implements OnInit, OnDe
   }
 
   ngOnInit(): void {
-       this.initListener();
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedin_user'));
+    this.initListener();
   }
 
   ngOnDestroy(): void {
     this.eventSource.close();
-    this.notificationService.unsubscribe().subscribe();
+    this.notificationService.unsubscribe(this?.loggedUser?.id).subscribe();
   }
 
   initListener(): void {
 
-    this.userDto = JSON.parse(localStorage.getItem('loggedin_user'));
-
     this.eventSource = new EventSourcePolyfill(`${environment.serverUrl}/${this.endpoint}/subscribe`, {
       headers: {
-        'Authorization': 'Bearer ' +  localStorage.getItem('jwt_token')
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
       }
     })
 
-    this.eventSource.onopen = (e) => {
+    this.eventSource.onopen = () => {
       console.log('open');
     }
 
+    this.eventSource.onerror = () => {
 
-    this.eventSource.onerror = (e) => {
-      if (e.readyState !== EventSource.CLOSED) {
-        this.eventSource.close();
-      }
-      this.notificationService
-        .unsubscribe()
-        .pipe(concatMap(() => this.initListener))
-        .subscribe()
+      this.eventSource.close();
+      this.initListener()
     };
 
-    this.eventSource.addEventListener(this?.userDto?.username, this.notifyServerEvent, false);
+    this.eventSource.addEventListener(this?.loggedUser?.id, this.notifyServerEvent, false);
     this.eventSource.addEventListener('keepAlive', this.keepAliveServerEvent, false);
-    this.eventSource.addEventListener(this?.userDto?.username, this.handleServerEvent, false);
 
   }
 
@@ -69,10 +61,6 @@ export class NotificationComponent extends PageComponent implements OnInit, OnDe
   }
 
   keepAliveServerEvent = (event) => {
-    console.log(event.data)
-  }
-
-  handleServerEvent = (event) => {
     console.log(event.data)
   }
 

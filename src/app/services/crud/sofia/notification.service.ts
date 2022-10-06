@@ -18,8 +18,8 @@ export class NotificationService extends CrudService<any> {
     return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}/send`, notificationDTO);
   }
 
-  unsubscribe(): Observable<any> {
-    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/unsubscribe`);
+  unsubscribe(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/unsubscribe?id=${id}`);
   }
 
 
