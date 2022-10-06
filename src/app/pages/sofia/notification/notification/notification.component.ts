@@ -5,6 +5,7 @@ import {NotificationService} from '../../../../services/crud/sofia/notification.
 import {PageComponent} from '../../page/page-component';
 import {EventSourcePolyfill} from 'ng-event-source';
 import {UserDto} from '../../../../dtos/sofia/user/user-dto';
+import {concatMap} from 'rxjs/operators';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class NotificationComponent extends PageComponent implements OnInit, OnDe
 
   ngOnDestroy(): void {
     this.eventSource.close();
+    this.notificationService.unsubscribe().subscribe();
   }
 
   initListener(): void {
@@ -47,26 +49,35 @@ export class NotificationComponent extends PageComponent implements OnInit, OnDe
 
 
     this.eventSource.onerror = (e) => {
-      if (e.readyState === EventSource.CLOSED) {
-        console.log('close');
-      } else {
-        console.log(e);
+      if (e.readyState !== EventSource.CLOSED) {
+        this.eventSource.close();
       }
-      this.initListener();
+      this.notificationService
+        .unsubscribe()
+        .pipe(concatMap(() => this.initListener))
+        .subscribe()
     };
 
+    this.eventSource.addEventListener(this?.userDto?.username, this.notifyServerEvent, false);
+    this.eventSource.addEventListener('keepAlive', this.keepAliveServerEvent, false);
     this.eventSource.addEventListener(this?.userDto?.username, this.handleServerEvent, false);
 
   }
 
-  handleServerEvent = (e) => {
-    console.log(e.data)
+  notifyServerEvent = (event) => {
+    console.log(event.data)
+  }
+
+  keepAliveServerEvent = (event) => {
+    console.log(event.data)
+  }
+
+  handleServerEvent = (event) => {
+    console.log(event.data)
   }
 
   send(): void {
     this.notificationService.sendNotification(this.notificationDTO).subscribe();
   }
-
-
 
 }
