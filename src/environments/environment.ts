@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   serverUrl: 'http://localhost:15502/api',
-  frontendUrl: 'http://localhost:5000'
+  frontendUrl: 'http://localhost:5020'
 };
