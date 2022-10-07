@@ -5,6 +5,7 @@ import {CommandNavigatorService} from '../../../../services/system/sofia/command
 import {AppViewDTO} from '../../../../dtos/sofia/appview/app-view-dto';
 import {AppViewService} from '../../../../services/crud/sofia/app-view.service';
 import {Location} from '@angular/common';
+import {AppViewFieldDTO} from '../../../../dtos/sofia/appview/app-view-field-dto';
 
 @Component({
   selector: 'app-app-view-designer-form',
@@ -89,10 +90,20 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
 
   generateViewFields() {
     this.service.generateViewFields(this.dto.query).subscribe(data => {
-      this.dto.appViewFieldList = data;
+      const genAppViewFieldList = this.replaceViewFieldIds(data);
+      this.dto.appViewFieldList = genAppViewFieldList;
     });
   }
 
+  replaceViewFieldIds( genAppViewFieldList: AppViewFieldDTO[]): AppViewFieldDTO[] {
+    genAppViewFieldList.forEach(genField => {
+      const existingAppViewFieldList = this.dto.appViewFieldList.filter(field => field.name === genField.name);
+      if (existingAppViewFieldList.length > 0) {
+        genField.id = existingAppViewFieldList[0].id;
+      }
+    });
+    return genAppViewFieldList;
+  }
 
   showPreviousPageButton() {
     if (this.previousPage === null) {

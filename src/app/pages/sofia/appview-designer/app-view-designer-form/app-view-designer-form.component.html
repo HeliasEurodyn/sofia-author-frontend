@@ -92,6 +92,7 @@
           <table class="table table-striped">
             <thead class=" text-primary">
             <tr>
+              <th>Id</th>
               <th>Name</th>
               <th>Type</th>
               <th>Size</th>
@@ -103,6 +104,9 @@
               <td colspan="4" class="empty-table-row">Empty!</td>
             </tr>
             <tr *ngFor="let row of this.dto.appViewFieldList">
+              <td>
+                <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.id">
+              </td>
               <td>
                 <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.name">
               </td>
