@@ -15,7 +15,7 @@ import {UserDto} from '../../../../dtos/sofia/user/user-dto';
 export class NotificationComponent extends PageComponent implements OnInit, OnDestroy {
 
   public endpoint = 'notification';
-  public notificationDTO: NotificationDTO = new NotificationDTO('Hello world')
+  public notificationDTO: NotificationDTO = new NotificationDTO('Hello world', 'da7a00e9-3b19-454d-b72b-8646d6eae678')
   public loggedUser: UserDto;
   public eventSource: EventSourcePolyfill;
 
