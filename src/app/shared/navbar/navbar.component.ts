@@ -4,7 +4,7 @@ import {
   Component,
   ComponentRef,
   ElementRef,
-  EmbeddedViewRef,
+  EmbeddedViewRef, OnDestroy,
   OnInit,
   Renderer2,
   ViewChild
@@ -22,6 +22,7 @@ import {ListSearchService} from '../../services/system/sofia/list-search.service
 import {LanguageDTO} from '../../dtos/sofia/language/language-dto';
 import {LanguageService} from '../../services/system/sofia/language.service';
 import { UserService } from 'app/services/crud/sofia/user.service';
+import {SSENotificationService} from '../../services/crud/sofia/s-s-e-notification.service';
 
 @Component({
   moduleId: module.id,
@@ -30,7 +31,7 @@ import { UserService } from 'app/services/crud/sofia/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   public listTitles: any[];
   public location: Location;
   public nativeElement: Node;
@@ -60,7 +61,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
               private appRef: ApplicationRef,
               private activatedRoute: ActivatedRoute,
               private listSearchService: ListSearchService,
-              private userService: UserService
+              private userService: UserService,
+              private sseNotificationService: SSENotificationService
   ) {
     this.location = location;
     this.nativeElement = element.nativeElement;
@@ -102,11 +104,21 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.listenToLoading();
 
     this.userDto = JSON.parse(localStorage.getItem('loggedin_user'));
+    this.sseNotificationService.subscribe(this.userDto.id, this.notifySSEServerEvent);
+  }
+
+  notifySSEServerEvent = (event) => {
+    this.notificationService.showNotification('top', 'center', 'alert-info', 'fa-id-card', '<b>Server Event</b> ' + event.data);
   }
 
   ngAfterViewInit(): void {
     this.insertComponentModal.nativeElement.addEventListener('click', this.onModalClosingActions.bind(this));
     this.insertComponentModal.nativeElement.addEventListener('keyup', this.onModalClosingActions.bind(this));
+  }
+
+  ngOnDestroy(): void {
+    this.sseNotificationService.closeEventSource();
+   //  this.sseNotificationService.unsubscribe(this.userDto.id).subscribe();
   }
 
   onModalClosingActions(event) {
