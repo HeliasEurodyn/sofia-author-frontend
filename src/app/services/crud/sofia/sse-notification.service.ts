@@ -3,21 +3,21 @@ import {CrudService} from '../common/crud.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {NotificationDTO} from '../../../dtos/sofia/notification/notification-dto';
 import {EventSourcePolyfill} from 'ng-event-source';
+import {SseNotificationResponseDTO} from '../../../dtos/sofia/sse-notification/sse-notification-response-dto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SSENotificationService extends CrudService<any> {
+export class SseNotificationService extends CrudService<any> {
   private eventSource: EventSourcePolyfill = null;
 
   constructor(public http: HttpClient) {
-    super(http, 'notification');
+    super(http, 'sse-notification');
   }
 
-  sendNotification(notificationDTO: NotificationDTO): Observable<any> {
-    return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}/send`, notificationDTO);
+  sendNotification(sseNotificationResponseDTO: SseNotificationResponseDTO): Observable<any> {
+    return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}/send`, sseNotificationResponseDTO);
   }
 
   unsubscribe(topic: any): Observable<any> {

@@ -122,7 +122,8 @@ import { FileSelectorComponent } from './form-controlls/sofia/file-selector/file
 import { TimelineComponent } from './pages/sofia/timeline/timeline/timeline.component';
 import { TimelineDesignerListComponent } from './pages/sofia/timeline-designer/timeline-designer-list/timeline-designer-list.component';
 import { TimelineDesignerFormComponent } from './pages/sofia/timeline-designer/timeline-designer-form/timeline-designer-form.component';
-import { NotificationComponent } from './pages/sofia/notification/notification/notification.component';
+import { SseNotificationTemplateListComponent } from './pages/sofia/sse-notification-template/sse-notification-template-list/sse-notification-template-list.component';
+import { SseNotificationTemplateFormComponent } from './pages/sofia/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -222,7 +223,8 @@ import { NotificationComponent } from './pages/sofia/notification/notification/n
     TimelineComponent,
     TimelineDesignerListComponent,
     TimelineDesignerFormComponent,
-    NotificationComponent
+    SseNotificationTemplateListComponent,
+    SseNotificationTemplateFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

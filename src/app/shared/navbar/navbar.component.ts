@@ -22,7 +22,7 @@ import {ListSearchService} from '../../services/system/sofia/list-search.service
 import {LanguageDTO} from '../../dtos/sofia/language/language-dto';
 import {LanguageService} from '../../services/system/sofia/language.service';
 import { UserService } from 'app/services/crud/sofia/user.service';
-import {SSENotificationService} from '../../services/crud/sofia/s-s-e-notification.service';
+import {SseNotificationService} from '../../services/crud/sofia/sse-notification.service';
 
 @Component({
   moduleId: module.id,
@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
               private activatedRoute: ActivatedRoute,
               private listSearchService: ListSearchService,
               private userService: UserService,
-              private sseNotificationService: SSENotificationService
+              private sseNotificationService: SseNotificationService
   ) {
     this.location = location;
     this.nativeElement = element.nativeElement;
@@ -118,7 +118,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sseNotificationService.closeEventSource();
-   //  this.sseNotificationService.unsubscribe(this.userDto.id).subscribe();
   }
 
   onModalClosingActions(event) {
