@@ -104,7 +104,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.listenToLoading();
 
     this.userDto = JSON.parse(localStorage.getItem('loggedin_user'));
-    this.sseNotificationService.subscribe(this.userDto.id, this.notifySSEServerEvent);
+    // this.sseNotificationService.subscribe(this.userDto.id, this.notifySSEServerEvent);
   }
 
   notifySSEServerEvent = (event) => {
@@ -117,7 +117,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sseNotificationService.closeEventSource();
+    // this.sseNotificationService.closeEventSource();
   }
 
   onModalClosingActions(event) {
