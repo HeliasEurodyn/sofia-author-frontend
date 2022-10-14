@@ -124,6 +124,8 @@ import { TimelineDesignerListComponent } from './pages/sofia/timeline-designer/t
 import { TimelineDesignerFormComponent } from './pages/sofia/timeline-designer/timeline-designer-form/timeline-designer-form.component';
 import { SseNotificationTemplateListComponent } from './pages/sofia/sse-notification-template/sse-notification-template-list/sse-notification-template-list.component';
 import { SseNotificationTemplateFormComponent } from './pages/sofia/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component';
+import { BusinessUnitDesignerFormComponent } from './pages/sofia/business-unit-designer/business-unit-designer-form/business-unit-designer-form.component';
+import { BusinessUnitDesignerListComponent } from './pages/sofia/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -224,7 +226,9 @@ import { SseNotificationTemplateFormComponent } from './pages/sofia/sse-notifica
     TimelineDesignerListComponent,
     TimelineDesignerFormComponent,
     SseNotificationTemplateListComponent,
-    SseNotificationTemplateFormComponent
+    SseNotificationTemplateFormComponent,
+    BusinessUnitDesignerFormComponent,
+    BusinessUnitDesignerListComponent
   ],
   imports: [
     BrowserAnimationsModule,

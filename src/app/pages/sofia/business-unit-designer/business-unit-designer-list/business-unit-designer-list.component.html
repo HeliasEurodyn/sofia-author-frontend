@@ -1,0 +1,86 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="numbers pull-left">  </div>
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-briefcase" style="padding-right: 5px;"></i>
+          Business Unit Designer
+        </h3>
+        <p style=" margin-bottom: 5px;">Business Unit Designer List </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" (click)="createNew()">
+        <i class="fa fa-plus-circle"></i> New
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="numbers pull-left"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th class="text-left">Actions</th>
+              <th>id</th>
+              <th>title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngIf="tableData == undefined || tableData?.length === 0 ">
+              <td colspan="12" class="empty-table-row">Empty!</td>
+            </tr>
+            <tr *ngIf="tableData?.length == 0">
+              <td colspan="3" class="empty-list">
+
+              </td>
+            </tr>
+            <tr *ngFor="let row of tableData">
+              <td>
+                <button type="button" title="Edit" class="btn btn-outline-success btn-icon btn-sm"
+                        (click)="edit(row['id'])">
+                  <i class="fa fa-pencil-alt"></i>
+                </button>
+                <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                     style="margin-top: 4px;">
+                  <button (click)="myDrop.open();"
+                          class="btn btn-outline-default btn-icon btn-sm"
+                          title="More">
+                    <i class="fa fa-ellipsis-v"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button (click)="delete(row['id'])"
+                            class="text-danger"
+                            ngbDropdownItem>
+                      <i class="fa fa-times"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input" readonly value="{{row['id']}}">
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input" readonly value="{{row['title']}}">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -76,12 +76,10 @@ import {SettingsComponent} from '../../pages/sofia/settings/settings.component';
 import {TimelineComponent} from '../../pages/sofia/timeline/timeline/timeline.component';
 import {TimelineDesignerListComponent} from '../../pages/sofia/timeline-designer/timeline-designer-list/timeline-designer-list.component';
 import {TimelineDesignerFormComponent} from '../../pages/sofia/timeline-designer/timeline-designer-form/timeline-designer-form.component';
-import {
-  SseNotificationTemplateListComponent
-} from "../../pages/sofia/sse-notification-template/sse-notification-template-list/sse-notification-template-list.component";
-import {
-  SseNotificationTemplateFormComponent
-} from "../../pages/sofia/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component";
+import {SseNotificationTemplateListComponent} from '../../pages/sofia/sse-notification-template/sse-notification-template-list/sse-notification-template-list.component';
+import {SseNotificationTemplateFormComponent} from '../../pages/sofia/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component';
+import {BusinessUnitDesignerFormComponent} from '../../pages/sofia/business-unit-designer/business-unit-designer-form/business-unit-designer-form.component';
+import {BusinessUnitDesignerListComponent} from '../../pages/sofia/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -163,6 +161,8 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'timeline-designer-form', component: TimelineDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'notification-template-list', component: SseNotificationTemplateListComponent, canActivate: [AuthGuard]},
   {path: 'notification-template-form', component: SseNotificationTemplateFormComponent, canActivate: [AuthGuard]},
+  {path: 'business-unit-designer-form', component: BusinessUnitDesignerFormComponent, canActivate: [AuthGuard]},
+  {path: 'business-unit-designer-list', component: BusinessUnitDesignerListComponent, canActivate: [AuthGuard]},
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;
