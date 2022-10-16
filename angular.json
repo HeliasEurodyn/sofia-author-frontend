@@ -32,7 +32,14 @@
               "node_modules/moment/moment.js",
               "node_modules/chartist/dist/chartist.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js"
-            ]
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -51,7 +58,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
