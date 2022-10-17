@@ -33,14 +33,19 @@
             </div>
             <div class="card-body ">
               <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text"><i
-                  class="nc-icon nc-single-02"></i></span></div>
+                <div class="input-group-prepend">
+                  <span class="input-group-text username-icon">
+                  <i class="fa-regular fa-circle-user" style="color: #236594;"></i>
+                  </span>
+                </div>
                 <input class="form-control" placeholder="Username" name="username" type="text" [(ngModel)]="username"
                        (keyup.enter)="onEnterMethod()">
               </div>
               <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text">
-                    <i class="nc-icon nc-key-25"></i></span>
+                <div class="input-group-prepend">
+                  <span class="input-group-text password-icon">
+                      <i class="fa fa-lock" style="color: #236594;"></i>
+                  </span>
                 </div>
                 <input class="form-control" placeholder="Password" name="password" [(ngModel)]="password"
                        type="password" (keyup.enter)="onEnterMethod()">
