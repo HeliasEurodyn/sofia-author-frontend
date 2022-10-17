@@ -31,6 +31,8 @@ import 'brace/mode/text';
 import 'brace/theme/github';
 import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
+import {BusinessUnitDesignerService} from '../../../../services/crud/sofia/business-unit-designer.service';
+import {BusinessUnitDTO} from '../../../../dtos/sofia/business-unit/business-unit-dto';
 
 
 @Component({
@@ -67,6 +69,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   public selectedComponentPersistEntity: ComponentPersistEntityDTO = new ComponentPersistEntityDTO();
   public selectedFormControlTableControl: FormControlTableControlDTO = new FormControlTableControlDTO();
   public components: any;
+  public businessUnitsList: Array<BusinessUnitDTO>;
   public roles: any;
   public visibleSection = 'settings';
   public selectedTableButtonFormControl: FormControlTableControlDTO = new FormControlTableControlDTO();
@@ -82,7 +85,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
               private roleService: RoleService,
               private navigatorService: CommandNavigatorService,
               private activatedRoute: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              private businessUnitDesignerService: BusinessUnitDesignerService) {
     super();
   }
 
@@ -121,6 +125,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     }
 
     this.refreshComponents();
+    this.refreshBusinessUnit();
   }
 
   cleanIdsIfCloneEnabled() {
@@ -268,6 +273,12 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     });
   }
 
+  refreshBusinessUnit() {
+    this.businessUnitDesignerService.get().subscribe(data => {
+      this.businessUnitsList = data;
+    });
+  }
+
   setVisibleSection(visibleSection: string) {
     this.visibleSection = visibleSection;
   }
@@ -408,6 +419,10 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   selectComponent(selectedComponent) {
     this.dto.component = selectedComponent;
     this.setAssignmentsToComponents();
+  }
+
+  selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {
+    this.dto.businessUnit = selectedBusinessUnit?.title;
   }
 
   selectRole(role) {

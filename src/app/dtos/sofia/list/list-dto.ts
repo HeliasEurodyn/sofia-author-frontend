@@ -35,6 +35,7 @@ export class ListDTO extends BaseDTO {
   public headerFilters: Boolean;
   public jsonUrl = '';
   public accessControlEnabled: Boolean;
+  public businessUnit: string;
   public component: ComponentDTO;
   public listActionButtons: ListActionButton[] = [];
   public listComponentColumnFieldList: ListComponentFieldDTO[] = [];

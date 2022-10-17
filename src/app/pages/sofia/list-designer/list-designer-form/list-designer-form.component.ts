@@ -24,6 +24,8 @@ import 'brace/mode/text';
 import 'brace/theme/github';
 import 'brace/theme/chrome';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
+import {BusinessUnitDesignerService} from '../../../../services/crud/sofia/business-unit-designer.service';
+import {BusinessUnitDTO} from '../../../../dtos/sofia/business-unit/business-unit-dto';
 
 @Component({
   selector: 'app-list-designer-form',
@@ -45,6 +47,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   };
 
   public components: any;
+  public businessUnitsList: Array<BusinessUnitDTO>;
   public selectedFilterField: ListComponentFieldDTO;
 
   public dto: ListDTO;
@@ -71,7 +74,8 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
               private router: Router,
               private location: Location,
               private roleService: RoleService,
-              private navigatorService: CommandNavigatorService) {
+              private navigatorService: CommandNavigatorService,
+              private businessUnitDesignerService: BusinessUnitDesignerService) {
     super();
   }
 
@@ -101,6 +105,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     }
 
     this.refreshComponents();
+    this.refreshBusinessUnit();
   }
 
   setDefaults() {
@@ -209,6 +214,12 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     this.roleService.get().subscribe(data => {
       this.roles = data;
     });
+  }
+
+  refreshBusinessUnit() {
+      this.businessUnitDesignerService.get().subscribe(data => {
+        this.businessUnitsList = data;
+      });
   }
 
   showPreviousPageButton() {
@@ -361,6 +372,10 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     this.dto.listComponentLeftGroupFieldList = [];
     this.dto.listComponentOrderByFieldList = [];
     this.dto.listComponentTopGroupFieldList = [];
+  }
+
+  selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {
+    this.dto.businessUnit = selectedBusinessUnit?.title;
   }
 
   hideChildren(item) {
