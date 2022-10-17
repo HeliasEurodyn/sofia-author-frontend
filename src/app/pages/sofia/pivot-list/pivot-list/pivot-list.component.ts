@@ -17,6 +17,16 @@ import {PivotListDTO} from '../../../../dtos/sofia/pivot-list/pivot-list-dto';
 import {FilterField} from '../../../../dtos/sofia/pivot-list/filter-field';
 import {PivotListComponentFieldDTO} from '../../../../dtos/sofia/pivot-list/pivot-list-component-field-dto';
 
+declare global {
+  interface Navigator {
+    msSaveBlob?: (blob: any, defaultName?: string) => boolean
+  }
+}
+
+if (navigator.msSaveBlob) {
+  // use navigator.msSaveBlob
+}
+
 class FieldBranch {
 
   code: string;
