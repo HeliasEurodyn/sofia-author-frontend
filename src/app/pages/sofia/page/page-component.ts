@@ -1,8 +1,9 @@
 import {CommandParserService} from '../../../services/system/sofia/command-parser.service';
-import {EventEmitter, Injector, Input} from '@angular/core';
+import {EventEmitter, Injectable, Injector, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 
+@Injectable()
 export class PageComponent {
 
   injector = Injector.create({
