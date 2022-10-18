@@ -22,4 +22,8 @@ export class InfoCardDTO extends BaseDTO {
 
   scripts: InfoCardScriptDTO[] = [];
 
+  icon: string;
+
+  iconColor: string;
+
 }
