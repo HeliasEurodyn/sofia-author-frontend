@@ -13,7 +13,7 @@ import {Title} from '@angular/platform-browser';
 })
 export class DashboardComponent extends PageComponent implements OnInit {
 
-  public dto: DashboardDTO = new DashboardDTO();
+  public dto: DashboardDTO = null;
   public extraParams = '';
   public extraParamsMap: Map<any, any>;
 

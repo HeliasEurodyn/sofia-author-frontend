@@ -5,6 +5,7 @@
     padding-top: .9rem;
     padding-bottom: .9rem;
     position: relative;
+    cursor: pointer;
 
     &.alert-success{
         background-color: lighten($success-color, 5%);

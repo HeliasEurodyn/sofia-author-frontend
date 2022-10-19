@@ -16,7 +16,7 @@ export class NotificationService {
       '',
       {
         timeOut: 40000,
-        closeButton: true,
+        closeButton: false,
         enableHtml: true,
         toastClass: 'alert alert-with-icon ' + type,
         positionClass: 'toast-' + from + '-' + align

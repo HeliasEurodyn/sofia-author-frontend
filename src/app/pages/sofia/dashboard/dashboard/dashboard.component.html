@@ -1,4 +1,4 @@
-<div class="row dashboard-entity main-dashboard-row">
+<div class="row dashboard-entity main-dashboard-row" *ngIf="dto != null">
   <ng-container *ngFor="let dashboardArea of this.dto?.dashboardAreaList">
     <div class="{{dashboardArea.cssclass}}">
       <div class="row">
