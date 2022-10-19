@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ListDTO} from '../../../../dtos/sofia/list/list-dto';
 import {ListService} from '../../../../services/crud/sofia/list.service';
 import {PageComponent} from '../../page/page-component';
@@ -6,7 +6,7 @@ import {ListResultsData} from '../../../../dtos/sofia/list/list-results-data';
 import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
 import {NotificationService} from '../../../../services/system/sofia/notification.service';
 import {DatePipe} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ListActionButton} from '../../../../dtos/sofia/list/list-action-button';
 import {TableComponentService} from '../../../../services/crud/sofia/table-component.service';
 import {Title} from '@angular/platform-browser';
@@ -22,7 +22,7 @@ import {LanguageService} from '../../../../services/system/sofia/language.servic
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent extends PageComponent implements OnInit, OnChanges, OnDestroy,  AfterViewInit {
+export class ListComponent extends PageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public listDto: ListDTO = null;
   public listResultsData: ListResultsData;
@@ -44,6 +44,9 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
   public selectedShortCode = '';
   public selectedShortOrder = 'desc';
 
+  @Input() public customCommand = '';
+  @Input() public runCustomCommand = false;
+
   constructor(private service: ListService,
               private commandNavigatorService: CommandNavigatorService,
               private notificationService: NotificationService,
@@ -54,39 +57,21 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
               private listScriptsService: ListScriptsService,
               private dynamicCssScriptLoader: DynamicCssScriptLoaderService,
               private languageService: LanguageService,
-              private listSearchService: ListSearchService,
-              private router: Router) {
+              private listSearchService: ListSearchService) {
     super();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-     // this.initNav(this.activatedRoute);
-     // this.refresh();
-     // this.applyHeaderSearchFilter();
-     // this.applyLanguageSelection();
-  }
-
-  public setPresetCommand(presetCommand) {
-    this.presetCommand = presetCommand;
+  ngOnInit(): void {
+    if (this.runCustomCommand) {
+      this.setPresetCommand(this.customCommand);
+    }
     this.initNav(this.activatedRoute);
     this.refresh();
-    this.applyHeaderSearchFilter();
-    this.applyLanguageSelection();
-  }
-
-
-  ngOnInit(): void {
-    if (this.router.url.startsWith('/list-alt?') || this.router.url.startsWith('/list?')) {
-      this.initNav(this.activatedRoute);
-      this.refresh();
-    }
   }
 
   ngAfterViewInit() {
-    if (this.router.url.startsWith('/list-alt?') || this.router.url.startsWith('/list?')) {
-      this.applyHeaderSearchFilter();
-      this.applyLanguageSelection();
-    }
+    this.applyHeaderSearchFilter();
+    this.applyLanguageSelection();
   }
 
   ngOnDestroy() {
@@ -131,7 +116,7 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
     this.listDto = new ListDTO();
 
     this.service.getVersion(id)
-      .pipe(concatMap(instanceVersion => this.service.getListById(id, instanceVersion, languageId )))
+      .pipe(concatMap(instanceVersion => this.service.getListById(id, instanceVersion, languageId)))
       .subscribe(dto => {
 
         localStorage.setItem('cachedList' + id + '-' + languageId, JSON.stringify(dto));
@@ -158,22 +143,6 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
       this.title.setTitle(this.getWindowCustomTitleFromCommand());
     }
   }
-
-  private setDafaultCommandParams() {
-    this.getParams('DEFAULTS')
-      .forEach((value: string, key: string) => {
-        this.listDto
-          .listComponentFilterFieldList
-          .filter(x => x.code === key)
-          .forEach(x => x.fieldValue = value);
-
-        this.listDto
-          .listComponentColumnFieldList
-          .filter(x => x.code === key)
-          .forEach(x => x.fieldValue = value);
-      });
-  }
-
 
   getListResultData(reloadGrouping = true) {
 
@@ -261,34 +230,6 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
     });
   }
 
-  private initializeGroupContentParrents(groupContent: Array<Map<string, any>>) {
-    if (groupContent == null) {
-      return;
-    }
-    for (const groupContentEntry of groupContent) {
-      if (groupContentEntry['children'] !== null) {
-        for (const groupContentChildEntry of groupContentEntry['children']) {
-          groupContentChildEntry['parrent'] = groupContentEntry;
-        }
-        this.initializeGroupContentParrents(groupContentEntry['children']);
-      }
-    }
-  }
-
-  private initializeGroupContentVisibility(groupContent: Array<Map<string, any>>, childrenVisible: Boolean) {
-    if (groupContent == null) {
-      return;
-    }
-
-    for (const groupContentEntry of groupContent) {
-      groupContentEntry['childrenVisible'] = childrenVisible;
-
-      if (groupContentEntry['children'] !== null) {
-        this.initializeGroupContentVisibility(groupContentEntry['children'], childrenVisible);
-      }
-    }
-  }
-
   listRowButtonClick(row: string[], listDto: ListDTO, field: ListComponentFieldDTO) {
 
     this.listScriptsService.listNativeRowButtonClickHandler(this.listDto.id, field.code, row);
@@ -315,7 +256,6 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
       this.commandNavigatorService.navigate(command);
     }
   }
-
 
   listDeleteCommandExecute(command) {
     const commandParameters: Map<string, string> = this.commandParserService.parse(command);
@@ -373,20 +313,6 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
     this.setValueToListComponentLeftGroupFieldList(item['code'], item['value']);
     if (item['parrent'] != null) {
       this.filterGroupParrent(item['parrent'])
-    }
-  }
-
-  private clearValuesToListComponentLeftGroupFieldList() {
-    for (const leftGroupingField of this.listDto.listComponentLeftGroupFieldList) {
-      leftGroupingField.fieldValue = '';
-    }
-  }
-
-  private setValueToListComponentLeftGroupFieldList(code: string, value: any) {
-    for (const leftGroupingField of this.listDto.listComponentLeftGroupFieldList) {
-      if (leftGroupingField.code === code) {
-        leftGroupingField.fieldValue = value;
-      }
     }
   }
 
@@ -641,25 +567,6 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
 
   }
 
-  private findContorlField(elements: HTMLCollection) {
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains('ctrl-field')) {
-
-        (elements[i] as HTMLElement).focus();
-        return true;
-      }
-    }
-
-    for (let i = 0; i < elements.length; i++) {
-      const found = this.findContorlField((elements[i] as HTMLElement).children);
-      if (found) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   listFieldFocusIn(focusedFieldValue: any) {
     this.focusedFieldValue = focusedFieldValue;
   }
@@ -739,5 +646,81 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
     }
 
     this.getListResultData(false);
+  }
+
+  private setDafaultCommandParams() {
+    this.getParams('DEFAULTS')
+      .forEach((value: string, key: string) => {
+        this.listDto
+          .listComponentFilterFieldList
+          .filter(x => x.code === key)
+          .forEach(x => x.fieldValue = value);
+
+        this.listDto
+          .listComponentColumnFieldList
+          .filter(x => x.code === key)
+          .forEach(x => x.fieldValue = value);
+      });
+  }
+
+  private initializeGroupContentParrents(groupContent: Array<Map<string, any>>) {
+    if (groupContent == null) {
+      return;
+    }
+    for (const groupContentEntry of groupContent) {
+      if (groupContentEntry['children'] !== null) {
+        for (const groupContentChildEntry of groupContentEntry['children']) {
+          groupContentChildEntry['parrent'] = groupContentEntry;
+        }
+        this.initializeGroupContentParrents(groupContentEntry['children']);
+      }
+    }
+  }
+
+  private initializeGroupContentVisibility(groupContent: Array<Map<string, any>>, childrenVisible: Boolean) {
+    if (groupContent == null) {
+      return;
+    }
+
+    for (const groupContentEntry of groupContent) {
+      groupContentEntry['childrenVisible'] = childrenVisible;
+
+      if (groupContentEntry['children'] !== null) {
+        this.initializeGroupContentVisibility(groupContentEntry['children'], childrenVisible);
+      }
+    }
+  }
+
+  private clearValuesToListComponentLeftGroupFieldList() {
+    for (const leftGroupingField of this.listDto.listComponentLeftGroupFieldList) {
+      leftGroupingField.fieldValue = '';
+    }
+  }
+
+  private setValueToListComponentLeftGroupFieldList(code: string, value: any) {
+    for (const leftGroupingField of this.listDto.listComponentLeftGroupFieldList) {
+      if (leftGroupingField.code === code) {
+        leftGroupingField.fieldValue = value;
+      }
+    }
+  }
+
+  private findContorlField(elements: HTMLCollection) {
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].classList.contains('ctrl-field')) {
+
+        (elements[i] as HTMLElement).focus();
+        return true;
+      }
+    }
+
+    for (let i = 0; i < elements.length; i++) {
+      const found = this.findContorlField((elements[i] as HTMLElement).children);
+      if (found) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
