@@ -60,11 +60,20 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
   }
 
   ngOnChanges(changes: SimpleChanges) {
-     this.initNav(this.activatedRoute);
-     this.refresh();
-     this.applyHeaderSearchFilter();
-     this.applyLanguageSelection();
+     // this.initNav(this.activatedRoute);
+     // this.refresh();
+     // this.applyHeaderSearchFilter();
+     // this.applyLanguageSelection();
   }
+
+  public setPresetCommand(presetCommand) {
+    this.presetCommand = presetCommand;
+    this.initNav(this.activatedRoute);
+    this.refresh();
+    this.applyHeaderSearchFilter();
+    this.applyLanguageSelection();
+  }
+
 
   ngOnInit(): void {
     if (this.router.url.startsWith('/list-alt?') || this.router.url.startsWith('/list?')) {
