@@ -15,7 +15,7 @@ export class InfoCardComponent implements OnInit {
   @Input() id: number;
   @Input() public extraParamsMap: Map<any, any>;
 
-  public dto: InfoCardDTO;
+  public dto: InfoCardDTO = null;
 
   constructor(private service: InfoCardService,
               private sanitizer: DomSanitizer, private infoCartScriptService: InfoCartScriptService,

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ListDTO} from '../../../../dtos/sofia/list/list-dto';
 import {ListService} from '../../../../services/crud/sofia/list.service';
 import {PageComponent} from '../../page/page-component';
@@ -22,9 +22,9 @@ import {LanguageService} from '../../../../services/system/sofia/language.servic
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent extends PageComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ListComponent extends PageComponent implements OnInit, OnChanges, OnDestroy,  AfterViewInit {
 
-  public listDto: ListDTO;
+  public listDto: ListDTO = null;
   public listResultsData: ListResultsData;
   public groupContent: Array<Map<string, any>>;
 
@@ -58,12 +58,17 @@ export class ListComponent extends PageComponent implements OnInit, AfterViewIni
     super();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // this.initNav(this.activatedRoute);
+    // this.refresh();
+  }
+
   ngOnInit(): void {
-    this.initNav(this.activatedRoute);
-    this.refresh();
   }
 
   ngAfterViewInit() {
+    this.initNav(this.activatedRoute);
+    this.refresh();
     this.applyHeaderSearchFilter();
     this.applyLanguageSelection();
   }
