@@ -27,8 +27,7 @@
 
           <div *ngIf="dashboardItem.type === 'list'" class="{{dashboardItem.cssclass}} dashboard-entity"
                style="padding-top: 0px;">
-            <app-list [embeded]="true"
-                      [presetCommand]="'LIST[LOCATE:(ID='+dashboardItem.entityId+'),SHOWTITLE:NO'+this.extraParams+']'">
+            <app-list [presetCommand]="'LIST[LOCATE:(ID='+dashboardItem.entityId+'),SHOWTITLE:NO'+this.extraParams+']'">
             </app-list>
           </div>
         </ng-container>
