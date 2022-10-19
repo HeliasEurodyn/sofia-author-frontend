@@ -6,7 +6,7 @@ import {ListResultsData} from '../../../../dtos/sofia/list/list-results-data';
 import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
 import {NotificationService} from '../../../../services/system/sofia/notification.service';
 import {DatePipe} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ListActionButton} from '../../../../dtos/sofia/list/list-action-button';
 import {TableComponentService} from '../../../../services/crud/sofia/table-component.service';
 import {Title} from '@angular/platform-browser';
@@ -54,23 +54,30 @@ export class ListComponent extends PageComponent implements OnInit, OnChanges, O
               private listScriptsService: ListScriptsService,
               private dynamicCssScriptLoader: DynamicCssScriptLoaderService,
               private languageService: LanguageService,
-              private listSearchService: ListSearchService) {
+              private listSearchService: ListSearchService,
+              private router: Router) {
     super();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // this.initNav(this.activatedRoute);
-    // this.refresh();
+     this.initNav(this.activatedRoute);
+     this.refresh();
+     this.applyHeaderSearchFilter();
+     this.applyLanguageSelection();
   }
 
   ngOnInit(): void {
+    if (this.router.url.startsWith('/list-alt?') || this.router.url.startsWith('/list?')) {
+      this.initNav(this.activatedRoute);
+      this.refresh();
+    }
   }
 
   ngAfterViewInit() {
-    this.initNav(this.activatedRoute);
-    this.refresh();
-    this.applyHeaderSearchFilter();
-    this.applyLanguageSelection();
+    if (this.router.url.startsWith('/list-alt?') || this.router.url.startsWith('/list?')) {
+      this.applyHeaderSearchFilter();
+      this.applyLanguageSelection();
+    }
   }
 
   ngOnDestroy() {

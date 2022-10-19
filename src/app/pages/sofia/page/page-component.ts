@@ -21,8 +21,6 @@ export class PageComponent {
   public selectEmmiter: EventEmitter<string[]> = new EventEmitter();
   public popupCloseEmmiter: EventEmitter<boolean> = new EventEmitter();
 
-  public titleEmmiter: EventEmitter<string> = new EventEmitter();
-
   @Input() public presetCommand = null;
 
   constructor() {
