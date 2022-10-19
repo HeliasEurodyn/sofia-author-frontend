@@ -8,4 +8,6 @@ export class DashboardItemDTO extends BaseDTO {
 
   public cssclass: string;
 
+  public command: string;
+
 }
