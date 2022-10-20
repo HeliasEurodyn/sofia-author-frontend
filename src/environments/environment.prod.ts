@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  serverUrl: window['backend_url'] ||  'https://cityscape-rita.eurodyn.com/api',
-  frontendUrl: 'https://cityscape-rita.eurodyn.com'
+  serverUrl: window['backend_url'] || 'http://localhost:15502/api',
+  frontendUrl: 'http://localhost:5020'
 };
