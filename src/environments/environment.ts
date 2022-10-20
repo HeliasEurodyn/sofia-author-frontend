@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://onenet-ngsi-ld.eurodyn.com/api',
+  serverUrl: 'http://localhost:15502/api',
   frontendUrl: 'http://localhost:5020'
 };
