@@ -16,7 +16,7 @@
       <button (click)="openNewPage()" class="btn btn-outline-primary">
         <i class="fa fa-plus-circle"></i> New
       </button>
-      <button (click)="showBusinessUnitsGrouping()" class="btn btn-outline-primary">
+      <button (click)="showBusinessUnitsGrouping()" class="btn btn-outline-primary" [hidden]="businessUnits.length==0">
         <i class="fa fa-layer-group"></i> {{showBusinessUnitButtonTitle}}
       </button>
     </div>

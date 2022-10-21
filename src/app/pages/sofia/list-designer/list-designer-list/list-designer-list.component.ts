@@ -25,6 +25,7 @@ export class ListDesignerListComponent extends PageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.businessUnits = new Array<String>();
     this.showBusinessUnitButtonTitle = 'Show Grouping'
     this.showBusinessUnitGrouping = false;
     this.refreshBusinessUnit();
