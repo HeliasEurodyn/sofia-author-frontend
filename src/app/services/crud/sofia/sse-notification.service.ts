@@ -37,18 +37,17 @@ export class SseNotificationService extends CrudService<any> {
     })
 
     this.eventSource.onopen = () => {
-      console.log('open');
+     console.log('open');
     }
 
     this.eventSource.addEventListener('keepAlive', (ev: MessageEvent) => {
-      console.log(ev.data)
+      console.log(ev.data);
     }, false);
 
     this.eventSource.addEventListener(topic, eventListenerFunction, false);
-
     this.eventSource.onerror = () => {
       this.eventSource.close();
-      this.eventSource = this.subscribe(topic, eventListenerFunction);
+      setTimeout(() => this.eventSource = this.subscribe(topic, eventListenerFunction),10000);
     };
 
     return this.eventSource;
