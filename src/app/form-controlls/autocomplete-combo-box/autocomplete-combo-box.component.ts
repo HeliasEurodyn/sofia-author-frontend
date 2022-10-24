@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 import {Observable, OperatorFunction} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
-import {CustomQueryDesignerService} from '../../../services/crud/sofia/custom-query-designer.service';
-import {CustomQueryService} from '../../../services/crud/sofia/custom-query.service';
+import {CustomQueryDesignerService} from '../../services/crud/sofia/custom-query-designer.service';
+import {CustomQueryService} from '../../services/crud/sofia/custom-query.service';
 
 @Component({
   selector: 'app-autocomplete-combo-box',

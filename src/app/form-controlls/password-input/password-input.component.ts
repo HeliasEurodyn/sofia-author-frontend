@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 
 @Component({
-  selector: 'app-check-box',
-  templateUrl: './check-box.component.html',
-  styleUrls: ['./check-box.component.css']
+  selector: 'app-password-input',
+  templateUrl: './password-input.component.html',
+  styleUrls: ['./password-input.component.css']
 })
-export class CheckBoxComponent implements OnInit {
+export class PasswordInputComponent implements OnInit {
 
 
   @Input() editable: Boolean;
@@ -17,6 +17,7 @@ export class CheckBoxComponent implements OnInit {
   @Output() focusEvent = new EventEmitter<FocusEvent>();
   @Output() eventOccured = new EventEmitter<any>();
   @Input() mask: String = '';
+  public customPatterns = { 'J': { pattern: new RegExp('\[a-zA-Z\\-0-9\]')} };
 
   constructor() {
   }
@@ -25,6 +26,7 @@ export class CheckBoxComponent implements OnInit {
   }
 
   eventOccuredActions(eventtype: string, event: any) {
+
     this.eventOccured.emit(
       {
         entityCode: this.componentPersistEntityDTO.code,
@@ -33,6 +35,7 @@ export class CheckBoxComponent implements OnInit {
         event: event
       }
     );
+
   }
 
   keyDownTriggered($event: KeyboardEvent) {

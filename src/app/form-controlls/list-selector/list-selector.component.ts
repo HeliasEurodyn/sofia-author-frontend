@@ -8,13 +8,13 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
 import * as uuid from 'uuid';
-import {CommandParserService} from '../../../services/system/sofia/command-parser.service';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
-import {TableComponentService} from '../../../services/crud/sofia/table-component.service';
-import {ComponentDTO} from '../../../dtos/sofia/component/componentDTO';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
+import {CommandParserService} from '../../services/system/sofia/command-parser.service';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
+import {TableComponentService} from '../../services/crud/sofia/table-component.service';
+import {ComponentDTO} from '../../dtos/sofia/component/componentDTO';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
 
 @Component({
   selector: 'app-list-selector',

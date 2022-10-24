@@ -1,13 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 
 @Component({
-  selector: 'app-text-input',
-  templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.css']
+  selector: 'app-check-box',
+  templateUrl: './check-box.component.html',
+  styleUrls: ['./check-box.component.css']
 })
-export class TextInputComponent implements OnInit {
+export class CheckBoxComponent implements OnInit {
+
 
   @Input() editable: Boolean;
   @Input() componentPersistEntityDTO: ComponentPersistEntityDTO;
@@ -41,4 +42,5 @@ export class TextInputComponent implements OnInit {
   focusTriggered($event: FocusEvent) {
     this.focusEvent.emit($event);
   }
+
 }

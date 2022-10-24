@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 
 @Component({
   selector: 'app-file-selector',

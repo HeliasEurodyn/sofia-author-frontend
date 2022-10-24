@@ -1,14 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 
 @Component({
-  selector: 'app-password-input',
-  templateUrl: './password-input.component.html',
-  styleUrls: ['./password-input.component.css']
+  selector: 'app-text-input',
+  templateUrl: './text-input.component.html',
+  styleUrls: ['./text-input.component.css']
 })
-export class PasswordInputComponent implements OnInit {
-
+export class TextInputComponent implements OnInit {
 
   @Input() editable: Boolean;
   @Input() componentPersistEntityDTO: ComponentPersistEntityDTO;
@@ -17,7 +16,6 @@ export class PasswordInputComponent implements OnInit {
   @Output() focusEvent = new EventEmitter<FocusEvent>();
   @Output() eventOccured = new EventEmitter<any>();
   @Input() mask: String = '';
-  public customPatterns = { 'J': { pattern: new RegExp('\[a-zA-Z\\-0-9\]')} };
 
   constructor() {
   }
@@ -26,7 +24,6 @@ export class PasswordInputComponent implements OnInit {
   }
 
   eventOccuredActions(eventtype: string, event: any) {
-
     this.eventOccured.emit(
       {
         entityCode: this.componentPersistEntityDTO.code,
@@ -35,7 +32,6 @@ export class PasswordInputComponent implements OnInit {
         event: event
       }
     );
-
   }
 
   keyDownTriggered($event: KeyboardEvent) {
@@ -45,5 +41,4 @@ export class PasswordInputComponent implements OnInit {
   focusTriggered($event: FocusEvent) {
     this.focusEvent.emit($event);
   }
-
 }

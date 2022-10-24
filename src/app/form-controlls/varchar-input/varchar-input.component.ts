@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 
 declare function nativeFieldEventsHandler(entityCode: string, fieldName: string, eventtype: string, event: any): any;
 
