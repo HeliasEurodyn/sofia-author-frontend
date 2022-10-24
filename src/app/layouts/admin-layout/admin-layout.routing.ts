@@ -44,9 +44,7 @@ import { CustomQueryFormComponent } from 'app/pages/custom-query/custom-query-fo
 import { SecurityListComponent } from 'app/pages/security/security-list/security-list.component';
 import {ListWrapperComponent} from '../../pages/list/list-wrapper/list-wrapper.component';
 import {AuthGuard} from '../../guards/auth.guard';
-import {NodeGraphComponent} from '../../pages/node-graph/asset/node-graph.component';
 import {FormWrapperComponent} from '../../pages/form/form-wrapper/form-wrapper.component';
-import {CompositeAssetNodeGraphComponent} from '../../pages/node-graph/composite-asset/composite-asset-node-graph/composite-asset-node-graph.component';
 import {HtmlDashboardDesignerFormComponent} from '../../pages/html-dashboard-designer/html-dashboard-designer-form/html-dashboard-designer-form.component';
 import {HtmlDashboardDesignerListComponent} from '../../pages/html-dashboard-designer/html-dashboard-designer-list/html-dashboard-designer-list.component';
 import {ExpressionViewerComponent} from '../../pages/expression-viewer/expression-viewer.component';
@@ -120,9 +118,6 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'custom-query-form', component: CustomQueryFormComponent, canActivate: [AuthGuard] },
   {path: 'custom-query-list', component: CustomQueryListComponent, canActivate: [AuthGuard]},
   {path: 'security-list', component: SecurityListComponent, canActivate: [AuthGuard]},
-  {path: 'node-graph', component: NodeGraphComponent, canActivate: [AuthGuard]},
-  {path: 'node-graph-alt', component: NodeGraphComponent, canActivate: [AuthGuard]},
-  {path: 'composite-asset-node-graph', component: CompositeAssetNodeGraphComponent, canActivate: [AuthGuard]},
   {path: 'html-dashboard-designer-form', component: HtmlDashboardDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'html-dashboard-designer-list', component: HtmlDashboardDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'expression-viewer', component: ExpressionViewerComponent, canActivate: [AuthGuard]},

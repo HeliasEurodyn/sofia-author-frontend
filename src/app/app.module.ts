@@ -85,11 +85,8 @@ import { SecurityFormComponent } from './pages/security/security-form/security-f
 import { ListWrapperComponent } from './pages/list/list-wrapper/list-wrapper.component';
 import { AutocompleteComboBoxComponent } from './form-controlls/autocomplete-combo-box/autocomplete-combo-box.component';
 import { CheckBoxComponent } from './form-controlls/check-box/check-box.component';
-import { NodeGraphComponent } from './pages/node-graph/asset/node-graph.component';
-import { NodeGraphWrapperComponent } from './pages/node-graph/asset/node-graph-wrapper/node-graph-wrapper.component';
 import { CallBackComponent } from './pages/call-back/call-back.component';
 import { FormWrapperComponent } from './pages/form/form-wrapper/form-wrapper.component';
-import { CompositeAssetNodeGraphComponent } from './pages/node-graph/composite-asset/composite-asset-node-graph/composite-asset-node-graph.component';
 import { HtmlDashboardDesignerFormComponent } from './pages/html-dashboard-designer/html-dashboard-designer-form/html-dashboard-designer-form.component';
 import { HtmlDashboardDesignerListComponent } from './pages/html-dashboard-designer/html-dashboard-designer-list/html-dashboard-designer-list.component';
 import { HtmlDashboardComponent } from './pages/html-dashboard/html-dashboard/html-dashboard.component';
@@ -183,11 +180,8 @@ import { BusinessUnitDesignerListComponent } from './pages/business-unit-designe
     ListWrapperComponent,
     AutocompleteComboBoxComponent,
     CheckBoxComponent,
-    NodeGraphComponent,
-    NodeGraphWrapperComponent,
     CallBackComponent,
     FormWrapperComponent,
-    CompositeAssetNodeGraphComponent,
     HtmlDashboardDesignerFormComponent,
     HtmlDashboardDesignerListComponent,
     HtmlDashboardComponent,
