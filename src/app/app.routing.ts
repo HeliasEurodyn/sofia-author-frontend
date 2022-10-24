@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
-import {LoginComponent} from './pages/sofia/login/login.component';
-import {CallBackComponent} from './pages/sofia/call-back/call-back.component';
+import {LoginComponent} from './pages/login/login.component';
+import {CallBackComponent} from './pages/call-back/call-back.component';
 
 export const AppRoutes: Routes = [
   {

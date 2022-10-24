@@ -5,8 +5,8 @@ import {FormsModule} from '@angular/forms';
 
 import {AdminLayoutRoutes} from './admin-layout.routing';
 
-import {UserComponent} from '../../pages/sofia/user/user.component';
-import {TableComponent} from '../../pages/sofia/table/table.component';
+import {UserComponent} from '../../pages/user/user.component';
+import {TableComponent} from '../../pages/table/table.component';
 import {ACE_CONFIG, AceConfigInterface, AceModule} from 'ngx-ace-wrapper';
 
 const DEFAULT_ACE_CONFIG: AceConfigInterface = {
