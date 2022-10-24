@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {CrudService} from './common/crud.service';
-import {LoginInfoDto} from '../../dtos/sofia/user/login-info-dto';
+import {LoginInfoDto} from '../../dtos/user/login-info-dto';
 import {environment} from '../../../environments/environment';
 
 

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {SearchDTO} from '../../../dtos/sofia/search/search-dto';
+import {SearchDTO} from '../../../dtos/search/search-dto';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {SearchDesignerService} from '../../../services/crud/search-designer.service';
 import {Location} from '@angular/common';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';

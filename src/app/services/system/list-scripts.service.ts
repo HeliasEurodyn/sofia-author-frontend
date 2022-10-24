@@ -4,7 +4,7 @@ import {CommandNavigatorService} from './command-navigator.service';
 import {ListComponent} from '../../pages/list/list/list.component';
 import {DynamicStaticJavascriptLoaderService} from './dynamic-static-javascript-loader.service';
 import {DynamicRequestService} from '../crud/dynamic-request.service';
-import {ListComponentFieldDTO} from '../../dtos/sofia/list/list-component-field-d-t-o';
+import {ListComponentFieldDTO} from '../../dtos/list/list-component-field-d-t-o';
 
 declare function registerListDynamicScript(id, list): any;
 

@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ListDTO} from '../../../dtos/sofia/list/list-dto';
-import {ListComponentFieldDTO} from 'app/dtos/sofia/list/list-component-field-d-t-o';
+import {ListDTO} from '../../../dtos/list/list-dto';
+import {ListComponentFieldDTO} from 'app/dtos/list/list-component-field-d-t-o';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../../dtos/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../../dtos/component/component-persist-entity-dto';
 import {Location} from '@angular/common';
-import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
+import {ListActionButton} from '../../../dtos/list/list-action-button';
 import {ListDesignerService} from '../../../services/crud/list-designer.service';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
-import {FormScript} from '../../../dtos/sofia/form/form-script';
-import {FormCss} from '../../../dtos/sofia/form/form-css';
-import {ListCssDTO} from '../../../dtos/sofia/list/list-css-dto';
-import {ListScriptDTO} from '../../../dtos/sofia/list/list-script-dto';
+import {FormScript} from '../../../dtos/form/form-script';
+import {FormCss} from '../../../dtos/form/form-css';
+import {ListCssDTO} from '../../../dtos/list/list-css-dto';
+import {ListScriptDTO} from '../../../dtos/list/list-script-dto';
 import {BaseDTO} from '../../../dtos/common/base-dto';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import 'brace';
 import 'brace/mode/javascript';
@@ -25,7 +25,7 @@ import 'brace/theme/github';
 import 'brace/theme/chrome';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
-import {BusinessUnitDTO} from '../../../dtos/sofia/business-unit/business-unit-dto';
+import {BusinessUnitDTO} from '../../../dtos/business-unit/business-unit-dto';
 
 @Component({
   selector: 'app-list-designer-form',

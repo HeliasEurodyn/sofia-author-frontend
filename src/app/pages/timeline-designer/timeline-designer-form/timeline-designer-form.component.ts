@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {TimelineDesignerService} from '../../../services/crud/timeline-designer.service';
-import {TimelineDTO} from '../../../dtos/sofia/timeline/timeline-dto';
+import {TimelineDTO} from '../../../dtos/timeline/timeline-dto';
 import {Location} from '@angular/common';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';
 import 'brace/mode/sql';
 import 'brace/theme/sqlserver';
-import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
+import {ListComponentFieldDTO} from '../../../dtos/list/list-component-field-d-t-o';
 
 @Component({
   selector: 'app-timeline-designer-form',

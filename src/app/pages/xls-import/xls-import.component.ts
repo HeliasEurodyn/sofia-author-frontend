@@ -3,7 +3,7 @@ import {NotificationService} from '../../services/system/notification.service';
 import {XlsImportService} from '../../services/crud/xls-import.service';
 import {PageComponent} from '../page/page-component';
 import {ActivatedRoute} from '@angular/router';
-import {XlsImportDTO} from '../../dtos/sofia/xls-import/xls-import-dto';
+import {XlsImportDTO} from '../../dtos/xls-import/xls-import-dto';
 
 @Component({
   selector: 'app-xls-import',

@@ -3,10 +3,10 @@ import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {TimelineService} from '../../../services/crud/timeline.service';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
-import {TimelineContentDTO} from '../../../dtos/sofia/timeline/timeline-content-dto';
-import {TimelineDTO} from '../../../dtos/sofia/timeline/timeline-dto';
+import {TimelineContentDTO} from '../../../dtos/timeline/timeline-content-dto';
+import {TimelineDTO} from '../../../dtos/timeline/timeline-dto';
 import {concatMap, map} from 'rxjs/operators';
-import {TimelineResponseDTO} from '../../../dtos/sofia/timeline/timeline-response-dto';
+import {TimelineResponseDTO} from '../../../dtos/timeline/timeline-response-dto';
 
 @Component({
   selector: 'app-timeline',

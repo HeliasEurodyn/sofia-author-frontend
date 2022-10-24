@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {CrudService} from './common/crud.service';
-import {ListComponentFieldDTO} from '../../dtos/sofia/list/list-component-field-d-t-o';
+import {ListComponentFieldDTO} from '../../dtos/list/list-component-field-d-t-o';
 
 @Injectable({
   providedIn: 'root'

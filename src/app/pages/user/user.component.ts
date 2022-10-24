@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDto} from '../../dtos/sofia/user/user-dto';
-import {MenuDTO} from '../../dtos/sofia/menu/menuDTO';
+import {UserDto} from '../../dtos/user/user-dto';
+import {MenuDTO} from '../../dtos/menu/menuDTO';
 import {UserService} from '../../services/crud/user.service';
 import {MenuService} from '../../services/crud/menu.service';
 import {CommandNavigatorService} from '../../services/system/command-navigator.service';

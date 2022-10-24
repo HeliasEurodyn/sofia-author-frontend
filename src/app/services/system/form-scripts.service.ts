@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {DynamicRequestService} from '../crud/dynamic-request.service';
-import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityDataLineDTO} from '../../dtos/sofia/component/component-persist-entity-data-line-dto';
-import {FormControlTableDTO} from '../../dtos/sofia/form/form-control-table-d-t-o';
-import {FormControlTableLineDTO} from '../../dtos/sofia/form/form-control-table-line-d-t-o';
-import {FormControlTableCellDTO} from '../../dtos/sofia/form/form-control-table-cell-d-t-o';
-import {FormControlTableControlDTO} from '../../dtos/sofia/form/form-control-table-control-d-t-o';
+import {ComponentPersistEntityDTO} from '../../dtos/component/component-persist-entity-dto';
+import {ComponentPersistEntityDataLineDTO} from '../../dtos/component/component-persist-entity-data-line-dto';
+import {FormControlTableDTO} from '../../dtos/form/form-control-table-d-t-o';
+import {FormControlTableLineDTO} from '../../dtos/form/form-control-table-line-d-t-o';
+import {FormControlTableCellDTO} from '../../dtos/form/form-control-table-cell-d-t-o';
+import {FormControlTableControlDTO} from '../../dtos/form/form-control-table-control-d-t-o';
 import * as uuid from 'uuid';
 import {FormComponent} from '../../pages/form/form/form.component';
 import {TableComponentService} from '../crud/table-component.service';

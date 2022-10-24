@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {CrudService} from './common/crud.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {FormDto} from '../../dtos/sofia/form/form-dto';
+import {FormDto} from '../../dtos/form/form-dto';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
-import {ComponentDTO} from '../../dtos/sofia/component/componentDTO';
+import {ComponentDTO} from '../../dtos/component/componentDTO';
 
 @Injectable({
   providedIn: 'root'

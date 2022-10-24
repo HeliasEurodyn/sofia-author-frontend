@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {RoleService} from '../../../services/crud/role.service';
 import {PageComponent} from '../../page/page-component';
-import {RoleDTO} from '../../../dtos/sofia/user/role-dto';
+import {RoleDTO} from '../../../dtos/user/role-dto';
 
 @Component({
   selector: 'app-role-form',

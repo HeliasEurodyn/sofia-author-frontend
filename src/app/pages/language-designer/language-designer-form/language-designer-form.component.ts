@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {CustomQueryDTO} from '../../../dtos/sofia/customquery/custom-query-dto';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {CustomQueryDTO} from '../../../dtos/customquery/custom-query-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {ActivatedRoute} from '@angular/router';
 import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
 import {RoleService} from '../../../services/crud/role.service';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
-import {LanguageDTO} from '../../../dtos/sofia/language/language-dto';
+import {LanguageDTO} from '../../../dtos/language/language-dto';
 import {LanguageService} from '../../../services/crud/language.service';
 
 @Component({

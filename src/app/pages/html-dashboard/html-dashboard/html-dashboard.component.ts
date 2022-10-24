@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as uuid from 'uuid';
-import {HtmlDashboardDTO} from '../../../dtos/sofia/html-dashboard/html-dashboard-dto';
+import {HtmlDashboardDTO} from '../../../dtos/html-dashboard/html-dashboard-dto';
 import {HtmlDashboardService} from 'app/services/crud/html-dashboard.service';
 
 @Component({

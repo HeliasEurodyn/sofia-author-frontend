@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ReportDTO} from '../../../dtos/sofia/report/report-dto';
-import {ReportParameterDTO} from '../../../dtos/sofia/report/report-parameter-dto';
+import {ReportDTO} from '../../../dtos/report/report-dto';
+import {ReportParameterDTO} from '../../../dtos/report/report-parameter-dto';
 import {ActivatedRoute} from '@angular/router';
 import {PageComponent} from '../../page/page-component';
 import {ReportDesignerService} from '../../../services/crud/report-designer.service';
 import {Location} from '@angular/common';
 import {NotificationService} from '../../../services/system/notification.service';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import {ReportService} from '../../../services/crud/report.service';
 

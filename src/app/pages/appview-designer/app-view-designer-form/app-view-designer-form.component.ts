@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
-import {AppViewDTO} from '../../../dtos/sofia/appview/app-view-dto';
+import {AppViewDTO} from '../../../dtos/appview/app-view-dto';
 import {AppViewService} from '../../../services/crud/app-view.service';
 import {Location} from '@angular/common';
-import {AppViewFieldDTO} from '../../../dtos/sofia/appview/app-view-field-dto';
+import {AppViewFieldDTO} from '../../../dtos/appview/app-view-field-dto';
 
 @Component({
   selector: 'app-app-view-designer-form',

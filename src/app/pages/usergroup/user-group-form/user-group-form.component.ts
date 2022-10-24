@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {UserGroupService} from '../../../services/crud/user-group.service';
-import {UserGroupDto} from '../../../dtos/sofia/user/user-group-dto';
+import {UserGroupDto} from '../../../dtos/user/user-group-dto';
 import {Location} from '@angular/common';
 import {UserService} from '../../../services/crud/user.service';
-import {UserDto} from '../../../dtos/sofia/user/user-dto';
+import {UserDto} from '../../../dtos/user/user-dto';
 
 @Component({
   selector: 'app-user-group-form',

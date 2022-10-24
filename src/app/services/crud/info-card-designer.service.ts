@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {CrudService} from './common/crud.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ChartFieldDTO} from '../../dtos/sofia/chart/chart-field-dto';
+import {ChartFieldDTO} from '../../dtos/chart/chart-field-dto';
 import {environment} from '../../../environments/environment';
 
 @Injectable({

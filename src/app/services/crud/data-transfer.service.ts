@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CrudService} from './common/crud.service';
-import {DataTransferDTO} from '../../dtos/sofia/data_transfer/data-transfer-dto';
+import {DataTransferDTO} from '../../dtos/data_transfer/data-transfer-dto';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 

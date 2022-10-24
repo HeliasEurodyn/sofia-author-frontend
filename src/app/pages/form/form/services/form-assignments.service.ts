@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../../dtos/sofia/component/component-persist-entity-dto';
-import {FormControlDto} from '../../../../dtos/sofia/form/form-control-dto';
-import {FormControlTableControlDTO} from '../../../../dtos/sofia/form/form-control-table-control-d-t-o';
-import {FormDto} from '../../../../dtos/sofia/form/form-dto';
+import {ComponentPersistEntityDTO} from '../../../../dtos/component/component-persist-entity-dto';
+import {FormControlDto} from '../../../../dtos/form/form-control-dto';
+import {FormControlTableControlDTO} from '../../../../dtos/form/form-control-table-control-d-t-o';
+import {FormDto} from '../../../../dtos/form/form-dto';
 import * as uuid from 'uuid';
 
 @Injectable({

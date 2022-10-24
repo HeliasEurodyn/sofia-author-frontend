@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TableDTO} from '../../../dtos/sofia/table/tableDTO';
+import {TableDTO} from '../../../dtos/table/tableDTO';
 import {TableService} from '../../../services/crud/table.service';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
-import {TableFieldDTO} from '../../../dtos/sofia/table/table-field-dto';
+import {TableFieldDTO} from '../../../dtos/table/table-field-dto';
 import { Location } from '@angular/common'
 import {NotificationService} from '../../../services/system/notification.service';
 

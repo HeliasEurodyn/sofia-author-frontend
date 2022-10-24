@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ListResultsData} from '../../../dtos/sofia/list/list-results-data';
+import {ListResultsData} from '../../../dtos/list/list-results-data';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {NotificationService} from '../../../services/system/notification.service';
 import {DatePipe} from '@angular/common';
@@ -9,13 +9,13 @@ import {Title} from '@angular/platform-browser';
 import {ListScriptsService} from '../../../services/system/list-scripts.service';
 import {DynamicCssScriptLoaderService} from '../../../services/system/dynamic-css-script-loader.service';
 import {concatMap} from 'rxjs/operators';
-import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
-import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
+import {ListComponentFieldDTO} from '../../../dtos/list/list-component-field-d-t-o';
+import {ListActionButton} from '../../../dtos/list/list-action-button';
 import {PageComponent} from '../../page/page-component';
 import {PivotListService} from '../../../services/crud/pivot-list.service';
-import {PivotListDTO} from '../../../dtos/sofia/pivot-list/pivot-list-dto';
-import {FilterField} from '../../../dtos/sofia/pivot-list/filter-field';
-import {PivotListComponentFieldDTO} from '../../../dtos/sofia/pivot-list/pivot-list-component-field-dto';
+import {PivotListDTO} from '../../../dtos/pivot-list/pivot-list-dto';
+import {FilterField} from '../../../dtos/pivot-list/filter-field';
+import {PivotListComponentFieldDTO} from '../../../dtos/pivot-list/pivot-list-component-field-dto';
 
 declare global {
   interface Navigator {

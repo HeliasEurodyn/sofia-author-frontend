@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {EventSourcePolyfill} from 'ng-event-source';
-import {SseNotificationResponseDTO} from '../../dtos/sofia/sse-notification/sse-notification-response-dto';
+import {SseNotificationResponseDTO} from '../../dtos/sse-notification/sse-notification-response-dto';
 
 @Injectable({
   providedIn: 'root'

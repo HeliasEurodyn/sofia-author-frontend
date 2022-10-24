@@ -3,7 +3,7 @@ import {CommandNavigatorService} from '../../../services/system/command-navigato
 import {PageComponent} from '../../page/page-component';
 import {FormDesignerService} from '../../../services/crud/form-designer.service';
 import {NotificationService} from '../../../services/system/notification.service';
-import {FormDto} from '../../../dtos/sofia/form/form-dto';
+import {FormDto} from '../../../dtos/form/form-dto';
 
 @Component({
   selector: 'app-form-designer-list',

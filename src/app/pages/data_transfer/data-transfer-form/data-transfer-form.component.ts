@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {FormDesignerService} from '../../../services/crud/form-designer.service';
-import {DataTransferDTO} from '../../../dtos/sofia/data_transfer/data-transfer-dto';
+import {DataTransferDTO} from '../../../dtos/data_transfer/data-transfer-dto';
 import {ListDesignerService} from '../../../services/crud/list-designer.service';
 import {DataTransferService} from '../../../services/crud/data-transfer.service';
 import {Location} from '@angular/common';

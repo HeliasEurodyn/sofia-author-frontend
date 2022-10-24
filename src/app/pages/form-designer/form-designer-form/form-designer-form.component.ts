@@ -1,28 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {FormDto} from '../../../dtos/sofia/form/form-dto';
-import {FormTabDto} from '../../../dtos/sofia/form/form-tab-dto';
+import {FormDto} from '../../../dtos/form/form-dto';
+import {FormTabDto} from '../../../dtos/form/form-tab-dto';
 import {BaseDTO} from '../../../dtos/common/base-dto';
-import {FormArea} from '../../../dtos/sofia/form/form-area';
-import {FormControlFieldDTO} from '../../../dtos/sofia/form/form-control-field-d-t-o';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
-import {FormControlDto} from '../../../dtos/sofia/form/form-control-dto';
+import {FormArea} from '../../../dtos/form/form-area';
+import {FormControlFieldDTO} from '../../../dtos/form/form-control-field-d-t-o';
+import {ComponentPersistEntityDTO} from '../../../dtos/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../../dtos/component/component-persist-entity-field-dto';
+import {FormControlDto} from '../../../dtos/form/form-control-dto';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
-import {FormScript} from '../../../dtos/sofia/form/form-script';
+import {FormScript} from '../../../dtos/form/form-script';
 import {ActivatedRoute} from '@angular/router';
-import {FormControlTableDTO} from '../../../dtos/sofia/form/form-control-table-d-t-o';
-import {FormControlTableControlDTO} from '../../../dtos/sofia/form/form-control-table-control-d-t-o';
-import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/sofia/component/component-persist-entity-field-assignment-dto';
+import {FormControlTableDTO} from '../../../dtos/form/form-control-table-d-t-o';
+import {FormControlTableControlDTO} from '../../../dtos/form/form-control-table-control-d-t-o';
+import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/component/component-persist-entity-field-assignment-dto';
 import {Location} from '@angular/common';
 import {FormDesignerService} from '../../../services/crud/form-designer.service';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
-import {FormControlButtonDTO} from '../../../dtos/sofia/form/form-control-button-dto';
-import {FormPopupDto} from '../../../dtos/sofia/form/form-popup-dto';
-import {FormActionButton} from '../../../dtos/sofia/form/form-action-button';
-import {FormCss} from '../../../dtos/sofia/form/form-css';
+import {FormControlButtonDTO} from '../../../dtos/form/form-control-button-dto';
+import {FormPopupDto} from '../../../dtos/form/form-popup-dto';
+import {FormActionButton} from '../../../dtos/form/form-action-button';
+import {FormCss} from '../../../dtos/form/form-css';
 import {UserService} from '../../../services/crud/user.service';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import 'brace';
 import 'brace/mode/javascript';
@@ -32,7 +32,7 @@ import 'brace/theme/github';
 import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
-import {BusinessUnitDTO} from '../../../dtos/sofia/business-unit/business-unit-dto';
+import {BusinessUnitDTO} from '../../../dtos/business-unit/business-unit-dto';
 
 
 @Component({

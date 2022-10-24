@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {ChartDTO} from '../../../dtos/sofia/chart/chart-dto';
+import {ChartDTO} from '../../../dtos/chart/chart-dto';
 import {ActivatedRoute} from '@angular/router';
 import {PageComponent} from '../../page/page-component';
 import {ChartDesignerService} from '../../../services/crud/chart-designer.service';
 import {Location} from '@angular/common';
-import {ChartFieldDTO} from '../../../dtos/sofia/chart/chart-field-dto';
+import {ChartFieldDTO} from '../../../dtos/chart/chart-field-dto';
 // import Chart from 'chart.js';
 import * as uuid from 'uuid';
-import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
+import {ListComponentFieldDTO} from '../../../dtos/list/list-component-field-d-t-o';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';
 import 'brace/mode/sql';

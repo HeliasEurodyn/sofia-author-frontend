@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {XlsImportDTO} from '../../../dtos/sofia/xls-import/xls-import-dto';
+import {XlsImportDTO} from '../../../dtos/xls-import/xls-import-dto';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
-import {XlsImportLineDTO} from '../../../dtos/sofia/xls-import/xls-import-line-dto';
+import {XlsImportLineDTO} from '../../../dtos/xls-import/xls-import-line-dto';
 import {XlsImportDesignerService} from '../../../services/crud/xls-import-designer.service';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/sofia/component/component-persist-entity-field-assignment-dto';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {ComponentPersistEntityFieldDTO} from '../../../dtos/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../../dtos/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/component/component-persist-entity-field-assignment-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import 'brace';
 import 'brace/mode/html'

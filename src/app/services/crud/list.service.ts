@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CrudService} from './common/crud.service';
 import {environment} from '../../../environments/environment';
-import {ListDTO} from '../../dtos/sofia/list/list-dto';
+import {ListDTO} from '../../dtos/list/list-dto';
 import {Observable} from 'rxjs';
 
 @Injectable({

@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 import {NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
-import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityDTO} from '../../dtos/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/component/component-persist-entity-field-dto';
 
 @Component({
   selector: 'app-date-picker',

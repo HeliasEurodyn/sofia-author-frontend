@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {FormDto} from '../../../../dtos/sofia/form/form-dto';
-import {FormArea} from '../../../../dtos/sofia/form/form-area';
-import {FormControlDto} from '../../../../dtos/sofia/form/form-control-dto';
+import {FormDto} from '../../../../dtos/form/form-dto';
+import {FormArea} from '../../../../dtos/form/form-area';
+import {FormControlDto} from '../../../../dtos/form/form-control-dto';
 
 @Injectable({
   providedIn: 'root'

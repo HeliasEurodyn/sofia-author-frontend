@@ -3,7 +3,7 @@ import {CrudService} from './common/crud.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {ReportDTO} from '../../dtos/sofia/report/report-dto';
+import {ReportDTO} from '../../dtos/report/report-dto';
 
 @Injectable({
   providedIn: 'root'

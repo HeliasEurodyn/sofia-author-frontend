@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InfoCardDTO} from '../../dtos/sofia/info-card/info-card-dto';
+import {InfoCardDTO} from '../../dtos/info-card/info-card-dto';
 import {InfoCardService} from '../../services/crud/info-card.service';
 import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import {DomSanitizer} from '@angular/platform-browser';

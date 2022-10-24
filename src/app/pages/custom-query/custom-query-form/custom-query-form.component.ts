@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {CustomQueryDTO} from '../../../dtos/sofia/customquery/custom-query-dto';
+import {CustomQueryDTO} from '../../../dtos/customquery/custom-query-dto';
 import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';

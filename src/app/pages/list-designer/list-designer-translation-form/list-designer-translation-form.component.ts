@@ -1,27 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
-import {ListDTO} from '../../../dtos/sofia/list/list-dto';
-import {ListScriptDTO} from '../../../dtos/sofia/list/list-script-dto';
-import {ListCssDTO} from '../../../dtos/sofia/list/list-css-dto';
-import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
-import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
+import {ListComponentFieldDTO} from '../../../dtos/list/list-component-field-d-t-o';
+import {ListDTO} from '../../../dtos/list/list-dto';
+import {ListScriptDTO} from '../../../dtos/list/list-script-dto';
+import {ListCssDTO} from '../../../dtos/list/list-css-dto';
+import {ListActionButton} from '../../../dtos/list/list-action-button';
+import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
 import {ListDesignerService} from '../../../services/crud/list-designer.service';
 import {Location} from '@angular/common';
 import {RoleService} from '../../../services/crud/role.service';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
-import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
-import {FormScript} from '../../../dtos/sofia/form/form-script';
-import {FormCss} from '../../../dtos/sofia/form/form-css';
+import {ComponentPersistEntityDTO} from '../../../dtos/component/component-persist-entity-dto';
+import {ComponentPersistEntityFieldDTO} from '../../../dtos/component/component-persist-entity-field-dto';
+import {FormScript} from '../../../dtos/form/form-script';
+import {FormCss} from '../../../dtos/form/form-css';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {PageComponent} from '../../page/page-component';
 import {LanguageService} from '../../../services/crud/language.service';
-import {LanguageDTO} from '../../../dtos/sofia/language/language-dto';
-import {ListTranslationDTO} from '../../../dtos/sofia/list/translation/list-translation-dto';
-import {ListActionButtonTranslationDTO} from '../../../dtos/sofia/list/translation/list-action-button-translation-dto';
-import {ListComponentFieldTranslationDTO} from '../../../dtos/sofia/list/translation/list-component-field-translation-dto';
+import {LanguageDTO} from '../../../dtos/language/language-dto';
+import {ListTranslationDTO} from '../../../dtos/list/translation/list-translation-dto';
+import {ListActionButtonTranslationDTO} from '../../../dtos/list/translation/list-action-button-translation-dto';
+import {ListComponentFieldTranslationDTO} from '../../../dtos/list/translation/list-component-field-translation-dto';
 
 @Component({
   selector: 'app-list-designer-translation-form',

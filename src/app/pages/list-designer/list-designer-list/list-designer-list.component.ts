@@ -3,7 +3,7 @@ import {CommandNavigatorService} from '../../../services/system/command-navigato
 import {PageComponent} from '../../page/page-component';
 import {ListDesignerService} from '../../../services/crud/list-designer.service';
 import {NotificationService} from '../../../services/system/notification.service';
-import {ListDTO} from '../../../dtos/sofia/list/list-dto';
+import {ListDTO} from '../../../dtos/list/list-dto';
 
 @Component({
   selector: 'app-list-designer-list',

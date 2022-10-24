@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as uuid from 'uuid';
-import {ChartDTO} from '../../dtos/sofia/chart/chart-dto';
+import {ChartDTO} from '../../dtos/chart/chart-dto';
 import {ChartService} from '../../services/crud/chart.service';
 import {Chart} from 'chart.js';
 import 'chartjs-plugin-zoom';

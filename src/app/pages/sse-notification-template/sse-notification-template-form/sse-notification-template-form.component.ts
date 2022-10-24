@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SseNotificationDTO} from '../../../dtos/sofia/sse-notification/sse-notification-dto';
+import {SseNotificationDTO} from '../../../dtos/sse-notification/sse-notification-dto';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import {ActivatedRoute} from '@angular/router';
 import {SseNotificationTemplateService} from '../../../services/crud/sse-notification-template.service';

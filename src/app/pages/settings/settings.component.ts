@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../page/page-component';
-import {SettingsDto} from '../../dtos/sofia/settings/settings-dto';
+import {SettingsDto} from '../../dtos/settings/settings-dto';
 import {SettingsService} from '../../services/crud/settings.service';
 import {Location} from '@angular/common';
 import {NotificationService} from '../../services/system/notification.service';

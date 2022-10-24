@@ -11,10 +11,10 @@ import {
 import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import * as uuid from 'uuid';
 import {CommandParserService} from '../../services/system/command-parser.service';
-import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
+import {ComponentPersistEntityFieldDTO} from '../../dtos/component/component-persist-entity-field-dto';
 import {TableComponentService} from '../../services/crud/table-component.service';
-import {ComponentDTO} from '../../dtos/sofia/component/componentDTO';
-import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
+import {ComponentDTO} from '../../dtos/component/componentDTO';
+import {ComponentPersistEntityDTO} from '../../dtos/component/component-persist-entity-dto';
 
 @Component({
   selector: 'app-list-selector',

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ComponentPersistEntityDTO} from '../../../../dtos/sofia/component/component-persist-entity-dto';
-import {ComponentPersistEntityDataLineDTO} from '../../../../dtos/sofia/component/component-persist-entity-data-line-dto';
+import {ComponentPersistEntityDTO} from '../../../../dtos/component/component-persist-entity-dto';
+import {ComponentPersistEntityDataLineDTO} from '../../../../dtos/component/component-persist-entity-data-line-dto';
 
 @Injectable({
   providedIn: 'root'

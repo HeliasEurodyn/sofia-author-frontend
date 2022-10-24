@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {FormControlTableDTO} from '../../../../dtos/sofia/form/form-control-table-d-t-o';
-import {FormControlTableLineDTO} from '../../../../dtos/sofia/form/form-control-table-line-d-t-o';
-import {ComponentPersistEntityDTO} from '../../../../dtos/sofia/component/component-persist-entity-dto';
-import {FormControlTableCellDTO} from '../../../../dtos/sofia/form/form-control-table-cell-d-t-o';
+import {FormControlTableDTO} from '../../../../dtos/form/form-control-table-d-t-o';
+import {FormControlTableLineDTO} from '../../../../dtos/form/form-control-table-line-d-t-o';
+import {ComponentPersistEntityDTO} from '../../../../dtos/component/component-persist-entity-dto';
+import {FormControlTableCellDTO} from '../../../../dtos/form/form-control-table-cell-d-t-o';
 import * as uuid from 'uuid';
-import {FormDto} from '../../../../dtos/sofia/form/form-dto';
-import {FormControlTableControlDTO} from '../../../../dtos/sofia/form/form-control-table-control-d-t-o';
+import {FormDto} from '../../../../dtos/form/form-dto';
+import {FormControlTableControlDTO} from '../../../../dtos/form/form-control-table-control-d-t-o';
 
 @Injectable({
   providedIn: 'root'
