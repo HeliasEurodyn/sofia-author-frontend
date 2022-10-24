@@ -26,7 +26,6 @@ import {ComponentDesignerFormComponent} from './pages/sofia/component-designer/c
 import {ViewDesignerListComponent} from './pages/sofia/view-designer/view-designer-list/view-designer-list.component';
 import {ViewDesignerFormComponent} from './pages/sofia/view-designer/view-designer-form/view-designer-form.component';
 import {ListComponent} from './pages/sofia/list/list/list.component';
-import {NavigatorComponent} from './pages/demos/navigator/navigator.component';
 import {AppViewDesignerFormComponent} from './pages/sofia/appview-designer/app-view-designer-form/app-view-designer-form.component';
 import {AppViewDesignerListComponent} from './pages/sofia/appview-designer/app-view-designer-list/app-view-designer-list.component';
 import {NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -66,7 +65,9 @@ import {FlowboardDesignerListComponent} from './pages/sofia/flowboard-designer/f
 import {ReportDesignerListComponent} from './pages/sofia/report-designer/report-designer-list/report-designer-list.component';
 import {ReportDesignerFormComponent} from './pages/sofia/report-designer/report-designer-form/report-designer-form.component';
 import {OkDialogComponent} from './shared/ok-dialog/ok-dialog.component';
+// tslint:disable-next-line:max-line-length
 import {XlsImportDesignerFormComponent} from './pages/sofia/xms-import-designer/xls-import-designer-form/xls-import-designer-form.component';
+// tslint:disable-next-line:max-line-length
 import {XlsImportDesignerListComponent} from './pages/sofia/xms-import-designer/xls-import-designer-list/xls-import-designer-list.component';
 import {XlsImportComponent} from './pages/sofia/xls-import/xls-import.component';
 import { SearchDesignerFormComponent } from './pages/sofia/search-designer/search-designer-form/search-designer-form.component';
@@ -74,12 +75,7 @@ import { SearchDesignerListComponent } from './pages/sofia/search-designer/searc
 import {Title} from '@angular/platform-browser';
 import { ComboBoxComponent } from './form-controlls/sofia/combo-box/combo-box.component';
 import { SearchComponent } from './pages/sofia/search/search/search.component';
-import { CveSearchComponent } from './pages/cityscape/cve-search/cve-search.component';
-import { VendorListComponent } from './pages/cityscape/vendor-list/vendor-list.component';
-import { CveSearchSelectorComponent } from './form-controlls/cityscape/cve-search-selector/cve-search-selector.component';
-import { VendorProductListComponent } from './pages/cityscape/vendor-product-list/vendor-product-list.component';
-import { VendorProductCpeListComponent } from './pages/cityscape/vendor-product-cpe-list/vendor-product-cpe-list.component';
-import { CveSearchSettingsComponent } from './pages/cityscape/cve-search-settings/cve-search-settings.component';
+
 import { UserGroupListComponent } from './pages/sofia/usergroup/user-group-list/user-group-list.component';
 import { UserGroupFormComponent } from './pages/sofia/usergroup/user-group-form/user-group-form.component';
 
@@ -142,7 +138,6 @@ import { BusinessUnitDesignerListComponent } from './pages/sofia/business-unit-d
     ViewDesignerListComponent,
     ViewDesignerFormComponent,
     ListComponent,
-    NavigatorComponent,
     AppViewDesignerFormComponent,
     AppViewDesignerListComponent,
     DatePickerComponent,
@@ -181,12 +176,6 @@ import { BusinessUnitDesignerListComponent } from './pages/sofia/business-unit-d
     SearchDesignerListComponent,
     ComboBoxComponent,
     SearchComponent,
-    CveSearchComponent,
-    VendorListComponent,
-    CveSearchSelectorComponent,
-    VendorProductListComponent,
-    VendorProductCpeListComponent,
-    CveSearchSettingsComponent,
     UserGroupListComponent,
     UserGroupFormComponent,
     CustomQueryFormComponent,

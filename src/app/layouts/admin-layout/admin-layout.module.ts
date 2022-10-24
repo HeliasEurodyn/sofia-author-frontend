@@ -7,11 +7,6 @@ import {AdminLayoutRoutes} from './admin-layout.routing';
 
 import {UserComponent} from '../../pages/sofia/user/user.component';
 import {TableComponent} from '../../pages/sofia/table/table.component';
-import {TypographyComponent} from '../../pages/demos/typography/typography.component';
-import {IconsComponent} from '../../pages/demos/icons/icons.component';
-import {MapsComponent} from '../../pages/demos/maps/maps.component';
-import {NotificationsComponent} from '../../pages/demos/notifications/notifications.component';
-import {UpgradeComponent} from '../../pages/demos/upgrade/upgrade.component';
 import {ACE_CONFIG, AceConfigInterface, AceModule} from 'ngx-ace-wrapper';
 
 const DEFAULT_ACE_CONFIG: AceConfigInterface = {
@@ -26,13 +21,7 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
   ],
   declarations: [
     UserComponent,
-    TableComponent,
-    UpgradeComponent,
-    TypographyComponent,
-    IconsComponent,
-    MapsComponent,
-    NotificationsComponent,
-  ],
+    TableComponent],
   providers: [
     {
       provide: ACE_CONFIG,
