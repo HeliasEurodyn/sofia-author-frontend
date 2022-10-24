@@ -10,7 +10,7 @@ import {TableComponentDesignerService} from '../../../services/crud/table-compon
 import {ListDesignerService} from '../../../services/crud/list-designer.service';
 import {Location} from '@angular/common';
 import {RoleService} from '../../../services/crud/role.service';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
 import {FormScript} from '../../../dtos/sofia/form/form-script';

@@ -1,34 +1,33 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 declare var document: any;
 
 @Injectable({
   providedIn: 'root'
 })
-export class DynamicJavaScriptLoaderService {
+export class DynamicStaticJavascriptLoaderService {
 
   constructor() {
   }
 
-  public addScript(scriptId: string, type: string) {
-
-    if (this.checkIfScriptExists(scriptId, type)) {
+  public addScript(type: String) {
+    if (this.checkIfScriptExists(type)) {
       return new Promise((resolve, reject) => {
         resolve({script: name, loaded: true, status: 'Loaded'});
       });
     }
 
-    return Promise.resolve(this.loadScript(scriptId, type));
+    return Promise.resolve(this.loadScript(type));
   }
 
-  private loadScript(scriptId: String, type: string) {
+  private loadScript(type: String) {
     return new Promise((resolve, reject) => {
       const jwtToken = localStorage.getItem('jwt_token');
       const script = document.createElement('script');
       script.type = 'text/javascript';
-      script.src = `${environment.serverUrl}/${type}/dynamic-javascript/${scriptId}/min/script.js?wtk=${jwtToken}`;
-      script.id = type + '-dynamic-javascript_' + scriptId;
+      script.src = `${environment.serverUrl}/${type}/dynamic-javascripts/factory.js?wtk=${jwtToken}`;
+      script.id = 'dynamic=' + type + '-factory-javascript';
 
       if (script.readyState) {  // IE
         script.onreadystatechange = () => {
@@ -47,11 +46,10 @@ export class DynamicJavaScriptLoaderService {
     });
   }
 
-  public checkIfScriptExists(scriptId: string, type: string) {
-    if (document.getElementById(type + '-dynamic-javascript_' + scriptId) != null) {
+  public checkIfScriptExists(type: String) {
+    if (document.getElementById('dynamic=' + type + '-factory-javascript') != null) {
       return true;
     }
     return false;
   }
-
 }

@@ -8,11 +8,11 @@ import {ComponentPersistEntityDataLineDTO} from '../../../../dtos/sofia/componen
 import * as uuid from 'uuid';
 import {FormControlTableCellDTO} from '../../../../dtos/sofia/form/form-control-table-cell-d-t-o';
 import {FormControlTableControlDTO} from '../../../../dtos/sofia/form/form-control-table-control-d-t-o';
-import {CommandNavigatorService} from '../../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../../services/system/command-navigator.service';
 import {FormComponent} from '../form.component';
 import {FormAssignmentsService} from '../services/form-assignments.service';
 import {ComponentObjService} from '../services/component-obj.service';
-import {FormScriptsService} from '../../../../services/system/sofia/form-scripts.service';
+import {FormScriptsService} from '../../../../services/system/form-scripts.service';
 
 @Component({
   selector: 'app-form-table',

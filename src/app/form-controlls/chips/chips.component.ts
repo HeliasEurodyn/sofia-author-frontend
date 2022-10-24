@@ -2,13 +2,13 @@ import {Component, ComponentRef, ElementRef, EventEmitter, Input, OnInit, Output
 import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 import {ComponentDTO} from '../../dtos/sofia/component/componentDTO';
 import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
-import {CommandParserService} from '../../services/system/sofia/command-parser.service';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
+import {CommandParserService} from '../../services/system/command-parser.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import {TableComponentService} from '../../services/crud/table-component.service';
 import * as uuid from 'uuid';
 import {ComponentPersistEntityDataLineDTO} from '../../dtos/sofia/component/component-persist-entity-data-line-dto';
 import {AccessControlDto} from '../../dtos/sofia/security/access-control-dto';
-import {FormScriptsService} from '../../services/system/sofia/form-scripts.service';
+import {FormScriptsService} from '../../services/system/form-scripts.service';
 
 @Component({
   selector: 'app-chips',

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardDTO} from '../../../dtos/sofia/dashboard/dashboard-dto';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {ChartDesignerService} from '../../../services/crud/chart-designer.service';

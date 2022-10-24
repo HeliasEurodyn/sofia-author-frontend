@@ -3,7 +3,7 @@ import {TableService} from '../../../services/crud/table.service';
 import {ComponentDTO} from '../../../dtos/sofia/component/componentDTO';
 import {TableDTO} from '../../../dtos/sofia/table/tableDTO';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';

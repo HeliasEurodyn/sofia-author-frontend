@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserGroupService} from '../../../services/crud/user-group.service';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 
 @Component({

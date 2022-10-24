@@ -8,9 +8,9 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import * as uuid from 'uuid';
-import {CommandParserService} from '../../services/system/sofia/command-parser.service';
+import {CommandParserService} from '../../services/system/command-parser.service';
 import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
 import {TableComponentService} from '../../services/crud/table-component.service';
 import {ComponentDTO} from '../../dtos/sofia/component/componentDTO';

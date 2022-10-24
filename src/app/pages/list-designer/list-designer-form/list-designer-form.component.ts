@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ListDTO} from '../../../dtos/sofia/list/list-dto';
 import {ListComponentFieldDTO} from 'app/dtos/sofia/list/list-component-field-d-t-o';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';

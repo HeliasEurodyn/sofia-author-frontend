@@ -2,7 +2,7 @@ import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EventEmitter, In
 import * as uuid from 'uuid';
 import {ActivatedRoute, Router, Routes} from '@angular/router';
 import {CommandParserService} from './command-parser.service';
-import {TableComponentService} from '../../crud/table-component.service';
+import {TableComponentService} from '../crud/table-component.service';
 
 
 @Injectable({

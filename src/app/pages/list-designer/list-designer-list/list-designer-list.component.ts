@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 import {ListDesignerService} from '../../../services/crud/list-designer.service';
-import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {NotificationService} from '../../../services/system/notification.service';
 import {ListDTO} from '../../../dtos/sofia/list/list-dto';
 
 @Component({

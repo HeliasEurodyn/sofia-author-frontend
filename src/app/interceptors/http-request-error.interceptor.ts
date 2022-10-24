@@ -3,8 +3,8 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {HttpErrorResponceService} from '../services/system/sofia/http-error-responce.service';
-import {NotificationService} from '../services/system/sofia/notification.service';
+import {HttpErrorResponceService} from '../services/system/http-error-responce.service';
+import {NotificationService} from '../services/system/notification.service';
 import {Router} from '@angular/router';
 
 @Injectable()

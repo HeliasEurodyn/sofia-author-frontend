@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MenuService} from '../../../services/crud/menu.service';
 import {MenuDTO, MenuFieldDTO} from '../../../dtos/sofia/menu/menuDTO';
 import {PageComponent} from '../../page/page-component';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {Location} from '@angular/common'
 import {UserService} from '../../../services/crud/user.service';

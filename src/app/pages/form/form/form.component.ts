@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {FormService} from '../../../services/crud/form.service';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {FormDto} from '../../../dtos/sofia/form/form-dto';
 import {FormTabDto} from '../../../dtos/sofia/form/form-tab-dto';
 import {ActivatedRoute} from '@angular/router';
@@ -10,11 +10,11 @@ import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component
 import {YesNoDialogComponent} from '../../../shared/yes-no-dialog/yes-no-dialog.component';
 import {FormControlButtonDTO} from '../../../dtos/sofia/form/form-control-button-dto';
 import {OkDialogComponent} from '../../../shared/ok-dialog/ok-dialog.component';
-import {PreviousRouteService} from '../../../services/system/sofia/previous-route.service';
+import {PreviousRouteService} from '../../../services/system/previous-route.service';
 import {Title} from '@angular/platform-browser';
-import {FormScriptsService} from '../../../services/system/sofia/form-scripts.service';
+import {FormScriptsService} from '../../../services/system/form-scripts.service';
 import {FormActionButton} from '../../../dtos/sofia/form/form-action-button';
-import {DynamicCssScriptLoaderService} from '../../../services/system/sofia/dynamic-css-script-loader.service';
+import {DynamicCssScriptLoaderService} from '../../../services/system/dynamic-css-script-loader.service';
 import {concatMap} from 'rxjs/operators';
 import {FormAssignmentsService} from './services/form-assignments.service';
 import {FormTableLinesService} from './services/form-table-lines.service';

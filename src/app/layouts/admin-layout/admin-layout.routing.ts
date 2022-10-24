@@ -13,7 +13,7 @@ import {ComponentDesignerListComponent} from '../../pages/component-designer/com
 import {ViewDesignerListComponent} from '../../pages/view-designer/view-designer-list/view-designer-list.component';
 import {ViewDesignerFormComponent} from '../../pages/view-designer/view-designer-form/view-designer-form.component';
 import {ListComponent} from '../../pages/list/list/list.component';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import {AppViewDesignerListComponent} from '../../pages/appview-designer/app-view-designer-list/app-view-designer-list.component';
 import {AppViewDesignerFormComponent} from '../../pages/appview-designer/app-view-designer-form/app-view-designer-form.component';
 import {UserFormComponent} from '../../pages/user/user-form/user-form.component';

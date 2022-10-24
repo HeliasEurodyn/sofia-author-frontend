@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../../services/crud/table.service';
 import {PageComponent} from '../../page/page-component';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
+import {NotificationService} from '../../../services/system/notification.service';
 
 @Component({
   selector: 'app-table-designer-list',

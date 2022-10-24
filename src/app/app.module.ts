@@ -90,7 +90,7 @@ import { FormWrapperComponent } from './pages/form/form-wrapper/form-wrapper.com
 import { HtmlDashboardDesignerFormComponent } from './pages/html-dashboard-designer/html-dashboard-designer-form/html-dashboard-designer-form.component';
 import { HtmlDashboardDesignerListComponent } from './pages/html-dashboard-designer/html-dashboard-designer-list/html-dashboard-designer-list.component';
 import { HtmlDashboardComponent } from './pages/html-dashboard/html-dashboard/html-dashboard.component';
-import { SafeHtmlPipe } from './services/system/sofia/safe-html.pipe';
+import { SafeHtmlPipe } from './services/system/safe-html.pipe';
 import { ExpressionViewerComponent } from './pages/expression-viewer/expression-viewer.component';
 import { RoleListComponent } from './pages/role/role-list/role-list.component';
 import { RoleFormComponent } from './pages/role/role-form/role-form.component';

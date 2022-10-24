@@ -3,10 +3,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TableDTO} from '../../../dtos/sofia/table/tableDTO';
 import {TableService} from '../../../services/crud/table.service';
 import {PageComponent} from '../../page/page-component';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {TableFieldDTO} from '../../../dtos/sofia/table/table-field-dto';
 import { Location } from '@angular/common'
-import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {NotificationService} from '../../../services/system/notification.service';
 
 @Component({
   selector: 'app-table-designer-form',

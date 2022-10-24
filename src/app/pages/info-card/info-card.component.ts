@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InfoCardDTO} from '../../dtos/sofia/info-card/info-card-dto';
 import {InfoCardService} from '../../services/crud/info-card.service';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {ListScriptsService} from '../../services/system/sofia/list-scripts.service';
-import {InfoCartScriptService} from '../../services/system/sofia/info-cart-script.service';
+import {ListScriptsService} from '../../services/system/list-scripts.service';
+import {InfoCartScriptService} from '../../services/system/info-cart-script.service';
 
 @Component({
   selector: 'app-info-card',

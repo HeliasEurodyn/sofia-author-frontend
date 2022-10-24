@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
 

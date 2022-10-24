@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
-import {HttpErrorResponceService} from './services/system/sofia/http-error-responce.service';
-import {NotificationService} from './services/system/sofia/notification.service';
+import {HttpErrorResponceService} from './services/system/http-error-responce.service';
+import {NotificationService} from './services/system/notification.service';
 import {SettingsService} from './services/crud/settings.service';
 
 @Component({

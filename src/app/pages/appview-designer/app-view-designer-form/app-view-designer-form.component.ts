@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {AppViewDTO} from '../../../dtos/sofia/appview/app-view-dto';
 import {AppViewService} from '../../../services/crud/app-view.service';
 import {Location} from '@angular/common';

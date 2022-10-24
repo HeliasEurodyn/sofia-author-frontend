@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {UserDto} from '../../../dtos/sofia/user/user-dto';
 import {UserService} from '../../../services/crud/user.service';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {MenuService} from '../../../services/crud/menu.service';
 import {MenuDTO} from '../../../dtos/sofia/menu/menuDTO';
 import {ActivatedRoute} from '@angular/router';

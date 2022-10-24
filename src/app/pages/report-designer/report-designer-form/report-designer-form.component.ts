@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {PageComponent} from '../../page/page-component';
 import {ReportDesignerService} from '../../../services/crud/report-designer.service';
 import {Location} from '@angular/common';
-import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {NotificationService} from '../../../services/system/notification.service';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import {ReportService} from '../../../services/crud/report.service';

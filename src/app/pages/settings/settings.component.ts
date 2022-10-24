@@ -3,7 +3,7 @@ import {PageComponent} from '../page/page-component';
 import {SettingsDto} from '../../dtos/sofia/settings/settings-dto';
 import {SettingsService} from '../../services/crud/settings.service';
 import {Location} from '@angular/common';
-import {NotificationService} from '../../services/system/sofia/notification.service';
+import {NotificationService} from '../../services/system/notification.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({

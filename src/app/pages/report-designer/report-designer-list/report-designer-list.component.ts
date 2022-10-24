@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {ReportDesignerService} from '../../../services/crud/report-designer.service';
 
 @Component({

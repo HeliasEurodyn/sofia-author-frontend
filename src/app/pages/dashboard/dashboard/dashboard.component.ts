@@ -1,6 +1,6 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DashboardDTO} from '../../../dtos/sofia/dashboard/dashboard-dto';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {ActivatedRoute} from '@angular/router';
 import {PageComponent} from '../../page/page-component';
 import {DashboardService} from '../../../services/crud/dashboard.service';

@@ -8,7 +8,7 @@ import {FormControlFieldDTO} from '../../../dtos/sofia/form/form-control-field-d
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
 import {FormControlDto} from '../../../dtos/sofia/form/form-control-dto';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {FormScript} from '../../../dtos/sofia/form/form-script';
 import {ActivatedRoute} from '@angular/router';
 import {FormControlTableDTO} from '../../../dtos/sofia/form/form-control-table-d-t-o';

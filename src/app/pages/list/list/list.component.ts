@@ -3,19 +3,19 @@ import {ListDTO} from '../../../dtos/sofia/list/list-dto';
 import {ListService} from '../../../services/crud/list.service';
 import {PageComponent} from '../../page/page-component';
 import {ListResultsData} from '../../../dtos/sofia/list/list-results-data';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
+import {NotificationService} from '../../../services/system/notification.service';
 import {DatePipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
 import {TableComponentService} from '../../../services/crud/table-component.service';
 import {Title} from '@angular/platform-browser';
 import {concatMap} from 'rxjs/operators';
-import {ListScriptsService} from '../../../services/system/sofia/list-scripts.service';
+import {ListScriptsService} from '../../../services/system/list-scripts.service';
 import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
-import {DynamicCssScriptLoaderService} from '../../../services/system/sofia/dynamic-css-script-loader.service';
-import {ListSearchService} from '../../../services/system/sofia/list-search.service';
-import {LanguageService} from '../../../services/system/sofia/language.service';
+import {DynamicCssScriptLoaderService} from '../../../services/system/dynamic-css-script-loader.service';
+import {ListSearchService} from '../../../services/system/list-search.service';
+import {LanguageService} from '../../../services/system/language.service';
 
 @Component({
   selector: 'app-list',

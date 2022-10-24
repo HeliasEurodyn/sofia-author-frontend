@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {TimelineService} from '../../../services/crud/timeline.service';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {TimelineContentDTO} from '../../../dtos/sofia/timeline/timeline-content-dto';
 import {TimelineDTO} from '../../../dtos/sofia/timeline/timeline-dto';
 import {concatMap, map} from 'rxjs/operators';

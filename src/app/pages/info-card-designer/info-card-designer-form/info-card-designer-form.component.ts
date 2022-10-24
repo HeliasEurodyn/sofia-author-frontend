@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
 import {InfoCardDTO} from '../../../dtos/sofia/info-card/info-card-dto';
 import {InfoCardDesignerService} from '../../../services/crud/info-card-designer.service';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {ListScriptDTO} from '../../../dtos/sofia/list/list-script-dto';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {ListDTO} from '../../../dtos/sofia/list/list-dto';

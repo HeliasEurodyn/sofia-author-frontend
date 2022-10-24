@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NotificationService} from '../../services/system/sofia/notification.service';
+import {NotificationService} from '../../services/system/notification.service';
 import {XlsImportService} from '../../services/crud/xls-import.service';
 import {PageComponent} from '../page/page-component';
 import {ActivatedRoute} from '@angular/router';

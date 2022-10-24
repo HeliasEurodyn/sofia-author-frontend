@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {LoadingService} from '../services/system/sofia/loading.service';
+import {LoadingService} from '../services/system/loading.service';
 import {catchError, map} from 'rxjs/operators';
 
 @Injectable()

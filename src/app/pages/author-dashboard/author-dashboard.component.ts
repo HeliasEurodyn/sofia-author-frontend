@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataTransferService} from '../../services/crud/data-transfer.service';
-import {NotificationService} from '../../services/system/sofia/notification.service';
+import {NotificationService} from '../../services/system/notification.service';
 import {PageComponent} from '../page/page-component';
 import {UserService} from '../../services/crud/user.service';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import {ListService} from '../../services/crud/list.service';
 import {FormService} from '../../services/crud/form.service';
 import {FormDesignerService} from '../../services/crud/form-designer.service';

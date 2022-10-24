@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ListResultsData} from '../../../dtos/sofia/list/list-results-data';
-import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {NotificationService} from '../../../services/system/sofia/notification.service';
+import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
+import {NotificationService} from '../../../services/system/notification.service';
 import {DatePipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {TableComponentService} from '../../../services/crud/table-component.service';
 import {Title} from '@angular/platform-browser';
-import {ListScriptsService} from '../../../services/system/sofia/list-scripts.service';
-import {DynamicCssScriptLoaderService} from '../../../services/system/sofia/dynamic-css-script-loader.service';
+import {ListScriptsService} from '../../../services/system/list-scripts.service';
+import {DynamicCssScriptLoaderService} from '../../../services/system/dynamic-css-script-loader.service';
 import {concatMap} from 'rxjs/operators';
 import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
 import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';

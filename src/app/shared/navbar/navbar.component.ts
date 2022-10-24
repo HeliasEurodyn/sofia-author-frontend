@@ -12,15 +12,15 @@ import {
 import {ROUTES} from '../sidebar/sidebar.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
-import {LoadingService} from '../../services/system/sofia/loading.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
+import {LoadingService} from '../../services/system/loading.service';
 import {delay} from 'rxjs/operators';
-import {HttpErrorResponceService} from '../../services/system/sofia/http-error-responce.service';
-import {NotificationService} from '../../services/system/sofia/notification.service';
+import {HttpErrorResponceService} from '../../services/system/http-error-responce.service';
+import {NotificationService} from '../../services/system/notification.service';
 import {UserDto} from '../../dtos/sofia/user/user-dto';
-import {ListSearchService} from '../../services/system/sofia/list-search.service';
+import {ListSearchService} from '../../services/system/list-search.service';
 import {LanguageDTO} from '../../dtos/sofia/language/language-dto';
-import {LanguageService} from '../../services/system/sofia/language.service';
+import {LanguageService} from '../../services/system/language.service';
 import { UserService } from 'app/services/crud/user.service';
 import {SseNotificationService} from '../../services/crud/sse-notification.service';
 
