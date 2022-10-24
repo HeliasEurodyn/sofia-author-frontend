@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
-import {BusinessUnitDesignerService} from '../../../services/crud/sofia/business-unit-designer.service';
+import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
 
 @Component({
   selector: 'app-business-unit-designer-list',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {InfoCardDesignerService} from '../../../services/crud/sofia/info-card-designer.service';
+import {InfoCardDesignerService} from '../../../services/crud/info-card-designer.service';
 
 @Component({
   selector: 'app-info-card-designer-list',

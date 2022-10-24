@@ -3,7 +3,7 @@ import {DashboardDTO} from '../../../dtos/sofia/dashboard/dashboard-dto';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {ActivatedRoute} from '@angular/router';
 import {PageComponent} from '../../page/page-component';
-import {DashboardService} from '../../../services/crud/sofia/dashboard.service';
+import {DashboardService} from '../../../services/crud/dashboard.service';
 import {Title} from '@angular/platform-browser';
 import {ListComponent} from '../../list/list/list.component';
 

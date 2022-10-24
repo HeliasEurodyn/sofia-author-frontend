@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MenuService} from '../../../services/crud/sofia/menu.service';
+import {MenuService} from '../../../services/crud/menu.service';
 import {MenuDTO, MenuFieldDTO} from '../../../dtos/sofia/menu/menuDTO';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {Location} from '@angular/common'
-import {UserService} from '../../../services/crud/sofia/user.service';
-import {UserGroupService} from '../../../services/crud/sofia/user-group.service';
+import {UserService} from '../../../services/crud/user.service';
+import {UserGroupService} from '../../../services/crud/user-group.service';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 
 @Component({
   selector: 'app-menu-designer-form',

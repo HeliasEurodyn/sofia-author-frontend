@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {ReportDesignerService} from '../../../services/crud/sofia/report-designer.service';
+import {ReportDesignerService} from '../../../services/crud/report-designer.service';
 
 @Component({
   selector: 'app-report-designer-list',

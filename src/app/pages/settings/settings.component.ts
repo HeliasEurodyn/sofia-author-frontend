@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../page/page-component';
 import {SettingsDto} from '../../dtos/sofia/settings/settings-dto';
-import {SettingsService} from '../../services/crud/sofia/settings.service';
+import {SettingsService} from '../../services/crud/settings.service';
 import {Location} from '@angular/common';
 import {NotificationService} from '../../services/system/sofia/notification.service';
 import {DomSanitizer} from '@angular/platform-browser';

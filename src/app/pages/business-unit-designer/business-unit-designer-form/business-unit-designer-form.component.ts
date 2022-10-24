@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
 import {BusinessUnitDTO} from '../../../dtos/sofia/business-unit/business-unit-dto';
-import {BusinessUnitDesignerService} from '../../../services/crud/sofia/business-unit-designer.service';
+import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
 
 @Component({
   selector: 'app-business-unit-designer-form',

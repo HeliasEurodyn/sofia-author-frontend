@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {SearchDesignerService} from '../../../services/crud/sofia/search-designer.service';
+import {SearchDesignerService} from '../../../services/crud/search-designer.service';
 
 @Component({
   selector: 'app-search-designer-list',

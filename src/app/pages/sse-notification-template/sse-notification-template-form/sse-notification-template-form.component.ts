@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SseNotificationDTO} from '../../../dtos/sofia/sse-notification/sse-notification-dto';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import {ActivatedRoute} from '@angular/router';
-import {SseNotificationTemplateService} from '../../../services/crud/sofia/sse-notification-template.service';
+import {SseNotificationTemplateService} from '../../../services/crud/sse-notification-template.service';
 import {PageComponent} from '../../page/page-component';
 import {Location} from '@angular/common';
 import 'brace';

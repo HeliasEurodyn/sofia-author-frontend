@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
-import {AppViewService} from '../../../services/crud/sofia/app-view.service';
+import {AppViewService} from '../../../services/crud/app-view.service';
 
 @Component({
   selector: 'app-app-view-designer-list',

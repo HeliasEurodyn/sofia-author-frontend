@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {TableComponentDesignerService} from '../../../services/crud/sofia/table-component-designer.service';
-import {XlsImportDesignerService} from '../../../services/crud/sofia/xls-import-designer.service';
+import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
+import {XlsImportDesignerService} from '../../../services/crud/xls-import-designer.service';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 
 @Component({

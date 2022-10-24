@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExpressionService} from '../../services/crud/sofia/expression.service';
+import {ExpressionService} from '../../services/crud/expression.service';
 import {ExprUnitDTO} from '../../dtos/sofia/expression/expr-unit-dto';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';

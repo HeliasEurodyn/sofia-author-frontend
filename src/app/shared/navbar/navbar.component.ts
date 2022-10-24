@@ -21,8 +21,8 @@ import {UserDto} from '../../dtos/sofia/user/user-dto';
 import {ListSearchService} from '../../services/system/sofia/list-search.service';
 import {LanguageDTO} from '../../dtos/sofia/language/language-dto';
 import {LanguageService} from '../../services/system/sofia/language.service';
-import { UserService } from 'app/services/crud/sofia/user.service';
-import {SseNotificationService} from '../../services/crud/sofia/sse-notification.service';
+import { UserService } from 'app/services/crud/user.service';
+import {SseNotificationService} from '../../services/crud/sse-notification.service';
 
 @Component({
   moduleId: module.id,

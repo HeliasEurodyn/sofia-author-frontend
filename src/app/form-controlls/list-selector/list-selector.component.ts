@@ -12,7 +12,7 @@ import {CommandNavigatorService} from '../../services/system/sofia/command-navig
 import * as uuid from 'uuid';
 import {CommandParserService} from '../../services/system/sofia/command-parser.service';
 import {ComponentPersistEntityFieldDTO} from '../../dtos/sofia/component/component-persist-entity-field-dto';
-import {TableComponentService} from '../../services/crud/sofia/table-component.service';
+import {TableComponentService} from '../../services/crud/table-component.service';
 import {ComponentDTO} from '../../dtos/sofia/component/componentDTO';
 import {ComponentPersistEntityDTO} from '../../dtos/sofia/component/component-persist-entity-dto';
 

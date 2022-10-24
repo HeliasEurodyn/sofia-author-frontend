@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SecurityService} from '../../../services/crud/sofia/security.service';
+import {SecurityService} from '../../../services/crud/security.service';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {XlsImportDTO} from '../../../dtos/sofia/xls-import/xls-import-dto';
-import {TableComponentDesignerService} from '../../../services/crud/sofia/table-component-designer.service';
+import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
 import {XlsImportLineDTO} from '../../../dtos/sofia/xls-import/xls-import-line-dto';
-import {XlsImportDesignerService} from '../../../services/crud/sofia/xls-import-designer.service';
+import {XlsImportDesignerService} from '../../../services/crud/xls-import-designer.service';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
@@ -10,7 +10,7 @@ import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/comp
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
 import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/sofia/component/component-persist-entity-field-assignment-dto';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 import 'brace';
 import 'brace/mode/html'
 import 'brace/theme/chrome'

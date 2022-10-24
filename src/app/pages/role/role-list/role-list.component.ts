@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserGroupService} from '../../../services/crud/sofia/user-group.service';
+import {UserGroupService} from '../../../services/crud/user-group.service';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 import {PageComponent} from '../../page/page-component';
 
 @Component({

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChartDTO} from '../../../dtos/sofia/chart/chart-dto';
 import {ActivatedRoute} from '@angular/router';
 import {PageComponent} from '../../page/page-component';
-import {ChartDesignerService} from '../../../services/crud/sofia/chart-designer.service';
+import {ChartDesignerService} from '../../../services/crud/chart-designer.service';
 import {Location} from '@angular/common';
 import {ChartFieldDTO} from '../../../dtos/sofia/chart/chart-field-dto';
 // import Chart from 'chart.js';

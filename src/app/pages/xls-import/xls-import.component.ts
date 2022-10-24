@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationService} from '../../services/system/sofia/notification.service';
-import {XlsImportService} from '../../services/crud/sofia/xls-import.service';
+import {XlsImportService} from '../../services/crud/xls-import.service';
 import {PageComponent} from '../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {XlsImportDTO} from '../../dtos/sofia/xls-import/xls-import-dto';

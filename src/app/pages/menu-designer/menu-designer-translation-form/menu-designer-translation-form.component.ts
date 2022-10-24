@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuDTO, MenuFieldDTO} from '../../../dtos/sofia/menu/menuDTO';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MenuService} from '../../../services/crud/sofia/menu.service';
+import {MenuService} from '../../../services/crud/menu.service';
 import {Location} from '@angular/common';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 import {PageComponent} from '../../page/page-component';
 import {LanguageDTO} from '../../../dtos/sofia/language/language-dto';
-import {LanguageService} from '../../../services/crud/sofia/language.service';
+import {LanguageService} from '../../../services/crud/language.service';
 import {MenuTranslationDTO} from '../../../dtos/sofia/menu/menu-translation-dto';
 
 @Component({

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {CustomQueryDTO} from '../../../dtos/sofia/customquery/custom-query-dto';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
 import {ActivatedRoute} from '@angular/router';
-import {CustomQueryDesignerService} from '../../../services/crud/sofia/custom-query-designer.service';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
+import {RoleService} from '../../../services/crud/role.service';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
 import {LanguageDTO} from '../../../dtos/sofia/language/language-dto';
-import {LanguageService} from '../../../services/crud/sofia/language.service';
+import {LanguageService} from '../../../services/crud/language.service';
 
 @Component({
   selector: 'app-language-designer-form',

@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
-import {MenuService} from '../../services/crud/sofia/menu.service';
+import {MenuService} from '../../services/crud/menu.service';
 import {MenuDTO} from '../../dtos/sofia/menu/menuDTO';
 import {LanguageService} from '../../services/system/sofia/language.service';
-import {SettingsService} from '../../services/crud/sofia/settings.service';
+import {SettingsService} from '../../services/crud/settings.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 

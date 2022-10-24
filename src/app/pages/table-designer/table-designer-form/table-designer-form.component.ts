@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TableDTO} from '../../../dtos/sofia/table/tableDTO';
-import {TableService} from '../../../services/crud/sofia/table.service';
+import {TableService} from '../../../services/crud/table.service';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {TableFieldDTO} from '../../../dtos/sofia/table/table-field-dto';

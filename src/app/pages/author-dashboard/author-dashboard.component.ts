@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DataTransferService} from '../../services/crud/sofia/data-transfer.service';
+import {DataTransferService} from '../../services/crud/data-transfer.service';
 import {NotificationService} from '../../services/system/sofia/notification.service';
 import {PageComponent} from '../page/page-component';
-import {UserService} from '../../services/crud/sofia/user.service';
+import {UserService} from '../../services/crud/user.service';
 import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
-import {ListService} from '../../services/crud/sofia/list.service';
-import {FormService} from '../../services/crud/sofia/form.service';
-import {FormDesignerService} from '../../services/crud/sofia/form-designer.service';
-import {ListDesignerService} from '../../services/crud/sofia/list-designer.service';
+import {ListService} from '../../services/crud/list.service';
+import {FormService} from '../../services/crud/form.service';
+import {FormDesignerService} from '../../services/crud/form-designer.service';
+import {ListDesignerService} from '../../services/crud/list-designer.service';
 
 @Component({
   selector: 'app-author-dashboard',

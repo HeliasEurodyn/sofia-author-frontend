@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
-import {TimelineDesignerService} from '../../../services/crud/sofia/timeline-designer.service';
+import {TimelineDesignerService} from '../../../services/crud/timeline-designer.service';
 import {TimelineDTO} from '../../../dtos/sofia/timeline/timeline-dto';
 import {Location} from '@angular/common';
 import {AceConfigInterface} from 'ngx-ace-wrapper';

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {FormService} from '../../../services/crud/sofia/form.service';
+import {FormService} from '../../../services/crud/form.service';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {FormDto} from '../../../dtos/sofia/form/form-dto';
 import {FormTabDto} from '../../../dtos/sofia/form/form-tab-dto';
@@ -18,7 +18,7 @@ import {DynamicCssScriptLoaderService} from '../../../services/system/sofia/dyna
 import {concatMap} from 'rxjs/operators';
 import {FormAssignmentsService} from './services/form-assignments.service';
 import {FormTableLinesService} from './services/form-table-lines.service';
-import {TableComponentService} from '../../../services/crud/sofia/table-component.service';
+import {TableComponentService} from '../../../services/crud/table-component.service';
 
 
 @Component({

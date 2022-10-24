@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as uuid from 'uuid';
 import {HtmlDashboardDTO} from '../../../dtos/sofia/html-dashboard/html-dashboard-dto';
-import {HtmlDashboardService} from 'app/services/crud/sofia/html-dashboard.service';
+import {HtmlDashboardService} from 'app/services/crud/html-dashboard.service';
 
 @Component({
   selector: 'app-html-dashboard',

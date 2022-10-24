@@ -15,15 +15,15 @@ import {FormControlTableDTO} from '../../../dtos/sofia/form/form-control-table-d
 import {FormControlTableControlDTO} from '../../../dtos/sofia/form/form-control-table-control-d-t-o';
 import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/sofia/component/component-persist-entity-field-assignment-dto';
 import {Location} from '@angular/common';
-import {FormDesignerService} from '../../../services/crud/sofia/form-designer.service';
-import {TableComponentDesignerService} from '../../../services/crud/sofia/table-component-designer.service';
+import {FormDesignerService} from '../../../services/crud/form-designer.service';
+import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
 import {FormControlButtonDTO} from '../../../dtos/sofia/form/form-control-button-dto';
 import {FormPopupDto} from '../../../dtos/sofia/form/form-popup-dto';
 import {FormActionButton} from '../../../dtos/sofia/form/form-action-button';
 import {FormCss} from '../../../dtos/sofia/form/form-css';
-import {UserService} from '../../../services/crud/sofia/user.service';
+import {UserService} from '../../../services/crud/user.service';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 import 'brace';
 import 'brace/mode/javascript';
 import 'brace/mode/css';
@@ -31,7 +31,7 @@ import 'brace/mode/text';
 import 'brace/theme/github';
 import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
-import {BusinessUnitDesignerService} from '../../../services/crud/sofia/business-unit-designer.service';
+import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
 import {BusinessUnitDTO} from '../../../dtos/sofia/business-unit/business-unit-dto';
 
 

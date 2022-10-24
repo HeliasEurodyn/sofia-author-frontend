@@ -3,7 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 import {HttpErrorResponceService} from './services/system/sofia/http-error-responce.service';
 import {NotificationService} from './services/system/sofia/notification.service';
-import {SettingsService} from './services/crud/sofia/settings.service';
+import {SettingsService} from './services/crud/settings.service';
 
 @Component({
   selector: 'app-root',

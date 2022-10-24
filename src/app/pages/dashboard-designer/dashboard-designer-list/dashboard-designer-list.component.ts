@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {DashboardDesignerService} from '../../../services/crud/sofia/dashboard-designer.service';
+import {DashboardDesignerService} from '../../../services/crud/dashboard-designer.service';
 import {PageComponent} from '../../page/page-component';
 
 @Component({

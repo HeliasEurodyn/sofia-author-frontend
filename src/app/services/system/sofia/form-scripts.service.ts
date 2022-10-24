@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DynamicRequestService} from '../../crud/sofia/dynamic-request.service';
+import {DynamicRequestService} from '../../crud/dynamic-request.service';
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
 import {ComponentPersistEntityDataLineDTO} from '../../../dtos/sofia/component/component-persist-entity-data-line-dto';
 import {FormControlTableDTO} from '../../../dtos/sofia/form/form-control-table-d-t-o';
@@ -8,7 +8,7 @@ import {FormControlTableCellDTO} from '../../../dtos/sofia/form/form-control-tab
 import {FormControlTableControlDTO} from '../../../dtos/sofia/form/form-control-table-control-d-t-o';
 import * as uuid from 'uuid';
 import {FormComponent} from '../../../pages/form/form/form.component';
-import {TableComponentService} from '../../crud/sofia/table-component.service';
+import {TableComponentService} from '../../crud/table-component.service';
 import {ReportPrinterService} from './report-printer.service';
 import {DynamicJavaScriptLoaderService} from './dynamic-java-script-loader.service';
 import {FormTableLinesService} from '../../../pages/form/form/services/form-table-lines.service';

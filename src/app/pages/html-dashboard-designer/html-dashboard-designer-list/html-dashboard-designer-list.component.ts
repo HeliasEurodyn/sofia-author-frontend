@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {HtmlDashboardDesignerService} from '../../../services/crud/sofia/html-dashboard-designer.service';
+import {HtmlDashboardDesignerService} from '../../../services/crud/html-dashboard-designer.service';
 
 @Component({
   selector: 'app-html-dashboard-designer-list',

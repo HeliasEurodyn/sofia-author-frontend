@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ListDTO} from '../../../dtos/sofia/list/list-dto';
-import {ListService} from '../../../services/crud/sofia/list.service';
+import {ListService} from '../../../services/crud/list.service';
 import {PageComponent} from '../../page/page-component';
 import {ListResultsData} from '../../../dtos/sofia/list/list-results-data';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
@@ -8,7 +8,7 @@ import {NotificationService} from '../../../services/system/sofia/notification.s
 import {DatePipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
-import {TableComponentService} from '../../../services/crud/sofia/table-component.service';
+import {TableComponentService} from '../../../services/crud/table-component.service';
 import {Title} from '@angular/platform-browser';
 import {concatMap} from 'rxjs/operators';
 import {ListScriptsService} from '../../../services/system/sofia/list-scripts.service';

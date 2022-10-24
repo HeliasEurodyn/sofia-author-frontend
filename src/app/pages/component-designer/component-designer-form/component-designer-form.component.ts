@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TableService} from '../../../services/crud/sofia/table.service';
+import {TableService} from '../../../services/crud/table.service';
 import {ComponentDTO} from '../../../dtos/sofia/component/componentDTO';
 import {TableDTO} from '../../../dtos/sofia/table/tableDTO';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,13 +7,13 @@ import {CommandNavigatorService} from '../../../services/system/sofia/command-na
 import {PageComponent} from '../../page/page-component';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/component-persist-entity-field-dto';
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
-import {ViewService} from '../../../services/crud/sofia/view.service';
-import {AppViewService} from '../../../services/crud/sofia/app-view.service';
+import {ViewService} from '../../../services/crud/view.service';
+import {AppViewService} from '../../../services/crud/app-view.service';
 import {Location} from '@angular/common';
-import {TableComponentDesignerService} from '../../../services/crud/sofia/table-component-designer.service';
+import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
 import {MenuFieldDTO} from '../../../dtos/sofia/menu/menuDTO';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 
 
 @Component({

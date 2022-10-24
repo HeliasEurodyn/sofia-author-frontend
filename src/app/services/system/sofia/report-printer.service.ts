@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ReportDesignerService} from '../../crud/sofia/report-designer.service';
-import {ReportService} from '../../crud/sofia/report.service';
+import {ReportDesignerService} from '../../crud/report-designer.service';
+import {ReportService} from '../../crud/report.service';
 
 @Injectable({
   providedIn: 'root'

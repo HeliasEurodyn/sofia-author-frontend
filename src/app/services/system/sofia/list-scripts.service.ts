@@ -3,7 +3,7 @@ import {DynamicJavaScriptLoaderService} from './dynamic-java-script-loader.servi
 import {CommandNavigatorService} from './command-navigator.service';
 import {ListComponent} from '../../../pages/list/list/list.component';
 import {DynamicStaticJavascriptLoaderService} from './dynamic-static-javascript-loader.service';
-import {DynamicRequestService} from '../../crud/sofia/dynamic-request.service';
+import {DynamicRequestService} from '../../crud/dynamic-request.service';
 import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
 
 declare function registerListDynamicScript(id, list): any;

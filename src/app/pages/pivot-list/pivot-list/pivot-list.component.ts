@@ -4,7 +4,7 @@ import {CommandNavigatorService} from '../../../services/system/sofia/command-na
 import {NotificationService} from '../../../services/system/sofia/notification.service';
 import {DatePipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
-import {TableComponentService} from '../../../services/crud/sofia/table-component.service';
+import {TableComponentService} from '../../../services/crud/table-component.service';
 import {Title} from '@angular/platform-browser';
 import {ListScriptsService} from '../../../services/system/sofia/list-scripts.service';
 import {DynamicCssScriptLoaderService} from '../../../services/system/sofia/dynamic-css-script-loader.service';
@@ -12,7 +12,7 @@ import {concatMap} from 'rxjs/operators';
 import {ListComponentFieldDTO} from '../../../dtos/sofia/list/list-component-field-d-t-o';
 import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
 import {PageComponent} from '../../page/page-component';
-import {PivotListService} from '../../../services/crud/sofia/pivot-list.service';
+import {PivotListService} from '../../../services/crud/pivot-list.service';
 import {PivotListDTO} from '../../../dtos/sofia/pivot-list/pivot-list-dto';
 import {FilterField} from '../../../dtos/sofia/pivot-list/filter-field';
 import {PivotListComponentFieldDTO} from '../../../dtos/sofia/pivot-list/pivot-list-component-field-dto';

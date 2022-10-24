@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
-import {FormDesignerService} from '../../../services/crud/sofia/form-designer.service';
+import {FormDesignerService} from '../../../services/crud/form-designer.service';
 import {NotificationService} from '../../../services/system/sofia/notification.service';
 import {FormDto} from '../../../dtos/sofia/form/form-dto';
 

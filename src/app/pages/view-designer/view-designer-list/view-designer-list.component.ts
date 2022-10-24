@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewService} from 'app/services/crud/sofia/view.service';
+import {ViewService} from 'app/services/crud/view.service';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 

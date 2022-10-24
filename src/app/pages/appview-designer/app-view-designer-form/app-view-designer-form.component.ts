@@ -3,7 +3,7 @@ import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {AppViewDTO} from '../../../dtos/sofia/appview/app-view-dto';
-import {AppViewService} from '../../../services/crud/sofia/app-view.service';
+import {AppViewService} from '../../../services/crud/app-view.service';
 import {Location} from '@angular/common';
 import {AppViewFieldDTO} from '../../../dtos/sofia/appview/app-view-field-dto';
 

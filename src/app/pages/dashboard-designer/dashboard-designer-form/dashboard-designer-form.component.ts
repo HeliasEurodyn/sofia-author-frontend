@@ -3,23 +3,23 @@ import {DashboardDTO} from '../../../dtos/sofia/dashboard/dashboard-dto';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {ChartDesignerService} from '../../../services/crud/sofia/chart-designer.service';
+import {ChartDesignerService} from '../../../services/crud/chart-designer.service';
 import {ChartDTO} from '../../../dtos/sofia/chart/chart-dto';
 import {DashboardItemDTO} from '../../../dtos/sofia/dashboard/dashboard-item-dto';
-import {InfoCardDesignerService} from '../../../services/crud/sofia/info-card-designer.service';
+import {InfoCardDesignerService} from '../../../services/crud/info-card-designer.service';
 import {InfoCardDTO} from '../../../dtos/sofia/info-card/info-card-dto';
-import {DashboardDesignerService} from '../../../services/crud/sofia/dashboard-designer.service';
+import {DashboardDesignerService} from '../../../services/crud/dashboard-designer.service';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {PageComponent} from '../../page/page-component';
-import {ListService} from '../../../services/crud/sofia/list.service';
+import {ListService} from '../../../services/crud/list.service';
 import {ListDTO} from '../../../dtos/sofia/list/list-dto';
 import {DashboardAreaDTO} from '../../../dtos/sofia/dashboard/dashboard-area-dto';
-import {UserService} from '../../../services/crud/sofia/user.service';
-import {UserGroupService} from '../../../services/crud/sofia/user-group.service';
+import {UserService} from '../../../services/crud/user.service';
+import {UserGroupService} from '../../../services/crud/user-group.service';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
 import {HtmlDashboardDTO} from '../../../dtos/sofia/html-dashboard/html-dashboard-dto';
-import {HtmlDashboardDesignerService} from '../../../services/crud/sofia/html-dashboard-designer.service';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {HtmlDashboardDesignerService} from '../../../services/crud/html-dashboard-designer.service';
+import {RoleService} from '../../../services/crud/role.service';
 
 @Component({
   selector: 'app-dashboard-designer-form',

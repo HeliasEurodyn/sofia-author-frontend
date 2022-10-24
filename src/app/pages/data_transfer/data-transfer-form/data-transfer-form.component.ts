@@ -1,27 +1,27 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {FormDesignerService} from '../../../services/crud/sofia/form-designer.service';
+import {FormDesignerService} from '../../../services/crud/form-designer.service';
 import {DataTransferDTO} from '../../../dtos/sofia/data_transfer/data-transfer-dto';
-import {ListDesignerService} from '../../../services/crud/sofia/list-designer.service';
-import {DataTransferService} from '../../../services/crud/sofia/data-transfer.service';
+import {ListDesignerService} from '../../../services/crud/list-designer.service';
+import {DataTransferService} from '../../../services/crud/data-transfer.service';
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
-import {TableService} from '../../../services/crud/sofia/table.service';
-import {ViewService} from '../../../services/crud/sofia/view.service';
-import {AppViewService} from '../../../services/crud/sofia/app-view.service';
-import {MenuService} from '../../../services/crud/sofia/menu.service';
-import {TableComponentDesignerService} from '../../../services/crud/sofia/table-component-designer.service';
-import {LanguageService} from '../../../services/crud/sofia/language.service';
-import {RoleService} from '../../../services/crud/sofia/role.service';
-import {UserService} from '../../../services/crud/sofia/user.service';
-import {ChartDesignerService} from '../../../services/crud/sofia/chart-designer.service';
-import {ReportDesignerService} from '../../../services/crud/sofia/report-designer.service';
-import {DashboardDesignerService} from '../../../services/crud/sofia/dashboard-designer.service';
-import {HtmlDashboardDesignerService} from '../../../services/crud/sofia/html-dashboard-designer.service';
-import {XlsImportDesignerService} from '../../../services/crud/sofia/xls-import-designer.service';
-import {SearchDesignerService} from '../../../services/crud/sofia/search-designer.service';
-import {CustomQueryDesignerService} from '../../../services/crud/sofia/custom-query-designer.service';
-import {InfoCardDesignerService} from '../../../services/crud/sofia/info-card-designer.service';
+import {TableService} from '../../../services/crud/table.service';
+import {ViewService} from '../../../services/crud/view.service';
+import {AppViewService} from '../../../services/crud/app-view.service';
+import {MenuService} from '../../../services/crud/menu.service';
+import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
+import {LanguageService} from '../../../services/crud/language.service';
+import {RoleService} from '../../../services/crud/role.service';
+import {UserService} from '../../../services/crud/user.service';
+import {ChartDesignerService} from '../../../services/crud/chart-designer.service';
+import {ReportDesignerService} from '../../../services/crud/report-designer.service';
+import {DashboardDesignerService} from '../../../services/crud/dashboard-designer.service';
+import {HtmlDashboardDesignerService} from '../../../services/crud/html-dashboard-designer.service';
+import {XlsImportDesignerService} from '../../../services/crud/xls-import-designer.service';
+import {SearchDesignerService} from '../../../services/crud/search-designer.service';
+import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
+import {InfoCardDesignerService} from '../../../services/crud/info-card-designer.service';
 
 @Component({
   selector: 'app-sofia-import-export-form',

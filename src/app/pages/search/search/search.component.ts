@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
-import {SearchService} from '../../../services/crud/sofia/search.service';
+import {SearchService} from '../../../services/crud/search.service';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 
 @Component({

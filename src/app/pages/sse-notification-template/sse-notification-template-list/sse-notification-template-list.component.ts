@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
-import {SseNotificationTemplateService} from '../../../services/crud/sofia/sse-notification-template.service';
+import {SseNotificationTemplateService} from '../../../services/crud/sse-notification-template.service';
 
 @Component({
   selector: 'app-sse-notification-template-list',

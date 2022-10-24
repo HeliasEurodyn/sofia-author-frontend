@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/crud/sofia/user.service';
+import {UserService} from '../../services/crud/user.service';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../../services/system/sofia/auth/auth.service';
 import {NotificationService} from '../../services/system/sofia/notification.service';
 import {Router} from '@angular/router';
 import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
-import {SettingsService} from '../../services/crud/sofia/settings.service';
+import {SettingsService} from '../../services/crud/settings.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({

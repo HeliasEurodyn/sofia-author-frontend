@@ -8,15 +8,15 @@ import {ComponentPersistEntityFieldDTO} from '../../../dtos/sofia/component/comp
 import {ComponentPersistEntityDTO} from '../../../dtos/sofia/component/component-persist-entity-dto';
 import {Location} from '@angular/common';
 import {ListActionButton} from '../../../dtos/sofia/list/list-action-button';
-import {ListDesignerService} from '../../../services/crud/sofia/list-designer.service';
-import {TableComponentDesignerService} from '../../../services/crud/sofia/table-component-designer.service';
+import {ListDesignerService} from '../../../services/crud/list-designer.service';
+import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
 import {FormScript} from '../../../dtos/sofia/form/form-script';
 import {FormCss} from '../../../dtos/sofia/form/form-css';
 import {ListCssDTO} from '../../../dtos/sofia/list/list-css-dto';
 import {ListScriptDTO} from '../../../dtos/sofia/list/list-script-dto';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {AccessControlDto} from '../../../dtos/sofia/security/access-control-dto';
-import {RoleService} from '../../../services/crud/sofia/role.service';
+import {RoleService} from '../../../services/crud/role.service';
 import 'brace';
 import 'brace/mode/javascript';
 import 'brace/mode/css';
@@ -24,7 +24,7 @@ import 'brace/mode/text';
 import 'brace/theme/github';
 import 'brace/theme/chrome';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
-import {BusinessUnitDesignerService} from '../../../services/crud/sofia/business-unit-designer.service';
+import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
 import {BusinessUnitDTO} from '../../../dtos/sofia/business-unit/business-unit-dto';
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/sofia/command-navigator.service';
-import {DataTransferService} from '../../../services/crud/sofia/data-transfer.service';
+import {DataTransferService} from '../../../services/crud/data-transfer.service';
 import {NotificationService} from '../../../services/system/sofia/notification.service';
 
 @Component({
