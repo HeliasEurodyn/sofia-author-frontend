@@ -27,13 +27,14 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
           return throwError(errorResponce);
         }
 
+        if (errorResponce?.error?.isVisible === 'true' && errorResponce?.error?.message != null) {
+          this.httpErrorResponceService.setNewErrorMessage(errorResponce?.error?.message);
+          return throwError(errorResponce);
+        }
+
         switch (errorResponce.status) {
           case 400:
-            if ( errorResponce?.error?.isVisible === 'true' ) {
-              this.httpErrorResponceService.setNewErrorMessage(errorResponce.error.message);
-            } else {
-              this.httpErrorResponceService.setNewErrorMessage('<b>400</b> Bad Request 400');
-            }
+             this.httpErrorResponceService.setNewErrorMessage('<b>400</b> Bad Request 400');
             // this.notificationService.showNotification('top', 'center', 'alert-danger',
             //   'fa-thumbs-down', '<b>Error 400</b> Bad Request 400');
             break;
