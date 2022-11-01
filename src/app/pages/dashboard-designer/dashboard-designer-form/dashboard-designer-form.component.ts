@@ -11,15 +11,13 @@ import {InfoCardDTO} from '../../../dtos/info-card/info-card-dto';
 import {DashboardDesignerService} from '../../../services/crud/dashboard-designer.service';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {PageComponent} from '../../page/page-component';
-import {ListService} from '../../../services/crud/list.service';
 import {ListDTO} from '../../../dtos/list/list-dto';
 import {DashboardAreaDTO} from '../../../dtos/dashboard/dashboard-area-dto';
-import {UserService} from '../../../services/crud/user.service';
-import {UserGroupService} from '../../../services/crud/user-group.service';
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {HtmlDashboardDTO} from '../../../dtos/html-dashboard/html-dashboard-dto';
 import {HtmlDashboardDesignerService} from '../../../services/crud/html-dashboard-designer.service';
 import {RoleService} from '../../../services/crud/role.service';
+import {ListDesignerService} from '../../../services/crud/list-designer.service';
 
 @Component({
   selector: 'app-dashboard-designer-form',
@@ -44,7 +42,7 @@ export class DashboardDesignerFormComponent extends PageComponent implements OnI
     private chartDesignerService: ChartDesignerService,
     private htmlDashboardService: HtmlDashboardDesignerService,
     private infoCardDesignerService: InfoCardDesignerService,
-    private listService: ListService,
+    private listService: ListDesignerService,
     private navigatorService: CommandNavigatorService,
     private activatedRoute: ActivatedRoute,
     private roleService: RoleService,
@@ -74,7 +72,7 @@ export class DashboardDesignerFormComponent extends PageComponent implements OnI
     this.refreshCharts();
     this.refreshInfoCards();
     this.refreshLists();
-    this.refreshComponents();
+    this.refreshRoles();
     this.refreshHtmlsDashboard();
   }
 
@@ -106,7 +104,7 @@ export class DashboardDesignerFormComponent extends PageComponent implements OnI
     });
   }
 
-  refreshComponents() {
+  refreshRoles() {
     this.roleService.get().subscribe(data => {
       this.roles = data;
     });

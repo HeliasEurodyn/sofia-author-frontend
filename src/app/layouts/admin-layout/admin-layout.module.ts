@@ -6,7 +6,6 @@ import {FormsModule} from '@angular/forms';
 import {AdminLayoutRoutes} from './admin-layout.routing';
 
 import {UserComponent} from '../../pages/user/user.component';
-import {TableComponent} from '../../pages/table/table.component';
 import {ACE_CONFIG, AceConfigInterface, AceModule} from 'ngx-ace-wrapper';
 
 const DEFAULT_ACE_CONFIG: AceConfigInterface = {
@@ -19,9 +18,7 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     FormsModule,
     AceModule
   ],
-  declarations: [
-    UserComponent,
-    TableComponent],
+  declarations: [UserComponent],
   providers: [
     {
       provide: ACE_CONFIG,
