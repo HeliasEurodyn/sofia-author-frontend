@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CrudService} from './common/crud.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';

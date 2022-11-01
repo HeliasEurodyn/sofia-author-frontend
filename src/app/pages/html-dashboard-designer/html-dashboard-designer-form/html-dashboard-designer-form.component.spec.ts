@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HtmlDashboardDesignerFormComponent } from './html-dashboard-designer-form.component';
+import {HtmlDashboardDesignerFormComponent} from './html-dashboard-designer-form.component';
 
 describe('HtmlDashboardDesignerFormComponent', () => {
   let component: HtmlDashboardDesignerFormComponent;

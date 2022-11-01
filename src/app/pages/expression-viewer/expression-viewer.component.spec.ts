@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExpressionViewerComponent } from './expression-viewer.component';
+import {ExpressionViewerComponent} from './expression-viewer.component';
 
 describe('ExpressionViewerComponent', () => {
   let component: ExpressionViewerComponent;

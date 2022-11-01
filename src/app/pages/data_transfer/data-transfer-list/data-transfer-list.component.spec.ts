@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DataTransferListComponent } from './data-transfer-list.component';
+import {DataTransferListComponent} from './data-transfer-list.component';
 
 describe('SofiaImportExportListComponent', () => {
   let component: DataTransferListComponent;

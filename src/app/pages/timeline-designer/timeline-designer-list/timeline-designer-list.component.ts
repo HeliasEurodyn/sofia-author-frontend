@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {TimelineDesignerService} from '../../../services/crud/timeline-designer.service';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';

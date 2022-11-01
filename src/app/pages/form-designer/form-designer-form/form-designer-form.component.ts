@@ -13,7 +13,9 @@ import {FormScript} from '../../../dtos/form/form-script';
 import {ActivatedRoute} from '@angular/router';
 import {FormControlTableDTO} from '../../../dtos/form/form-control-table-d-t-o';
 import {FormControlTableControlDTO} from '../../../dtos/form/form-control-table-control-d-t-o';
-import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/component/component-persist-entity-field-assignment-dto';
+import {
+  ComponentPersistEntityFieldAssignmentDTO
+} from '../../../dtos/component/component-persist-entity-field-assignment-dto';
 import {Location} from '@angular/common';
 import {FormDesignerService} from '../../../services/crud/form-designer.service';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';

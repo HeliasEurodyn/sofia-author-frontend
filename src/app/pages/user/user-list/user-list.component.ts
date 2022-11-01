@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
-import {NotificationService} from '../../../services/system/notification.service';
 import {PageComponent} from '../../page/page-component';
 import {UserService} from '../../../services/crud/user.service';
 

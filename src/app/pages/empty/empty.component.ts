@@ -1,7 +1,5 @@
-import {AfterContentInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ReportDesignerService} from '../../services/crud/report-designer.service';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import * as d3 from 'd3';
-import {consoleTestResultHandler} from 'tslint/lib/test';
 
 @Component({
   selector: 'app-empty',

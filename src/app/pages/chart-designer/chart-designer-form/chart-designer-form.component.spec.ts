@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChartDesignerFormComponent } from './chart-designer-form.component';
+import {ChartDesignerFormComponent} from './chart-designer-form.component';
 
 describe('ChartDesignerFormComponent', () => {
   let component: ChartDesignerFormComponent;

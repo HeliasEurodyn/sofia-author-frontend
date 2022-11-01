@@ -1,5 +1,4 @@
 import {BaseDTO} from '../common/base-dto';
-import {ListComponentFieldDTO} from '../list/list-component-field-d-t-o';
 
 export class DataTransferDTO extends BaseDTO {
   public name: string;

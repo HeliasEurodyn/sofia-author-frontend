@@ -3,7 +3,6 @@ import {BaseDTO} from '../common/base-dto';
 import {FormTabDto} from './form-tab-dto';
 import {FormScript} from './form-script';
 import {FormPopupDto} from './form-popup-dto';
-import {ListActionButton} from '../list/list-action-button';
 import {FormActionButton} from './form-action-button';
 import {FormCss} from './form-css';
 import {AccessControlDto} from '../security/access-control-dto';

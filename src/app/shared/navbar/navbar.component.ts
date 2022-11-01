@@ -4,7 +4,8 @@ import {
   Component,
   ComponentRef,
   ElementRef,
-  EmbeddedViewRef, OnInit,
+  EmbeddedViewRef,
+  OnInit,
   Renderer2,
   ViewChild
 } from '@angular/core';
@@ -20,7 +21,7 @@ import {UserDto} from '../../dtos/user/user-dto';
 import {ListSearchService} from '../../services/system/list-search.service';
 import {LanguageDTO} from '../../dtos/language/language-dto';
 import {LanguageService} from '../../services/system/language.service';
-import { UserService } from 'app/services/crud/user.service';
+import {UserService} from 'app/services/crud/user.service';
 
 
 @Component({

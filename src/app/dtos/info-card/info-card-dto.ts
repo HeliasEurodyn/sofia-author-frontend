@@ -1,5 +1,4 @@
 import {BaseDTO} from '../common/base-dto';
-import {ListScriptDTO} from '../list/list-script-dto';
 import {InfoCardScriptDTO} from './info-card-script-dto';
 
 export class InfoCardDTO extends BaseDTO {

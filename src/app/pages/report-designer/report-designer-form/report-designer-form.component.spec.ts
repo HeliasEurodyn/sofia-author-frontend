@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReportDesignerFormComponent } from './report-designer-form.component';
+import {ReportDesignerFormComponent} from './report-designer-form.component';
 
 describe('ReportDesignerFormComponent', () => {
   let component: ReportDesignerFormComponent;

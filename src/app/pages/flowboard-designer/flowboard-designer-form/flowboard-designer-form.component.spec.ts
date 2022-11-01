@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FlowboardDesignerFormComponent } from './flowboard-designer-form.component';
+import {FlowboardDesignerFormComponent} from './flowboard-designer-form.component';
 
 describe('FlowboardDesignerFormComponent', () => {
   let component: FlowboardDesignerFormComponent;

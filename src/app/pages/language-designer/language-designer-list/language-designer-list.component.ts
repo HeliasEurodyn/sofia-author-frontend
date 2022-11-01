@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
+import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 import {LanguageService} from '../../../services/crud/language.service';

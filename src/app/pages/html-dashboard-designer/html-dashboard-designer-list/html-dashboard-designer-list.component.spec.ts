@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HtmlDashboardDesignerListComponent } from './html-dashboard-designer-list.component';
+import {HtmlDashboardDesignerListComponent} from './html-dashboard-designer-list.component';
 
 describe('HtmlDashboardDesignerListComponent', () => {
   let component: HtmlDashboardDesignerListComponent;

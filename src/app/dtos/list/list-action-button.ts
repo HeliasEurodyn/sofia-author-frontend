@@ -1,5 +1,4 @@
 import {BaseDTO} from '../common/base-dto';
-import {ListComponentFieldTranslationDTO} from './translation/list-component-field-translation-dto';
 import {ListActionButtonTranslationDTO} from './translation/list-action-button-translation-dto';
 
 export class ListActionButton extends BaseDTO {

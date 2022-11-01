@@ -1,5 +1,5 @@
 import {CommandParserService} from '../../services/system/command-parser.service';
-import {EventEmitter, Injectable, Injector, Input} from '@angular/core';
+import {EventEmitter, Injectable, Injector} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 

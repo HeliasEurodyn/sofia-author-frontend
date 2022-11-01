@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListDesignerFormComponent } from './list-designer-form.component';
+import {ListDesignerFormComponent} from './list-designer-form.component';
 
 describe('ListDesignerFormComponent', () => {
   let component: ListDesignerFormComponent;

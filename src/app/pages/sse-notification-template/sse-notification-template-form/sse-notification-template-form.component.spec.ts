@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SseNotificationTemplateFormComponent } from './sse-notification-template-form.component';
+import {SseNotificationTemplateFormComponent} from './sse-notification-template-form.component';
 
 describe('SseNotificationTemplateFormComponent', () => {
   let component: SseNotificationTemplateFormComponent;

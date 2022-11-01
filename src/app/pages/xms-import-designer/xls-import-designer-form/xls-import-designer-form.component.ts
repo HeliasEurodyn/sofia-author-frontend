@@ -8,7 +8,9 @@ import {PageComponent} from '../../page/page-component';
 import {ActivatedRoute} from '@angular/router';
 import {ComponentPersistEntityFieldDTO} from '../../../dtos/component/component-persist-entity-field-dto';
 import {ComponentPersistEntityDTO} from '../../../dtos/component/component-persist-entity-dto';
-import {ComponentPersistEntityFieldAssignmentDTO} from '../../../dtos/component/component-persist-entity-field-assignment-dto';
+import {
+  ComponentPersistEntityFieldAssignmentDTO
+} from '../../../dtos/component/component-persist-entity-field-assignment-dto';
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import 'brace';

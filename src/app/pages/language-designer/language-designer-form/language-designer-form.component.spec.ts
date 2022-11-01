@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LanguageDesignerFormComponent } from './language-designer-form.component';
+import {LanguageDesignerFormComponent} from './language-designer-form.component';
 
 describe('LanguageDesignerFormComponent', () => {
   let component: LanguageDesignerFormComponent;

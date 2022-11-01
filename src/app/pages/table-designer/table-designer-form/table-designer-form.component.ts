@@ -5,7 +5,7 @@ import {TableService} from '../../../services/crud/table.service';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {TableFieldDTO} from '../../../dtos/table/table-field-dto';
-import { Location } from '@angular/common'
+import {Location} from '@angular/common'
 import {NotificationService} from '../../../services/system/notification.service';
 
 @Component({

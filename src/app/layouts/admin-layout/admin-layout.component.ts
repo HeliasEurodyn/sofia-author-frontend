@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminLayoutRoutes} from './admin-layout.routing';
 
 @Component({
   selector: 'app-admin-layout',

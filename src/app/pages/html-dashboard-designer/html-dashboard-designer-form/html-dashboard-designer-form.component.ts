@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
-import {CustomQueryDTO} from '../../../dtos/customquery/custom-query-dto';
 import {ActivatedRoute} from '@angular/router';
-import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
 import {Location} from '@angular/common';
 import {HtmlDashboardDTO} from '../../../dtos/html-dashboard/html-dashboard-dto';
 import {HtmlDashboardDesignerService} from '../../../services/crud/html-dashboard-designer.service';

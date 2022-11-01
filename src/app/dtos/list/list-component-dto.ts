@@ -1,6 +1,4 @@
-import {ComponentDTO} from '../component/componentDTO';
 import {BaseDTO} from '../common/base-dto';
-import {ListComponentFieldDTO} from './list-component-field-d-t-o';
 
 export class ListComponentDTO extends BaseDTO {
 

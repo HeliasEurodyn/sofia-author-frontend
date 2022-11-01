@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LanguageDesignerListComponent } from './language-designer-list.component';
+import {LanguageDesignerListComponent} from './language-designer-list.component';
 
 describe('LanguageDesignerListComponent', () => {
   let component: LanguageDesignerListComponent;

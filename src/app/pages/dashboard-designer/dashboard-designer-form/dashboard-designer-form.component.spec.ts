@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DashboardDesignerFormComponent } from './dashboard-designer-form.component';
+import {DashboardDesignerFormComponent} from './dashboard-designer-form.component';
 
 describe('DashboardDesignerFormComponent', () => {
   let component: DashboardDesignerFormComponent;

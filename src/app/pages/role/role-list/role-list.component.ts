@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {UserGroupService} from '../../../services/crud/user-group.service';
+import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {RoleService} from '../../../services/crud/role.service';
 import {PageComponent} from '../../page/page-component';

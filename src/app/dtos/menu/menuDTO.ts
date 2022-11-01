@@ -1,6 +1,5 @@
 import {BaseDTO} from '../common/base-dto';
 import {AccessControlDto} from '../security/access-control-dto';
-import {ListTranslationDTO} from '../list/translation/list-translation-dto';
 import {MenuTranslationDTO} from './menu-translation-dto';
 
 export class MenuDTO extends BaseDTO {

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BusinessUnitDesignerFormComponent } from './business-unit-designer-form.component';
+import {BusinessUnitDesignerFormComponent} from './business-unit-designer-form.component';
 
 describe('BusinessUnitDesginerFormComponent', () => {
   let component: BusinessUnitDesignerFormComponent;

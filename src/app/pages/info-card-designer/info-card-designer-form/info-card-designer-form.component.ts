@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as uuid from 'uuid';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
@@ -8,8 +7,6 @@ import {InfoCardDesignerService} from '../../../services/crud/info-card-designer
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {ListScriptDTO} from '../../../dtos/list/list-script-dto';
 import {BaseDTO} from '../../../dtos/common/base-dto';
-import {ListDTO} from '../../../dtos/list/list-dto';
-import {FormScript} from '../../../dtos/form/form-script';
 import {InfoCardScriptDTO} from '../../../dtos/info-card/info-card-script-dto';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';

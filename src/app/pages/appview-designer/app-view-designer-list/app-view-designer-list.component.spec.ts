@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppViewDesignerListComponent } from './app-view-designer-list.component';
+import {AppViewDesignerListComponent} from './app-view-designer-list.component';
 
 describe('AppViewDesignerListComponent', () => {
   let component: AppViewDesignerListComponent;

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { XlsImportDesignerFormComponent } from './xls-import-designer-form.component';
+import {XlsImportDesignerFormComponent} from './xls-import-designer-form.component';
 
 describe('XlsImportDesignerFormComponent', () => {
   let component: XlsImportDesignerFormComponent;

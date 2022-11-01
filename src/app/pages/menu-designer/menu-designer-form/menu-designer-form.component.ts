@@ -6,8 +6,6 @@ import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {BaseDTO} from '../../../dtos/common/base-dto';
 import {Location} from '@angular/common'
-import {UserService} from '../../../services/crud/user.service';
-import {UserGroupService} from '../../../services/crud/user-group.service';
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 

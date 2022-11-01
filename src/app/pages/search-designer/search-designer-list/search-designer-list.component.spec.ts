@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SearchDesignerListComponent } from './search-designer-list.component';
+import {SearchDesignerListComponent} from './search-designer-list.component';
 
 describe('SearchDesignerListComponent', () => {
   let component: SearchDesignerListComponent;

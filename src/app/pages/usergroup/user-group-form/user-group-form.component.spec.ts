@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserGroupFormComponent } from './user-group-form.component';
+import {UserGroupFormComponent} from './user-group-form.component';
 
 describe('UserGroupFormComponent', () => {
   let component: UserGroupFormComponent;
