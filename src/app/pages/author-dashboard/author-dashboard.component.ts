@@ -4,8 +4,6 @@ import {NotificationService} from '../../services/system/notification.service';
 import {PageComponent} from '../page/page-component';
 import {UserService} from '../../services/crud/user.service';
 import {CommandNavigatorService} from '../../services/system/command-navigator.service';
-import {ListService} from '../../services/crud/list.service';
-import {FormService} from '../../services/crud/form.service';
 import {FormDesignerService} from '../../services/crud/form-designer.service';
 import {ListDesignerService} from '../../services/crud/list-designer.service';
 

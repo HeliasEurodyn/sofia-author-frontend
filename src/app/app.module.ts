@@ -28,9 +28,6 @@ import {ViewDesignerFormComponent} from './pages/view-designer/view-designer-for
 import {AppViewDesignerFormComponent} from './pages/appview-designer/app-view-designer-form/app-view-designer-form.component';
 import {AppViewDesignerListComponent} from './pages/appview-designer/app-view-designer-list/app-view-designer-list.component';
 import {NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DatePickerComponent} from './form-controlls/date-picker/date-picker.component';
-import {NgbDateFRParserFormatter} from './form-controlls/date-picker/ngb-date-frparser-formatter';
-import {NgbUTCStringAdapter} from './form-controlls/date-picker/ngb-utcstring-adapter';
 import {SofiaDateDirective} from './directives/sofia-date.directive';
 import {NgxMaskModule} from 'ngx-mask';
 import {DatePipe} from '@angular/common';
@@ -39,15 +36,9 @@ import {UserListComponent} from './pages/user/user-list/user-list.component';
 import {AuthenticationHeaderInterceptor} from './interceptors/authentication-header-interceptor';
 import {HttpRequestLoadingInterceptor} from './interceptors/http-request-loading.interceptor';
 import {HttpRequestErrorInterceptor} from './interceptors/http-request-error.interceptor';
-import {ListSelectorComponent} from './form-controlls/list-selector/list-selector.component';
 import {FormDesignerFormComponent} from './pages/form-designer/form-designer-form/form-designer-form.component';
 import {FormDesignerListComponent} from './pages/form-designer/form-designer-list/form-designer-list.component';
 import {FormDesignerFormToolBoxComponent} from './pages/form-designer/form-designer-form-tool-box/form-designer-form-tool-box.component';
-
-import {NumericInputComponent} from './form-controlls/numeric-input/numeric-input.component';
-import {VarcharInputComponent} from './form-controlls/varchar-input/varchar-input.component';
-import {TextInputComponent} from './form-controlls/text-input/text-input.component';
-
 import {ChartDesignerFormComponent} from './pages/chart-designer/chart-designer-form/chart-designer-form.component';
 import {ChartDesignerListComponent} from './pages/chart-designer/chart-designer-list/chart-designer-list.component';
 import {InfoCardDesignerFormComponent} from './pages/info-card-designer/info-card-designer-form/info-card-designer-form.component';
@@ -66,17 +57,13 @@ import {XlsImportDesignerListComponent} from './pages/xms-import-designer/xls-im
 import { SearchDesignerFormComponent } from './pages/search-designer/search-designer-form/search-designer-form.component';
 import { SearchDesignerListComponent } from './pages/search-designer/search-designer-list/search-designer-list.component';
 import {Title} from '@angular/platform-browser';
-import { ComboBoxComponent } from './form-controlls/combo-box/combo-box.component';
 import { UserGroupListComponent } from './pages/usergroup/user-group-list/user-group-list.component';
 import { UserGroupFormComponent } from './pages/usergroup/user-group-form/user-group-form.component';
 import { CustomQueryFormComponent } from './pages/custom-query/custom-query-form/custom-query-form.component';
 import { CustomQueryListComponent } from './pages/custom-query/custom-query-list/custom-query-list.component';
 import { SecurityListComponent } from './pages/security/security-list/security-list.component';
 import { SecurityFormComponent } from './pages/security/security-form/security-form.component';
-import { AutocompleteComboBoxComponent } from './form-controlls/autocomplete-combo-box/autocomplete-combo-box.component';
-import { CheckBoxComponent } from './form-controlls/check-box/check-box.component';
 import { CallBackComponent } from './pages/call-back/call-back.component';
-
 import { HtmlDashboardDesignerFormComponent } from './pages/html-dashboard-designer/html-dashboard-designer-form/html-dashboard-designer-form.component';
 import { HtmlDashboardDesignerListComponent } from './pages/html-dashboard-designer/html-dashboard-designer-list/html-dashboard-designer-list.component';
 import { SafeHtmlPipe } from './services/system/safe-html.pipe';
@@ -87,15 +74,12 @@ import { LanguageDesignerListComponent } from './pages/language-designer/languag
 import { LanguageDesignerFormComponent } from './pages/language-designer/language-designer-form/language-designer-form.component';
 import { ListDesignerTranslationFormComponent } from './pages/list-designer/list-designer-translation-form/list-designer-translation-form.component';
 import {AceModule} from 'ngx-ace-wrapper';
-
 import {ChartsModule} from 'ng2-charts';
 import { MenuDesignerTranslationFormComponent } from './pages/menu-designer/menu-designer-translation-form/menu-designer-translation-form.component';
 import { DataTransferListComponent } from './pages/data_transfer/data-transfer-list/data-transfer-list.component';
 import { DataTransferFormComponent } from './pages/data_transfer/data-transfer-form/data-transfer-form.component';
 import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { PasswordInputComponent } from './form-controlls/password-input/password-input.component';
-import { FileSelectorComponent } from './form-controlls/file-selector/file-selector.component';
 import { TimelineDesignerListComponent } from './pages/timeline-designer/timeline-designer-list/timeline-designer-list.component';
 import { TimelineDesignerFormComponent } from './pages/timeline-designer/timeline-designer-form/timeline-designer-form.component';
 import { SseNotificationTemplateListComponent } from './pages/sse-notification-template/sse-notification-template-list/sse-notification-template-list.component';
@@ -119,17 +103,12 @@ import { BusinessUnitDesignerListComponent } from './pages/business-unit-designe
     ViewDesignerFormComponent,
     AppViewDesignerFormComponent,
     AppViewDesignerListComponent,
-    DatePickerComponent,
     SofiaDateDirective,
     UserFormComponent,
     UserListComponent,
-    ListSelectorComponent,
     FormDesignerFormComponent,
     FormDesignerListComponent,
     FormDesignerFormToolBoxComponent,
-    NumericInputComponent,
-    VarcharInputComponent,
-    TextInputComponent,
     ChartDesignerFormComponent,
     ChartDesignerListComponent,
     InfoCardDesignerFormComponent,
@@ -147,15 +126,12 @@ import { BusinessUnitDesignerListComponent } from './pages/business-unit-designe
     XlsImportDesignerListComponent,
     SearchDesignerFormComponent,
     SearchDesignerListComponent,
-    ComboBoxComponent,
     UserGroupListComponent,
     UserGroupFormComponent,
     CustomQueryFormComponent,
     CustomQueryListComponent,
     SecurityListComponent,
     SecurityFormComponent,
-    AutocompleteComboBoxComponent,
-    CheckBoxComponent,
     CallBackComponent,
     HtmlDashboardDesignerFormComponent,
     HtmlDashboardDesignerListComponent,
@@ -171,8 +147,6 @@ import { BusinessUnitDesignerListComponent } from './pages/business-unit-designe
     DataTransferFormComponent,
     AuthorDashboardComponent,
     SettingsComponent,
-    PasswordInputComponent,
-    FileSelectorComponent,
     TimelineDesignerListComponent,
     TimelineDesignerFormComponent,
     SseNotificationTemplateListComponent,
@@ -200,14 +174,6 @@ import { BusinessUnitDesignerListComponent } from './pages/business-unit-designe
   ],
   providers: [
     DatePipe,
-    {
-      provide: NgbDateParserFormatter,
-      useClass: NgbDateFRParserFormatter
-    },
-    {
-      provide: NgbDateAdapter,
-      useClass: NgbUTCStringAdapter
-    },
     {provide: HTTP_INTERCEPTORS, useClass: AuthenticationHeaderInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpRequestLoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpRequestErrorInterceptor, multi: true},

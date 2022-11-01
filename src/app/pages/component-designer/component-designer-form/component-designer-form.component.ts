@@ -11,7 +11,6 @@ import {ViewService} from '../../../services/crud/view.service';
 import {AppViewService} from '../../../services/crud/app-view.service';
 import {Location} from '@angular/common';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
-import {MenuFieldDTO} from '../../../dtos/menu/menuDTO';
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 
