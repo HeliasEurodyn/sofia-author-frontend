@@ -1,0 +1,170 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          List Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> List Designer List </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button (click)="clearCache()" class="btn btn-outline-success">
+        <i class="fas fa-trash-alt"></i> Clear Cache
+      </button>
+      <button (click)="openNewPage()" class="btn btn-outline-primary">
+        <i class="fa fa-plus-circle"></i> New
+      </button>
+      <button (click)="showBusinessUnitsGrouping()" class="btn btn-outline-primary" [hidden]="businessUnits.length==0">
+        <i class="fa fa-layer-group"></i> {{showBusinessUnitButtonTitle}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane form-area">
+  <div class="row">
+    <div class="col">
+      <div class="row" style="padding-right: 10px;padding-left: 10px;">
+
+        <!-- Groups -->
+        <div *ngIf="isGroupContentDivVisible() && showBusinessUnitGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
+             style="padding-right: 5px;padding-left: 5px;">
+          <div class="row">
+            <div *ngIf="isGroupContentDivVisible()" style="margin-bottom: 10px;" class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row formnav">
+                    <div class="col-12">
+                      <div class="pull-left">
+                        <h5 class="card-title" style="margin-bottom: 0px;">
+                          <i class="fas fa-briefcase"></i>
+                          Categorization By Business Units
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul *ngIf="businessUnits?.length > 0">
+                    <li *ngFor="let item of businessUnits">
+                      <div class="btn-group">
+                        <button type="button"
+                                class="btn left-group-button btn-outline-default active-header"
+                                style="padding: 2px;font-size: 10px;border: 2px solid #959494 !important; color: #959494;">
+                          <i class="fas fa-circle" style="color: #959494;"></i>
+                        </button>
+                        <button (click)="filterGroup(item)"
+                                class="btn left-group-button btn-outline-default"
+                                style="border: 1px solid #66615b !important; text-align: left;">
+                          {{item}}
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="row" *ngIf="selectedBusinessUnit!=null">
+                    <div class="col-12">
+                      <h6 class="float-left"> Selected Business Unit: {{selectedBusinessUnit}}
+                        <div (click)="clearFilterGroup()"
+                              style="color: #ff733e;cursor: pointer;">
+                      <i class="fas fa-trash"></i> Clear
+                    </div>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- List -->
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="numbers pull-left"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="">
+                <table class="table table-striped">
+                  <thead class=" text-primary">
+                  <tr>
+                    <th class="text-left">Actions</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>Created at</th>
+                    <th>Component Id</th>
+                    <th>Component Name</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    *ngIf="filteredTableData == undefined || filteredTableData.length === 0 ">
+                    <td class="empty-table-row" colspan="12">Empty!</td>
+                  </tr>
+                  <tr *ngFor="let row of filteredTableData; ">
+                    <td>
+                      <button (click)="openPage( row['id'])" class="btn btn-outline-success btn-icon btn-sm"
+                              title="Edit"
+                              type="button">
+                        <i class="fa fa-pencil-alt"></i>
+                      </button>
+                      <button (click)="openTranslationPage( row['id'])" class="btn btn-outline-info btn-icon btn-sm"
+                              title="Translate"
+                              type="button">
+                        <i class="fa fa-globe-europe"></i>
+                      </button>
+                      <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                           style="margin-top: 4px;display:none;">
+                        <button (click)="myDrop.open();"
+                                class="btn btn-outline-default btn-icon btn-sm"
+                                title="More">
+                          <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div ngbDropdownMenu>
+                          <button ngbDropdownAnchor (click)="delete(row)"
+                                  class="text-danger menu-button">
+                            <i class="fa fa-times"></i> Delete
+                          </button>
+                          <div ngbDropdownAnchor class="dropdown-divider"></div>
+                          <button (click)="clone( row['id'])"
+                                  class="text-success menu-button">
+                            <i class="fa fa-clone"></i> Copy As New
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input [(ngModel)]="row['component']['id']" class="form-control transparent-input" readonly
+                             type="text">
+                    </td>
+                    <td>
+                      <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                             type="text">
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

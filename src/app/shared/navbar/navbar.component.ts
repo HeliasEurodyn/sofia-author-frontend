@@ -4,7 +4,7 @@ import {
   Component,
   ComponentRef,
   ElementRef,
-  EmbeddedViewRef, OnDestroy,
+  EmbeddedViewRef,
   OnInit,
   Renderer2,
   ViewChild
@@ -12,17 +12,17 @@ import {
 import {ROUTES} from '../sidebar/sidebar.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {CommandNavigatorService} from '../../services/system/sofia/command-navigator.service';
-import {LoadingService} from '../../services/system/sofia/loading.service';
+import {CommandNavigatorService} from '../../services/system/command-navigator.service';
+import {LoadingService} from '../../services/system/loading.service';
 import {delay} from 'rxjs/operators';
-import {HttpErrorResponceService} from '../../services/system/sofia/http-error-responce.service';
-import {NotificationService} from '../../services/system/sofia/notification.service';
-import {UserDto} from '../../dtos/sofia/user/user-dto';
-import {ListSearchService} from '../../services/system/sofia/list-search.service';
-import {LanguageDTO} from '../../dtos/sofia/language/language-dto';
-import {LanguageService} from '../../services/system/sofia/language.service';
-import { UserService } from 'app/services/crud/sofia/user.service';
-import {SseNotificationService} from '../../services/crud/sofia/sse-notification.service';
+import {HttpErrorResponceService} from '../../services/system/http-error-responce.service';
+import {NotificationService} from '../../services/system/notification.service';
+import {UserDto} from '../../dtos/user/user-dto';
+import {ListSearchService} from '../../services/system/list-search.service';
+import {LanguageDTO} from '../../dtos/language/language-dto';
+import {LanguageService} from '../../services/system/language.service';
+import {UserService} from 'app/services/crud/user.service';
+
 
 @Component({
   moduleId: module.id,
@@ -31,7 +31,7 @@ import {SseNotificationService} from '../../services/crud/sofia/sse-notification
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NavbarComponent implements OnInit, AfterViewInit {
   public listTitles: any[];
   public location: Location;
   public nativeElement: Node;
@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
               private activatedRoute: ActivatedRoute,
               private listSearchService: ListSearchService,
               private userService: UserService,
-              private sseNotificationService: SseNotificationService
+
   ) {
     this.location = location;
     this.nativeElement = element.nativeElement;
@@ -104,20 +104,12 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.listenToLoading();
 
     this.userDto = JSON.parse(localStorage.getItem('loggedin_user'));
-    // this.sseNotificationService.subscribe(this.userDto.id, this.notifySSEServerEvent);
-  }
 
-  notifySSEServerEvent = (event) => {
-    this.notificationService.showNotification('top', 'center', 'alert-info', 'fa-id-card', '<b>Server Event</b> ' + event.data);
   }
 
   ngAfterViewInit(): void {
     this.insertComponentModal.nativeElement.addEventListener('click', this.onModalClosingActions.bind(this));
     this.insertComponentModal.nativeElement.addEventListener('keyup', this.onModalClosingActions.bind(this));
-  }
-
-  ngOnDestroy(): void {
-    // this.sseNotificationService.closeEventSource();
   }
 
   onModalClosingActions(event) {

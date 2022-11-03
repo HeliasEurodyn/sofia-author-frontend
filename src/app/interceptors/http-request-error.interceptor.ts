@@ -3,8 +3,8 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {HttpErrorResponceService} from '../services/system/sofia/http-error-responce.service';
-import {NotificationService} from '../services/system/sofia/notification.service';
+import {HttpErrorResponceService} from '../services/system/http-error-responce.service';
+import {NotificationService} from '../services/system/notification.service';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -27,9 +27,14 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
           return throwError(errorResponce);
         }
 
+        if (errorResponce?.error?.isVisible === 'true' && errorResponce?.error?.message != null) {
+          this.httpErrorResponceService.setNewErrorMessage(errorResponce?.error?.message);
+          return throwError(errorResponce);
+        }
+
         switch (errorResponce.status) {
           case 400:
-            this.httpErrorResponceService.setNewErrorMessage('<b>400</b> Bad Request 400');
+             this.httpErrorResponceService.setNewErrorMessage('<b>400</b> Bad Request 400');
             // this.notificationService.showNotification('top', 'center', 'alert-danger',
             //   'fa-thumbs-down', '<b>Error 400</b> Bad Request 400');
             break;
