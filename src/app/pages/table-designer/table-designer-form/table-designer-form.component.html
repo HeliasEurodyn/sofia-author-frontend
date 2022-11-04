@@ -115,7 +115,7 @@
                 </button>
               </td>
               <td>
-                <input type="text" class="form-control transparent-input" [(ngModel)]="row.name">
+                <input type="text" class="form-control transparent-input" [(ngModel)]="row.name" [patterns]="customTableNamePattern" [mask]="customTableNameMask">
               </td>
               <td>
                 <select [(ngModel)]="row.type" class="transparent-input">
