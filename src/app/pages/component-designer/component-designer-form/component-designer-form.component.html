@@ -192,7 +192,9 @@
                              style="background-color: #f9f9f9;border: 1px solid #DDDDDD;"
                              (focusout)=
                                "componentPersistEntity.code = defineComponentCode( this.componentDTO.componentPersistEntityList, componentPersistEntity);"
-                             [(ngModel)]="componentPersistEntity.code">
+                             [(ngModel)]="componentPersistEntity.code"
+                             [patterns]="componentPersistEntityCodePattern"
+                             [mask]="componentPersistEntityCodeMask">
 
                       <input type="text"
                              placeholder="Custom Join Selector"
@@ -252,10 +254,18 @@
                     {{field.persistEntityField?.name}}({{field.persistEntityField.type}})
                   </td>
                   <td>
-                    <input type="text" class="form-control" [(ngModel)]="field.locateStatement">
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="field.locateStatement"
+                           [patterns]="componentPersistEntityFieldStatementsPattern"
+                           [mask]="componentPersistEntityFieldStatementsMask" >
                   </td>
                   <td>
-                    <input type="text" class="form-control" [(ngModel)]="field.saveStatement">
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="field.saveStatement"
+                           [patterns]="componentPersistEntityFieldStatementsPattern"
+                           [mask]="componentPersistEntityFieldStatementsMask">
                   </td>
                 </tr>
                 </tbody>

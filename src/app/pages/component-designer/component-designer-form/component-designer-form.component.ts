@@ -36,6 +36,10 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   public roles: any;
   tableDesign: TableDTO;
   tableComponentFieldList: ComponentPersistEntityFieldDTO[];
+  public componentPersistEntityCodeMask = '0*';
+  public componentPersistEntityCodePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
+  public componentPersistEntityFieldStatementsMask = '0*';
+  public componentPersistEntityFieldStatementsPattern = { '0': { pattern: new RegExp('\\S')} };
 
   constructor(private tableService: TableService,
               private viewService: ViewService,
