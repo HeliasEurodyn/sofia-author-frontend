@@ -13,14 +13,13 @@ import {SettingsService} from './services/crud/settings.service';
 
 export class AppComponent implements OnInit {
 
-  favIcon: HTMLLinkElement = document.querySelector('#appIcon');
-  appTitle = '';
+
+  appTitle = 'Sofia';
 
   public constructor(private activatedRoute: ActivatedRoute,
                      private httpErrorResponceService: HttpErrorResponceService,
                      private notificationService: NotificationService,
-                     private title: Title,
-                     private settingsService: SettingsService) {
+                     private title: Title) {
   }
 
   ngOnInit(): void {
@@ -28,8 +27,7 @@ export class AppComponent implements OnInit {
       this.title.setTitle(this.appTitle);
     });
     this.listenToHttpErrors();
-    this.defineIcon();
-    this.defineTitle();
+    this.title.setTitle(this.appTitle);
   }
 
   listenToHttpErrors(): void {
@@ -41,24 +39,4 @@ export class AppComponent implements OnInit {
       });
   }
 
-  defineIcon() {
-    this.settingsService.getIcon().subscribe(icon => {
-      if (icon != null) {
-        this.favIcon.href = icon;
-      } else {
-        this.favIcon.href = './assets/img/sofia_icon.png';
-      }
-    });
-  }
-
-  defineTitle() {
-    this.settingsService.getName().subscribe(name => {
-      if (name != null) {
-        this.appTitle = name;
-      } else {
-        this.appTitle = 'Sofia';
-      }
-      this.title.setTitle(this.appTitle);
-    });
-  }
 }
