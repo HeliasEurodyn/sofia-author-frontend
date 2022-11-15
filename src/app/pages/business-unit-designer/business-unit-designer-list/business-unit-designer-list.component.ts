@@ -44,4 +44,10 @@ export class BusinessUnitDesignerListComponent extends  PageComponent implements
       this.refresh();
     });
   }
+
+  clone(id: string) {
+    let command = 'STATICPAGE[NAME:business-unit-designer-form,TITLE:Business Unit Designer Form,TYPE:CLONE,LOCATE:(ID=' + id + '),PARENT-PAGEID:$PAGEID]';
+    command = command.replace('$PAGEID', this.pageId);
+    this.navigatorService.navigate(command);
+  }
 }

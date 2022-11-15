@@ -44,4 +44,10 @@ export class TimelineDesignerListComponent extends  PageComponent implements OnI
       this.refresh();
     });
   }
+
+  clone(id: string) {
+    let command = 'STATICPAGE[NAME:timeline-designer-form,TITLE:Timeline Designer Form,TYPE:CLONE,LOCATE:(ID=' + id + '),PARENT-PAGEID:$PAGEID]';
+    command = command.replace('$PAGEID', this.pageId);
+    this.navigatorService.navigate(command);
+  }
 }

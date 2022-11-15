@@ -50,6 +50,7 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
       this.service.getById(id).subscribe(data => {
         this.dto = data;
         this.dto.query = atob(this.dto?.query);
+        this.cleanIdsIfCloneEnabled();
       });
     }
   }
@@ -170,6 +171,18 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
     for (const listItem of list) {
       listItem.shortOrder = shortOrder;
       shortOrder++;
+    }
+  }
+
+  cleanIdsIfCloneEnabled() {
+    if (this.params.has('TYPE')) {
+
+      if (this.params.get('TYPE').toUpperCase() === 'CLONE') {
+
+        this.dto.id = null;
+        this.dto.version = null;
+        this.mode = 'new-record';
+      }
     }
   }
 }
