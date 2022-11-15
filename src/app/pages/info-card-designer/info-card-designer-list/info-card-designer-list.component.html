@@ -51,13 +51,27 @@
                       type="button">
                 <i class="fa fa-pencil-alt"></i>
               </button>
-              <button (click)="delete(row)" class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button">
-                <i class="fa fa-times"></i>
-              </button>
-              <button (click)="clone( row['id'])" class="btn btn-outline-success btn-icon btn-sm" title="Clone"
-                      type="button">
-                <i class="fa fa-clone"></i>
-              </button>
+              <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                   style="margin-top: 4px;">
+                <button (click)="myDrop.open();"
+                        class="btn btn-outline-default btn-icon btn-sm"
+                        title="More">
+                  <i class="fa fa-ellipsis-v"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button (click)="delete(row)"
+                          class="text-danger menu-button"
+                          ngbDropdownAnchor>
+                    <i class="fa fa-times"></i> Delete
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button (click)="clone( row['id'])"
+                          class="text-success menu-button"
+                          ngbDropdownAnchor>
+                    <i class="fa fa-clone"></i> Copy As New
+                  </button>
+                </div>
+              </div>
             </td>
             <td>
               <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">

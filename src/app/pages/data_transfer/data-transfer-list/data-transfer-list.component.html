@@ -90,14 +90,14 @@
                 </button>
                 <div ngbDropdownMenu>
                   <button (click)="delete(row)"
-                          class="text-danger"
-                          ngbDropdownItem>
+                          class="text-danger menu-button"
+                          ngbDropdownAnchor>
                     <i class="fa fa-times"></i> Delete
                   </button>
-                  <div class="dropdown-divider"></div>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
                   <button (click)="export(row['id'], row['name'])"
-                          class="text-success"
-                          ngbDropdownItem>
+                          class="text-success menu-button"
+                          ngbDropdownAnchor>
                     <i class="fas fa-download"></i> Export
                   </button>
                 </div>

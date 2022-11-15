@@ -61,14 +61,14 @@
                   </button>
                   <div ngbDropdownMenu>
                     <button (click)="delete(row)"
-                            class="text-danger"
-                            ngbDropdownItem>
+                            class="text-danger menu-button"
+                            ngbDropdownAnchor>
                       <i class="fa fa-times"></i> Delete
                     </button>
-                    <div class="dropdown-divider"></div>
+                    <div ngbDropdownAnchor class="dropdown-divider"></div>
                     <button (click)="clone( row['id'])"
-                            class="text-success"
-                            ngbDropdownItem>
+                            class="text-success menu-button"
+                            ngbDropdownAnchor>
                       <i class="fa fa-clone"></i> Copy As New
                     </button>
                   </div>
