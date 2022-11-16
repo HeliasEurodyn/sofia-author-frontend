@@ -40,10 +40,10 @@
             </thead>
             <tbody>
             <tr
-              *ngIf="tableData == undefined || tableData.length === 0 ">
+              *ngIf="tableData == undefined || tableData?.length === 0 ">
               <td colspan="12" class="empty-table-row">Empty!</td>
             </tr>
-            <tr *ngIf="tableData.length == 0">
+            <tr *ngIf="tableData?.length == 0">
               <td colspan="3" class="empty-list">
                 Empty!
               </td>
