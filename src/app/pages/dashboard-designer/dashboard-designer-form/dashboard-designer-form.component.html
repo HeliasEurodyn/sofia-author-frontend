@@ -99,42 +99,50 @@
                     </button>
 
                     <div ngbDropdownMenu>
-                      <button ngbDropdownItem (click)="dto.dashboardAreaList = removeEntityFormList(dashboardArea,dto.dashboardAreaList)" >
+                      <button ngbDropdownAnchor
+                              class="menu-button"
+                              (click)="dto.dashboardAreaList = removeEntityFormList(dashboardArea,dto.dashboardAreaList)" >
                         <i class="fa fa-times"></i> Delete Area
                       </button>
 
-                      <button ngbDropdownItem
+                      <button ngbDropdownAnchor
+                              class="menu-button"
                               (click)="moveUp(dashboardArea,dto.dashboardAreaList)">
                         <i class="fa fa-angle-double-left"></i> Move Prev
                       </button>
 
-                      <button ngbDropdownItem
+                      <button ngbDropdownAnchor
+                              class="menu-button"
                               (click)="moveDown(dashboardArea,dto.dashboardAreaList)">
                         <i class="fa fa-angle-double-right"></i> Move Next
                       </button>
 
-                      <button ngbDropdownItem
+                      <button ngbDropdownAnchor
+                              class="menu-button"
                               data-target="#insertChartModal"
                               data-toggle="modal"
                               (click)="setSelectedArea(dashboardArea);">
                         <i class="fas fa-chart-area"></i> Add Chart
                       </button>
 
-                      <button ngbDropdownItem
+                      <button ngbDropdownAnchor
+                              class="menu-button"
                               data-target="#insertInfoCardModal"
                               data-toggle="modal"
                               (click)="setSelectedArea(dashboardArea);">
                         <i class="fab fa-wpforms"></i> Add Info Card
                       </button>
 
-                      <button ngbDropdownItem
+                      <button ngbDropdownAnchor
+                              class="menu-button"
                               data-target="#insertHtmlModal"
                               data-toggle="modal"
                               (click)="setSelectedArea(dashboardArea);">
                         <i class="far fa-file-code"></i> Add Html
                       </button>
 
-                      <button ngbDropdownItem
+                      <button ngbDropdownAnchor
+                              class="menu-button"
                               data-target="#insertListModal"
                               data-toggle="modal"
                               (click)="setSelectedArea(dashboardArea);">

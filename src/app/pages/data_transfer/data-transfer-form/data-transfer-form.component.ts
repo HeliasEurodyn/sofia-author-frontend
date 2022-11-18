@@ -22,6 +22,18 @@ import {XlsImportDesignerService} from '../../../services/crud/xls-import-design
 import {SearchDesignerService} from '../../../services/crud/search-designer.service';
 import {CustomQueryDesignerService} from '../../../services/crud/custom-query-designer.service';
 import {InfoCardDesignerService} from '../../../services/crud/info-card-designer.service';
+import {ListDTO} from '../../../dtos/list/list-dto';
+import {ComponentDTO} from '../../../dtos/component/componentDTO';
+import {UserDto} from '../../../dtos/user/user-dto';
+import {FormDto} from '../../../dtos/form/form-dto';
+import {LanguageDTO} from '../../../dtos/language/language-dto';
+import {MenuDTO} from '../../../dtos/menu/menuDTO';
+import {RoleDTO} from '../../../dtos/user/role-dto';
+import {TableDTO} from '../../../dtos/table/tableDTO';
+import {ViewDTO} from '../../../dtos/view/view-dto';
+import {AppViewDTO} from '../../../dtos/appview/app-view-dto';
+import {PersistEntityDTO} from '../../../dtos/persistEntity/persist-entity-dto';
+import {DashboardDTO} from "../../../dtos/dashboard/dashboard-dto";
 
 @Component({
   selector: 'app-sofia-import-export-form',
@@ -32,13 +44,13 @@ export class DataTransferFormComponent extends PageComponent implements OnInit {
 
   id = '';
 
-  public formList: any;
-  public listList: any;
-  public menusList: any;
-  public componentsList: any;
-  public tableList: any;
-  public viewList: any;
-  public appViewList: any;
+  public formList: Array<FormDto>;
+  public listList: Array<ListDTO>;
+  public menusList: Array<MenuDTO>;
+  public componentsList: Array<ComponentDTO>;
+  public tableList: Array<TableDTO>;
+  public viewList: Array<ViewDTO>;
+  public appViewList: Array<AppViewDTO>;
   public chartsList: any;
   public infoCardsList: any;
   public htmlPartsList: any;
@@ -47,9 +59,9 @@ export class DataTransferFormComponent extends PageComponent implements OnInit {
   public xlsImportsList: any;
   public searchesList: any;
   public customQueriesList: any;
-  public languagesList: any;
-  public rolesList: any;
-  public usersList: any;
+  public languagesList: Array<LanguageDTO>;
+  public rolesList: Array<RoleDTO>;
+  public usersList: Array<UserDto>;
 
   public visibleSection = 'general';
   public dto: DataTransferDTO = new DataTransferDTO();
@@ -442,5 +454,79 @@ export class DataTransferFormComponent extends PageComponent implements OnInit {
 
   setVisibleSection(visibleSection: string) {
     this.visibleSection = visibleSection;
+  }
+
+  onCheckBoxChangeAffectingComponent(dto: any) {
+   const componentIndex = this?.componentsList.findIndex(item => item?.id === dto?.component?.id);
+   if (dto['checked'] && componentIndex !== 1) {
+     this.componentsList[componentIndex]['checked'] = true;
+     this.OnComponentCheckBoxChange(this?.componentsList[componentIndex])
+   }
+
+  }
+
+  onUserCheckBoxChange(userDto: UserDto) {
+    const  roleIdsOfUser = userDto.roles.map(role => role.id);
+    const  headerMenuIndex = this?.menusList.findIndex(item => item?.id === userDto?.headerMenu?.id)
+    const  sidebarMenuIndex = this?.menusList.findIndex(item => item?.id === userDto.sidebarMenu?.id)
+    const  languageIndex = this?.languagesList.findIndex(item => item?.id === userDto.currentLanguage?.id)
+
+    if (userDto['checked']) {
+      if (headerMenuIndex !== -1) {
+        this.menusList[headerMenuIndex]['checked'] = true
+      }
+      if (sidebarMenuIndex !== -1) {
+        this.menusList[sidebarMenuIndex]['checked'] = true
+      }
+      if (languageIndex !== -1) {
+        this.languagesList[languageIndex]['checked'] = true
+      }
+      this.rolesList.filter(item => roleIdsOfUser.includes(item?.id) ).forEach(item => {
+         item['checked'] = true
+      })
+    }
+  }
+
+  OnComponentCheckBoxChange(componentDto: ComponentDTO) {
+    const flattenIds = arr => arr.flatMap(({ persistEntity = [], componentPersistEntityList }) =>
+      [].concat(persistEntity, flattenIds(componentPersistEntityList))
+    );
+    const persistEntities: Array<PersistEntityDTO> = flattenIds(componentDto?.componentPersistEntityList);
+    const persistEntitiesIds: Array<String> = persistEntities.map(persistEntity => persistEntity?.id);
+
+    if (componentDto['checked']) {
+      this.tableList.filter(item => persistEntitiesIds.includes(item?.id)).forEach( item => {
+         item['checked'] = true;
+      })
+      this.appViewList.filter(item => persistEntitiesIds.includes(item?.id)).forEach( item => {
+        item['checked'] = true;
+      })
+      this.viewList.filter(item => persistEntitiesIds.includes(item?.id)).forEach( item => {
+        item['checked'] = true;
+      })
+    }
+  }
+
+  onDashboardCheckBoxChange(dashboardDto: DashboardDTO) {
+    const dashboardItemIds = dashboardDto?.dashboardAreaList
+      .flatMap(dashboardArea => dashboardArea?.dashboardItemList)
+      .map(dashboardItem => dashboardItem?.entityId);
+
+    if (dashboardDto['checked']) {
+      this.listList.filter(item => dashboardItemIds.includes(item?.id)).forEach( item => {
+        item['checked'] = true;
+        this.onCheckBoxChangeAffectingComponent(item);
+      })
+      this.chartsList.filter(item => dashboardItemIds.includes(item?.id)).forEach( item => {
+        item['checked'] = true;
+      })
+      this.htmlPartsList.filter(item => dashboardItemIds.includes(item?.id)).forEach( item => {
+        item['checked'] = true;
+      })
+      this.infoCardsList.filter(item => dashboardItemIds.includes(item?.id)).forEach( item => {
+        item['checked'] = true;
+      })
+    }
+
   }
 }
