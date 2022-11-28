@@ -50,6 +50,7 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
       this.service.getById(id).subscribe(data => {
         this.dto = data;
         this.dto.query = atob(this.dto?.query);
+        this.sortFilters();
         this.cleanIdsIfCloneEnabled();
       });
     }
@@ -94,13 +95,13 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
     dto.editable = false;
     dto.type = 'varchar';
     dto.shortOrder = this.genNextShortOrder(this.dto.filterList);
-    dto.code = this.genNextComponentCode(this.dto.filterList);
+    dto.code = this.genNextFilterCode(this.dto.filterList);
     dto.description = dto.code;
     dto.formulaType = 'column';
     this.dto.filterList.push(dto);
   }
 
-  genNextComponentCode(componentsList: any[]) {
+  genNextFilterCode(componentsList: any[]) {
     let prefixCount = 1;
     let code = 'filter_' + prefixCount;
     while (true) {
@@ -184,5 +185,9 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
         this.mode = 'new-record';
       }
     }
+  }
+
+  sortFilters() {
+    this.dto?.filterList.sort((a, b) => (a.shortOrder > b.shortOrder) ? 1 : -1 )
   }
 }
