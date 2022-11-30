@@ -96,6 +96,7 @@
               <th>Name</th>
               <th>Type</th>
               <th>Size</th>
+              <th>Primary key</th>
             </tr>
             </thead>
             <tbody>
@@ -116,6 +117,12 @@
               <td>
                 <input readonly class="form-control ng-dirty ng-valid ng-touched transparent-input" number="true"
                        type="number" [(ngModel)]="row.size"  >
+              </td>
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.primaryKey">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
               </td>
             </tr>
             </tbody>
