@@ -43,4 +43,10 @@ export class CustomQueryListComponent extends PageComponent implements OnInit {
       this.refresh();
     });
   }
+
+  clone(id: string) {
+    let command = 'STATICPAGE[NAME:custom-query-form,TITLE:Custom Query Form,TYPE:CLONE,LOCATE:(ID=' + id + '),PARENT-PAGEID:$PAGEID]';
+    command = command.replace('$PAGEID', this.pageId);
+    this.navigatorService.navigate(command);
+  }
 }

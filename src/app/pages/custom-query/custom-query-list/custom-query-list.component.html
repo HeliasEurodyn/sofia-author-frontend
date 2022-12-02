@@ -72,6 +72,11 @@
                               ngbDropdownAnchor>
                         <i class="fa fa-times"></i> Delete
                       </button>
+                      <div ngbDropdownAnchor class="dropdown-divider"></div>
+                      <button (click)="clone( row['id'])"
+                              class="text-success menu-button">
+                        <i class="fa fa-clone"></i> Copy As New
+                      </button>
                     </div>
                   </div>
                 </td>

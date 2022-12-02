@@ -53,6 +53,7 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
+        this.cleanIdsIfCloneEnabled();
       });
     }
 
@@ -119,6 +120,18 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
 
   setVisibleSection(visibleSection: string) {
     this.visibleSection = visibleSection;
+  }
+
+  cleanIdsIfCloneEnabled() {
+    if (this.params.has('TYPE')) {
+
+      if (this.params.get('TYPE').toUpperCase() === 'CLONE') {
+
+        this.dto.id = null;
+        this.dto.version = null;
+        this.mode = 'new-record';
+      }
+    }
   }
 
 }
