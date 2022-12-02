@@ -66,6 +66,7 @@ export class DashboardDesignerFormComponent extends PageComponent implements OnI
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(dto => {
         this.dto = dto;
+        this.cleanIdsIfCloneEnabled();
       });
     }
 
@@ -292,6 +293,18 @@ export class DashboardDesignerFormComponent extends PageComponent implements OnI
     securityList =
       securityList.filter(item => item !== column);
     return securityList;
+  }
+
+  cleanIdsIfCloneEnabled() {
+    if (this.params.has('TYPE')) {
+
+      if (this.params.get('TYPE').toUpperCase() === 'CLONE') {
+
+        this.dto.id = null;
+        this.dto.version = null;
+        this.mode = 'new-record';
+      }
+    }
   }
 
 }
