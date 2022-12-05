@@ -38,9 +38,9 @@
               <th class="text-left">Actions</th>
               <th>id</th>
               <th>name</th>
-              <th>Created on</th>
+              <th>Modified On</th>
             </tr>
-            </thead>
+            </thead>np
             <tbody>
             <tr
               *ngIf="tableData == undefined || tableData.length === 0 ">
@@ -85,7 +85,7 @@
                 <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['createdOn']" class="form-control transparent-input" readonly type="text">
+                <input [(ngModel)]="row['modifiedOn']" class="form-control transparent-input" readonly type="text">
               </td>
             </tr>
             </tbody>
