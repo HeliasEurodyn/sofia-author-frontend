@@ -629,12 +629,12 @@
                   <select [(ngModel)]="column.type" class="transparent-input">
                     <option value=""></option>
                     <option value="field">field</option>
-
                     <option value="simple-field">simple field</option>
                     <option value="bigint">bigint</option>
                     <option value="int">int</option>
                     <option value="double">double</option>
-                    <option value="datetime">datetime</option>
+                    <option value="datetime">date</option>
+                    <option value="datetime_det">datetime</option>
                     <option value="varchar">varchar</option>
                     <option value="text">text</option>
                     <option value="list">list</option>
@@ -675,6 +675,11 @@
             <div class="row formnav" style="padding-bottom: 10px;">
               <div class="col-sm-12">
                 <div class="pull-right">
+
+                  <button (click)="addSqlFormulaFieldToFilters()" class="btn btn-outline-success">
+                    <i class="fa fa-plus-circle"></i> Sql Formula field
+                  </button>
+
                   <button class="btn btn-outline-primary" data-target="#customFilterStructureModal" data-toggle="modal">
                     <i class="fa fa-wrench"></i> Custom filter structure
                   </button>
@@ -704,7 +709,8 @@
                 *ngIf="this.dto == undefined || this.dto?.listComponentFilterFieldList.length === 0 ">
                 <td colspan="12" class="empty-table-row">Empty!</td>
               </tr>
-              <tr *ngFor="let column of this.dto?.listComponentFilterFieldList">
+              <tr *ngFor="let column of this.dto?.listComponentFilterFieldList"
+                  [ngClass]="{'command-field': column.formulaType === 'command', 'sql-field': column.formulaType === 'sql'}">
                 <td style="min-width: 150px;">
                   <button (click)="removeFilter(column)" title="Remove" type="button"
                           class="btn btn-outline-danger btn-icon btn-sm">
@@ -743,8 +749,8 @@
                     <option value="bigint">bigint</option>
                     <option value="int">int</option>
                     <option value="double">double</option>
-                    <option value="datetime">datetime</option>
-                    <option value="datetimerange">datetimerange</option>
+                    <option value="datetime">date</option>
+                    <option value="datetime_det">datetime</option>
                     <option value="varchar">varchar</option>
                     <option value="text">text</option>
                     <option value="list">list</option>
@@ -876,7 +882,8 @@
                     <option value="bigint">bigint</option>
                     <option value="int">int</option>
                     <option value="double">double</option>
-                    <option value="datetime">datetime</option>
+                    <option value="datetime">date</option>
+                    <option value="datetime_det">datetime</option>
                     <option value="varchar">varchar</option>
                     <option value="text">text</option>
                   </select>
@@ -982,7 +989,8 @@
                     <option value="bigint">bigint</option>
                     <option value="int">int</option>
                     <option value="double">double</option>
-                    <option value="datetime">datetime</option>
+                    <option value="datetime">date</option>
+                    <option value="datetime_det">datetime</option>
                     <option value="varchar">varchar</option>
                     <option value="text">text</option>
                   </select>
@@ -1077,7 +1085,8 @@
                     <option value="bigint">bigint</option>
                     <option value="int">int</option>
                     <option value="double">double</option>
-                    <option value="datetime">datetime</option>
+                    <option value="datetime">date</option>
+                    <option value="datetime_det">datetime</option>
                     <option value="varchar">varchar</option>
                     <option value="text">text</option>
                   </select>
@@ -1884,11 +1893,12 @@
             <select [(ngModel)]="selectedFilterField.type" name="type" class="transparent-input">
               <option value=""></option>
               <option value="field">field</option>
+              <option value="simple-field">simple field</option>
               <option value="bigint">bigint</option>
               <option value="int">int</option>
               <option value="double">double</option>
-              <option value="datetime">datetime</option>
-              <option value="datetimerange">datetimerange</option>
+              <option value="datetime">date</option>
+              <option value="datetime_det">datetime</option>
               <option value="varchar">varchar</option>
               <option value="text">text</option>
               <option value="list">list</option>
@@ -2048,8 +2058,8 @@
               <option value="bigint">bigint</option>
               <option value="int">int</option>
               <option value="double">double</option>
-              <option value="datetime">datetime</option>
-              <option value="datetimerange">datetimerange</option>
+              <option value="datetime">date</option>
+              <option value="datetime_det">datetime</option>
               <option value="varchar">varchar</option>
               <option value="text">text</option>
               <option value="list">list</option>
@@ -2197,8 +2207,8 @@
               <option value="bigint">bigint</option>
               <option value="int">int</option>
               <option value="double">double</option>
-              <option value="datetime">datetime</option>
-              <option value="datetimerange">datetimerange</option>
+              <option value="datetime">date</option>
+              <option value="datetime_det">datetime</option>
               <option value="varchar">varchar</option>
               <option value="text">text</option>
               <option value="list">list</option>
@@ -2318,8 +2328,8 @@
               <option value="bigint">bigint</option>
               <option value="int">int</option>
               <option value="double">double</option>
-              <option value="datetime">datetime</option>
-              <option value="datetimerange">datetimerange</option>
+              <option value="datetime">date</option>
+              <option value="datetime_det">datetime</option>
               <option value="varchar">varchar</option>
               <option value="text">text</option>
               <option value="list">list</option>
@@ -2439,8 +2449,8 @@
               <option value="bigint">bigint</option>
               <option value="int">int</option>
               <option value="double">double</option>
-              <option value="datetime">datetime</option>
-              <option value="datetimerange">datetimerange</option>
+              <option value="datetime">date</option>
+              <option value="datetime_det">datetime</option>
               <option value="varchar">varchar</option>
               <option value="text">text</option>
               <option value="list">list</option>
