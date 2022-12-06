@@ -458,6 +458,25 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     this.dto.listComponentColumnFieldList.push(dto);
   }
 
+  addSqlFormulaFieldToFilters() {
+    const dto = new ListComponentFieldDTO();
+    dto.editor = '';
+    dto.componentPersistEntity = null
+    dto.componentPersistEntityField = null;
+    dto.visible = true;
+    dto.editable = true;
+    dto.required = false;
+    dto.headerFilter = false;
+    dto.operator = '=';
+    dto.description = '';
+    dto.type = '';
+    dto.shortOrder = this.genNextShortOrder(this.dto.listComponentFilterFieldList);
+    dto.code = 'sqlf_' + dto.shortOrder;
+    dto.formulaType = 'sql';
+    dto.bclass = 'col-12';
+    this.dto.listComponentFilterFieldList.push(dto);
+  }
+
   addSqlFormulaFieldToLeftGroup() {
     const dto = new ListComponentFieldDTO();
     dto.editor = '';
