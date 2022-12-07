@@ -42,6 +42,7 @@
               <th>Id</th>
               <th>Code</th>
               <th>Name</th>
+              <th>Modified On</th>
             </tr>
             </thead>
             <tbody>
@@ -82,6 +83,9 @@
               </td>
               <td>
                 <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['name']">
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['modifiedOn']">
               </td>
             </tr>
 
