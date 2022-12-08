@@ -419,8 +419,10 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectComponent(selectedComponent) {
-    this.dto.component = selectedComponent;
-    this.setAssignmentsToComponents();
+    this.tableComponentService.getById(selectedComponent.id).subscribe(data => {
+      this.dto.component = data;
+      this.setAssignmentsToComponents();
+    });
   }
 
   selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {

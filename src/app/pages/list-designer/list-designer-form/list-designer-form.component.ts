@@ -365,13 +365,15 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectComponent(selectedComponent) {
-    this.dto.component = selectedComponent;
-    this.dto.listComponentActionFieldList = [];
-    this.dto.listComponentColumnFieldList = [];
-    this.dto.listComponentFilterFieldList = [];
-    this.dto.listComponentLeftGroupFieldList = [];
-    this.dto.listComponentOrderByFieldList = [];
-    this.dto.listComponentTopGroupFieldList = [];
+    this.tableComponentService.getById(selectedComponent.id).subscribe(data => {
+      this.dto.component = data;
+      this.dto.listComponentActionFieldList = [];
+      this.dto.listComponentColumnFieldList = [];
+      this.dto.listComponentFilterFieldList = [];
+      this.dto.listComponentLeftGroupFieldList = [];
+      this.dto.listComponentOrderByFieldList = [];
+      this.dto.listComponentTopGroupFieldList = [];
+    });
   }
 
   selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {
