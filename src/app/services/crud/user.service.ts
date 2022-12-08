@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {CrudService} from './common/crud.service';
 import {LoginInfoDto} from '../../dtos/user/login-info-dto';
 import {environment} from '../../../environments/environment';
+import {LogoutDTO} from '../../dtos/security/logout-dto';
 
 
 /**
@@ -29,9 +30,9 @@ export class UserService extends CrudService<any> {
       loginInfoDTO);
   }
 
-  logout(): Observable<any> {
+  logout(logoutDTO: LogoutDTO): Observable<any> {
     return this.http.post<string>(
-      `${environment.serverUrl}/${this.endpoint}/logout`, UserService.getJwt());
+      `${environment.serverUrl}/${this.endpoint}/logout`, logoutDTO);
   }
 
   getCurrentUser(): Observable<any> {

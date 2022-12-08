@@ -22,6 +22,7 @@ import {ListSearchService} from '../../services/system/list-search.service';
 import {LanguageDTO} from '../../dtos/language/language-dto';
 import {LanguageService} from '../../services/system/language.service';
 import {UserService} from 'app/services/crud/user.service';
+import {LogoutDTO} from '../../dtos/security/logout-dto';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   @ViewChild('insertComponentModal') insertComponentModal: ElementRef;
 
   public userDto: UserDto;
+  public logoutDTO = new LogoutDTO();
   public popupTitle = '';
 
   constructor(location: Location,
@@ -249,7 +251,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    this.userService.logout().subscribe();
+    this.logoutDTO.jwt = UserService.getJwt();
+    this.userService.logout(this?.logoutDTO).subscribe();
     this.router.navigate(['/login']);
   }
 
