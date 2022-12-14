@@ -35,3 +35,19 @@
 .checkbox input:checked + .info:after{border-color:#3de0f5}
 .checkbox input:checked + .warning:after{border-color:#FFC107}
 .checkbox input:checked + .danger:after{border-color:#f44336}
+
+.infocard{
+  border: 2px solid #932dc6 !important;
+}
+
+.chart{
+  border: 2px solid #448c5b !important;
+}
+
+.html{
+  border: 2px solid #6f9ed4 !important;
+}
+
+.list{
+  border: 2px solid #d75e86 !important;
+}

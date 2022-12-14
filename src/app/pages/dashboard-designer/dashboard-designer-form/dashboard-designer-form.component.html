@@ -87,7 +87,7 @@
     <div class="{{dashboardArea.cssclass}}" *ngFor="let dashboardArea of this.dto?.dashboardAreaList">
     <div class="row">
       <div class="col-12 form-area">
-        <div class="card tooltip-card">
+        <div class="card tooltip-card" style="border: 2px solid #6b6868 !important;" >
           <div class="card-body" style="padding: 0px 15px 0px 15px;">
             <div class="row">
               <div class="col-sm-12">
@@ -171,7 +171,10 @@
             <div class="{{dashboardItem.cssclass}}" *ngFor="let dashboardItem of dashboardArea?.dashboardItemList">
               <div class="row">
                 <div class="col-12 form-area">
-                  <div class="card ">
+                  <div class="card "[ngClass]="{'infocard': dashboardItem.type === 'infoCard',
+                  'chart': dashboardItem.type === 'chart' ,
+                  'html': dashboardItem.type === 'html' ,
+                  'list': dashboardItem.type === 'list' }">
                     <div class="card-body" style="padding: 0px 15px 0px 15px;">
                       <div class="row">
                         <div class="col-sm-12">
@@ -195,6 +198,7 @@
                               <i class="fa fa-angle-double-right"></i>
                             </button>
                             <input type="text" class="form-control textfield" [(ngModel)]="dashboardItem.cssclass">
+                            <input type="text" class="form-control textfield" [(ngModel)]="dashboardItem.type">
                           </div>
                           <div class="pull-right">
                             <div class="form-group ">
@@ -208,22 +212,22 @@
                   </div>
                 </div>
 
-                <div *ngIf="dashboardItem.type === 'chart'" class="col-12 form-area">
+                <!--div *ngIf="dashboardItem.type === 'chart'" class="col-12 form-area">
                   <div class="card">
                     <div class="card-body">
-                      <!--<app-chart
+                      <app-chart
                         [id]="dashboardItem.entityId">
-                      </app-chart>-->
+                    </app-chart>
                     </div>
                   </div>
-                </div>
+                </div-->
 
-                <div *ngIf="dashboardItem.type === 'infoCard'" class="col-12 form-area">
+                <!--div *ngIf="dashboardItem.type === 'infoCard'" class="col-12 form-area">
                   <div class="card">
                     <div class="card-body" style="padding: 0px;">
-                     <!-- <app-info-card
+                     <app-info-card
                         [id]="dashboardItem.entityId">
-                      </app-info-card>-->
+                      </app-info-card>
                     </div>
                   </div>
                 </div>
@@ -231,23 +235,23 @@
                 <div *ngIf="dashboardItem.type === 'list'" class="col-12 form-area">
                   <div class="card">
                     <div class="card-body" style="padding: 0px;">
-                     <!-- <app-list
+                     <app-list
                         [embeded]="true"
                         [presetCommand]="'LIST[LOCATE:(ID='+dashboardItem.entityId+')]'">
-                      </app-list>-->
+                      </app-list>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
-                <div *ngIf="dashboardItem.type === 'html'" class="col-12 form-area">
+                <!--div *ngIf="dashboardItem.type === 'html'" class="col-12 form-area">
                   <div class="card">
                     <div class="card-body">
-                      <!--<app-html-dashboard
+                      <app-html-dashboard
                         [id]="dashboardItem.entityId">
-                      </app-html-dashboard>-->
+                      </app-html-dashboard>
                     </div>
                   </div>
-                </div>
+                </div>-->
               </div>
             </div>
         </div>
