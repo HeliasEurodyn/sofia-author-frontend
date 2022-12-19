@@ -136,6 +136,7 @@ import {
 import {
   BusinessUnitDesignerListComponent
 } from './pages/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
+import {FormDesignerTranslationFormComponent} from "./pages/form-designer/form-designer-translation-form/form-designer-translation-form.component";
 
 @NgModule({
   declarations: [
@@ -158,6 +159,7 @@ import {
     UserFormComponent,
     UserListComponent,
     FormDesignerFormComponent,
+    FormDesignerTranslationFormComponent,
     FormDesignerListComponent,
     FormDesignerFormToolBoxComponent,
     ChartDesignerFormComponent,

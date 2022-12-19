@@ -9,7 +9,6 @@ import {AccessControlDto} from '../security/access-control-dto';
 import {FormTranslationDto} from "./translation/form-translation-dto";
 
 export class FormDto extends BaseDTO {
-
   public name: string;
   public title: string;
   public description: string;

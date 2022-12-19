@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AceConfigInterface} from "ngx-ace-wrapper";
 import {FormDto} from "../../../dtos/form/form-dto";
 import {FormArea} from "../../../dtos/form/form-area";
@@ -30,6 +30,11 @@ import {PageComponent} from "../../page/page-component";
 import {LanguageDTO} from "../../../dtos/language/language-dto";
 import {LanguageService} from "../../../services/crud/language.service";
 import {FormTranslationDto} from "../../../dtos/form/translation/form-translation-dto";
+import {FormActionButtonTranslationDTO} from "../../../dtos/form/translation/form-action-button-translation-dto";
+import {FormControlFieldTranslationDTO} from "../../../dtos/form/translation/form-control-field-translation-dto";
+import {FormControlButtonTranslationDTO} from "../../../dtos/form/translation/form-control-button-translation-dto";
+import {FormTabTranslationDTO} from "../../../dtos/form/translation/form-tab-translation-dto";
+import {FormAreaTranslationDTO} from "../../../dtos/form/translation/form-area-translation-dto";
 
 @Component({
   selector: 'app-form-designer-translation-form',
@@ -41,13 +46,13 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
   public aceJavascriptEditorConfig: AceConfigInterface = {
     mode: 'javascript',
     theme: 'github',
-    readOnly : false
+    readOnly: false
   };
 
   public aceCSSEditorConfig: AceConfigInterface = {
     mode: 'css',
     theme: 'chrome',
-    readOnly : false
+    readOnly: false
   };
 
   public mode: string;
@@ -67,14 +72,14 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
   public components: any;
   public businessUnitsList: Array<BusinessUnitDTO>;
   public roles: any;
-  public visibleSection = 'settings';
+  public visibleSection = 'empty';
   public selectedTableButtonFormControl: FormControlTableControlDTO = new FormControlTableControlDTO();
   public selectedTblFormControlButton: FormControlButtonDTO = new FormControlButtonDTO();
   public selectedTblButtonFormControl: FormControlDto = new FormControlDto();
   public selectedButtonFormControl: FormControlDto = new FormControlDto();
   public selectedActionButton: FormActionButton
-  private selectedSecurityRow: AccessControlDto;
   public languages: LanguageDTO[];
+  private selectedSecurityRow: AccessControlDto;
   private translation: FormTranslationDto;
   private language: LanguageDTO;
 
@@ -148,19 +153,98 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
 
     this.dto.translations.push(formTranslationDto);
 
-    //
-    // this.dto.listActionButtons
-    //   .forEach(addActionButton => {
-    //     if (addActionButton.translations == null) {
-    //       addActionButton.translations = [];
-    //     }
-    //
-    //     const listActionButtonTranslationDTO = new ListActionButtonTranslationDTO();
-    //     listActionButtonTranslationDTO.language = language;
-    //     listActionButtonTranslationDTO.description = addActionButton.description;
-    //     addActionButton.translations.push(listActionButtonTranslationDTO);
-    //   });
-    //
+
+    this.dto.formActionButtons
+      .forEach(actionButton => {
+        if (actionButton.translations == null) {
+          actionButton.translations = [];
+        }
+
+        const formActionButtonTranslationDTO = new FormActionButtonTranslationDTO();
+        formActionButtonTranslationDTO.language = language;
+        formActionButtonTranslationDTO.description = actionButton.description;
+        actionButton.translations.push(formActionButtonTranslationDTO);
+
+        actionButton.formActionButtons
+          .forEach(subActionButton => {
+            if (subActionButton.translations == null) {
+              subActionButton.translations = [];
+            }
+
+            const formActionButtonTranslationDTO = new FormActionButtonTranslationDTO();
+            formActionButtonTranslationDTO.language = language;
+            formActionButtonTranslationDTO.description = subActionButton.description;
+            subActionButton.translations.push(formActionButtonTranslationDTO);
+          });
+
+      });
+
+    this.dto.formTabs.concat(this.dto.formPopups).forEach(formTab => {
+      if (formTab.translations == null) {
+        formTab.translations = [];
+      }
+      const formTabTranslationDTO = new FormTabTranslationDTO();
+      formTabTranslationDTO.language = language;
+      formTabTranslationDTO.description = formTab.description;
+      formTab.translations.push(formTabTranslationDTO);
+
+      formTab.formAreas.forEach(formArea => {
+        if (formArea.translations == null) {
+          formArea.translations = [];
+        }
+        const formAreaTranslationDTO = new FormAreaTranslationDTO();
+        formAreaTranslationDTO.language = language;
+        formAreaTranslationDTO.title = formArea.title;
+        formAreaTranslationDTO.description = formArea.description;
+        formArea.translations.push(formAreaTranslationDTO);
+
+        formArea.formControls.forEach(formControl => {
+          if (formControl.type === 'field') {
+            if (formControl.formControlField.translations == null) {
+              formControl.formControlField.translations = [];
+            }
+            const formControlFieldTranslationDTO = new FormControlFieldTranslationDTO();
+            formControlFieldTranslationDTO.language = language;
+            formControlFieldTranslationDTO.description = formControl.formControlField.description;
+            formControlFieldTranslationDTO.message = formControl.formControlField.message;
+            formControlFieldTranslationDTO.placeholder = formControl.formControlField.placeholder;
+            formControl.formControlField.translations.push(formControlFieldTranslationDTO);
+
+          } else if (formControl.type === 'button') {
+            if (formControl.formControlButton.translations == null) {
+              formControl.formControlButton.translations = [];
+            }
+            const formControlButtonTranslationDTO = new FormControlButtonTranslationDTO();
+            formControlButtonTranslationDTO.language = language;
+            formControlButtonTranslationDTO.description = formControl.formControlButton.description;
+            formControl.formControlButton.translations.push(formControlButtonTranslationDTO);
+          } else if (formControl.type === 'table') {
+            for (const tblFormControl of formControl.formControlTable.formControls) {
+              if (tblFormControl.formControlButton.translations == null) {
+                tblFormControl.formControlButton.translations = [];
+              }
+              const formControlFieldTranslationDTO = new FormControlFieldTranslationDTO();
+              formControlFieldTranslationDTO.language = language;
+              formControlFieldTranslationDTO.description = tblFormControl.formControlButton.description;
+              formControlFieldTranslationDTO.message = tblFormControl.formControlField.message;
+              formControlFieldTranslationDTO.placeholder = tblFormControl.formControlField.placeholder;
+              tblFormControl.formControlField.translations.push(formControlFieldTranslationDTO);
+            }
+            for (const tblFormControl of formControl.formControlTable.formControlButtons) {
+              if (tblFormControl.formControlButton.translations == null) {
+                tblFormControl.formControlButton.translations = [];
+              }
+              const formControlButtonTranslationDTO = new FormControlButtonTranslationDTO();
+              formControlButtonTranslationDTO.language = language;
+              formControlButtonTranslationDTO.description = tblFormControl.formControlButton.description;
+              tblFormControl.formControlButton.translations.push(formControlButtonTranslationDTO);
+            }
+          }
+        });
+      });
+    });
+
+
     // this.dto.listComponentColumnFieldList
     //   .concat(this.dto.listComponentFilterFieldList)
     //   .concat(this.dto.listComponentLeftGroupFieldList)
@@ -168,7 +252,7 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
     //   .concat(this.dto.listComponentOrderByFieldList)
     //   .concat(this.dto.listComponentActionFieldList)
     //   .forEach(listComponentField => {
-    //     if (listComponentField.translations == null) {
+    //     if (listComponentField.translations == null) {`
     //       listComponentField.translations = [];
     //     }
     //
@@ -948,8 +1032,8 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
   selectLanguage(language: LanguageDTO) {
     this.language = language;
 
-    if (this.visibleSection === 'general') {
-      this.visibleSection = 'header_descriptions';
+    if (this.visibleSection === 'empty') {
+      this.visibleSection = 'settings';
     }
 
     for (const translation of this.dto.translations) {
