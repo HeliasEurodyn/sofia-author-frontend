@@ -1,0 +1,1740 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          Form Language Designer
+        </h3>
+        <p style=" margin-bottom: 5px;">
+          Select or Add languages from the
+          <b><i class="fas fa-globe-europe"></i> Available Languages </b> section & Translate on the <b>Main
+          Description</b> &
+          <b>Forms Descriptions</b></p>
+      </div>
+    </div>
+
+    <div class="pull-right">
+
+      <button (click)="save()" class="btn btn-outline-success">
+        <i class="fa fa-save"></i> Save
+      </button>
+
+      <button (click)="delete()" class="btn btn-outline-danger">
+        <i class="fa fa-times"></i> Delete
+      </button>
+
+      <button (click)="navigateToPreviousPage()"
+              *ngIf="showPreviousPageButton()"
+              class="btn btn-outline-primary">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+
+      <button (click)="navigateToNextPage()"
+              *ngIf="showNextPageButton()"
+              class="btn btn-outline-primary">
+        <i class="fa fa-chevron-right"></i> Next
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-object-group"></i> Form Info
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Name</label>
+              <input class="form-control" name="name" readonly type="text" value="{{dto.id}}">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="form-group">
+              <label>Title</label>
+              <input class="form-control" name="name" readonly type="text" value="{{dto.name}}">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card main-card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-globe-europe"></i>
+                Available Languages</h5>
+            </div>
+            <div class="pull-right">
+              <button
+                class="btn btn-outline-primary"
+                data-target="#selectLanguageModal"
+                data-toggle="modal">
+                <i class="fas fa-plus"></i> Add Language
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th></th>
+                <th>Code</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.translations?.length === 0 || this.dto?.translations == undefined ">
+                <td class="empty-table-row" colspan="7">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.dto?.translations">
+                <td>
+                  <button (click)="removeTranslation(column.language)" class="btn btn-outline-danger btn-icon btn-sm"
+                          title="Remove"
+                          type="button">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="selectLanguage(column.language)" class="btn btn-outline-success btn-icon btn-sm"
+                          title="Remove"
+                          type="button">
+                    <i class="fa fa-pencil-alt"></i>
+                  </button>
+                </td>
+
+
+                <td>
+                  <img src="../../../assets/img/flags/4x3/{{column.language.image}}"
+                       style="width: 18px; padding-bottom: 4px; margin-right: 4px;">
+                </td>
+                <td>
+                  <input class="form-control" readonly type="text" value="{{column.language.code}}">
+                </td>
+                <td>
+                  <input class="form-control" readonly type="text" value="{{column.language.code}}">
+                </td>
+                <td>
+                  <input class="form-control" readonly type="text" value="{{column.language.name}}">
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button (click)="setVisibleSection('empty');" *ngIf="language == null"
+              class="btn btn-outline-default btn-round btn-white header-tab inactive-button"
+              type="button">
+        <i class="fas fa-globe-europe"></i>
+        Main
+      </button>
+      <button (click)="setVisibleSection('empty');" *ngIf="language == null"
+              class="btn btn-outline-default btn-round btn-white header-tab inactive-button"
+              type="button">
+        <i class="fas fa-globe-europe"></i>
+        Design
+      </button>
+      <button (click)="setVisibleSection('empty');" *ngIf="language == null"
+              class="btn btn-outline-default btn-round btn-white header-tab inactive-button"
+              type="button">
+        <i class="fas fa-globe-europe"></i>
+        Popup
+      </button>
+
+      <button (click)="setVisibleSection('settings');" *ngIf="language != null"
+              class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <img src="../../../assets/img/flags/4x3/{{this.language?.image}}"
+             style="width: 18px; padding-bottom: 4px; margin-right: 4px;">
+        Main Description
+      </button>
+      <button (click)="setVisibleSection('designer');setDefaultSelectedTabs();" *ngIf="language != null"
+              class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <img src="../../../assets/img/flags/4x3/{{this.language?.image}}"
+             style="width: 18px; padding-bottom: 4px; margin-right: 4px;">
+        Design Descriptions
+      </button>
+      <button (click)="setVisibleSection('popups');setDefaultSelectedPopups();" *ngIf="language != null"
+              class="btn btn-outline-default btn-round btn-white header-tab"
+              type="button">
+        <img src="../../../assets/img/flags/4x3/{{this.language?.image}}"
+             style="width: 18px; padding-bottom: 4px; margin-right: 4px;">
+        Popup Descriptions
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'empty'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label></label>
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fas fa-tools"></i> Form Designer
+              </h5>
+            </div>
+            <div class="pull-right">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Name</label>
+              <input [(ngModel)]="this.translation.name" class="form-control" name="name" type="text">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Title</label>
+              <input [(ngModel)]="this.translation.title" class="form-control" name="name" type="text">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <input [(ngModel)]="this.translation.description" class="form-control" name="name" type="text">
+              <code></code>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'settings'" class="row  form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title pull-left">
+                <i class="fa fa-bars"></i>
+                Action Buttons
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Description</th>
+                <th>Visible</th>
+                <th>Editable</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto == undefined || this.dto?.formActionButtons?.length === 0 || this.dto?.formActionButtons == undefined ">
+                <td class="empty-table-row" colspan="8">Empty!</td>
+              </tr>
+              <tr *ngFor="let formActionButton of this.dto?.formActionButtons">
+                <td>
+                  <button (click)="setSelectedActionButton(formActionButton);"
+                          class="btn btn-outline-success btn-icon btn-sm"
+                          data-target="#selectedActionButtonModal" data-toggle="modal" title="Details"
+                          type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </td>
+                <td>
+                  <input class="form-control transparent-input" disabled type="text"
+                         value="{{formActionButton.code}}">
+                </td>
+                <td>
+                  <input class="form-control" disabled type="text" value="{{formActionButton.icon}}">
+                </td>
+                <td>
+                  <ng-container *ngFor="let translation of formActionButton.translations">
+                    <input *ngIf="translation.language.id === this.language.id"
+                           [(ngModel)]="translation.description" class="form-control transparent-input"
+                           type="text">
+                  </ng-container>
+                </td>
+
+                <td>
+                  <select [(ngModel)]="formActionButton.visible" class="transparent-input" disabled>
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+                <td>
+                  <select [(ngModel)]="formActionButton.editable" class="transparent-input" disabled>
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'designer'" class="row form-area">
+  <div class="col-sm-12">
+    <div class="pull-left">
+
+      <div *ngFor="let formTab of this.dto?.formTabs" class="btn-group">
+
+        <button (click)="selectFormSection(formTab)"
+                class="btn btn-outline-info btn-round blue-tab"
+                data-target="#selectedFormTabFieldModal"
+                data-toggle="modal"
+                style="margin-top: 0px;margin-bottom: 0px;padding: 0px 6px 0px 6px;"
+                title="Edit Tab"
+                type="button">
+          <i class="fa fa-pencil-alt"></i>
+        </button>
+        <ng-container *ngFor="let translation of formTab.translations">
+          <button (click)="selectFormSection(formTab)" *ngIf="translation.language.id === this.language.id"
+                  class="btn btn-outline-default btn-round white-tab"
+                  style="margin-top: 0px;margin-bottom: 0px;padding: 10px;"
+                  type="button">
+            <i class="fa {{formTab?.icon}}"></i>
+            {{translation.description}}
+          </button>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'popups'" class="row form-area">
+  <div class="col-sm-12">
+    <div class="pull-left">
+
+      <div *ngFor="let formPopup of this.dto?.formPopups" class="btn-group">
+        <button (click)="selectFormSection(formPopup)"
+                class="btn btn-outline-info btn-round blue-tab"
+                data-target="#selectedFormPopupFieldModal"
+                data-toggle="modal"
+                style="margin-top: 0px;margin-bottom: 0px;padding: 0px 6px 0px 6px;"
+                title="Edit Popup"
+                type="button">
+          <i class="fa fa-pencil-alt"></i>
+        </button>
+        <ng-container *ngFor="let translation of formPopup.translations">
+          <button (click)="selectFormSection(formPopup)" *ngIf="translation.language.id === this.language.id"
+                  class="btn btn-outline-default btn-round white-tab"
+                  style="margin-top: 0px;margin-bottom: 0px;padding: 10px;"
+                  type="button">
+            <i class="fa {{formPopup?.icon}}"></i>
+            {{translation.description}}
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.visibleSection === 'designer' || this.visibleSection === 'popups'" class="row">
+  <div *ngFor="let formArea of this.selectedFormSection?.formAreas" class="{{formArea.cssclass}} form-area">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col-12">
+            <ng-container *ngFor="let translation of formArea.translations">
+              <div class="pull-left" *ngIf="translation.language.id === this.language.id">
+                <h5 class="card-title">
+                  <i class="fa {{formArea.icon}}"></i>
+                  {{translation.title}}
+                </h5>
+                <p [innerHTML]="translation.description" class="card-category"></p>
+              </div>
+            </ng-container>
+
+            <div class="pull-right">
+              <button (click)="selectFormArea(formArea)"
+                      class="btn btn-outline-info"
+                      data-target="#selectedFormAreaFieldModal"
+                      data-toggle="modal" type="button">
+                <i class="fa fa-pencil-alt"></i> Edit
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngFor="let formcontrol of formArea?.formControls" class="{{formcontrol.cssclass}}">
+
+            <div *ngIf="formcontrol.type === 'button'" class="form-group">
+              <div class="btn-group">
+                <ng-container *ngFor="let translation of formcontrol?.formControlButton?.translations">
+                  <button *ngIf="translation.language.id === this.language.id"
+                            (click)="setSelectedFormControlButton(formcontrol);"
+                          class="btn btn-outline-default btn-round white-tab"
+                          data-target="#insertButtonModal"
+                          data-toggle="modal"
+                          style="margin-top: 0px;margin-bottom: 0px;padding: 10px;"
+                          type="button">
+                    <i class="fa {{formcontrol?.formControlButton?.icon}}"></i>
+                    {{translation.description}}
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+
+            <div *ngIf="formcontrol.type === 'field'" class="form-group">
+              <div class="input-group input-group-alternative">
+
+                <div (click)="setSelectedFormControl(formcontrol);"
+                     class="input-group-prepend"
+                     data-target="#selectedDesignFieldModal"
+                     data-toggle="modal"
+                     title="Edit field">
+                     <span class="input-group-text textfield-button-info">
+                          <i class="fa fa-pencil-alt"></i>
+                     </span>
+                </div>
+
+                <input class="form-control textfield-area"
+                       readonly
+                       type="text"
+                       value="{{formcontrol.formControlField.componentPersistEntity?.code}}.{{formcontrol.formControlField.componentPersistEntityField.persistEntityField.name}}">
+
+                <ng-container *ngFor="let translation of formcontrol.formControlField.translations">
+                  <input *ngIf="translation.language.id === this.language.id"
+                         [(ngModel)]="translation.description"
+                         class="form-control textfield-area"
+                         style="border-left: 1px solid #51ccce !important;"
+                         type="text">
+
+                  <input *ngIf="translation.language.id === this.language.id"
+                         [(ngModel)]="translation.message" class="form-control textfield-area"
+                         style="border-left: 1px solid #51ccce !important; background-color: #f1fcff"
+                         type="text">
+
+                  <input *ngIf="translation.language.id === this.language.id"
+                         [(ngModel)]="translation.placeholder" class="form-control textfield-area"
+                         style="border-left: 1px solid #51ccce !important;"
+                         type="text">
+                </ng-container>
+              </div>
+            </div>
+
+            <div *ngIf="formcontrol.type === 'table'" class="form-group">
+
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th class="text-left">Table: {{formcontrol.formControlTable.description}}</th>
+                  <th class="text-left">
+                    <button (click)="setSelectedButtonFormControl(formcontrol);"
+                            class="btn btn-outline-info btn-icon btn-sm"
+                            data-target="#selectedButtonFieldsModal"
+                            data-toggle="modal"
+                            title="Edit table field"
+                            type="button">
+                      <i class="fa fa-pencil-alt"></i>
+                    </button>
+                    Action Buttons
+                  </th>
+                  <th *ngFor="let tableFieldComponent of formcontrol.formControlTable.formControls">
+                    <button
+                      (click)="formcontrol.formControlTable.formControls = removeEntityFormList(tableFieldComponent,formcontrol.formControlTable.formControls);"
+                      class="btn btn-outline-danger btn-icon btn-sm"
+                      title="Delete"
+                      type="button">
+                      <i class="fa fa-times"> </i>
+                    </button>
+                    <button (click)="setSelectedTableFormControl(tableFieldComponent);"
+                            class="btn btn-outline-info btn-icon btn-sm"
+                            data-target="#selectedFormComponentTableFieldModal"
+                            data-toggle="modal"
+                            title="Edit table field"
+                            type="button">
+                      <i class="fa fa-pencil-alt"></i>
+                    </button>
+                    <button (click)="moveUp(tableFieldComponent,formcontrol.formControlTable.formControls);"
+                            class="btn btn-outline-warning btn-icon btn-sm"
+                            title="Move"
+                            type="button">
+                      <i class="fa fa-angle-double-left"></i>
+                    </button>
+                    <button (click)="moveDown(tableFieldComponent,formcontrol.formControlTable.formControls);"
+                            class="btn btn-outline-warning btn-icon btn-sm"
+                            title="Move"
+                            type="button">
+                      <i class="fa fa-angle-double-right"></i>
+                    </button>
+                    {{tableFieldComponent.formControlField.componentPersistEntityField.persistEntityField.name}}
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>
+                    <button (click)="formArea.formControls = removeEntityFormList(formcontrol,formArea.formControls);"
+                            class="btn btn-outline-danger btn-icon btn-sm"
+                            title="Delete Table"
+                            type="button">
+                      <i class="fa fa-times"></i>
+                    </button>
+                    <button (click)="setSelectedTableParentFormControl(formcontrol);addButtonToTable();"
+                            class="btn btn-outline-info btn-icon btn-sm"
+                            title="Add Buttons to Table"
+                            type="button">
+                      <i class="fa fa-plus-circle"></i>
+                    </button>
+                    <button (click)="setSelectedTableParentFormControl(formcontrol);"
+                            class="btn btn-outline-success btn-icon btn-sm"
+                            data-target="#addTableFieldFieldModal"
+                            data-toggle="modal"
+                            title="Add Fields to Table"
+                            type="button">
+                      <i class="fa fa-plus-circle"></i>
+                    </button>
+                    <button (click)="setSelectedTableParentFormControl(formcontrol);"
+                            class="btn btn-outline-info btn-icon btn-sm"
+                            data-target="#editTableModal"
+                            data-toggle="modal"
+                            title="Edit Table"
+                            type="button">
+                      <i class="fa fa-pencil-alt"></i>
+                    </button>
+                    <button (click)="moveUp(formcontrol,formArea.formControls);"
+                            class="btn btn-outline-warning btn-icon btn-sm"
+                            title="Move"
+                            type="button">
+                      <i class="fa fa-angle-double-left"></i>
+                    </button>
+                    <button (click)="moveDown(formcontrol,formArea.formControls);"
+                            class="btn btn-outline-warning btn-icon btn-sm"
+                            title="Move"
+                            type="button">
+                      <i class="fa fa-angle-double-right"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      (click)="setSelectedTableButtonFormControl(tableFormControl,tableFormControl.formControlButton,formcontrol);"
+                      *ngFor="let tableFormControl of formcontrol.formControlTable.formControlButtons"
+                      class="btn {{tableFormControl.formControlButton.cssClass}} btn-icon btn-sm"
+                      data-target="#editTableFieldButtonModal"
+                      data-toggle="modal"
+                      title="{{tableFormControl.formControlButton.description}}"
+                      type="button">
+                      <i class="fa {{tableFormControl.formControlButton.icon}}"> </i>
+                    </button>
+                  </td>
+
+                  <td *ngFor="let tableFieldComponent of formcontrol.formControlTable.formControls">
+                    <input class="form-control transparent-input" readonly type="text">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedFormSection != null" aria-hidden="true" aria-labelledby="ModalLabel"
+     class="modal fade"
+     id="selectedFormPopupFieldModal"
+     role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Popup fields</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <ng-container *ngFor="let translation of this.selectedFormSection.translations">
+          <div *ngIf="translation.language.id === this.language.id"  class="row">
+            <div class="col-12">
+              <label>Description</label>
+              <input [(ngModel)]="translation.description" class="form-control" type="text">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedFormSection != null" aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade"
+     id="selectedFormTabFieldModal"
+     role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Tab fields</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <ng-container *ngFor="let translation of this.selectedFormSection.translations">
+          <div *ngIf="translation.language.id === this.language.id" class="row">
+            <div class="col-12">
+              <label>Description</label>
+              <input [(ngModel)]="translation.description" class="form-control" type="text">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedTableFormControl != null" aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade"
+     id="editTableModal"
+     role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Edit Table</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label>
+            <select [(ngModel)]="selectedTableFormControl.formControlTable.editable"
+                    class="transparent-input">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedFormArea != null" aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade"
+     id="selectedFormAreaFieldModal"
+     role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Area Details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <ng-container *ngFor="let translation of selectedFormArea.translations">
+          <div *ngIf="translation.language.id === this.language.id" class="row">
+            <div class="col-12">
+              <label>Title</label>
+              <input [(ngModel)]="translation.title" class="form-control" type="text">
+            </div>
+          </div>
+          <div *ngIf="translation.language.id === this.language.id" class="row">
+            <div class="col-12">
+              <label>Description (Inner Html)</label>
+              <input [(ngModel)]="translation.description" class="form-control" type="text">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectedFieldModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Field details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input class="form-control" readonly type="text"
+                   value=" [{{this.selectedComponentPersistEntity?.code}}] {{this.selectedComponentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input [(ngModel)]="this.selectedComponentPersistEntityField?.persistEntityField.name" class="form-control"
+                   name="code" readonly
+                   type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label><br>
+            <select [(ngModel)]="this.selectedComponentPersistEntityField.assignment.type" class="transparent-input"
+                    name="type">
+              <option value=""></option>
+              <option value="bigint">Bigint</option>
+              <option value="int">Int</option>
+              <option value="double">Double</option>
+              <option value="datetime">Date</option>
+              <option value="datetime_det">Datetime</option>
+              <option value="varchar">Varchar</option>
+              <option value="text">Text</option>
+              <option value="list">List</option>
+              <option value="combo">Combo</option>
+              <option value="chips">Chips</option>
+              <option value="autocomplete-combo">Autocomplete Combo</option>
+              <option value="checkbox">Checkbox</option>
+              <option value="password">Password</option>
+              <option value="file-selector">File Selector</option>
+              <option value="cve">Cve</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editor</label>
+            <textarea [(ngModel)]="this.selectedComponentPersistEntityField.assignment.editor"
+                      class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Default Value</label>
+            <textarea [(ngModel)]="this.selectedComponentPersistEntityField.assignment.defaultValue"
+                      class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>On Save Value</label>
+            <textarea [(ngModel)]="this.selectedComponentPersistEntityField.assignment.onSaveValue"
+                      class="form-control"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectedDesignFieldModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Design Field Details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input class="form-control" readonly type="text"
+                   value=" [{{this.selectedComponentPersistEntity?.code}}] {{this.selectedComponentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input [(ngModel)]="this.selectedComponentPersistEntityField?.persistEntityField.name" class="form-control"
+                   name="code" readonly
+                   type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Type</label>
+            <input [(ngModel)]="this.selectedComponentPersistEntityField.assignment.type" class="form-control"
+                   name="code" readonly
+                   type="text">
+          </div>
+        </div>
+
+        <ng-container *ngFor="let translation of this.selectedFormControl.formControlField.translations">
+
+          <div *ngIf="translation.language.id === this.language.id" class="row">
+            <div class="col-12">
+              <label>Description</label>
+              <textarea [(ngModel)]="translation.description"
+                        class="form-control"></textarea>
+            </div>
+          </div>
+
+          <div *ngIf="translation.language.id === this.language.id" class="row">
+            <div class="col-12">
+              <label>Message</label>
+              <textarea [(ngModel)]="translation.message"
+                        class="form-control"></textarea>
+            </div>
+          </div>
+
+          <div *ngIf="translation.language.id === this.language.id" class="row">
+            <div class="col-12">
+              <label>Placeholder</label>
+              <textarea [(ngModel)]="translation.placeholder"
+                        class="form-control"></textarea>
+            </div>
+          </div>
+
+        </ng-container>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectedFormComponentTableFieldModal"
+     role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Table Field Details</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Table</label>
+            <input class="form-control" readonly type="text"
+                   value=" [{{this.selectedComponentPersistEntity?.code}}] {{this.selectedComponentPersistEntity?.persistEntity?.name}}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Field</label>
+            <input [(ngModel)]="this.selectedTableComponentPersistEntityField?.persistEntityField.name"
+                   class="form-control" name="code" readonly
+                   type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <textarea [(ngModel)]="this.selectedFormControlTableControl.formControlField.description"
+                      class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Custom css</label>
+            <textarea [(ngModel)]="this.selectedFormControlTableControl.formControlField.css"
+                      class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Visible</label><br>
+            <select [(ngModel)]="this.selectedFormControlTableControl.formControlField.visible"
+                    class="transparent-input">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editable</label><br>
+            <select [(ngModel)]="this.selectedFormControlTableControl.formControlField.editable"
+                    class="transparent-input">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Required</label><br>
+            <select [(ngModel)]="this.selectedFormControlTableControl.formControlField.required"
+                    class="transparent-input">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Mask</label>
+            <input [(ngModel)]="this.selectedFormControlTableControl.formControlField.mask" class="form-control"
+                   type="text">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="insertButtonModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Button</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div *ngIf="this.selectedButtonFormControl.formControlButton != null" class="modal-body">
+        <ng-container *ngFor="let translation of this.selectedButtonFormControl?.formControlButton?.translations">
+          <div class="row" *ngIf="translation.language.id === this.language.id">
+            <div class="col-12">
+              <label>Description</label>
+              <input [(ngModel)]="translation.description" class="form-control"
+                     type="text">
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Class</label>
+            <input [(ngModel)]="this.selectedButtonFormControl.cssclass" class="form-control"
+                   type="text">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="insertFieldsModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Fields</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <ul style="padding: 0px;">
+          <ng-template #recursiveList let-componentPersistEntityList>
+            <li *ngFor="let componentPersistEntity of componentPersistEntityList">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 style="margin: 0px;">
+                    <button (click)="hideChildren(componentPersistEntity)"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                            class="btn btn-outline-default btn-icon btn-sm"
+                            style="margin: 1px;" title="Hide"
+                            type="button">
+                      <i class="fa fa-compress"></i>
+                    </button>
+                    <button (click)="showChildren(componentPersistEntity)"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList !== true"
+                            class="btn btn-outline-default btn-icon btn-sm"
+                            style="margin: 1px;" title="Show"
+                            type="button">
+                      <i class="fa fa-expand"></i>
+                    </button>
+                    [{{componentPersistEntity.code}}] {{componentPersistEntity.persistEntity.name}}
+                  </h6>
+                </div>
+              </div>
+
+              <table
+                *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>actions</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let field of componentPersistEntity.componentPersistEntityFieldList"
+                    style="cursor: pointer;">
+                  <td>
+                    <button (click)="addField(componentPersistEntity, field)"
+                            class="btn btn-outline-primary btn-icon btn-sm" title="Add to Order By"
+                            type="button">
+                      <i class="fa fa-plus-circle" style="color: #0aca57;"></i>
+                    </button>
+
+                  </td>
+                  <td>{{field.persistEntityField.id}}</td>
+                  <td>{{field.persistEntityField.name}}</td>
+                  <td>{{field.persistEntityField.type}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+              <ul *ngIf="(componentPersistEntity.componentPersistEntityList != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: componentPersistEntity.componentPersistEntityList }">
+                </ng-container>
+              </ul>
+
+            </li>
+          </ng-template>
+
+          <ng-container
+            *ngTemplateOutlet="recursiveList; context:{ $implicit: this.dto?.component?.componentPersistEntityList }"></ng-container>
+        </ul>
+
+      </div>
+
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="editTableFieldButtonModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Edit Table Button</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <label>Code</label>
+            <input [(ngModel)]="this.selectedTblFormControlButton.code" class="form-control"
+                   type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Icon</label>
+            <input [(ngModel)]="this.selectedTblFormControlButton.icon" class="form-control"
+                   type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Description</label>
+            <input [(ngModel)]="this.selectedTblFormControlButton.description" class="form-control"
+                   type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Editor</label>
+            <textarea [(ngModel)]="this.selectedTblFormControlButton.editor"
+                      class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Css class</label>
+            <input [(ngModel)]="this.selectedTblFormControlButton.cssClass" class="form-control"
+                   type="text">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button (click)="this.selectedTblButtonFormControl.formControlTable.formControlButtons =
+          removeEntityFormList(this.selectedTableButtonFormControl,
+          this.selectedTblButtonFormControl.formControlTable.formControlButtons)"
+                  class="btn btn-outline-danger"
+                  data-dismiss="modal"
+                  type="button">Delete
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="addTableFieldFieldModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Add Fields to Table</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <ul style="padding: 0px;">
+          <ng-template #recursiveListTbl let-componentPersistEntityList>
+            <li *ngFor="let componentPersistEntity of componentPersistEntityList">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 style="margin: 0px;">
+                    <button (click)="hideChildren(componentPersistEntity)"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                            class="btn btn-outline-default btn-icon btn-sm"
+                            style="margin: 1px;" title="Hide"
+                            type="button">
+                      <i class="fa fa-compress"></i>
+                    </button>
+                    <button (click)="showChildren(componentPersistEntity)"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList !== true"
+                            class="btn btn-outline-default btn-icon btn-sm"
+                            style="margin: 1px;" title="Show"
+                            type="button">
+                      <i class="fa fa-expand"></i>
+                    </button>
+                    [{{componentPersistEntity.code}}] {{componentPersistEntity.persistEntity.name}}
+                  </h6>
+                </div>
+              </div>
+
+              <table
+                *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                class="table table-striped">
+                <thead class="text-primary">
+                <tr>
+                  <th>actions</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let field of componentPersistEntity.componentPersistEntityFieldList"
+                    style="cursor: pointer;">
+                  <td>
+                    <button (click)="addFieldToTable(componentPersistEntity, field)"
+                            class="btn btn-outline-primary btn-icon btn-sm" title="Add Field to Table"
+                            type="button">
+                      <i class="fa fa-plus-circle" style="color: #0aca57;"></i>
+                    </button>
+                  </td>
+                  <td>{{field.persistEntityField.id}}</td>
+                  <td>{{field.persistEntityField.name}}</td>
+                  <td>{{field.persistEntityField.type}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+              <ul *ngIf="(componentPersistEntity.componentPersistEntityList != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveListTbl; context:{ $implicit: componentPersistEntity.componentPersistEntityList }">
+                </ng-container>
+              </ul>
+
+            </li>
+          </ng-template>
+          <ng-container
+            *ngTemplateOutlet="recursiveListTbl; context:{ $implicit: this.selectedTableVisibleComponentPersistEntityList }"></ng-container>
+        </ul>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="insertTableModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Tables</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <ul style="padding: 0px;">
+          <ng-template #recursiveListPersistEntity let-componentPersistEntityList>
+            <li *ngFor="let componentPersistEntity of componentPersistEntityList">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 style="margin: 0px;">
+                    <button (click)="addTable(componentPersistEntity)"
+                            *ngIf="componentPersistEntity.multiDataLine"
+                            class="btn btn-outline-primary btn-icon btn-sm"
+                            style="margin: 1px;"
+                            title="Add table"
+                            type="button">
+                      <i class="fa fa-plus-circle" style="color: #0aca57;"></i>
+                    </button>
+                    <button *ngIf="!componentPersistEntity.multiDataLine" class="btn btn-muted btn-icon btn-sm "
+                            readonly="true"
+                            title="Only multidataline components can be added!"
+                            type="button">
+                      <i class="fa fa-plus-circle" style="color: #9a9a9a;"></i>
+                    </button>
+                    [{{componentPersistEntity.code}}] {{componentPersistEntity.persistEntity.name}}
+                  </h6>
+                </div>
+              </div>
+              <ul *ngIf="(componentPersistEntity.componentPersistEntityList != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveListPersistEntity; context:{ $implicit: componentPersistEntity.componentPersistEntityList }">
+                </ng-container>
+              </ul>
+            </li>
+          </ng-template>
+          <ng-container
+            *ngTemplateOutlet="recursiveListPersistEntity; context:{ $implicit: this.dto?.component?.componentPersistEntityList }"></ng-container>
+        </ul>
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectComponentModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Component</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-fixed">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr (click)="selectComponent(row)" *ngFor="let row of components" data-dismiss="modal"
+                    style="cursor: pointer;">
+                  <td>
+                    <button (click)="selectComponent(row)" class="btn btn-outline-success btn-icon btn-sm"
+                            title="Select"
+                            type="button">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{row['id']}}">
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{row['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectBusinessUnitModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Select Business Unit</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-fixed">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>id</th>
+                  <th>title</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr (click)="selectBusinessUnit(row)" *ngFor="let row of businessUnitsList" data-dismiss="modal"
+                    style="cursor: pointer;">
+                  <td>
+                    <button (click)="selectBusinessUnit(row)" class="btn btn-outline-success btn-icon btn-sm"
+                            title="Select"
+                            type="button">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{row['id']}}">
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{row['title']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectedButtonFieldsModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 700px !important;">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Edit Form Buttons</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>Actions</th>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Description</th>
+                <th>Editor</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngFor="let tableFormControl of this.selectedTblButtonFormControl.formControlTable.formControlButtons">
+                <td style="min-width: 150px;">
+
+                  <button (click)="this.selectedTblButtonFormControl.formControlTable.formControlButtons =
+          removeEntityFormList(tableFormControl,
+          this.selectedTblButtonFormControl.formControlTable.formControlButtons)"
+                          class="btn btn-outline-danger btn-icon btn-sm"
+                          type="button">
+                    <i class="fa fa-times"> </i>
+                  </button>
+
+
+                  <button
+                    (click)="moveUp(tableFormControl,this.selectedTblButtonFormControl.formControlTable.formControlButtons);"
+                    class="btn btn-outline-warning btn-icon btn-sm"
+                    title="Up"
+                    type="button">
+                    <i class="fa fa-angle-double-up"> </i>
+                  </button>
+                  <button
+                    (click)="moveDown(tableFormControl,this.selectedTblButtonFormControl.formControlTable.formControlButtons);"
+                    class="btn btn-outline-warning btn-icon btn-sm"
+                    title="Up"
+                    type="button">
+                    <i class="fa fa-angle-double-down"> </i>
+                  </button>
+
+                  <button
+                    (click)="setSelectedTableButtonFormControl(tableFormControl,tableFormControl.formControlButton,selectedTblButtonFormControl);"
+                    class="btn btn-outline-primary btn-icon btn-sm"
+                    data-dismiss="modal"
+                    data-target="#editTableFieldButtonModal"
+                    data-toggle="modal"
+                    title="Details"
+                    type="button">
+                    <i class="fa fa-search"> </i>
+                  </button>
+
+                </td>
+                <td>
+                  <input [(ngModel)]="this.tableFormControl.formControlButton.code" class="form-control"
+                         type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="this.tableFormControl.formControlButton.icon" class="form-control"
+                         type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="this.tableFormControl.formControlButton.description" class="form-control"
+                         type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="this.tableFormControl.formControlButton.editor" class="form-control"
+                         type="text">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectedActionButtonModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields" style="max-width: 1200px;">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Submenu Buttons</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead class="text-primary">
+              <tr>
+                <th>Code</th>
+                <th>Icon</th>
+                <th>Description</th>
+                <th>Visible</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.selectedActionButton?.formActionButtons == undefined || this.selectedActionButton?.formActionButtons?.length === 0">
+                <td class="empty-table-row" colspan="7">Empty!</td>
+              </tr>
+              <tr *ngFor="let column of this.selectedActionButton?.formActionButtons">
+
+                <td>
+                  <input [(ngModel)]="column.code" disabled class="form-control transparent-input"
+                         type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="column.icon" disabled class="form-control" type="text">
+                </td>
+                <ng-container *ngFor="let translation of column?.translations">
+                  <td *ngIf="translation.language.id === this.language.id">
+                    <input  [(ngModel)]="translation.description" class="form-control transparent-input"
+                           type="text">
+                  </td>
+                </ng-container>
+
+                <td>
+                  <select [(ngModel)]="column.visible" disabled class="transparent-input">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="left-side">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectRoleModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Role</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-fixed">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of this.roles" style="cursor: pointer;">
+                  <td>
+                    <button
+                      (click)="selectRole(row)"
+                      class="btn btn-outline-success btn-icon btn-sm"
+                      data-dismiss="modal"
+                      type="button">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{row['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="ModalLabel" class="modal fade" id="selectLanguageModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">
+          <i class="fa fa-globe-europe"></i>
+          Languages
+        </h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <i class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th></th>
+                  <th>Code</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let language of languages" style="cursor: pointer;">
+                  <td>
+                    <button (click)="addLanguage(language)" class="btn btn-outline-primary btn-icon btn-sm"
+                            data-dismiss="modal"
+                            title="Delete"
+                            type="button">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <img src="../../../assets/img/flags/4x3/{{language.image}}"
+                         style="width: 18px; padding-bottom: 4px; margin-right: 4px;">
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{language.code}}">
+                  </td>
+                  <td>
+                    <input class="form-control transparent-input" readonly type="text"
+                           value="{{language.name}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

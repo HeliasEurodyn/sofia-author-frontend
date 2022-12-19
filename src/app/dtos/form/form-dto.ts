@@ -6,9 +6,9 @@ import {FormPopupDto} from './form-popup-dto';
 import {FormActionButton} from './form-action-button';
 import {FormCss} from './form-css';
 import {AccessControlDto} from '../security/access-control-dto';
+import {FormTranslationDto} from "./translation/form-translation-dto";
 
 export class FormDto extends BaseDTO {
-
   public name: string;
   public title: string;
   public description: string;
@@ -24,5 +24,5 @@ export class FormDto extends BaseDTO {
   public instanceVersion: number;
   public formActionButtons: FormActionButton[] = [];
   public accessControls: AccessControlDto[] = [];
-
+  public translations: FormTranslationDto[] = [];
 }

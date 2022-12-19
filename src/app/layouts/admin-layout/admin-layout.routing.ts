@@ -108,6 +108,7 @@ import {
 import {
   BusinessUnitDesignerListComponent
 } from '../../pages/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
+import {FormDesignerTranslationFormComponent} from "../../pages/form-designer/form-designer-translation-form/form-designer-translation-form.component";
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -165,6 +166,8 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'notification-template-form', component: SseNotificationTemplateFormComponent, canActivate: [AuthGuard]},
   {path: 'business-unit-designer-form', component: BusinessUnitDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'business-unit-designer-list', component: BusinessUnitDesignerListComponent, canActivate: [AuthGuard]},
+  {path: 'form-designer-translation-form', component: FormDesignerTranslationFormComponent, canActivate: [AuthGuard]}
+
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;

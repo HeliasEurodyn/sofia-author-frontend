@@ -116,7 +116,11 @@
                               type="button">
                         <i class="fa fa-pencil-alt"></i>
                       </button>
-
+                      <button (click)="openTranslationPage( row['id'])" class="btn btn-outline-info btn-icon btn-sm"
+                              title="Translate"
+                              type="button">
+                        <i class="fa fa-globe-europe"></i>
+                      </button>
                       <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
                            style="margin-top: 4px;">
                         <button (click)="myDrop.open();"

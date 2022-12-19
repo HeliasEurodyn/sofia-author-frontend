@@ -363,15 +363,27 @@ export class ListDesignerTranslationFormComponent extends PageComponent implemen
     this.dto.translations.push(listTranslationDTO);
 
     this.dto.listActionButtons
-      .forEach(addActionButton => {
-        if (addActionButton.translations == null) {
-          addActionButton.translations = [];
+      .forEach(actionButton => {
+        if (actionButton.translations == null) {
+          actionButton.translations = [];
         }
 
         const listActionButtonTranslationDTO = new ListActionButtonTranslationDTO();
         listActionButtonTranslationDTO.language = language;
-        listActionButtonTranslationDTO.description = addActionButton.description;
-        addActionButton.translations.push(listActionButtonTranslationDTO);
+        listActionButtonTranslationDTO.description = actionButton.description;
+        actionButton.translations.push(listActionButtonTranslationDTO);
+
+        actionButton.listActionButtons.forEach(subActionButton => {
+          if (subActionButton.translations == null) {
+            subActionButton.translations = [];
+          }
+
+          const listActionButtonTranslationDTO = new ListActionButtonTranslationDTO();
+          listActionButtonTranslationDTO.language = language;
+          listActionButtonTranslationDTO.description = subActionButton.description;
+          subActionButton.translations.push(listActionButtonTranslationDTO);
+        });
+
       });
 
     this.dto.listComponentColumnFieldList

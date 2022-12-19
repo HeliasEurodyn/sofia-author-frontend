@@ -62,6 +62,11 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
     this.navigatorService.navigate(command);
   }
 
+  openTranslationPage(id: string) {
+    let command = 'STATICPAGE[NAME:form-designer-translation-form,LOCATE:(ID=' + id + ')]';
+    command = command.replace('$PAGEID', this.pageId);
+    this.navigatorService.navigate(command);
+  }
 
   openNewPage() {
     let command = 'STATICPAGE[NAME:form-designer-form,TITLE:Form,PARENT-PAGEID:$PAGEID]';
