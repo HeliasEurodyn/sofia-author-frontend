@@ -9,4 +9,6 @@ export class SettingsDto extends BaseDTO {
   loginImage: any;
 
   icon: any;
+
+  oauth_prototype_user_id: string;
 }
