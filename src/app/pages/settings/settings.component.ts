@@ -5,6 +5,10 @@ import {SettingsService} from '../../services/crud/settings.service';
 import {Location} from '@angular/common';
 import {NotificationService} from '../../services/system/notification.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {BusinessUnitDesignerService} from "../../services/crud/business-unit-designer.service";
+import {UserService} from "../../services/crud/user.service";
+import {BusinessUnitDTO} from "../../dtos/business-unit/business-unit-dto";
+import {UserDto} from "../../dtos/user/user-dto";
 
 @Component({
   selector: 'app-settings',
@@ -14,9 +18,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class SettingsComponent extends PageComponent implements OnInit {
 
   public dto: SettingsDto = new SettingsDto();
+  public usersList: Array<UserDto>;
 
   constructor(private service: SettingsService,
               private location: Location,
+              private userService: UserService,
               private notificationService: NotificationService,
               private sanitizer: DomSanitizer) {
     super();
@@ -37,6 +43,19 @@ export class SettingsComponent extends PageComponent implements OnInit {
         this.dto.icon = './assets/img/sofia_icon.png';
       }
     });
+
+    this.refreshUsers();
+  }
+
+  refreshUsers() {
+    this.userService.get().subscribe(data => {
+      this.usersList = data;
+    });
+  }
+
+  selectUser(user: UserDto) {
+    this.dto.oauthPrototypeUserId = user?.id;
+    this.dto.oauthPrototypeUserName = user?.username;
   }
 
   save() {
