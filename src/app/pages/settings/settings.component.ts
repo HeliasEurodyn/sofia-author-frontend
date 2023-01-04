@@ -54,7 +54,8 @@ export class SettingsComponent extends PageComponent implements OnInit {
   }
 
   selectUser(user: UserDto) {
-    this.dto.oauth_prototype_user_id = user?.id;
+    this.dto.oauthPrototypeUserId = user?.id;
+    this.dto.oauthPrototypeUserName = user?.username;
   }
 
   save() {

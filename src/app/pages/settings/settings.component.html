@@ -111,7 +111,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <br>
-              <label>Third Party Oauth Prototype User id</label>
+              <label>Third Party Oauth Prototype User</label>
               <div class="input-group input-group-selector no-border">
                 <div
                   data-target="#selectBusinessUnitModal"
@@ -125,7 +125,7 @@
                        data-target="#selectUserModal"
                        data-toggle="modal"
                        type="text" class="form-control"
-                       value="{{this.dto?.oauth_prototype_user_id}}">
+                       value="{{this.dto?.oauthPrototypeUserId}} {{this.dto?.oauthPrototypeUserName}}">
                 <div class="input-group-append" (click)="selectUser(null)">
                  <span class="input-group-text input-group-text-rm">
                     <i class="fa fa-window-close"></i>
