@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=5020",
+    "start": "ng serve --port=5021",
     "build": "ng build",
     "elebuild": "ng build --base-href ./ && electron .",
     "test": "ng test",
