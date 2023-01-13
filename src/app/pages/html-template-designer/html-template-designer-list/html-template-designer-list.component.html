@@ -1,0 +1,106 @@
+<div class="row formnav">
+    <div class="col-sm-12">
+      <div class="numbers pull-left">  </div>
+      <div class="pull-left">
+        <div class="col-12">
+          <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+            <i class=" fa-brands fa-html5" style="padding-right: 5px;"></i>
+            Html Template Designer
+          </h3>
+          <p style=" margin-bottom: 5px;"> html Template Designer </p>
+        </div>
+      </div>
+      <div class="pull-right">
+        <button class="btn btn-outline-success" (click)="createNew()">
+          <i class="fa fa-plus-circle"></i> New
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-area">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="numbers pull-left"> </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th class="text-left">Actions</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Modified On</th>
+                <th>Component Id</th>
+                <th>Component Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="tableData == undefined || tableData?.length === 0 ">
+                <td colspan="12" class="empty-table-row">Empty!</td>
+              </tr>
+              <tr *ngIf="tableData?.length == 0">
+                <td colspan="6" class="empty-list">
+  
+                </td>
+              </tr>
+              <tr *ngFor="let row of tableData">
+                <td>
+                  <button type="button" title="Edit" class="btn btn-outline-success btn-icon btn-sm"
+                          (click)="edit(row['id'])">
+                    <i class="fa fa-pencil-alt"></i>
+                  </button>
+                  <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                       style="margin-top: 4px;">
+                    <button (click)="myDrop.open();"
+                            class="btn btn-outline-default btn-icon btn-sm"
+                            title="More">
+                      <i class="fa fa-ellipsis-v"></i>
+                    </button>
+                    <div ngbDropdownMenu>
+                      <button (click)="delete(row['id'])"
+                              class="text-danger menu-button"
+                              ngbDropdownAnchor>
+                        <i class="fa fa-times"></i> Delete
+                      </button>
+                      <div ngbDropdownAnchor class="dropdown-divider"></div>
+                      <button (click)="clone( row['id'])"
+                              class="text-success menu-button">
+                        <i class="fa fa-clone"></i> Copy As New
+                      </button>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="row['title']" class="form-control transparent-input" readonly type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="row['modifiedOn']" class="form-control transparent-input" readonly type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="row['component']['id']" class="form-control transparent-input" readonly
+                         type="text">
+                </td>
+                <td>
+                  <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                         type="text">
+                </td>
+                
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

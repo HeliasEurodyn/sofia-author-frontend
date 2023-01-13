@@ -1,0 +1,167 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class=" fa-brands fa-html5" style="padding-right: 5px;"></i>
+          Html Template Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Html Template Designer Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i>
+        Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="fa fa-sliders-h"></i>
+          General
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Title</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="dto.title">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" name="description" [(ngModel)]="dto.description">
+              <code></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+            <div class="form-group">
+              <label>Component</label>
+              <div class="input-group input-group-selector no-border">
+                <div
+                  data-target="#selectComponentModal"
+                  data-toggle="modal"
+                  class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                </div>
+                <input readonly
+                       data-target="#selectComponentModal"
+                       data-toggle="modal"
+                       type="text" class="form-control"
+                       value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
+                <div class="input-group-append" (click)="selectComponent(null)">
+                 <span class="input-group-text input-group-text-rm">
+                    <i class="fa fa-window-close"></i>
+                 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<div  class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+                <i class="fa fa-code" style="padding-right: 5px;"></i>
+                Html Section
+              </h3>
+                  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <ace style="width: 100%;height: 800px;border: 1px solid #51cbce;"
+                   [config]="aceHTMLEditorConfig"
+                   [(value)]="dto.html"></ace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectComponentModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Component</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-fixed">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of components" (click)="selectComponent(row)" data-dismiss="modal"
+                    style="cursor: pointer;">
+                  <td>
+                    <button type="button" title="Select" class="btn btn-outline-success btn-icon btn-sm"
+                            (click)="selectComponent(row)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{row['id']}}">
+                  </td>
+                  <td>
+                    <input type="text" readonly class="form-control transparent-input"
+                           value="{{row['name']}}">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
