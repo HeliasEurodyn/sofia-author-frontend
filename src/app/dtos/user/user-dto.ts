@@ -19,4 +19,5 @@ export class UserDto extends BaseDTO {
   defaultLanguage: LanguageDTO;
   currentLanguage: LanguageDTO;
   languages: LanguageDTO[] = [];
+  isChecked: boolean ;
 }

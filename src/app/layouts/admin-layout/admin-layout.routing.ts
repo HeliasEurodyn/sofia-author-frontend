@@ -108,11 +108,12 @@ import {
 import {
   BusinessUnitDesignerListComponent
 } from '../../pages/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
-import {FormDesignerTranslationFormComponent} from "../../pages/form-designer/form-designer-translation-form/form-designer-translation-form.component";
+import {FormDesignerTranslationFormComponent} from '../../pages/form-designer/form-designer-translation-form/form-designer-translation-form.component';
 import { CalendarDesginerListComponent } from '../../pages/calendar/calendar-desginer-list/calendar-desginer-list.component';
 import { CalendarDesginerFormComponent } from '../../pages/calendar/calendar-desginer-form/calendar-desginer-form.component';
 import { HtmlTemplateDesignerFormComponent } from '../../pages/html-template-designer/html-template-designer-form/html-template-designer-form.component';
 import { HtmlTemplateDesignerListComponent } from '../../pages/html-template-designer/html-template-designer-list/html-template-designer-list.component';
+import {AccessControlComponent} from '../../pages/access-control/access-control.component';
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -174,7 +175,10 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'calendar-designer-list', component: CalendarDesginerListComponent, canActivate: [AuthGuard]},
   {path: 'calendar-designer-form', component: CalendarDesginerFormComponent, canActivate: [AuthGuard]},
   {path: 'html-template-designer-list', component: HtmlTemplateDesignerListComponent, canActivate: [AuthGuard]},
-  {path: 'html-template-designer-form', component: HtmlTemplateDesignerFormComponent, canActivate: [AuthGuard]}
+  {path: 'html-template-designer-form', component: HtmlTemplateDesignerFormComponent, canActivate: [AuthGuard]},
+  {path: 'form-designer-translation-form', component: FormDesignerTranslationFormComponent, canActivate: [AuthGuard]},
+  {path: 'access-control', component: AccessControlComponent, canActivate: [AuthGuard]}
+
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;
