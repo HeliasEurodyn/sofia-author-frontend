@@ -39,4 +39,8 @@ export class CrudService<T> {
     return this.http.delete(`${environment.serverUrl}/${this.endpoint}`);
   }
 
+  printById(id: any): Observable<any> {
+    return this.http.get(`${environment.serverUrl}/${this.endpoint}/export-to-pdf?id=${id}`);
+  }
+
 }

@@ -130,10 +130,25 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     this.tableComponentService.get().subscribe(data => {
       this.components = data;
     });
-
-    
   }
 
+  download() {
+    this.service.download(this.dto?.id).subscribe(response => {
+      this.saveFile(response.body, "pdf");
+    });
+  }
   
+  saveFile(downloadedData: any, reportType: string) {
+    const blob = new Blob([downloadedData], {type: 'application/' + reportType});
+    const url = window.URL.createObjectURL(blob);
+    const downloadedReportFile = document.createElement('a');
+    document.body.appendChild(downloadedReportFile);
+    downloadedReportFile.setAttribute('style', 'display: none');
+    downloadedReportFile.href = url;
+    downloadedReportFile.download = 'report.' + reportType;
+    downloadedReportFile.click();
+    window.URL.revokeObjectURL(url);
+    downloadedReportFile.remove();
+  }
 
 }

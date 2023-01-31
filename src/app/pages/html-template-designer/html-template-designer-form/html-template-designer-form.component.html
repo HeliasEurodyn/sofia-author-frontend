@@ -19,6 +19,11 @@
         <i class="fa fa-times"></i>
         Delete
       </button>
+      <button class="btn btn-outline-default" style="margin-top: 0px;"
+              (click)="download()">
+        <i class="fa-sharp fa-solid fa-print"></i>
+        Download
+      </button>
     </div>
   </div>
 </div>
@@ -36,6 +41,11 @@
         <div class="row">
           <div class="col-12">
             <div class="form-group ">
+              <label>Id</label>
+              <input type="text" readonly class="form-control" value="{{dto.id}}">
+              <code></code>
+            </div>
+            <div class="form-group ">
               <label>Title</label>
               <input type="text" class="form-control" name="title" [(ngModel)]="dto.title">
               <code></code>
@@ -49,36 +59,40 @@
             </div>
           </div>
         </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Component</label>
+            <div class="input-group input-group-selector no-border">
+              <div
+                data-target="#selectComponentModal"
+                data-toggle="modal"
+                class="input-group-prepend">
+               <span class="input-group-text">
+                  <i class="fa fa-search"></i>
+               </span>
+              </div>
+              <input readonly
+                     data-target="#selectComponentModal"
+                     data-toggle="modal"
+                     type="text" class="form-control"
+                     value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
+              <div class="input-group-append" (click)="selectComponent(null)">
+               <span class="input-group-text input-group-text-rm">
+                  <i class="fa fa-window-close"></i>
+               </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<div class="col-md-12">
-            <div class="form-group">
-              <label>Component</label>
-              <div class="input-group input-group-selector no-border">
-                <div
-                  data-target="#selectComponentModal"
-                  data-toggle="modal"
-                  class="input-group-prepend">
-                 <span class="input-group-text">
-                    <i class="fa fa-search"></i>
-                 </span>
-                </div>
-                <input readonly
-                       data-target="#selectComponentModal"
-                       data-toggle="modal"
-                       type="text" class="form-control"
-                       value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
-                <div class="input-group-append" (click)="selectComponent(null)">
-                 <span class="input-group-text input-group-text-rm">
-                    <i class="fa fa-window-close"></i>
-                 </span>
-                </div>
-              </div>
-            </div>
-          </div>
 
 <div  class="row form-area">
   <div class="col-md-12">
