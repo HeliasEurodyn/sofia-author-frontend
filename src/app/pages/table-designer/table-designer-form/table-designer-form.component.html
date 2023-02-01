@@ -1,72 +1,94 @@
 <div class="row formnav">
-    <div class="col-sm-12">
-      <div class="pull-left">
-        <div class="col-12">
-          <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
-            <i class="fa fa-cogs" style="padding-right: 5px;"></i>
-            Table Designer
-          </h3>
-          <p style=" margin-bottom: 5px;">Table Designer Form </p>
-        </div>
-      </div>
-      <div class="pull-right">
-        <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
-          <i class="fa fa-save"></i> Save
-        </button>
-        <button class="btn btn-outline-danger"  style="margin-top: 0px;" [hidden]="mode === 'new-record'" (click)="delete()">
-          <i class="fa fa-times"></i> Delete
-        </button>
-        <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showPreviousPageButton()" (click)="navigateToPreviousPage()">
-          <i class="fa fa-chevron-left"></i> Back
-        </button>
-        <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()" (click)="navigateToNextPage()">
-          <i class="fa fa-chevron-right"></i> Next
-        </button>
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-cogs" style="padding-right: 5px;"></i>
+          Table Designer
+        </h3>
+        <p style=" margin-bottom: 5px;">Table Designer Form </p>
       </div>
     </div>
-  </div>
-
-<div class="row form-area">
-  <div class="col-md-12">
-    <div class="card card-user">
-      <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group" >
-                <label>Name</label>
-                <input type="text"
-                       class="form-control"
-                       (focusout)="checkIfTableAlreadyExists()"
-                       [(ngModel)]="dto.name"
-                       mask="{{customTableNameMask}}"
-                       [patterns]="customTableNamePattern"
-                       [readonly]="mode === 'edit-record'" >
-                <small class="text-info" *ngIf="tableExists"> Table already exists. </small>
-                <code ></code>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Description</label>
-                <textarea
-                  class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
-              </div>
-            </div>
-          </div>
-      </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i> Delete
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showPreviousPageButton()"
+              (click)="navigateToPreviousPage()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button class="btn btn-outline-primary" style="margin-top: 0px;" *ngIf="showNextPageButton()"
+              (click)="navigateToNextPage()">
+        <i class="fa fa-chevron-right"></i> Next
+      </button>
     </div>
   </div>
 </div>
 
 <div class="row form-area">
   <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text"
+                     class="form-control"
+                     (focusout)="checkIfTableAlreadyExists()"
+                     [(ngModel)]="dto.name"
+                     mask="{{customTableNameMask}}"
+                     [patterns]="customTableNamePattern"
+                     [readonly]="mode === 'edit-record'">
+              <small class="text-info" *ngIf="tableExists"> Table already exists. </small>
+              <code></code>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea
+                class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('fields');">
+        <i class="fa fa-database"></i>
+        Fields
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-default btn-round btn-white header-tab"
+        (click)="setVisibleSection('fk_constrains');">
+        <i class="fa fa-key"></i>
+        FK Constrains
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row form-area" [ngClass]="{'is-hidden': this.visibleSection !== 'fields' }">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-header">
         <div class="row">
           <div class="col-sm-7">
-              <h5 class="card-title pull-left">Fields</h5>
+            <h5 class="card-title pull-left">Fields</h5>
           </div>
           <div class="col-sm-5">
             <div class="pull-right">
@@ -110,12 +132,14 @@
             <tbody>
             <tr *ngFor="let row of this.dto.tableFieldList">
               <td>
-                <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"  (click)="removeLine(row)">
+                <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"
+                        (click)="removeLine(row)">
                   <i class="fa fa-times"></i>
                 </button>
               </td>
               <td>
-                <input type="text" class="form-control transparent-input" [(ngModel)]="row.name" [patterns]="customTableNamePattern" [mask]="customTableNameMask">
+                <input type="text" class="form-control transparent-input" [(ngModel)]="row.name"
+                       [patterns]="customTableNamePattern" [mask]="customTableNameMask">
               </td>
               <td>
                 <select [(ngModel)]="row.type" class="transparent-input">
@@ -133,14 +157,13 @@
               </td>
               <td>
                 <input class="form-control ng-dirty ng-valid ng-touched transparent-input" number="true"
-                       type="number" [(ngModel)]="row.size"  >
+                       type="number" [(ngModel)]="row.size">
               </td>
               <td>
                 <select class="transparent-input" [(ngModel)]="row.autoIncrement">
                   <option value="false">No</option>
                   <option value="true">Yes</option>
                 </select>
-
               </td>
               <td>
                 <select class="transparent-input" [(ngModel)]="row.primaryKey">
@@ -148,47 +171,131 @@
                   <option value="true">Yes</option>
                 </select>
               </td>
-
-
               <td>
                 <select class="transparent-input" [(ngModel)]="row.hasDefault">
                   <option value="false">No</option>
                   <option value="true">Yes</option>
                 </select>
               </td>
-
               <td>
                 <input class="form-control ng-dirty ng-valid ng-touched transparent-input"
-                        [(ngModel)]="row.defaultValue"  >
+                       [(ngModel)]="row.defaultValue">
               </td>
-
               <td>
                 <select class="transparent-input" [(ngModel)]="row.isUnsigned">
                   <option value="false">No</option>
                   <option value="true">Yes</option>
                 </select>
               </td>
-
               <td>
                 <select class="transparent-input" [(ngModel)]="row.hasNotNull">
                   <option value="false">No</option>
                   <option value="true">Yes</option>
                 </select>
               </td>
-
               <td>
                 <input class="form-control ng-dirty ng-valid ng-touched transparent-input"
-                       [(ngModel)]="row.onSaveValue"  >
+                       [(ngModel)]="row.onSaveValue">
               </td>
             </tr>
-
-
             </tbody>
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
 
+<div class="row form-area" [ngClass]="{'is-hidden': this.visibleSection !== 'fk_constrains' }">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-7">
+            <h5 class="card-title pull-left">Foreign Key Constrains</h5>
+          </div>
+          <div class="col-sm-5">
+            <div class="pull-right">
+              <button class="btn btn-outline-success" (click)="addForeignKeyConstrain()">
+                <i class="fa fa-plus-circle"></i> Add Foreign Key Constrain
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <table class="table table-striped">
+            <thead class=" text-primary">
+            <tr>
+              <th>Actions</th>
+              <th>Name</th>
+              <th>Field Name</th>
+              <th>Referred Table</th>
+              <th>Referred Field</th>
+              <th>On Update</th>
+              <th>On Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of this.dto.foreignKeyConstrainList">
+              <td>
+                <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"
+                        (click)="removeForeignKeyConstrainLine(row)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input" [(ngModel)]="row.name"
+                       [patterns]="customTableNamePattern" [mask]="customTableNameMask">
+              </td>
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.fieldName">
+                  <option *ngFor="let field of (this.dto.tableFieldList)"
+                          [value]="field?.name">
+                    {{field.name}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select class="transparent-input" [compareWith]="compareReferredTable" [(ngModel)]="row.referredTable"
+                        (ngModelChange)="onChange($event,row)">
+                  <option *ngFor="let table of (listOfTables)"
+                          [ngValue]="table">
+                    {{table.name}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select class="transparent-input" [compareWith]="compareReferredField" [(ngModel)]="row.referredField">
+                  <option *ngFor="let referredField of (row?.referredTable?.tableFieldList)"
+                          [ngValue]="referredField">
+                    {{referredField.name}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.onUpdate">
+                  <option *ngFor="let referentialAction of (referentialActions)"
+                          [value]="referentialAction">
+                    {{referentialAction}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.onDelete">
+                  <option *ngFor="let referentialAction of (referentialActions)"
+                          [value]="referentialAction">
+                    {{referentialAction}}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
