@@ -163,10 +163,24 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
       return;
     }
 
+    const set = new Set();
+
+    if (this?.dto?.foreignKeyConstrainList.some((fk) => set.size === (set.add(fk.name), set.size))) {
+      this.notificationService.showNotification('top', 'center', 'alert-danger',
+        'fa-exclamation-circle', '<b>Duplicate Foreign Key Constrain Name Has Been Added</b>');
+      return;
+    }
+
     let shortOrder = 1;
     this.dto.tableFieldList.forEach(field => {
       field.shortOrder = shortOrder;
       shortOrder++;
+    });
+
+    let fkConstrainShortOrder = 1;
+    this.dto.foreignKeyConstrainList.forEach(fk => {
+      fk.shortOrder = fkConstrainShortOrder;
+      fkConstrainShortOrder++;
     });
 
     if (this.mode === 'edit-record') {
@@ -318,10 +332,9 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
 
     return foreignKeyConstrain.name === ''
       || foreignKeyConstrain.fieldName === ''
-      || foreignKeyConstrain.referredTable == null
-      || foreignKeyConstrain.referredField == null;
+      || foreignKeyConstrain.referredTable.id == null
+      || foreignKeyConstrain.referredField.id == null;
   }
-
   compareReferredField(referredField1: TableFieldDTO, referredField2: TableFieldDTO): boolean {
     return referredField1 && referredField2 ? referredField1.id === referredField2.id : referredField1 === referredField2;
   }

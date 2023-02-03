@@ -239,7 +239,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let row of this.dto.foreignKeyConstrainList">
+            <tr *ngFor="let row of this.dto.foreignKeyConstrainList | shortByOrder">
               <td>
                 <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"
                         (click)="removeForeignKeyConstrainLine(row)">
