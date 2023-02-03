@@ -58,7 +58,7 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
   public mode: string;
   public dto: FormDto;
   public description: string;
-  public selectedFormSection: any;
+  public selectedFormSection: FormTabDto = new FormTabDto() ;
   public selectedFormArea: FormArea = new FormArea();
   public selectedformScript: FormScript;
   public selectedformCss: FormCss;
