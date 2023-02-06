@@ -25,6 +25,8 @@ export class UserFormComponent extends PageComponent implements OnInit {
   public languageDTOS: LanguageDTO[];
   public mode: string;
   public visibleSection = 'general';
+  public filteredRoleDTOS: RoleDTO[];
+
 
   constructor(private userService: UserService,
               private menuService: MenuService,
@@ -168,4 +170,8 @@ export class UserFormComponent extends PageComponent implements OnInit {
       this.userDTO.languages.filter(item => item !== language);
   }
 
+  removeRolesWhichHasBeenAlreadyAssignedToTheUser() {
+    const rolesId = this.userDTO.roles.map(role => role?.id);
+    this.filteredRoleDTOS = this?.roleDTOS?.filter(role => !rolesId.includes( role?.id))
+  }
 }
