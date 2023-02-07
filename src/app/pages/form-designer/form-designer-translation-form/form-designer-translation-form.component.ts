@@ -43,18 +43,6 @@ import {FormAreaTranslationDTO} from "../../../dtos/form/translation/form-area-t
 })
 export class FormDesignerTranslationFormComponent extends PageComponent implements OnInit {
 
-  public aceJavascriptEditorConfig: AceConfigInterface = {
-    mode: 'javascript',
-    theme: 'github',
-    readOnly: false
-  };
-
-  public aceCSSEditorConfig: AceConfigInterface = {
-    mode: 'css',
-    theme: 'chrome',
-    readOnly: false
-  };
-
   public mode: string;
   public dto: FormDto;
   public description: string;
