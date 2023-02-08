@@ -38,8 +38,6 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     readOnly : false
   };
 
-
-
   constructor(private tableComponentService: TableComponentDesignerService,
               private service: XlsImportDesignerService,
               private location: Location,
@@ -146,11 +144,14 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     this.service.delete(this.dto.id).subscribe(data => {
       this.location.back();
     });
-  }
+  }F
 
   selectComponent(selectedComponent) {
-    this.dto.component = selectedComponent;
-    this.setAssignmentsToComponents();
+
+    this.tableComponentService.getById(selectedComponent.id).subscribe(data => {
+      this.dto.component = data;
+      this.setAssignmentsToComponents();
+    });
   }
 
   setAssignmentsToComponents() {

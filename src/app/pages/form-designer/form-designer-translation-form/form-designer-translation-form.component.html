@@ -336,7 +336,7 @@
                 </td>
                 <td>
                   <ng-container *ngFor="let translation of formActionButton.translations">
-                    <input *ngIf="translation.language.id === this.language.id"
+                    <input *ngIf="translation.language.id === this.language?.id"
                            [(ngModel)]="translation.description" class="form-control transparent-input"
                            type="text">
                   </ng-container>
@@ -381,7 +381,7 @@
           <i class="fa fa-pencil-alt"></i>
         </button>
         <ng-container *ngFor="let translation of formTab.translations">
-          <button (click)="selectFormSection(formTab)" *ngIf="translation.language.id === this.language.id"
+          <button (click)="selectFormSection(formTab)" *ngIf="translation.language.id === this.language?.id"
                   class="btn btn-outline-default btn-round white-tab"
                   style="margin-top: 0px;margin-bottom: 0px;padding: 10px;"
                   type="button">
@@ -410,7 +410,7 @@
           <i class="fa fa-pencil-alt"></i>
         </button>
         <ng-container *ngFor="let translation of formPopup.translations">
-          <button (click)="selectFormSection(formPopup)" *ngIf="translation.language.id === this.language.id"
+          <button (click)="selectFormSection(formPopup)" *ngIf="translation.language.id === this.language?.id"
                   class="btn btn-outline-default btn-round white-tab"
                   style="margin-top: 0px;margin-bottom: 0px;padding: 10px;"
                   type="button">
@@ -430,7 +430,7 @@
         <div class="row formnav">
           <div class="col-12">
             <ng-container *ngFor="let translation of formArea.translations">
-              <div class="pull-left" *ngIf="translation.language.id === this.language.id">
+              <div class="pull-left" *ngIf="translation.language.id === this.language?.id">
                 <h5 class="card-title">
                   <i class="fa {{formArea.icon}}"></i>
                   {{translation.title}}
@@ -459,7 +459,7 @@
             <div *ngIf="formcontrol.type === 'button'" class="form-group">
               <div class="btn-group">
                 <ng-container *ngFor="let translation of formcontrol?.formControlButton?.translations">
-                  <button *ngIf="translation.language.id === this.language.id"
+                  <button *ngIf="translation.language.id === this.language?.id"
                             (click)="setSelectedFormControlButton(formcontrol);"
                           class="btn btn-outline-default btn-round white-tab"
                           data-target="#insertButtonModal"
@@ -492,18 +492,18 @@
                        value="{{formcontrol.formControlField.componentPersistEntity?.code}}.{{formcontrol.formControlField.componentPersistEntityField.persistEntityField.name}}">
 
                 <ng-container *ngFor="let translation of formcontrol.formControlField.translations">
-                  <input *ngIf="translation.language.id === this.language.id"
+                  <input *ngIf="translation.language.id === this.language?.id"
                          [(ngModel)]="translation.description"
                          class="form-control textfield-area"
                          style="border-left: 1px solid #51ccce !important;"
                          type="text">
 
-                  <input *ngIf="translation.language.id === this.language.id"
+                  <input *ngIf="translation.language.id === this.language?.id"
                          [(ngModel)]="translation.message" class="form-control textfield-area"
                          style="border-left: 1px solid #51ccce !important; background-color: #f1fcff"
                          type="text">
 
-                  <input *ngIf="translation.language.id === this.language.id"
+                  <input *ngIf="translation.language.id === this.language?.id"
                          [(ngModel)]="translation.placeholder" class="form-control textfield-area"
                          style="border-left: 1px solid #51ccce !important;"
                          type="text">
@@ -643,8 +643,8 @@
           class="fa fa-times"></i></button>
       </div>
       <div class="modal-body">
-        <ng-container *ngFor="let translation of this.selectedFormSection.translations">
-          <div *ngIf="translation.language.id === this.language.id"  class="row">
+        <ng-container *ngFor="let translation of this.selectedFormSection?.translations">
+          <div *ngIf="translation?.language?.id === this.language?.id"  class="row">
             <div class="col-12">
               <label>Description</label>
               <input [(ngModel)]="translation.description" class="form-control" type="text">
@@ -673,7 +673,7 @@
       </div>
       <div class="modal-body">
         <ng-container *ngFor="let translation of this.selectedFormSection.translations">
-          <div *ngIf="translation.language.id === this.language.id" class="row">
+          <div *ngIf="translation.language.id === this.language?.id" class="row">
             <div class="col-12">
               <label>Description</label>
               <input [(ngModel)]="translation.description" class="form-control" type="text">
@@ -735,13 +735,13 @@
       </div>
       <div class="modal-body">
         <ng-container *ngFor="let translation of selectedFormArea.translations">
-          <div *ngIf="translation.language.id === this.language.id" class="row">
+          <div *ngIf="translation.language.id === this.language?.id" class="row">
             <div class="col-12">
               <label>Title</label>
               <input [(ngModel)]="translation.title" class="form-control" type="text">
             </div>
           </div>
-          <div *ngIf="translation.language.id === this.language.id" class="row">
+          <div *ngIf="translation.language.id === this.language?.id" class="row">
             <div class="col-12">
               <label>Description (Inner Html)</label>
               <input [(ngModel)]="translation.description" class="form-control" type="text">
@@ -886,7 +886,7 @@
 
         <ng-container *ngFor="let translation of this.selectedFormControl.formControlField.translations">
 
-          <div *ngIf="translation.language.id === this.language.id" class="row">
+          <div *ngIf="translation.language.id === this.language?.id" class="row">
             <div class="col-12">
               <label>Description</label>
               <textarea [(ngModel)]="translation.description"
@@ -894,7 +894,7 @@
             </div>
           </div>
 
-          <div *ngIf="translation.language.id === this.language.id" class="row">
+          <div *ngIf="translation.language.id === this.language?.id" class="row">
             <div class="col-12">
               <label>Message</label>
               <textarea [(ngModel)]="translation.message"
@@ -902,7 +902,7 @@
             </div>
           </div>
 
-          <div *ngIf="translation.language.id === this.language.id" class="row">
+          <div *ngIf="translation.language.id === this.language?.id" class="row">
             <div class="col-12">
               <label>Placeholder</label>
               <textarea [(ngModel)]="translation.placeholder"
@@ -1029,7 +1029,7 @@
       </div>
       <div *ngIf="this.selectedButtonFormControl.formControlButton != null" class="modal-body">
         <ng-container *ngFor="let translation of this.selectedButtonFormControl?.formControlButton?.translations">
-          <div class="row" *ngIf="translation.language.id === this.language.id">
+          <div class="row" *ngIf="translation.language.id === this.language?.id">
             <div class="col-12">
               <label>Description</label>
               <input [(ngModel)]="translation.description" class="form-control"
@@ -1599,7 +1599,7 @@
                   <input [(ngModel)]="column.icon" disabled class="form-control" type="text">
                 </td>
                 <ng-container *ngFor="let translation of column?.translations">
-                  <td *ngIf="translation.language.id === this.language.id">
+                  <td *ngIf="translation.language.id === this.language?.id">
                     <input  [(ngModel)]="translation.description" class="form-control transparent-input"
                            type="text">
                   </td>
