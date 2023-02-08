@@ -18,6 +18,10 @@ export class AccessControlService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-role?roleId=${roleId}`);
   }
 
+  getPermissions(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/permissions`);
+  }
+
   getUsersWithoutTheGivenRole(roleId: string): Observable<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/available?roleId=${roleId}`);
   }

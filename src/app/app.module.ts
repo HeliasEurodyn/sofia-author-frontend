@@ -143,6 +143,7 @@ import { HtmlTemplateDesignerFormComponent } from './pages/html-template-designe
 import { HtmlTemplateDesignerListComponent } from './pages/html-template-designer/html-template-designer-list/html-template-designer-list.component';
 import { AccessControlComponent } from './pages/access-control/access-control.component';
 import { ShortByOrderPipe } from './pages/table-designer/table-designer-form/short-by-order.pipe';
+import { RemoveElementModalComponent } from './modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
 
 @NgModule({
   declarations: [
@@ -218,7 +219,8 @@ import { ShortByOrderPipe } from './pages/table-designer/table-designer-form/sho
     HtmlTemplateDesignerFormComponent,
     BusinessUnitDesignerListComponent,
     AccessControlComponent,
-    ShortByOrderPipe
+    ShortByOrderPipe,
+    RemoveElementModalComponent
   ],
   imports: [
     BrowserAnimationsModule,

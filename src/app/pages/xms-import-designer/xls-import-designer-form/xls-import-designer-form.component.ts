@@ -214,7 +214,7 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     dto.updateEntity = false;
     dto.readEntity = false;
     dto.deleteEntity = false;
-    dto.type = 'form';
+    dto.type = 'xls import';
     dto.entityId = this.dto.id;
 
     securityList.push(dto);

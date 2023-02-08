@@ -31,21 +31,176 @@
   </div>
 </div>
 
-<div [ngClass]="{'is-hidden': this.visibleSection !== 'permissions' }" class="row form-area">
-  <div class="col-md-12">
-    <div class="card card-user">
-      <div class="card-header">
-        <h5 class="card-title">
-          <i class="fa fa-lock"></i>
-          Permissions
-        </h5>
-      </div>
-      <div class="card-body">
 
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'permissions' }" class="tab-pane form-area">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card card-user">
+        <div class="card-header">
+          <div class="row formnav">
+            <div class="col-12">
+              <div class="pull-left">
+                <h5 class="card-title" style="margin-bottom: 0px;">
+                  <i class="fas fa-filter"></i>
+                  Filters
+                </h5>
+              </div>
+              <div class="pull-right">
+                <button
+                  (click)="getFilteredPermissions()"
+                  class="btn btn-outline-success"
+                  style="margin-top: 0px;">
+                  <i class="fa fa-filter"></i>
+                  Filter
+                </button>
+                <button
+                  (click)="clearFilters()"
+                  class="btn btn-outline-danger"
+                  style="margin-top: 0px;">
+                  <i class="fa fa-times"></i>
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+           <div class="row">
+             <div class="col-md-12">
+               <div class="form-group">
+                 <label>Type</label>
+                 <select class="form-control" [(ngModel)]="selectedType">
+                   <option value="">any</option>
+                   <option *ngFor="let type of types"
+                           [value]="type">
+                     {{type}}
+                   </option>
+                 </select>
+               </div>
+             </div>
+             <div class="col-md-12">
+               <div class="form-group">
+                 <label>Role</label>
+                 <select class="form-control" [(ngModel)]="selectedRoleName">
+                   <option value="">any</option>
+                   <option *ngFor="let role of roles"
+                           [value]="role.name">
+                     {{role.name}}
+                   </option>
+                 </select>
+               </div>
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card card-user">
+          <div class="card-header">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-lock"></i>
+                Permissions
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button class="btn btn btn-outline-success" (click)="savePermissions()">
+                <i class="fa fa-save"></i> Save
+              </button>
+              <button class="btn btn btn-outline-success" (click)="addPermissions()">
+                <i class="fa fa-plus-circle"></i> Add Permission
+              </button>
+              <button class="btn btn btn-outline-info" (click)="navigateToPreviousPage()">
+                <i class="fa fa-chevron-left"></i> Back
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>Actions</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Role</th>
+                  <th>create</th>
+                  <th>update</th>
+                  <th>read</th>
+                  <th>delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngIf="permissions == undefined || permissions?.length === 0 ">
+                  <td colspan="12" class="empty-table-row">Empty!</td>
+                </tr>
+                <tr *ngFor="let permission of permissions">
+                  <td>
+                    <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"
+                            (click)="removePermission(permission)">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input" readonly [(ngModel)]="permission['entityId']">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input" readonly [(ngModel)]="permission['entityName']">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input" readonly [(ngModel)]="permission['type']">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control transparent-input" readonly [(ngModel)]="permission['roleName']">
+                  </td>
+                  <td>
+                    <label class="checkbox" style="margin-bottom: 0px;">
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="permission.createEntity"
+                      />
+                      <span class="info"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <label class="checkbox" style="margin-bottom: 0px;">
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="permission.updateEntity"
+                      />
+                      <span class="info"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <label class="checkbox" style="margin-bottom: 0px;">
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="permission.readEntity"
+                      />
+                      <span class="info"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <label class="checkbox" style="margin-bottom: 0px;">
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="permission.deleteEntity"
+                      />
+                      <span class="info"></span>
+                    </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 <div [ngClass]="{'is-hidden': this.visibleSection !== 'assign-roles' }" class="row form-area">

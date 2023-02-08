@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="title title-up modal-title" style="margin: 0;">Delete Permission</h4>
+  <button type="button" class="btn" style="cursor: default"></button>
+</div>
+<div class="modal-body">
+  <p>permission for <b>{{permission.roleName}}</b> will be removed in the  <b>{{permission.type}}</b> with name <b>{{permission.entityName}}</b>. Are you Sure ?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-success " (click)="passBack()" >
+     Yes
+  </button>
+  <button type="button" class="btn btn-outline-danger " (click)="dismiss()" >
+     No
+  </button>
+</div>

@@ -6,6 +6,10 @@ import {UserDto} from '../../dtos/user/user-dto';
 import {AccessControlService} from '../../services/crud/access-control.service';
 import {PrivilegeDTO} from '../../dtos/access-control/privilege-dto';
 import {NotificationService} from '../../services/system/notification.service';
+import {AccessControlDTO} from '../../dtos/access-control/access-control-dto';
+import {Location} from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {RemoveElementModalComponent} from '../../modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
 
 @Component({
   selector: 'app-access-control',
@@ -14,28 +18,46 @@ import {NotificationService} from '../../services/system/notification.service';
 })
 export class AccessControlComponent extends PageComponent implements OnInit {
 
+  public types = ['list', 'form', 'menu', 'component', 'dashboard' , 'report' , 'xls import', 'search designer', 'custom query']
+
   public visibleSection = 'permissions';
   public roles: Array<RoleDTO>;
   public usersHavingTheRole: Array<UserDto>
   public usersNotHavingTheRole: Array<UserDto>
   public selectedRoleId: String;
+  public selectedRoleName: String;
+  public selectedType: String;
+  public permissions: Array<AccessControlDTO>;
+  public initialPermissions: Array<AccessControlDTO>;
   parentSelectorForUsersHavingTheRole: false;
 
   parentSelectorForUsersNotHavingTheRole: false;
 
   constructor(private roleService: RoleService,
               private  accessControlService: AccessControlService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private location: Location,
+              private modalService: NgbModal) {
     super();
   }
 
   ngOnInit(): void {
     this.usersHavingTheRole = new Array<UserDto>();
     this.usersNotHavingTheRole = new Array<UserDto>();
+    this.selectedRoleName = ''
+    this.selectedType = ''
     this.refresh();
   }
 
+  reload() {
+    location.reload();
+  }
+
   refresh() {
+    this.accessControlService.getPermissions().subscribe(data => {
+      this.initialPermissions = data;
+      this.permissions = this?.initialPermissions;
+    })
     this.roleService.get().subscribe(data => {
       this.roles = data;
     });
@@ -141,4 +163,53 @@ export class AccessControlComponent extends PageComponent implements OnInit {
   checkIThereIsSelectedItem(user: UserDto) {
      return user.isChecked;
   }
+
+  navigateToPreviousPage() {
+    this.location.back();
+  }
+
+  savePermissions() {
+    this.accessControlService.update(this.permissions).subscribe(response => {
+      this.reload();
+    })
+  }
+
+  getFilteredPermissions() {
+
+    this.permissions = this.initialPermissions
+
+     if (this.selectedRoleName) {
+         this.permissions = this.permissions?.filter(permission => permission?.roleName === this?.selectedRoleName);
+
+     }
+     if (this.selectedType) {
+       this.permissions = this.permissions?.filter(permission => permission?.type === this?.selectedType);
+     }
+  }
+
+  addPermissions() {
+
+  }
+
+  clearFilters() {
+    this.selectedRoleName = '';
+    this.selectedType = '';
+    this.permissions = this.initialPermissions;
+  }
+
+  removePermission(permission: AccessControlDTO) {
+      const modalReference = this.modalService.open(RemoveElementModalComponent);
+      modalReference.componentInstance.permission = permission;
+
+    modalReference.result.then((permissionForDelete) => {
+      if (permissionForDelete) {
+        this.accessControlService.delete(permissionForDelete.id).subscribe(data => {
+           this.permissions = this.permissions.filter(item => item !== permissionForDelete);
+           this.initialPermissions = this.initialPermissions.filter(item => item !== permissionForDelete)
+        });
+      }
+    });
+  }
+
+
 }
