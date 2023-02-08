@@ -7,8 +7,8 @@
   white-space: nowrap;
 }
 
-.modal-dialog {
-  max-width: 700px;
+hr.solid {
+  border-top: 3px solid #bbb;
 }
 
 .checkbox{

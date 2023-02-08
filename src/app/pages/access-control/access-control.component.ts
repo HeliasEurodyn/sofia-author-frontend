@@ -27,6 +27,8 @@ export class AccessControlComponent extends PageComponent implements OnInit {
   public selectedRoleId: String;
   public selectedRoleName: String;
   public selectedType: String;
+  public selectedTypeOnPermissionAddDialog: String;
+
   public permissions: Array<AccessControlDTO>;
   public initialPermissions: Array<AccessControlDTO>;
   parentSelectorForUsersHavingTheRole: false;
@@ -46,6 +48,7 @@ export class AccessControlComponent extends PageComponent implements OnInit {
     this.usersNotHavingTheRole = new Array<UserDto>();
     this.selectedRoleName = ''
     this.selectedType = ''
+    this.selectedTypeOnPermissionAddDialog = 'list';
     this.refresh();
   }
 
