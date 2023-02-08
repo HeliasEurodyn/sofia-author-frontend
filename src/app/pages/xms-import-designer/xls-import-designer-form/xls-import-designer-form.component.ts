@@ -144,7 +144,7 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     this.service.delete(this.dto.id).subscribe(data => {
       this.location.back();
     });
-  }F
+  }
 
   selectComponent(selectedComponent) {
 
