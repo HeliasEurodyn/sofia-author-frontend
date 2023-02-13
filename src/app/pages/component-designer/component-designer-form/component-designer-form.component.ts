@@ -173,87 +173,99 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
 
 
   selectView(row) {
-    const componentPersistEntityDTO = new ComponentPersistEntityDTO();
-    componentPersistEntityDTO.persistEntity = row;
-    componentPersistEntityDTO.showFieldList = false;
-    componentPersistEntityDTO.deleteType = 'delete';
-    componentPersistEntityDTO.code = this.genNextComponentCode(this.componentDTO.componentPersistEntityList, row.name);
-    componentPersistEntityDTO.shortOrder = this.setShortOrders(this.componentDTO.componentPersistEntityList);
-    componentPersistEntityDTO.componentPersistEntityFieldList = [];
-    let shortOrder = 1;
-    for (const viewDesignField of row.viewFieldList) {
-      const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
-      componentTableFieldDTO.persistEntityField = viewDesignField;
-      componentTableFieldDTO.assignment.editor = '';
-      componentTableFieldDTO.shortOrder = shortOrder;
-      componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
-      shortOrder++;
-    }
-
-    if (this.selectedComponentPersistEntity == null) {
-      this.componentDTO.componentPersistEntityList.push(componentPersistEntityDTO);
-    } else {
-      if (this.selectedComponentPersistEntity.componentPersistEntityList == null) {
-        this.selectedComponentPersistEntity.componentPersistEntityList = [];
+    let persistEntity;
+    this.viewService.getById(row?.id).subscribe(data => {
+      persistEntity = data;
+      const componentPersistEntityDTO = new ComponentPersistEntityDTO();
+      componentPersistEntityDTO.persistEntity = persistEntity;
+      componentPersistEntityDTO.showFieldList = false;
+      componentPersistEntityDTO.deleteType = 'delete';
+      componentPersistEntityDTO.code = this.genNextComponentCode(this.componentDTO.componentPersistEntityList, row.name);
+      componentPersistEntityDTO.shortOrder = this.setShortOrders(this.componentDTO.componentPersistEntityList);
+      componentPersistEntityDTO.componentPersistEntityFieldList = [];
+      let shortOrder = 1;
+      for (const viewDesignField of persistEntity.viewFieldList) {
+        const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
+        componentTableFieldDTO.persistEntityField = viewDesignField;
+        componentTableFieldDTO.assignment.editor = '';
+        componentTableFieldDTO.shortOrder = shortOrder;
+        componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
+        shortOrder++;
       }
-      this.selectedComponentPersistEntity.componentPersistEntityList.push(componentPersistEntityDTO);
-    }
+
+      if (this.selectedComponentPersistEntity == null) {
+        this.componentDTO.componentPersistEntityList.push(componentPersistEntityDTO);
+      } else {
+        if (this.selectedComponentPersistEntity.componentPersistEntityList == null) {
+          this.selectedComponentPersistEntity.componentPersistEntityList = [];
+        }
+        this.selectedComponentPersistEntity.componentPersistEntityList.push(componentPersistEntityDTO);
+      }
+    })
   }
 
   selectAppView(row) {
-    const componentPersistEntityDTO = new ComponentPersistEntityDTO();
-    componentPersistEntityDTO.persistEntity = row;
-    componentPersistEntityDTO.showFieldList = false;
-    componentPersistEntityDTO.deleteType = 'delete';
-    componentPersistEntityDTO.shortOrder = this.setShortOrders(this.componentDTO.componentPersistEntityList);
-    componentPersistEntityDTO.code = this.genNextComponentCode(this.componentDTO.componentPersistEntityList, row.name);
-    componentPersistEntityDTO.componentPersistEntityFieldList = [];
-    let shortOrder = 1;
-    for (const appViewDesignField of row.appViewFieldList) {
-      const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
-      componentTableFieldDTO.persistEntityField = appViewDesignField;
-      componentTableFieldDTO.assignment.editor = '';
-      componentTableFieldDTO.shortOrder = shortOrder;
-      componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
-      shortOrder++;
-    }
-
-    if (this.selectedComponentPersistEntity == null) {
-      this.componentDTO.componentPersistEntityList.push(componentPersistEntityDTO);
-    } else {
-      if (this.selectedComponentPersistEntity.componentPersistEntityList == null) {
-        this.selectedComponentPersistEntity.componentPersistEntityList = [];
+    let persistEntity;
+    this.appViewService.getById(row?.id).subscribe(data => {
+      persistEntity = data;
+      const componentPersistEntityDTO = new ComponentPersistEntityDTO();
+      componentPersistEntityDTO.persistEntity = persistEntity;
+      componentPersistEntityDTO.showFieldList = false;
+      componentPersistEntityDTO.deleteType = 'delete';
+      componentPersistEntityDTO.shortOrder = this.setShortOrders(this.componentDTO.componentPersistEntityList);
+      componentPersistEntityDTO.code = this.genNextComponentCode(this.componentDTO.componentPersistEntityList, row.name);
+      componentPersistEntityDTO.componentPersistEntityFieldList = [];
+      let shortOrder = 1;
+      for (const appViewDesignField of persistEntity.appViewFieldList) {
+        const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
+        componentTableFieldDTO.persistEntityField = appViewDesignField;
+        componentTableFieldDTO.assignment.editor = '';
+        componentTableFieldDTO.shortOrder = shortOrder;
+        componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
+        shortOrder++;
       }
-      this.selectedComponentPersistEntity.componentPersistEntityList.push(componentPersistEntityDTO);
-    }
+
+      if (this.selectedComponentPersistEntity == null) {
+        this.componentDTO.componentPersistEntityList.push(componentPersistEntityDTO);
+      } else {
+        if (this.selectedComponentPersistEntity.componentPersistEntityList == null) {
+          this.selectedComponentPersistEntity.componentPersistEntityList = [];
+        }
+        this.selectedComponentPersistEntity.componentPersistEntityList.push(componentPersistEntityDTO);
+      }
+    })
   }
 
   selectTable(row) {
-    const componentPersistEntityDTO = new ComponentPersistEntityDTO();
-    componentPersistEntityDTO.persistEntity = row;
-    componentPersistEntityDTO.showFieldList = false;
-    componentPersistEntityDTO.deleteType = 'delete';
-    componentPersistEntityDTO.code = this.genNextComponentCode(this.componentDTO.componentPersistEntityList, row.name);
-    componentPersistEntityDTO.shortOrder = this.setShortOrders(this.componentDTO.componentPersistEntityList);
-    componentPersistEntityDTO.componentPersistEntityFieldList = [];
-    let shortOrder = 1;
-    for (const tableDesignField of row.tableFieldList) {
-      const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
-      componentTableFieldDTO.persistEntityField = tableDesignField;
-      componentTableFieldDTO.assignment.editor = '';
-      componentTableFieldDTO.shortOrder = shortOrder;
-      componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
-      shortOrder++;
-    }
-
-    if (this.selectedComponentPersistEntity == null) {
-      this.componentDTO.componentPersistEntityList.push(componentPersistEntityDTO);
-    } else {
-      if (this.selectedComponentPersistEntity.componentPersistEntityList == null) {
-        this.selectedComponentPersistEntity.componentPersistEntityList = [];
+    let persistEntity;
+    this.tableService.getById(row?.id).subscribe(data => {
+      persistEntity = data;
+      const componentPersistEntityDTO = new ComponentPersistEntityDTO();
+      componentPersistEntityDTO.persistEntity = persistEntity;
+      componentPersistEntityDTO.showFieldList = false;
+      componentPersistEntityDTO.deleteType = 'delete';
+      componentPersistEntityDTO.code = this.genNextComponentCode(this.componentDTO.componentPersistEntityList, row.name);
+      componentPersistEntityDTO.shortOrder = this.setShortOrders(this.componentDTO.componentPersistEntityList);
+      componentPersistEntityDTO.componentPersistEntityFieldList = [];
+      let shortOrder = 1;
+      for (const tableDesignField of persistEntity.tableFieldList) {
+        const componentTableFieldDTO = new ComponentPersistEntityFieldDTO();
+        componentTableFieldDTO.persistEntityField = tableDesignField;
+        componentTableFieldDTO.assignment.editor = '';
+        componentTableFieldDTO.shortOrder = shortOrder;
+        componentPersistEntityDTO.componentPersistEntityFieldList.push(componentTableFieldDTO);
+        shortOrder++;
       }
-      this.selectedComponentPersistEntity.componentPersistEntityList.push(componentPersistEntityDTO);
-    }
+
+      if (this.selectedComponentPersistEntity == null) {
+        this.componentDTO.componentPersistEntityList.push(componentPersistEntityDTO);
+      } else {
+        if (this.selectedComponentPersistEntity.componentPersistEntityList == null) {
+          this.selectedComponentPersistEntity.componentPersistEntityList = [];
+        }
+        this.selectedComponentPersistEntity.componentPersistEntityList.push(componentPersistEntityDTO);
+      }
+    })
   }
 
   genNextComponentCode(componentsList: ComponentPersistEntityDTO[], defaultCode: string) {
