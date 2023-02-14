@@ -38,8 +38,6 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     readOnly : false
   };
 
-
-
   constructor(private tableComponentService: TableComponentDesignerService,
               private service: XlsImportDesignerService,
               private location: Location,
@@ -149,8 +147,11 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
   }
 
   selectComponent(selectedComponent) {
-    this.dto.component = selectedComponent;
-    this.setAssignmentsToComponents();
+
+    this.tableComponentService.getById(selectedComponent.id).subscribe(data => {
+      this.dto.component = data;
+      this.setAssignmentsToComponents();
+    });
   }
 
   setAssignmentsToComponents() {
@@ -214,7 +215,7 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     dto.updateEntity = false;
     dto.readEntity = false;
     dto.deleteEntity = false;
-    dto.type = 'form';
+    dto.type = 'xls import';
     dto.entityId = this.dto.id;
 
     securityList.push(dto);

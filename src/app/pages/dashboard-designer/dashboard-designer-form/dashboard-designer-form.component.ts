@@ -281,7 +281,7 @@ export class DashboardDesignerFormComponent extends PageComponent implements OnI
     dto.updateEntity = false;
     dto.readEntity = false;
     dto.deleteEntity = false;
-    dto.type = 'form';
+    dto.type = 'dashboard';
     dto.entityId = this.dto.id;
 
     securityList.push(dto);

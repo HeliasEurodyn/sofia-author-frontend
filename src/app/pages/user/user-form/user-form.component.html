@@ -295,7 +295,7 @@
               <button
                 data-target="#insertRoleMenuModal"
                 data-toggle="modal"
-                class="btn btn-outline-primary">
+                class="btn btn-outline-primary" (click)="removeRolesWhichHasBeenAlreadyAssignedToTheUser()">
                 <i class="fa fa-plus-circle"></i> Add Role
               </button>
             </div>
@@ -466,7 +466,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let role of roleDTOS" style="cursor: pointer;">
+                <tr *ngFor="let role of filteredRoleDTOS" style="cursor: pointer;">
                   <td>
                     <button
                       data-dismiss="modal"

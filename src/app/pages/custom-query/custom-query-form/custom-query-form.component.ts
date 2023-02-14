@@ -96,7 +96,7 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
     dto.updateEntity = false;
     dto.readEntity = false;
     dto.deleteEntity = false;
-    dto.type = 'form';
+    dto.type = 'custom query';
     dto.entityId = this.dto.id;
 
     securityList.push(dto);

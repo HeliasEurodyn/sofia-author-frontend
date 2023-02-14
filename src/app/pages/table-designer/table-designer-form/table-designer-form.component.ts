@@ -7,6 +7,7 @@ import {CommandNavigatorService} from '../../../services/system/command-navigato
 import {TableFieldDTO} from '../../../dtos/table/table-field-dto';
 import {Location} from '@angular/common'
 import {NotificationService} from '../../../services/system/notification.service';
+import {ForeignKeyConstrainDTO} from '../../../dtos/table/foreign-key-constrain-dto';
 
 @Component({
   selector: 'app-table-designer-form',
@@ -15,13 +16,19 @@ import {NotificationService} from '../../../services/system/notification.service
 })
 export class TableDesignerFormComponent extends PageComponent implements OnInit {
 
+  public referentialActions = ['CASCADE', 'SET NULL', 'RESTRICT', 'NO ACTION', 'SET DEFAULT']
+
   public dto: TableDTO;
   shortOrder = 0;
   public tableExists = false;
   public mode: string;
   public isCollapsed = false;
   public customTableNameMask = '0*';
-  public customTableNamePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
+  public customTableNamePattern = {'0': {pattern: new RegExp('\[a-z0-9_\]')}};
+  public visibleSection = 'fields';
+  public fkConstrainShortOrder = 1;
+
+  public listOfTables: Array<TableDTO>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: TableService,
@@ -51,27 +58,25 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
         this.dto = data;
         this.setTitle('Entry ' + this.dto.name);
         this.cleanIdsIfCloneEnabled();
+        if (this.dto?.foreignKeyConstrainList == null) {
+          this.dto.foreignKeyConstrainList = [];
+        }
       });
+    } else {
+      this.dto.tableFieldList = [];
+      this.addField()
+
+      this.dto.foreignKeyConstrainList = [];
+      this.addForeignKeyConstrain();
     }
 
-    this.dto = new TableDTO();
-    this.dto.tableFieldList = [];
-    const tableFieldDTO = new TableFieldDTO();
-    tableFieldDTO.shortOrder = this.shortOrder;
-    tableFieldDTO.name = '';
-    tableFieldDTO.description = '';
-    tableFieldDTO.type = '';
-    tableFieldDTO.size = '';
-    tableFieldDTO.createdOn = null;
-    tableFieldDTO.createdBy = null;
-    tableFieldDTO.autoIncrement = false;
-    tableFieldDTO.primaryKey = false;
-    tableFieldDTO.version = null;
-    tableFieldDTO.hasDefault = false;
-    tableFieldDTO.defaultValue = '';
-    tableFieldDTO.isUnsigned = false;
-    tableFieldDTO.hasNotNull = false;
-    this.dto.tableFieldList.push(tableFieldDTO);
+    this.getTables();
+  }
+
+  getTables() {
+    this.service.get().subscribe(data => {
+      this.listOfTables = data;
+    });
   }
 
   checkIfTableAlreadyExists() {
@@ -85,12 +90,16 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   }
 
   showPreviousPageButton() {
-      return true;
+    return true;
+  }
+
+  setVisibleSection(visibleSection: string) {
+    this.visibleSection = visibleSection;
   }
 
   navigateToPreviousPage() {
     this.location.back();
-   // this.navigatorService.navigateToPreviousPage(this.pageId);
+    // this.navigatorService.navigateToPreviousPage(this.pageId);
   }
 
   navigateToNextPage() {
@@ -128,26 +137,50 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
     this.dto.tableFieldList = this.dto.tableFieldList.filter(item => item !== row);
   }
 
+  removeForeignKeyConstrainLine(row) {
+    this.dto.foreignKeyConstrainList = this.dto.foreignKeyConstrainList.filter(item => item !== row);
+  }
+
   save() {
 
-    if ( this.dto.name === '' || this.dto.name == null) {
+    if (this.dto.name === '' || this.dto.name == null) {
       this.notificationService.showNotification('top', 'center', 'alert-danger',
         'fa-exclamation-circle', '<b>Table Name</b> Table Name cannot be empty!');
       return;
     }
 
     for (const field of this.dto.tableFieldList) {
-      if ( field.name === '') {
+      if (field.name === '') {
         this.notificationService.showNotification('top', 'center', 'alert-danger',
           'fa-exclamation-circle', '<b>Empty Field Name</b> Field Name cannot be empty!');
         return;
       }
     }
 
+    if (this?.dto?.foreignKeyConstrainList.some(this.isNonValid)) {
+      this.notificationService.showNotification('top', 'center', 'alert-danger',
+        'fa-exclamation-circle', '<b>A non-valid foreign key constrain has been added</b><br> Please check the list with foreign keys!');
+      return;
+    }
+
+    const set = new Set();
+
+    if (this?.dto?.foreignKeyConstrainList.some((fk) => set.size === (set.add(fk.name), set.size))) {
+      this.notificationService.showNotification('top', 'center', 'alert-danger',
+        'fa-exclamation-circle', '<b>Duplicate Foreign Key Constrain Name Has Been Added</b>');
+      return;
+    }
+
     let shortOrder = 1;
     this.dto.tableFieldList.forEach(field => {
       field.shortOrder = shortOrder;
-      shortOrder ++;
+      shortOrder++;
+    });
+
+    let fkConstrainShortOrder = 1;
+    this.dto.foreignKeyConstrainList.forEach(fk => {
+      fk.shortOrder = fkConstrainShortOrder;
+      fkConstrainShortOrder++;
     });
 
     if (this.mode === 'edit-record') {
@@ -174,7 +207,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   addDefaultFields() {
     let tableFieldDTO = null;
 
-    if ( this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)].name === '') {
+    if (this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)].name === '') {
       tableFieldDTO = this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)];
     } else {
       tableFieldDTO = this.addField();
@@ -210,7 +243,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   addVersionField() {
     let tableFieldDTO = null;
 
-    if ( this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)].name === '') {
+    if (this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)].name === '') {
       tableFieldDTO = this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)];
     } else {
       tableFieldDTO = this.addField();
@@ -224,7 +257,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   addShortOrderField() {
     let tableFieldDTO = null;
 
-    if ( this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)].name === '') {
+    if (this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)].name === '') {
       tableFieldDTO = this.dto.tableFieldList[(this.dto.tableFieldList.length - 1)];
     } else {
       tableFieldDTO = this.addField();
@@ -237,7 +270,6 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
 
 
   addField() {
-    this.shortOrder++;
 
     const tableFieldDTO = new TableFieldDTO();
     tableFieldDTO.id = null;
@@ -257,16 +289,58 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
     tableFieldDTO.hasNotNull = false;
 
     this.dto.tableFieldList.push(tableFieldDTO);
-
+    this.shortOrder++;
     return tableFieldDTO;
   }
 
   generateTableFields() {
     this.service.generateTableFields(this.dto.name).subscribe(data => {
-      if ( data.length > 0) {
+      if (data.length > 0) {
         this.dto.tableFieldList = data;
       }
     });
 
   }
+
+  addForeignKeyConstrain() {
+
+    const foreignKeyConstrain = new ForeignKeyConstrainDTO();
+    foreignKeyConstrain.shortOrder = this.fkConstrainShortOrder;
+    foreignKeyConstrain.id = null;
+    foreignKeyConstrain.name = '';
+    foreignKeyConstrain.fieldName = '';
+    foreignKeyConstrain.referredTable = new TableDTO();
+    foreignKeyConstrain.referredField = new TableFieldDTO();
+    foreignKeyConstrain.onDelete = this.referentialActions[4];
+    foreignKeyConstrain.onUpdate = this.referentialActions[4];
+    this.dto.foreignKeyConstrainList.push(foreignKeyConstrain);
+    console.log(this.dto)
+    this.fkConstrainShortOrder++;
+  }
+
+  onChange(referredTable: TableDTO, selectedForeignKeyConstrain: ForeignKeyConstrainDTO) {
+    const referredTableId = referredTable?.id;
+    selectedForeignKeyConstrain.referredTable.tableFieldList = null;
+    this.service.getById(referredTableId).subscribe(data => {
+      selectedForeignKeyConstrain.referredTable.tableFieldList = data?.tableFieldList;
+    });
+  }
+
+
+
+  isNonValid(foreignKeyConstrain: ForeignKeyConstrainDTO) {
+
+    return foreignKeyConstrain.name === ''
+      || foreignKeyConstrain.fieldName === ''
+      || foreignKeyConstrain.referredTable.id == null
+      || foreignKeyConstrain.referredField.id == null;
+  }
+  compareReferredField(referredField1: TableFieldDTO, referredField2: TableFieldDTO): boolean {
+    return referredField1 && referredField2 ? referredField1.id === referredField2.id : referredField1 === referredField2;
+  }
+
+  compareReferredTable(referredTable1: TableDTO, referredTable2: TableDTO): boolean {
+    return referredTable1 && referredTable2 ? referredTable1.id === referredTable2.id : referredTable1 === referredTable2;
+  }
+
 }

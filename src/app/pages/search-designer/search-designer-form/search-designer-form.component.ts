@@ -109,7 +109,7 @@ export class SearchDesignerFormComponent extends PageComponent implements OnInit
     dto.updateEntity = false;
     dto.readEntity = false;
     dto.deleteEntity = false;
-    dto.type = 'form';
+    dto.type = 'search designer';
     dto.entityId = this.dto.id;
 
     securityList.push(dto);
