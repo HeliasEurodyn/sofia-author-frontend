@@ -105,8 +105,12 @@
                 <i class="fa fa-code" style="padding-right: 5px;"></i>
                 Html Section
               </h3>
-                  
             </div>
+            <div class="pull-right">
+              <button class="btn btn-outline-primary" data-target="#insertFieldsModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i> Insert Fields
+              </button>
+            </div>    
           </div>
         </div>
       </div>
@@ -177,5 +181,90 @@
     </div>
   </div>
 </div>
+ <div aria-labelledby="ModalLabel" class="modal fade" id="insertFieldsModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-select-fields">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Insert Fields</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <ul style="padding: 0px;">
+          <ng-template #recursiveList let-componentPersistEntityList>
+            <div *ngFor="let componentPersistEntity of componentPersistEntityList">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 style="margin: 0px;">
+                    <button style="margin: 0px;"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                            (click)="hideChildren(componentPersistEntity)"
+                            type="button" title="Hide"
+                            class="btn btn-outline-default btn-icon btn-sm">
+                      <i class="fa fa-compress"></i>
+                    </button>
+                    <button style="margin: 0px;"
+                            *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList !== true"
+                            (click)="showChildren(componentPersistEntity)"
+                            type="button" title="Show"
+                            class="btn btn-outline-default btn-icon btn-sm">
+                      <i class="fa fa-expand"></i>
+                    </button>
+                    [{{componentPersistEntity.code}}] {{componentPersistEntity.persistEntity.name}}
+                  </h6>
+                </div>
+              </div>
+
+              <table
+                *ngIf="componentPersistEntity.persistEntity != null && componentPersistEntity.showFieldList === true"
+                class="table table-striped">
+                <thead class=" text-primary">
+                <tr>
+                  <th>actions</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let field of componentPersistEntity.componentPersistEntityFieldList"
+                    style="cursor: pointer;">
+                  <td>
+                    <button title="Add To Columns" type="button" class="btn btn-outline-info btn-icon btn-sm" 
+                            (click)="addColumn(componentPersistEntity, field)">
+                      <i class="fa fa-copy" style="color: #4f5057;"></i>
+                    </button>
+
+                  </td>
+                  <td>{{field.persistEntityField.id}}</td>
+                  <td>{{field.persistEntityField.name}}</td>
+                  <td>{{field.persistEntityField.type}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+              <ul *ngIf="(componentPersistEntity.componentPersistEntityList != undefined)">
+                <ng-container
+                  *ngTemplateOutlet="recursiveList; context:{ $implicit: componentPersistEntity.componentPersistEntityList }">
+                </ng-container>
+              </ul>
+
+            </div>
+          </ng-template>
+
+          <ng-container
+            *ngTemplateOutlet="recursiveList; context:{ $implicit: this.dto?.component?.componentPersistEntityList }"></ng-container>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 

@@ -12,6 +12,7 @@ import { TableComponentDesignerService } from 'app/services/crud/table-component
 import { ComponentPersistEntityDTO } from 'app/dtos/component/component-persist-entity-dto';
 import { ComponentPersistEntityFieldAssignmentDTO } from 'app/dtos/component/component-persist-entity-field-assignment-dto';
 import { RoleService } from 'app/services/crud/role.service';
+import { NotificationService } from 'app/services/system/notification.service';
 
 @Component({
   selector: 'app-html-template-designer-form',
@@ -19,6 +20,7 @@ import { RoleService } from 'app/services/crud/role.service';
   styleUrls: ['./html-template-designer-form.component.css']
 })
 export class HtmlTemplateDesignerFormComponent extends PageComponent implements OnInit {
+  [x: string]: any;
 
   public dto: HtmlTemplateDTO;
   public mode : string;
@@ -36,7 +38,8 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     private tableComponentService: TableComponentDesignerService,
     private service: HtmlTemplateDesignerService,
     private roleService: RoleService,
-    private location: Location) {
+    private location: Location,
+    private notificationService: NotificationService) {
     super();
   }
 
@@ -150,5 +153,26 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     window.URL.revokeObjectURL(url);
     downloadedReportFile.remove();
   }
+
+  hideChildren(item) {
+    item.showFieldList = false;
+  }
+
+  showChildren(item) {
+    item.showFieldList = true;
+  }
+
+  addColumn(componentPersistEntity, field){
+    const fieldString = componentPersistEntity.code + '.' + field.persistEntityField.name;
+    const fieldParameter = '##' + fieldString + '##';
+    navigator.clipboard.writeText(fieldParameter).then().catch(e => console.log(e));
+
+    this.notificationService.showNotification('top', 'center', 'alert-success', 'fa-exclamation', 'Field <b>' + fieldString + '</b> copied to clipboard!');
+
+    // console.log(fieldString);
+    // this.dto.html += fieldString;
+    
+  }
+
 
 }
