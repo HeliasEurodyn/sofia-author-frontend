@@ -21,4 +21,9 @@ export class FormDesignerService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/business-units`);
   }
 
+  get10LatestForms(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/10-latest`);
+  }
+
+
 }

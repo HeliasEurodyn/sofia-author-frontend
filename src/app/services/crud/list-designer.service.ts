@@ -57,4 +57,8 @@ export class ListDesignerService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/business-units`);
   }
 
+  get10LatestLists(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/10-latest`);
+  }
+
 }

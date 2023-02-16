@@ -49,4 +49,8 @@ export class UserService extends CrudService<any> {
       `${environment.serverUrl}/${this.endpoint}/current-language?language-id=${languageId}`, null);
   }
 
+  get10LatestUsers(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/10-latest`);
+  }
+
 }

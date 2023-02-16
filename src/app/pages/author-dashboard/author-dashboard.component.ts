@@ -39,15 +39,20 @@ export class AuthorDashboardComponent extends PageComponent implements OnInit {
 
   refresh() {
 
-    this.userService.get().subscribe(data => {
+   
+
+    this.userService.get10LatestUsers().subscribe(data => {
       this.usersList = data;
     });
 
-    this.listDesignerService.get().subscribe(data => {
+
+    this.listDesignerService.get10LatestLists().subscribe(data => {
       this.listsList = data;
     });
 
-    this.formDesignerService.get().subscribe(data => {
+  
+
+    this.formDesignerService.get10LatestForms().subscribe(data => {
       this.formsList = data;
     });
 
