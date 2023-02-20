@@ -58,7 +58,7 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
-        this.dto.html = atob(this.dto?.html);
+        this.dto.html = decodeURIComponent(atob(this.dto?.html));
         this.cleanIdsIfCloneEnabled();
       });
     }
@@ -68,7 +68,7 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
 
   save() {
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
-    const base64Html = btoa(dtoToBeSaved?.html);
+    const base64Html = btoa(encodeURIComponent(dtoToBeSaved?.html));
     dtoToBeSaved.html = base64Html;
     console.log(this.dto);
     if (this.mode === 'edit-record') {
@@ -140,7 +140,7 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
       this.saveFile(response.body, "pdf");
     });
   }
-  
+
   saveFile(downloadedData: any, reportType: string) {
     const blob = new Blob([downloadedData], {type: 'application/' + reportType});
     const url = window.URL.createObjectURL(blob);
@@ -171,7 +171,7 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
 
     // console.log(fieldString);
     // this.dto.html += fieldString;
-    
+
   }
 
 
