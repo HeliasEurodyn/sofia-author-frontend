@@ -49,7 +49,7 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
-        this.dto.query = atob(this.dto?.query);
+        this.dto.query = decodeURIComponent(atob(this.dto?.query));
         this.sortFilters();
         this.cleanIdsIfCloneEnabled();
       });
@@ -58,7 +58,7 @@ export class TimelineDesignerFormComponent extends PageComponent implements OnIn
 
   save() {
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
-    const base64Query = btoa(dtoToBeSaved?.query);
+    const base64Query = btoa(encodeURIComponent(dtoToBeSaved?.query));
     dtoToBeSaved.query = base64Query;
 
     if (this.mode === 'edit-record') {

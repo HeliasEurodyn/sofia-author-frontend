@@ -53,6 +53,7 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
+        this.dto.query = decodeURIComponent(atob(this.dto?.query));
         this.cleanIdsIfCloneEnabled();
       });
     }
@@ -67,6 +68,10 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
   }
 
   save() {
+    const base64Query = btoa(encodeURIComponent(this.dto?.query));
+    this.dto.query = base64Query;
+    console.log(this.dto);
+
     if (this.mode === 'edit-record') {
       this.service.update(this.dto).subscribe(data => {
         this.location.back();

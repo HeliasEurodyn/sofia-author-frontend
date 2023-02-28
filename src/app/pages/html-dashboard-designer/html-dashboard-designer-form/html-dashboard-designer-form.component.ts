@@ -48,12 +48,18 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
+        this.dto.html = decodeURIComponent(atob(this.dto?.html));
         this.cleanIdsIfCloneEnabled();
       });
     }
   }
 
   save() {
+
+    const base64Html = btoa(encodeURIComponent(this.dto?.html));
+    this.dto.html = base64Html;
+    console.log(this.dto);
+
     if (this.mode === 'edit-record') {
       this.service.update(this.dto).subscribe(data => {
         this.location.back();

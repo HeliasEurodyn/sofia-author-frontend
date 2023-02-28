@@ -63,10 +63,10 @@ export class InfoCardDesignerFormComponent extends PageComponent implements OnIn
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
-        this.dto.query = atob(this.dto.query);
+        this.dto.query = decodeURIComponent(atob(this.dto?.query));
 
         this.dto.scripts.forEach(listScript => {
-          const decodedScrypt = atob(listScript.script);
+          const decodedScrypt = decodeURIComponent(atob(listScript.script));
           listScript.script = decodedScrypt;
         });
 
@@ -76,21 +76,25 @@ export class InfoCardDesignerFormComponent extends PageComponent implements OnIn
   }
 
   save() {
-    const dto = JSON.parse(JSON.stringify(this.dto));
-    dto.query = btoa(this.dto.query);
 
-    dto.scripts.forEach(listScript => {
-      const encodedScrypt = btoa(listScript.script);
+    const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
+    const base64Query = btoa(encodeURIComponent(dtoToBeSaved?.query));
+    dtoToBeSaved.query = base64Query;
+
+  
+
+    dtoToBeSaved.scripts.forEach(listScript => {
+      const encodedScrypt = btoa(encodeURIComponent(listScript.script));
       listScript.script = encodedScrypt;
     });
 
     if (this.mode === 'edit-record') {
-      this.service.update(dto).subscribe(data => {
+      this.service.update(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
 
     } else {
-      this.service.save(dto).subscribe(data => {
+      this.service.save(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
     }

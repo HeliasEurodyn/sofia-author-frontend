@@ -46,7 +46,7 @@ export class CalendarDesginerFormComponent extends PageComponent implements OnIn
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
-        this.dto.query = atob(this.dto?.query);
+        this.dto.query = decodeURIComponent(atob(this.dto?.query));
         this.cleanIdsIfCloneEnabled();
       });
     }
@@ -54,7 +54,7 @@ export class CalendarDesginerFormComponent extends PageComponent implements OnIn
 
   save() {
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
-    const base64Query = btoa(dtoToBeSaved?.query);
+    const base64Query = decodeURIComponent(btoa(dtoToBeSaved?.query));
     dtoToBeSaved.query = base64Query;
 
     if (this.mode === 'edit-record') {
