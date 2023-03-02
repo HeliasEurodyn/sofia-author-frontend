@@ -202,7 +202,7 @@ export class AccessControlComponent extends PageComponent implements OnInit {
 
   removePermission(permission: AccessControlDTO) {
       const modalReference = this.modalService.open(RemoveElementModalComponent);
-      modalReference.componentInstance.permission = permission;
+      modalReference.componentInstance.element = permission;
 
     modalReference.result.then((permissionForDelete) => {
       if (permissionForDelete) {

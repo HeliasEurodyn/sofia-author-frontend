@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AccessControlDTO} from '../../../dtos/access-control/access-control-dto';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,16 +8,16 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class RemoveElementModalComponent implements OnInit {
 
-  @Input() public permission: AccessControlDTO
+  @Input() public element: any
 
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-    console.log(this.permission);
+    console.log(this.element);
   }
 
   passBack() {
-    this.activeModal.close(this.permission);
+    this.activeModal.close(this.element);
   }
 
   dismiss() {

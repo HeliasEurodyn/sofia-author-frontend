@@ -8,6 +8,11 @@ import {TableFieldDTO} from '../../../dtos/table/table-field-dto';
 import {Location} from '@angular/common'
 import {NotificationService} from '../../../services/system/notification.service';
 import {ForeignKeyConstrainDTO} from '../../../dtos/table/foreign-key-constrain-dto';
+import {
+  RemoveElementModalComponent
+} from '../../../modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {RemoveForeignKeyConstrainDTO} from '../../../dtos/table/remove-foreign-key-constrain-dto';
 
 @Component({
   selector: 'app-table-designer-form',
@@ -29,13 +34,15 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   public fkConstrainShortOrder = 1;
 
   public listOfTables: Array<TableDTO>;
+  public removeForeignKeyConstrainDTO: RemoveForeignKeyConstrainDTO;
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: TableService,
               private router: Router,
               private location: Location,
               private notificationService: NotificationService,
-              private navigatorService: CommandNavigatorService) {
+              private navigatorService: CommandNavigatorService,
+              private modalService: NgbModal) {
     super();
   }
 
@@ -46,6 +53,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
 
     this.mode = 'new-record';
     this.dto = new TableDTO();
+    this.removeForeignKeyConstrainDTO = new RemoveForeignKeyConstrainDTO();
 
     const locateParams = this.getLocateParams();
     if (locateParams.has('ID')) {
@@ -137,8 +145,19 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
     this.dto.tableFieldList = this.dto.tableFieldList.filter(item => item !== row);
   }
 
-  removeForeignKeyConstrainLine(row) {
-    this.dto.foreignKeyConstrainList = this.dto.foreignKeyConstrainList.filter(item => item !== row);
+  removeForeignKeyConstrainLine(row: ForeignKeyConstrainDTO) {
+    const modalReference = this.modalService.open(RemoveElementModalComponent);
+    modalReference.componentInstance.element = row;
+
+    modalReference.result.then((foreignKeyConstrainForDelete) => {
+      if (foreignKeyConstrainForDelete) {
+        this.removeForeignKeyConstrainDTO.setTableDTO(this.dto);
+        this.removeForeignKeyConstrainDTO.setForeignKeyConstrainDTO(foreignKeyConstrainForDelete);
+        this.service.dropForeignKeyConstrain(this.removeForeignKeyConstrainDTO).subscribe(data => {
+          this.dto.foreignKeyConstrainList = this.dto.foreignKeyConstrainList.filter(item => item !== row);
+        });
+      }
+    });
   }
 
   save() {

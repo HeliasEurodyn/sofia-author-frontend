@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {CrudService} from './common/crud.service';
 import {environment} from '../../../environments/environment';
+import {RemoveForeignKeyConstrainDTO} from "../../dtos/table/remove-foreign-key-constrain-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class TableService extends CrudService<any> {
 
   generateTableFields(name: string) {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/generate-table-fields?name=${encodeURIComponent(name)}`);
+  }
+
+  dropForeignKeyConstrain(foreignKeyConstrain: RemoveForeignKeyConstrainDTO) {
+    return this.http.put(`${environment.serverUrl}/${this.endpoint}/drop_foreign_key_constrain`, foreignKeyConstrain);
   }
 
 }
