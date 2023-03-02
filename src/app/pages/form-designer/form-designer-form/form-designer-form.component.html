@@ -1368,6 +1368,17 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-12">
+            <label>Required</label><br>
+            <select class="transparent-input"
+                    [(ngModel)]="this.selectedComponentPersistEntityField.assignment.required">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
       </div>
 
       <div class="modal-footer">
@@ -1482,16 +1493,6 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12">
-            <label>Required</label><br>
-            <select class="transparent-input"
-                    [(ngModel)]="this.selectedFormControl.formControlField.required">
-              <option value="false">No</option>
-              <option value="true">Yes</option>
-            </select>
-          </div>
-        </div>
       </div>
 
       <div class="modal-footer">

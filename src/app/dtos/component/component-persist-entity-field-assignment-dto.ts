@@ -13,4 +13,6 @@ export class ComponentPersistEntityFieldAssignmentDTO extends BaseDTO {
   fieldValue: any;
 
   type: string;
+
+  required: boolean;
 }
