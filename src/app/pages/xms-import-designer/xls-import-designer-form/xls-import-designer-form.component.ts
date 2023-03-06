@@ -61,6 +61,7 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(dto => {
         this.dto = dto;
+        this.dto.description = decodeURIComponent(atob(this.dto?.description));
 
         const cpeList: ComponentPersistEntityDTO[] = this.treeToList(this.dto.component.componentPersistEntityList);
         cpeList.forEach( cpe => {
@@ -98,6 +99,8 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
 
   save() {
     const dto: XlsImportDTO = JSON.parse(JSON.stringify(this.dto));
+    const base64Query = btoa(encodeURIComponent(dto?.description));
+    dto.description = base64Query;
     const cpeList: ComponentPersistEntityDTO[] = this.treeToList(dto.component.componentPersistEntityList);
     cpeList.forEach( cpe => {
       cpe.componentPersistEntityFieldList.forEach( cpef => {
