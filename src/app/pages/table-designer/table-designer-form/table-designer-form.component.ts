@@ -151,11 +151,15 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
 
     modalReference.result.then((foreignKeyConstrainForDelete) => {
       if (foreignKeyConstrainForDelete) {
-        this.removeForeignKeyConstrainDTO.setTableDTO(this.dto);
-        this.removeForeignKeyConstrainDTO.setForeignKeyConstrainDTO(foreignKeyConstrainForDelete);
-        this.service.dropForeignKeyConstrain(this.removeForeignKeyConstrainDTO).subscribe(data => {
+        if (foreignKeyConstrainForDelete?.id == null) {
           this.dto.foreignKeyConstrainList = this.dto.foreignKeyConstrainList.filter(item => item !== row);
-        });
+        } else {
+          this.removeForeignKeyConstrainDTO.setTableDTO(this.dto);
+          this.removeForeignKeyConstrainDTO.setForeignKeyConstrainDTO(foreignKeyConstrainForDelete);
+          this.service.dropForeignKeyConstrain(this.removeForeignKeyConstrainDTO).subscribe(data => {
+            this.dto.foreignKeyConstrainList = this.dto.foreignKeyConstrainList.filter(item => item !== row);
+          });
+        }
       }
     });
   }
