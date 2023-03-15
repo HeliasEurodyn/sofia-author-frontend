@@ -18,7 +18,7 @@ export class AppViewService extends CrudService<any> {
   }
 
   generateViewFields(query: string): Observable<any> {
-    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/generate-view-fields?query=${encodeURIComponent(query)}`);
+    return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}/generate-view-fields`,{ query: btoa(encodeURIComponent(query)) } );
   }
 
 }

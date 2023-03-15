@@ -102,7 +102,7 @@
             <tbody>
             <tr
               *ngIf="this.dto == undefined || this.dto?.appViewFieldList?.length === 0 || this.dto?.appViewFieldList == undefined ">
-              <td colspan="4" class="empty-table-row">Empty!</td>
+              <td colspan="5" class="empty-table-row">Empty!</td>
             </tr>
             <tr *ngFor="let row of this.dto.appViewFieldList">
               <td>

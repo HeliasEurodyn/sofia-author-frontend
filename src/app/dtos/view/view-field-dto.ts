@@ -4,4 +4,6 @@ export class ViewFieldDTO extends PersistEntityFieldDTO {
 
   private entitytype = 'ViewField';
 
+  public primaryKey;
+
 }

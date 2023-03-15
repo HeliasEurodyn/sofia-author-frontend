@@ -92,8 +92,8 @@
           </div>
           <div class="col-sm-5">
             <div class="pull-right">
-              <button class="btn btn-outline-primary" (click)="generateTableFields()">
-                <i class="fa fa-plus-circle"></i> Generate Fields From Database
+              <button class="btn btn-outline-success" (click)="addField()">
+                <i class="fa fa-plus-circle"></i> Empty Field
               </button>
               <button class="btn btn-outline-success" (click)="addDefaultFields()">
                 <i class="fa fa-plus-circle"></i> Default Fields
@@ -104,8 +104,8 @@
               <button class="btn btn-outline-success" (click)="addShortOrderField()">
                 <i class="fa fa-plus-circle"></i> Short Order Field
               </button>
-              <button class="btn btn-outline-success" (click)="addField()">
-                <i class="fa fa-plus-circle"></i> Empty Field
+              <button class="btn btn-outline-primary" (click)="generateTableFields()">
+                <i class="fa fa-plus-circle"></i> Generate Fields From Database
               </button>
             </div>
           </div>
@@ -213,12 +213,12 @@
       <div class="card-header">
         <div class="row">
           <div class="col-sm-7">
-            <h5 class="card-title pull-left">Foreign Key Constrains</h5>
+            <h5 class="card-title pull-left">Foreign Key Constraints</h5>
           </div>
           <div class="col-sm-5">
             <div class="pull-right">
               <button class="btn btn-outline-success" (click)="addForeignKeyConstrain()">
-                <i class="fa fa-plus-circle"></i> Add Foreign Key Constrain
+                <i class="fa fa-plus-circle"></i> Add Foreign Key Constraint
               </button>
             </div>
           </div>
@@ -239,6 +239,10 @@
             </tr>
             </thead>
             <tbody>
+            <tr
+              *ngIf="this.dto == undefined || this.dto?.foreignKeyConstrainList?.length === 0 || this.dto?.foreignKeyConstrainList == undefined ">
+              <td colspan="7" class="empty-table-row">Empty!</td>
+            </tr>
             <tr *ngFor="let row of this.dto.foreignKeyConstrainList | shortByOrder">
               <td>
                 <button class="btn btn-outline-danger btn-icon btn-sm" title="Delete" type="button"

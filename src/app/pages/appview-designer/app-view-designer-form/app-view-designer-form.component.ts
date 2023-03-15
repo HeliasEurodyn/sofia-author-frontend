@@ -70,11 +70,9 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
   }
 
   save() {
-
     const base64Query = btoa(encodeURIComponent(this.dto?.query));
     this.dto.query = base64Query;
-    console.log(this.dto);
-    
+
     if (this.mode === 'edit-record') {
 
       this.service.update(this.dto).subscribe(data => {
@@ -106,6 +104,9 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
       const existingAppViewFieldList = this.dto.appViewFieldList.filter(field => field.name === genField.name);
       if (existingAppViewFieldList.length > 0) {
         genField.id = existingAppViewFieldList[0].id;
+        genField.primaryKey = existingAppViewFieldList[0].primaryKey;
+      } else {
+        genField.primaryKey = false;
       }
     });
     return genAppViewFieldList;

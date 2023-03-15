@@ -3,8 +3,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ViewService} from 'app/services/crud/view.service';
 import {ViewDTO} from '../../../dtos/view/view-dto';
-import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
+import {Location} from "@angular/common";
+import {ViewFieldDTO} from "../../../dtos/view/view-field-dto";
 
 @Component({
   selector: 'app-view-designer-form',
@@ -22,7 +23,7 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private service: ViewService,
               private router: Router,
-              private navigatorService: CommandNavigatorService) {
+              private location: Location) {
     super();
   }
 
@@ -42,13 +43,13 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
+        this.dto.query = decodeURIComponent(atob(this.dto?.query));
         this.cleanIdsIfCloneEnabled();
       });
     }
 
     this.dto.viewFieldList = [];
   }
-
 
   cleanIdsIfCloneEnabled() {
     if (this.params.has('TYPE')) {
@@ -67,29 +68,46 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   save() {
+
+    const base64Query = btoa(encodeURIComponent(this.dto?.query));
+    this.dto.query = base64Query;
+
     if (this.mode === 'edit-record') {
       this.service.update(this.dto).subscribe(data => {
-        this.navigatorService.closeAndBack(this.pageId);
+        this.location.back();
       });
     } else {
       this.service.save(this.dto).subscribe(data => {
-        this.navigatorService.closeAndBack(this.pageId);
+        this.location.back();
       });
     }
   }
 
   delete() {
     this.service.delete(this.dto.id).subscribe(data => {
-      this.navigatorService.closeAndBack(this.pageId);
+      this.location.back();
     });
   }
 
   generateViewFields() {
     this.service.generateViewFields(this.dto.query).subscribe(data => {
-      this.dto.viewFieldList = data;
+      const genAppViewFieldList = this.replaceViewFieldIds(data);
+      this.dto.viewFieldList = genAppViewFieldList;
     });
   }
 
+  replaceViewFieldIds( genAppViewFieldList: ViewFieldDTO[]): ViewFieldDTO[] {
+    genAppViewFieldList.forEach(genField => {
+      const existingAppViewFieldList = this.dto.viewFieldList.filter(field => field.name === genField.name);
+      if (existingAppViewFieldList.length > 0) {
+        genField.id = existingAppViewFieldList[0].id;
+        genField.primaryKey = existingAppViewFieldList[0].primaryKey;
+      } else {
+        genField.primaryKey = false;
+      }
+    });
+    return genAppViewFieldList;
+  }
 
   showPreviousPageButton() {
     if (this.previousPage === null) {
@@ -105,14 +123,6 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
     } else {
       return true;
     }
-  }
-
-  navigateToPreviousPage() {
-    this.navigatorService.navigateToPreviousPage(this.pageId);
-  }
-
-  navigateToNextPage() {
-    this.navigatorService.navigateToNextPage(this.pageId);
   }
 
 }

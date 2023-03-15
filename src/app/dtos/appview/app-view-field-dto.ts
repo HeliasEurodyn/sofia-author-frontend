@@ -4,4 +4,6 @@ export class AppViewFieldDTO extends PersistEntityFieldDTO {
 
   public entitytype = 'AppViewField';
 
+  public primaryKey;
+
 }

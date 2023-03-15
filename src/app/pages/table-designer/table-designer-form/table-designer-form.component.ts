@@ -75,7 +75,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
       this.addField()
 
       this.dto.foreignKeyConstrainList = [];
-      this.addForeignKeyConstrain();
+     // this.addForeignKeyConstrain();
     }
 
     this.getTables();

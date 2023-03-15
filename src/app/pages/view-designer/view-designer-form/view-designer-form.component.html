@@ -87,23 +87,24 @@
           <table class="table table-striped">
             <thead class=" text-primary">
             <tr>
+              <th>Id</th>
               <th>Name</th>
-              <th>Description</th>
               <th>Type</th>
               <th>Size</th>
+              <th>Primary key</th>
             </tr>
             </thead>
             <tbody>
             <tr
               *ngIf="this.dto == undefined || this.dto?.viewFieldList?.length === 0 || this.dto?.viewFieldList == undefined ">
-              <td colspan="4" class="empty-table-row">Empty!</td>
+              <td colspan="5" class="empty-table-row">Empty!</td>
             </tr>
             <tr *ngFor="let row of this.dto.viewFieldList">
               <td>
-                <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.name">
+                <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.id">
               </td>
               <td>
-                <input type="text" class="form-control transparent-input" [(ngModel)]="row.description">
+                <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.name">
               </td>
               <td>
                 <input type="text" readonly class="form-control transparent-input" [(ngModel)]="row.type">
@@ -111,6 +112,12 @@
               <td>
                 <input readonly class="form-control ng-dirty ng-valid ng-touched transparent-input" number="true"
                        type="number" [(ngModel)]="row.size"  >
+              </td>
+              <td>
+                <select class="transparent-input" [(ngModel)]="row.primaryKey">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
               </td>
             </tr>
             </tbody>
