@@ -24,8 +24,8 @@ import 'brace/mode/text';
 import 'brace/theme/github';
 import 'brace/theme/chrome';
 import {AceConfigInterface} from 'ngx-ace-wrapper';
-import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
-import {BusinessUnitDTO} from '../../../dtos/business-unit/business-unit-dto';
+import {TagDesignerService} from '../../../services/crud/tag-designer.service';
+import {TagDTO} from '../../../dtos/tag/tag-dto';
 
 @Component({
   selector: 'app-list-designer-form',
@@ -47,7 +47,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   };
 
   public components: any;
-  public businessUnitsList: Array<BusinessUnitDTO>;
+  public tagList: Array<TagDTO>;
   public selectedFilterField: ListComponentFieldDTO;
 
   public dto: ListDTO;
@@ -75,7 +75,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
               private location: Location,
               private roleService: RoleService,
               private navigatorService: CommandNavigatorService,
-              private businessUnitDesignerService: BusinessUnitDesignerService) {
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -105,7 +105,6 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     }
 
     this.refreshComponents();
-    this.refreshBusinessUnit();
   }
 
   setDefaults() {
@@ -214,13 +213,13 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     this.roleService.get().subscribe(data => {
       this.roles = data;
     });
+
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagList = data;
+      console.log(this.tagList);
+    });
   }
 
-  refreshBusinessUnit() {
-      this.businessUnitDesignerService.get().subscribe(data => {
-        this.businessUnitsList = data;
-      });
-  }
 
   showPreviousPageButton() {
     if (this.previousPage === null) {
@@ -376,8 +375,8 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     });
   }
 
-  selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {
-    this.dto.businessUnit = selectedBusinessUnit?.title;
+  selectTag(selectedTag: TagDTO) {
+    this.dto.tag = selectedTag?.title;
   }
 
   hideChildren(item) {

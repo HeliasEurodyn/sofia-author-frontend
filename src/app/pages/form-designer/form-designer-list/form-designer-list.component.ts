@@ -14,10 +14,10 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
 
   public tableData: any
   public filteredTableData: Array<FormDto>;
-  public businessUnits: Array<String>
-  public selectedBusinessUnit: String;
-  public showBusinessUnitGrouping: Boolean;
-  public showBusinessUnitButtonTitle: String;
+  public tags: Array<String>
+  public selectedTag: String;
+  public showTagGrouping: Boolean;
+  public showTagButtonTitle: String;
 
   constructor(private service: FormDesignerService,
               private navigatorService: CommandNavigatorService,
@@ -26,10 +26,10 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.businessUnits = new Array<String>();
-    this.showBusinessUnitButtonTitle = 'Show Grouping'
-    this.showBusinessUnitGrouping = false;
-    this.refreshBusinessUnit();
+    this.tags = new Array<String>();
+    this.showTagButtonTitle = 'Show Grouping'
+    this.showTagGrouping = false;
+    this.refreshTag();
     this.refresh();
   }
 
@@ -40,9 +40,9 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
     });
   }
 
-  refreshBusinessUnit() {
-    this.service.getBusinessUnits().subscribe(data => {
-      this.businessUnits = data;
+  refreshTag() {
+    this.service.getTags().subscribe(data => {
+      this.tags = data;
     });
   }
 
@@ -88,7 +88,7 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
   }
 
   isGroupContentDivVisible() {
-    if (this?.businessUnits?.length > 0) {
+    if (this?.tags?.length > 0) {
       return true;
     } else {
       return false;
@@ -96,7 +96,7 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
   }
 
   filterGroup(item: String) {
-    this.selectedBusinessUnit = item;
+    this.selectedTag = item;
     this.filteredTableData = this.tableData.filter(list => {
       return list.businessUnit === item;
     })
@@ -104,15 +104,15 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
 
   clearFilterGroup() {
     this.filteredTableData = this?.tableData;
-    this.selectedBusinessUnit = null;
+    this.selectedTag = null;
   }
 
-  showBusinessUnitsGrouping() {
-    this.showBusinessUnitGrouping = !this.showBusinessUnitGrouping
-    if (this.showBusinessUnitGrouping === true) {
-      this.showBusinessUnitButtonTitle = 'Hide Grouping'
+  showTagsGrouping() {
+    this.showTagGrouping = !this.showTagGrouping
+    if (this.showTagGrouping === true) {
+      this.showTagButtonTitle = 'Hide Grouping'
     } else {
-      this.showBusinessUnitButtonTitle = 'Show Grouping'
+      this.showTagButtonTitle = 'Show Grouping'
     }
   }
 

@@ -130,12 +130,7 @@ import {
 import {
   SseNotificationTemplateFormComponent
 } from './pages/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component';
-import {
-  BusinessUnitDesignerFormComponent
-} from './pages/business-unit-designer/business-unit-designer-form/business-unit-designer-form.component';
-import {
-  BusinessUnitDesignerListComponent
-} from './pages/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
+
 import {FormDesignerTranslationFormComponent} from './pages/form-designer/form-designer-translation-form/form-designer-translation-form.component';
 import { CalendarDesginerListComponent } from './pages/calendar/calendar-desginer-list/calendar-desginer-list.component';
 import { CalendarDesginerFormComponent } from './pages/calendar/calendar-desginer-form/calendar-desginer-form.component';
@@ -144,6 +139,8 @@ import { HtmlTemplateDesignerListComponent } from './pages/html-template-designe
 import { AccessControlComponent } from './pages/access-control/access-control.component';
 import { ShortByOrderPipe } from './pages/table-designer/table-designer-form/short-by-order.pipe';
 import { RemoveElementModalComponent } from './modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
+import { TagDesignerListComponent } from './pages/tag-designer/tag-designer-list/tag-designer-list.component';
+import { TagDesignerFormComponent } from './pages/tag-designer/tag-designer-form/tag-designer-form.component';
 
 @NgModule({
   declarations: [
@@ -211,13 +208,12 @@ import { RemoveElementModalComponent } from './modals/remove_element_modal/remov
     TimelineDesignerFormComponent,
     SseNotificationTemplateListComponent,
     SseNotificationTemplateFormComponent,
-    BusinessUnitDesignerFormComponent,
-    BusinessUnitDesignerListComponent,
+    TagDesignerFormComponent,
+    TagDesignerListComponent,
     CalendarDesginerFormComponent,
     CalendarDesginerListComponent,
     HtmlTemplateDesignerListComponent,
     HtmlTemplateDesignerFormComponent,
-    BusinessUnitDesignerListComponent,
     AccessControlComponent,
     ShortByOrderPipe,
     RemoveElementModalComponent

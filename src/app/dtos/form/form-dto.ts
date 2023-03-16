@@ -15,7 +15,7 @@ export class FormDto extends BaseDTO {
   public icon: string;
   public jsonUrl: string;
   public accessControlEnabled: Boolean;
-  public businessUnit: string;
+  public tag: string;
   public component: ComponentDTO;
   public formTabs: FormTabDto[] = [];
   public formPopups: FormPopupDto[] = [];

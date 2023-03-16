@@ -128,10 +128,10 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label>Business Unit</label>
+              <label>Tags</label>
               <div class="input-group input-group-selector no-border">
                 <div
-                  data-target="#selectBusinessUnitModal"
+                  data-target="#selectTagModal"
                   data-toggle="modal"
                   class="input-group-prepend">
                  <span class="input-group-text">
@@ -139,11 +139,11 @@
                  </span>
                 </div>
                 <input readonly
-                       data-target="#selectBusinessUnitModal"
+                       data-target="#selectTagModal"
                        data-toggle="modal"
                        type="text" class="form-control"
-                       value="{{this.dto?.businessUnit}}">
-                <div class="input-group-append" (click)="selectBusinessUnit(null)">
+                       value="{{this.dto?.tag}}">
+                <div class="input-group-append" (click)="selectTag(null)">
                  <span class="input-group-text input-group-text-rm">
                     <i class="fa fa-window-close"></i>
                  </span>
@@ -1637,11 +1637,11 @@
   </div>
 </div>
 
-<div aria-labelledby="ModalLabel" class="modal fade" id="selectBusinessUnitModal" role="dialog" aria-hidden="true">
+<div aria-labelledby="ModalLabel" class="modal fade" id="selectTagModal" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h4 class="title title-up modal-title">Select Business Unit</h4>
+        <h4 class="title title-up modal-title">Select Tag</h4>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
           class="fa fa-times"></i></button>
       </div>
@@ -1653,16 +1653,16 @@
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
-                  <th>id</th>
-                  <th>title</th>
+                  <th>Id</th>
+                  <th>Title</th>
                 </tr>
                 </thead>
                 <tbody >
-                <tr *ngFor="let row of businessUnitsList" (click)="selectBusinessUnit(row)" data-dismiss="modal"
+                <tr *ngFor="let row of tagList" (click)="selectTag(row)" data-dismiss="modal"
                     style="cursor: pointer;">
                   <td>
                     <button type="button" title="Select" class="btn btn-outline-success btn-icon btn-sm"
-                            (click)="selectBusinessUnit(row)">
+                            (click)="selectTag(row)">
                       <i class="fa fa-plus"></i>
                     </button>
                   </td>

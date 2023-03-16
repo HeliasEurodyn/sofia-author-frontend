@@ -2,22 +2,22 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {PageComponent} from '../../page/page-component';
-import {BusinessUnitDTO} from '../../../dtos/business-unit/business-unit-dto';
-import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
+import {TagDesignerService} from '../../../services/crud/tag-designer.service';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
 
 @Component({
-  selector: 'app-business-unit-designer-form',
-  templateUrl: './business-unit-designer-form.component.html',
-  styleUrls: ['./business-unit-designer-form.component.css']
+  selector: 'app-tag-designer-form',
+  templateUrl: './tag-designer-form.component.html',
+  styleUrls: ['./tag-designer-form.component.css']
 })
-export class BusinessUnitDesignerFormComponent extends PageComponent implements OnInit {
+export class TagDesignerFormComponent extends PageComponent implements OnInit {
 
-  public dto: BusinessUnitDTO;
+  public dto: TagDTO;
   public mode: string;
   public visibleSection = 'general';
 
   constructor(private activatedRoute: ActivatedRoute,
-              private service: BusinessUnitDesignerService,
+              private service: TagDesignerService,
               private location: Location) {
     super();
   }
@@ -27,7 +27,7 @@ export class BusinessUnitDesignerFormComponent extends PageComponent implements 
     this.initNav(this.activatedRoute);
     let id = '0';
     this.mode = 'new-record';
-    this.dto = new BusinessUnitDTO();
+    this.dto = new TagDTO();
 
     const locateParams = this.getLocateParams();
     if (locateParams.has('ID')) {

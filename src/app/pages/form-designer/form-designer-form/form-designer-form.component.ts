@@ -33,8 +33,8 @@ import 'brace/mode/text';
 import 'brace/theme/github';
 import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
-import {BusinessUnitDesignerService} from '../../../services/crud/business-unit-designer.service';
-import {BusinessUnitDTO} from '../../../dtos/business-unit/business-unit-dto';
+import {TagDesignerService} from '../../../services/crud/tag-designer.service';
+import {TagDTO} from '../../../dtos/tag/tag-dto';
 
 
 @Component({
@@ -71,7 +71,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   public selectedComponentPersistEntity: ComponentPersistEntityDTO = new ComponentPersistEntityDTO();
   public selectedFormControlTableControl: FormControlTableControlDTO = new FormControlTableControlDTO();
   public components: any;
-  public businessUnitsList: Array<BusinessUnitDTO>;
+  public tagsList: Array<TagDTO>;
   public roles: any;
   public visibleSection = 'settings';
   public selectedTableButtonFormControl: FormControlTableControlDTO = new FormControlTableControlDTO();
@@ -88,7 +88,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
               private navigatorService: CommandNavigatorService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
-              private businessUnitDesignerService: BusinessUnitDesignerService) {
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -127,7 +127,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     }
 
     this.refreshComponents();
-    this.refreshBusinessUnit();
+    this.refreshTag();
   }
 
   cleanIdsIfCloneEnabled() {
@@ -275,9 +275,9 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     });
   }
 
-  refreshBusinessUnit() {
-    this.businessUnitDesignerService.get().subscribe(data => {
-      this.businessUnitsList = data;
+  refreshTag() {
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -425,8 +425,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     });
   }
 
-  selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {
-    this.dto.businessUnit = selectedBusinessUnit?.title;
+  selectTag(selectedTag: TagDTO) {
+    this.dto.tag = selectedTag?.title;
   }
 
   selectRole(role) {

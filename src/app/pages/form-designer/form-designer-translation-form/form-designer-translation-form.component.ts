@@ -8,7 +8,7 @@ import {FormControlDto} from "../../../dtos/form/form-control-dto";
 import {ComponentPersistEntityDTO} from "../../../dtos/component/component-persist-entity-dto";
 import {ComponentPersistEntityFieldDTO} from "../../../dtos/component/component-persist-entity-field-dto";
 import {FormControlTableControlDTO} from "../../../dtos/form/form-control-table-control-d-t-o";
-import {BusinessUnitDTO} from "../../../dtos/business-unit/business-unit-dto";
+import {TagDTO} from "../../../dtos/tag/tag-dto";
 import {FormControlButtonDTO} from "../../../dtos/form/form-control-button-dto";
 import {FormActionButton} from "../../../dtos/form/form-action-button";
 import {AccessControlDto} from "../../../dtos/security/access-control-dto";
@@ -19,7 +19,7 @@ import {RoleService} from "../../../services/crud/role.service";
 import {CommandNavigatorService} from "../../../services/system/command-navigator.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
-import {BusinessUnitDesignerService} from "../../../services/crud/business-unit-designer.service";
+import {TagDesignerService} from "../../../services/crud/tag-designer.service";
 import {FormTabDto} from "../../../dtos/form/form-tab-dto";
 import {FormPopupDto} from "../../../dtos/form/form-popup-dto";
 import {BaseDTO} from "../../../dtos/common/base-dto";
@@ -58,7 +58,7 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
   public selectedComponentPersistEntity: ComponentPersistEntityDTO = new ComponentPersistEntityDTO();
   public selectedFormControlTableControl: FormControlTableControlDTO = new FormControlTableControlDTO();
   public components: any;
-  public businessUnitsList: Array<BusinessUnitDTO>;
+  public tagsList: Array<TagDTO>;
   public roles: any;
   public visibleSection = 'empty';
   public selectedTableButtonFormControl: FormControlTableControlDTO = new FormControlTableControlDTO();
@@ -79,7 +79,7 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
               private activatedRoute: ActivatedRoute,
               private location: Location,
               private languageService: LanguageService,
-              private businessUnitDesignerService: BusinessUnitDesignerService) {
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -118,7 +118,7 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
     }
 
     this.refreshComponents();
-    this.refreshBusinessUnit();
+    this.refreshTag();
   }
 
   addLanguage(language: LanguageDTO) {
@@ -413,9 +413,9 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
     });
   }
 
-  refreshBusinessUnit() {
-    this.businessUnitDesignerService.get().subscribe(data => {
-      this.businessUnitsList = data;
+  refreshTag() {
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -561,8 +561,8 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
     this.setAssignmentsToComponents();
   }
 
-  selectBusinessUnit(selectedBusinessUnit: BusinessUnitDTO) {
-    this.dto.businessUnit = selectedBusinessUnit?.title;
+  selectTag(selectedTag: TagDTO) {
+    this.dto.tag = selectedTag?.title;
   }
 
   selectRole(role) {

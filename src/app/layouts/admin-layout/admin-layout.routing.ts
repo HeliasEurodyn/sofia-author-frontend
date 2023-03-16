@@ -103,11 +103,11 @@ import {
   SseNotificationTemplateFormComponent
 } from '../../pages/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component';
 import {
-  BusinessUnitDesignerFormComponent
-} from '../../pages/business-unit-designer/business-unit-designer-form/business-unit-designer-form.component';
+  TagDesignerFormComponent
+} from '../../pages/tag-designer/tag-designer-form/tag-designer-form.component';
 import {
-  BusinessUnitDesignerListComponent
-} from '../../pages/business-unit-designer/business-unit-designer-list/business-unit-designer-list.component';
+  TagDesignerListComponent
+} from '../../pages/tag-designer/tag-designer-list/tag-designer-list.component';
 import {FormDesignerTranslationFormComponent} from '../../pages/form-designer/form-designer-translation-form/form-designer-translation-form.component';
 import { CalendarDesginerListComponent } from '../../pages/calendar/calendar-desginer-list/calendar-desginer-list.component';
 import { CalendarDesginerFormComponent } from '../../pages/calendar/calendar-desginer-form/calendar-desginer-form.component';
@@ -169,8 +169,8 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'timeline-designer-form', component: TimelineDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'notification-template-list', component: SseNotificationTemplateListComponent, canActivate: [AuthGuard]},
   {path: 'notification-template-form', component: SseNotificationTemplateFormComponent, canActivate: [AuthGuard]},
-  {path: 'business-unit-designer-form', component: BusinessUnitDesignerFormComponent, canActivate: [AuthGuard]},
-  {path: 'business-unit-designer-list', component: BusinessUnitDesignerListComponent, canActivate: [AuthGuard]},
+  {path: 'tag-designer-form', component: TagDesignerFormComponent, canActivate: [AuthGuard]},
+  {path: 'tag-designer-list', component: TagDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'form-designer-translation-form', component: FormDesignerTranslationFormComponent, canActivate: [AuthGuard]},
   {path: 'calendar-designer-list', component: CalendarDesginerListComponent, canActivate: [AuthGuard]},
   {path: 'calendar-designer-form', component: CalendarDesginerFormComponent, canActivate: [AuthGuard]},

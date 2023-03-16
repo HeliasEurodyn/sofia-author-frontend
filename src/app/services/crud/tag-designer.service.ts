@@ -5,9 +5,9 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class BusinessUnitDesignerService extends CrudService<any> {
+export class TagDesignerService extends CrudService<any> {
 
   constructor(public http: HttpClient) {
-    super(http, 'business-unit-designer');
+    super(http, 'tag-designer');
   }
 }
