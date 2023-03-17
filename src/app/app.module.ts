@@ -141,6 +141,7 @@ import { ShortByOrderPipe } from './pages/table-designer/table-designer-form/sho
 import { RemoveElementModalComponent } from './modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
 import { TagDesignerListComponent } from './pages/tag-designer/tag-designer-list/tag-designer-list.component';
 import { TagDesignerFormComponent } from './pages/tag-designer/tag-designer-form/tag-designer-form.component';
+import {NavCommandCalculatorComponent} from "./pages/nav-command-calculator/nav-command-calculator.component";
 
 @NgModule({
   declarations: [
@@ -194,6 +195,7 @@ import { TagDesignerFormComponent } from './pages/tag-designer/tag-designer-form
     HtmlDashboardDesignerListComponent,
     SafeHtmlPipe,
     ExpressionViewerComponent,
+    NavCommandCalculatorComponent,
     RoleListComponent,
     RoleFormComponent,
     LanguageDesignerListComponent,

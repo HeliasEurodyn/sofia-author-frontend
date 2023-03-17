@@ -114,6 +114,7 @@ import { CalendarDesginerFormComponent } from '../../pages/calendar/calendar-des
 import { HtmlTemplateDesignerFormComponent } from '../../pages/html-template-designer/html-template-designer-form/html-template-designer-form.component';
 import { HtmlTemplateDesignerListComponent } from '../../pages/html-template-designer/html-template-designer-list/html-template-designer-list.component';
 import {AccessControlComponent} from '../../pages/access-control/access-control.component';
+import {NavCommandCalculatorComponent} from "../../pages/nav-command-calculator/nav-command-calculator.component";
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -177,8 +178,8 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'html-template-designer-list', component: HtmlTemplateDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'html-template-designer-form', component: HtmlTemplateDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'form-designer-translation-form', component: FormDesignerTranslationFormComponent, canActivate: [AuthGuard]},
-  {path: 'access-control', component: AccessControlComponent, canActivate: [AuthGuard]}
-
+  {path: 'access-control', component: AccessControlComponent, canActivate: [AuthGuard]},
+  {path: 'nav-command-calculator', component: NavCommandCalculatorComponent, canActivate: [AuthGuard]}
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;
