@@ -7,6 +7,7 @@ import {FormActionButton} from './form-action-button';
 import {FormCss} from './form-css';
 import {AccessControlDto} from '../security/access-control-dto';
 import {FormTranslationDto} from "./translation/form-translation-dto";
+import {TagDTO} from "../tag/tag-dto";
 
 export class FormDto extends BaseDTO {
   public name: string;
@@ -16,6 +17,7 @@ export class FormDto extends BaseDTO {
   public jsonUrl: string;
   public accessControlEnabled: Boolean;
   public tag: string;
+  public tags: TagDTO[] = [];
   public component: ComponentDTO;
   public formTabs: FormTabDto[] = [];
   public formPopups: FormPopupDto[] = [];

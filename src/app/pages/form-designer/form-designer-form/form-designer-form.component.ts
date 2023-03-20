@@ -115,6 +115,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
         this.setDefaultSelectedFormScript();
         this.setDefaultSelectedFormCss();
         this.formScriptsFromBase64();
+
+        this.createSampleTags();
       });
     } else {
       this.addFormTab();
@@ -127,8 +129,10 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     }
 
     this.refreshComponents();
-    this.refreshTag();
+
   }
+
+
 
   cleanIdsIfCloneEnabled() {
     if (this.params.has('TYPE')) {
@@ -273,12 +277,23 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     this.roleService.get().subscribe(data => {
       this.roles = data;
     });
-  }
 
-  refreshTag() {
     this.tagDesignerService.get().subscribe(data => {
       this.tagsList = data;
     });
+  }
+
+  createSampleTags() {
+   const tag: TagDTO = new TagDTO();
+    tag.title = 'Sample 1';
+
+    const tag2: TagDTO = new TagDTO();
+    tag2.title = 'Sample 2';
+
+    this.dto.tags = [];
+
+    this.dto.tags.push(tag);
+    this.dto.tags.push(tag2);
   }
 
   setVisibleSection(visibleSection: string) {
@@ -426,7 +441,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectTag(selectedTag: TagDTO) {
-    this.dto.tag = selectedTag?.title;
+    const tag: TagDTO = new TagDTO(selectedTag.title);
+    this.dto.tags.push(tag);
   }
 
   selectRole(role) {
@@ -881,4 +897,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     this.selectedSecurityRow = securityRow;
   }
 
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
+  }
 }

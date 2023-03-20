@@ -155,7 +155,21 @@
           </div>
           <div class="col-md-12">
             <div class="form-group">
-              <label>Tag</label>
+              <label>Tags</label>
+
+              <div>
+                <button *ngFor="let tag of this.dto?.tags" class="btn btn-outline-primary btn-round btn-chips">
+                  <i class="fa fa-times btn-delete-node" (click)="deleteTagChipsLine(tag)"></i>
+                  {{tag.title}}
+                </button>
+                <button data-target="#selectTagModal"
+                        data-toggle="modal"
+                        class="btn btn-outline-success btn-round btn-icon btn-chips">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+
+              <br>
               <div class="input-group input-group-selector no-border">
                 <div
                   data-target="#selectTagModal"
@@ -2045,11 +2059,15 @@
                   <th>Title</th>
                 </tr>
                 </thead>
-                <tbody >
-                <tr *ngFor="let row of tagsList" (click)="selectTag(row)" data-dismiss="modal"
+                <tbody>
+                <tr *ngIf="tagsList == undefined || tagsList?.length === 0">
+                  <td colspan="3" class="empty-table-row">Empty!</td>
+                </tr>
+                <tr *ngFor="let row of tagsList"
                     style="cursor: pointer;">
                   <td>
                     <button type="button" title="Select" class="btn btn-outline-success btn-icon btn-sm"
+                            data-dismiss="modal"
                             (click)="selectTag(row)">
                       <i class="fa fa-plus"></i>
                     </button>
