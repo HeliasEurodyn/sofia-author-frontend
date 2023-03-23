@@ -82,7 +82,7 @@ export class ListDesignerListComponent extends PageComponent implements OnInit {
   clearCache() {
     this.service.clearCache().subscribe(data => {
       this.notificationService.showNotification('top', 'center', 'alert-info',
-        'fa-check', '<b>Form Cache</b> is cleared on the backend & all the frontends.');
+        'fa-check', '<b>Cache</b> is cleared.');
     });
   }
 
