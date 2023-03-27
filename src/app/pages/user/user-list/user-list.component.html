@@ -67,19 +67,19 @@
                 </div>
               </td>
               <td>
-                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['username']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['username']}}" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['email']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['email']}}" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['status']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['status']}}" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['modifiedOn']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
               </td>
             </tr>
             </tbody>

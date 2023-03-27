@@ -83,7 +83,7 @@
                 <input type="text" class="form-control transparent-input" readonly value="{{row['title']}}">
               </td>
               <td>
-                <input type="text" class="form-control transparent-input" readonly value="{{row['modifiedOn']}}">
+                <input type="text" class="form-control transparent-input" readonly value="{{row['modifiedOn'] | date:'medium'}}">
               </td>
             </tr>
             </tbody>

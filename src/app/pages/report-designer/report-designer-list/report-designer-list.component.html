@@ -76,16 +76,16 @@
               </div>
             </td>
             <td>
-              <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['id']">
+              <input type="text" class="form-control transparent-input" readonly value="{{row['id']}}">
             </td>
             <td>
-              <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['code']">
+              <input type="text" class="form-control transparent-input" readonly value="{{row['code']}}">
             </td>
             <td>
-              <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['name']">
+              <input type="text" class="form-control transparent-input" readonly value="{{row['name']}}">
             </td>
             <td>
-              <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['modifiedOn']">
+              <input type="text" class="form-control transparent-input" readonly value="{{row['modifiedOn'] | date:'medium'}}">
             </td>
           </tr>
           </tbody>

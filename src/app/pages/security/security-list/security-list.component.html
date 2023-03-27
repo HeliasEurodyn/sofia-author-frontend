@@ -65,22 +65,22 @@
                   </button>
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['type']">
+                  <input type="text" class="form-control transparent-input" readonly value="{{row['type']}}">
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['entityId']">
+                  <input type="text" class="form-control transparent-input" readonly value="{{row['entityId']}}">
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['create']">
+                  <input type="text" class="form-control transparent-input" readonly value="{{row['create']}}">
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['update']">
+                  <input type="text" class="form-control transparent-input" readonly value="{{row['update']}}">
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['read']">
+                  <input type="text" class="form-control transparent-input" readonly value="{{row['read']}}">
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input" readonly [(ngModel)]="row['delete']">
+                  <input type="text" class="form-control transparent-input" readonly value="{{row['delete']}}">
                 </td>
                 <td>
                   <input *ngIf="row['user'] == null" type="text" class="form-control transparent-input" readonly>

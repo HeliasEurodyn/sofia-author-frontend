@@ -81,13 +81,13 @@
                 </div>
               </td>
               <td>
-                <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['name']}}" class="form-control transparent-input" readonly type="text">
               </td>
               <td>
-                <input [(ngModel)]="row['modifiedOn']" class="form-control transparent-input" readonly type="text">
+                <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
               </td>
             </tr>
             </tbody>
