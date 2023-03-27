@@ -98,7 +98,7 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
   filterGroup(item: String) {
     this.selectedTag = item;
     this.filteredTableData = this.tableData.filter(list => {
-      return list.businessUnit === item;
+      return list.tag === item;
     })
   }
 

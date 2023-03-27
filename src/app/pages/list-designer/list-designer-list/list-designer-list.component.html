@@ -16,8 +16,8 @@
       <button (click)="openNewPage()" class="btn btn-outline-primary">
         <i class="fa fa-plus-circle"></i> New
       </button>
-      <button (click)="showTagsGrouping()" class="btn btn-outline-primary" [hidden]="tags.length==0">
-        <i class="fa fa-layer-group"></i> {{showTagButtonTitle}}
+      <button (click)="showTagsGrouping()" class="btn btn-outline-primary">
+        <i class="fa fa-tags"></i> {{showTagButtonTitle}}
       </button>
     </div>
   </div>
@@ -29,17 +29,17 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Groups -->
-        <div *ngIf="isGroupContentDivVisible() && showTagGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
+        <div *ngIf="showTagGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
              style="padding-right: 5px;padding-left: 5px;">
           <div class="row">
-            <div *ngIf="isGroupContentDivVisible()" style="margin-bottom: 10px;" class="col-12">
+            <div style="margin-bottom: 10px;" class="col-12">
               <div class="card">
                 <div class="card-header">
                   <div class="row formnav">
                     <div class="col-12">
                       <div class="pull-left">
                         <h5 class="card-title" style="margin-bottom: 0px;">
-                          <i class="fas fa-briefcase"></i>
+                          <i class="fas fa-tags"></i>
                           Categorization By Tags
                         </h5>
                       </div>
@@ -58,7 +58,7 @@
                         <button (click)="filterGroup(item)"
                                 class="btn left-group-button btn-outline-default"
                                 style="border: 1px solid #66615b !important; text-align: left;">
-                          {{item}}
+                          {{item.title}}
                         </button>
                       </div>
                     </li>
@@ -140,20 +140,20 @@
                       </div>
                     </td>
                     <td>
-                      <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['name']}}" class="form-control transparent-input" readonly type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['modifiedOn']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['component']['id']" class="form-control transparent-input" readonly
+                      <input value="{{row['component']['id']}}" class="form-control transparent-input" readonly
                              type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                      <input value="{{row['component']['name']}}" class="form-control transparent-input" readonly
                              type="text">
                     </td>
                   </tr>

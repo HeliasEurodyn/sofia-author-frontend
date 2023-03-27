@@ -1,7 +1,7 @@
 .nav-tabs-navigation
 {
- /*text-align: center;*/
- /* margin-bottom: 30px;*/
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 ul {
@@ -123,4 +123,23 @@ h6{
 
 .modal-dialog {
   max-width: 700px;
+}
+
+.btn.btn-icon, .navbar .navbar-nav > a.btn.btn-icon {
+  height: 1.775rem;
+  min-width: 1.775rem;
+  width: 1.775rem;
+}
+
+.btn-chips{
+  margin: 1px;
+  padding: 8px;
+}
+
+.btn-delete-node{
+  color: red;
+}
+
+.btn-delete-node:hover{
+  color: #b60000;
 }

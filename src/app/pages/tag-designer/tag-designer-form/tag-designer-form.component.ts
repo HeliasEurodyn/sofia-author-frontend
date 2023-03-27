@@ -16,6 +16,8 @@ export class TagDesignerFormComponent extends PageComponent implements OnInit {
   public mode: string;
   public visibleSection = 'general';
 
+
+
   constructor(private activatedRoute: ActivatedRoute,
               private service: TagDesignerService,
               private location: Location) {
@@ -78,4 +80,5 @@ export class TagDesignerFormComponent extends PageComponent implements OnInit {
       }
     }
   }
+
 }

@@ -6,6 +6,7 @@ import {ListCssDTO} from './list-css-dto';
 import {ListScriptDTO} from './list-script-dto';
 import {AccessControlDto} from '../security/access-control-dto';
 import {ListTranslationDTO} from './translation/list-translation-dto';
+import { TagDTO } from '../tag/tag-dto';
 
 export class ListDTO extends BaseDTO {
   public code = '';
@@ -36,6 +37,7 @@ export class ListDTO extends BaseDTO {
   public jsonUrl = '';
   public accessControlEnabled: Boolean;
   public tag: string;
+  public tags: TagDTO[] = [];
   public component: ComponentDTO;
   public listActionButtons: ListActionButton[] = [];
   public listComponentColumnFieldList: ListComponentFieldDTO[] = [];

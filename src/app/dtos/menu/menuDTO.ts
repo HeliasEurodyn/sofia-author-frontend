@@ -1,6 +1,7 @@
 import {BaseDTO} from '../common/base-dto';
 import {AccessControlDto} from '../security/access-control-dto';
 import {MenuTranslationDTO} from './menu-translation-dto';
+import {TagDTO} from "../tag/tag-dto";
 
 export class MenuDTO extends BaseDTO {
 
@@ -13,6 +14,10 @@ export class MenuDTO extends BaseDTO {
   public accessControls: AccessControlDto[] = [];
 
   public translations: MenuTranslationDTO[] = [];
+
+  public tags: TagDTO[] = [];
+
+  public tag: string;
 
   constructor() {
     super();

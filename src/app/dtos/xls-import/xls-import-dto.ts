@@ -2,6 +2,7 @@ import {BaseDTO} from '../common/base-dto';
 import {XlsImportLineDTO} from './xls-import-line-dto';
 import {ComponentDTO} from '../component/componentDTO';
 import {AccessControlDto} from '../security/access-control-dto';
+import { TagDTO } from '../tag/tag-dto';
 
 export class XlsImportDTO extends BaseDTO {
 
@@ -24,6 +25,8 @@ export class XlsImportDTO extends BaseDTO {
   public accessControlEnabled: Boolean;
 
   public accessControls: AccessControlDto[] = [];
+
+  public tags: TagDTO[] = [];
 
   constructor() {
     super();

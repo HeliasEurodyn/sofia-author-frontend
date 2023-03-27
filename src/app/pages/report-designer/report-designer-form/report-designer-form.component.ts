@@ -9,6 +9,8 @@ import {NotificationService} from '../../../services/system/notification.service
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import {ReportService} from '../../../services/crud/report.service';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 @Component({
   selector: 'app-report-designer-form',
@@ -26,13 +28,15 @@ export class ReportDesignerFormComponent extends PageComponent implements OnInit
   public visibleSection = 'general';
   private selectedSecurityRow: AccessControlDto;
   public roles: any;
+  public tagsList: Array<TagDTO>;
 
   constructor(private reportDesignerService: ReportDesignerService,
               private reportService: ReportService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
               private roleService: RoleService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -54,6 +58,7 @@ export class ReportDesignerFormComponent extends PageComponent implements OnInit
       });
     }
     this.refreshData();
+    this.refreshTags();
   }
 
   refreshData() {
@@ -63,6 +68,12 @@ export class ReportDesignerFormComponent extends PageComponent implements OnInit
 
     this.roleService.get().subscribe(data => {
       this.roles = data;
+    });
+  }
+
+  refreshTags(){
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -246,6 +257,19 @@ export class ReportDesignerFormComponent extends PageComponent implements OnInit
 
   selectRole(role) {
     this.selectedSecurityRow.role = role;
+  }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+    this.dto.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
   }
 
 }

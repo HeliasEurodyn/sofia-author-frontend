@@ -116,7 +116,6 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
         this.setDefaultSelectedFormCss();
         this.formScriptsFromBase64();
 
-        this.createSampleTags();
       });
     } else {
       this.addFormTab();
@@ -283,19 +282,6 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     });
   }
 
-  createSampleTags() {
-   const tag: TagDTO = new TagDTO();
-    tag.title = 'Sample 1';
-
-    const tag2: TagDTO = new TagDTO();
-    tag2.title = 'Sample 2';
-
-    this.dto.tags = [];
-
-    this.dto.tags.push(tag);
-    this.dto.tags.push(tag2);
-  }
-
   setVisibleSection(visibleSection: string) {
     this.visibleSection = visibleSection;
   }
@@ -441,7 +427,10 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title);
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
     this.dto.tags.push(tag);
   }
 

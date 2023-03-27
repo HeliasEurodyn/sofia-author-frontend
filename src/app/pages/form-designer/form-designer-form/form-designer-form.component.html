@@ -168,28 +168,6 @@
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
-
-              <br>
-              <div class="input-group input-group-selector no-border">
-                <div
-                  data-target="#selectTagModal"
-                  data-toggle="modal"
-                  class="input-group-prepend">
-                 <span class="input-group-text">
-                    <i class="fa fa-search"></i>
-                 </span>
-                </div>
-                <input readonly
-                       data-target="#selectTagModal"
-                       data-toggle="modal"
-                       type="text" class="form-control"
-                       value="{{this.dto?.tag}}">
-                <div class="input-group-append" (click)="selectedTag(null)">
-                 <span class="input-group-text input-group-text-rm">
-                    <i class="fa fa-window-close"></i>
-                 </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -2002,8 +1980,8 @@
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
-                  <th>id</th>
-                  <th>name</th>
+                  <th>Id</th>
+                  <th>Name</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -2055,7 +2033,6 @@
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
-                  <th>Id</th>
                   <th>Title</th>
                 </tr>
                 </thead>
@@ -2073,11 +2050,7 @@
                     </button>
                   </td>
                   <td>
-                    <input type="text" readonly class="form-control transparent-input"
-                           value="{{row['id']}}">
-                  </td>
-                  <td>
-                    <input type="text" readonly class="form-control transparent-input"
+                    <input type="text" readonly class="form-control transparent-input"style="border: 1px solid {{row['color']}}"
                            value="{{row['title']}}">
                   </td>
                 </tr>

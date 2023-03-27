@@ -6,6 +6,8 @@ import {ViewDTO} from '../../../dtos/view/view-dto';
 import {PageComponent} from '../../page/page-component';
 import {Location} from "@angular/common";
 import {ViewFieldDTO} from "../../../dtos/view/view-field-dto";
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 @Component({
   selector: 'app-view-designer-form',
@@ -19,11 +21,13 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
   public mode: string;
   public customTableNameMask = '0*';
   public customTableNamePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
-
+  public tagsList: Array<TagDTO>;
+  
   constructor(private activatedRoute: ActivatedRoute,
               private service: ViewService,
               private router: Router,
-              private location: Location) {
+              private location: Location,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -49,6 +53,13 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
     }
 
     this.dto.viewFieldList = [];
+    this.refreshTags();
+  }
+
+  refreshTags(){
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
+    });
   }
 
   cleanIdsIfCloneEnabled() {
@@ -123,6 +134,19 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+    this.dto.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
   }
 
 }

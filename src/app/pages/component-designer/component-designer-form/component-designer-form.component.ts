@@ -13,6 +13,8 @@ import {Location} from '@angular/common';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 
 @Component({
@@ -40,6 +42,8 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   public componentPersistEntityCodePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
   public componentPersistEntityFieldStatementsMask = '0*';
   public componentPersistEntityFieldStatementsPattern = { '0': { pattern: new RegExp('\\S')} };
+  public tagsList: Array<TagDTO>;
+  
 
   constructor(private tableService: TableService,
               private viewService: ViewService,
@@ -49,7 +53,8 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
               private router: Router,
               private location: Location,
               private roleService: RoleService,
-              private navigatorService: CommandNavigatorService) {
+              private navigatorService: CommandNavigatorService,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -168,6 +173,10 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
 
     this.roleService.get().subscribe(data => {
       this.roles = data;
+    });
+
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -446,6 +455,19 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
 
   selectRole(role) {
     this.selectedSecurityRow.role = role;
+  }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.componentDTO.tags == null){
+      this.componentDTO.tags = [];
+    }
+    this.componentDTO.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.componentDTO.tags =
+      this.componentDTO.tags.filter(item => item !== tag);
   }
 
 }

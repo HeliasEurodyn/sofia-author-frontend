@@ -37,6 +37,7 @@
               <th>Id</th>
               <th>Title</th>
               <th>Modified On</th>
+              <th>Color</th>
             </tr>
             </thead>
             <tbody>
@@ -77,13 +78,16 @@
                 </div>
               </td>
               <td>
-                <input type="text" class="form-control transparent-input" readonly value="{{row['id']}}">
+                <input type="text" class="form-control transparent-input"  readonly value="{{row['id']}}">
               </td>
               <td>
                 <input type="text" class="form-control transparent-input" readonly value="{{row['title']}}">
               </td>
               <td>
-                <input type="text" class="form-control transparent-input" readonly value="{{row['modifiedOn']}}">
+                <input type="text" class="form-control transparent-input" readonly value="{{row['modifiedOn'] | date:'medium'}}">
+              </td>
+              <td>
+                <input type="text" class="form-control transparent-input"style="border: 1px solid {{row['color']}}" readonly value="{{row['color']}}">
               </td>
             </tr>
             </tbody>

@@ -30,7 +30,7 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Groups -->
-        <div *ngIf="isGroupContentDivVisible()  && showBusinessUnitGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
+        <div *ngIf="isGroupContentDivVisible()  && showTagGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
              style="padding-right: 5px;padding-left: 5px;">
           <div class="row">
             <div *ngIf="isGroupContentDivVisible()" style="margin-bottom: 10px;" class="col-12">
@@ -144,24 +144,24 @@
                       </div>
                     </td>
                     <td>
-                      <input [(ngModel)]="row['id']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['name']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['name']}}" class="form-control transparent-input" readonly type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['modifiedOn']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['component']['id']" class="form-control transparent-input" readonly
+                      <input value="{{row['component']['id']}}" class="form-control transparent-input" readonly
                              type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['component']['name']" class="form-control transparent-input" readonly
+                      <input value="{{row['component']['name']}}" class="form-control transparent-input" readonly
                              type="text">
                     </td>
                     <td>
-                      <input [(ngModel)]="row['jsonUrl']" class="form-control transparent-input" readonly type="text">
+                      <input value="{{row['jsonUrl']}}" class="form-control transparent-input" readonly type="text">
                     </td>
                   </tr>
                   </tbody>

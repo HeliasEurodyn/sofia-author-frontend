@@ -6,6 +6,8 @@ import {AppViewDTO} from '../../../dtos/appview/app-view-dto';
 import {AppViewService} from '../../../services/crud/app-view.service';
 import {Location} from '@angular/common';
 import {AppViewFieldDTO} from '../../../dtos/appview/app-view-field-dto';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 @Component({
   selector: 'app-app-view-designer-form',
@@ -20,12 +22,14 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
   public mode: string;
   public customTableNameMask = '0*';
   public customTableNamePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
+  public tagsList: Array<TagDTO>
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: AppViewService,
               private router: Router,
               private location: Location,
-              private navigatorService: CommandNavigatorService) {
+              private navigatorService: CommandNavigatorService,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -51,6 +55,13 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
     }
 
     this.dto.appViewFieldList = [];
+    this.refreshTags();
+  }
+
+  refreshTags(){
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
+    });
   }
 
   cleanIdsIfCloneEnabled() {
@@ -134,6 +145,19 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
 
   navigateToNextPage() {
     this.navigatorService.navigateToNextPage(this.pageId);
+  }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+    this.dto.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
   }
 
 }

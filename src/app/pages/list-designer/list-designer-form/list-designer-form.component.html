@@ -125,33 +125,25 @@
           </div>
         </div>
 
-        <div class="row">
+        
           <div class="col-md-12">
             <div class="form-group">
               <label>Tags</label>
-              <div class="input-group input-group-selector no-border">
-                <div
-                  data-target="#selectTagModal"
-                  data-toggle="modal"
-                  class="input-group-prepend">
-                 <span class="input-group-text">
-                    <i class="fa fa-search"></i>
-                 </span>
-                </div>
-                <input readonly
-                       data-target="#selectTagModal"
-                       data-toggle="modal"
-                       type="text" class="form-control"
-                       value="{{this.dto?.tag}}">
-                <div class="input-group-append" (click)="selectTag(null)">
-                 <span class="input-group-text input-group-text-rm">
-                    <i class="fa fa-window-close"></i>
-                 </span>
-                </div>
+
+              <div>
+                <button *ngFor="let tag of this.dto?.tags" class="btn btn-outline-primary btn-round btn-chips">
+                  <i class="fa fa-times btn-delete-node" (click)="deleteTagChipsLine(tag)"></i>
+                  {{tag.title}}
+                </button>
+                <button data-target="#selectTagModal"
+                        data-toggle="modal"
+                        class="btn btn-outline-success btn-round btn-icon btn-chips">
+                  <i class="fa fa-plus"></i>
+                </button>
               </div>
             </div>
           </div>
-        </div>
+        
 
         <div class="row">
           <div class="col-md-10">
@@ -1653,25 +1645,24 @@
                 <thead class=" text-primary">
                 <tr>
                   <th>Actions</th>
-                  <th>Id</th>
                   <th>Title</th>
                 </tr>
                 </thead>
                 <tbody >
-                <tr *ngFor="let row of tagList" (click)="selectTag(row)" data-dismiss="modal"
+                <tr *ngIf="tagsList == undefined || tagsList?.length === 0">
+                  <td colspan="3" class="empty-table-row">Empty!</td>
+                </tr>
+                <tr *ngFor="let row of tagsList"
                     style="cursor: pointer;">
                   <td>
                     <button type="button" title="Select" class="btn btn-outline-success btn-icon btn-sm"
+                             data-dismiss="modal"
                             (click)="selectTag(row)">
                       <i class="fa fa-plus"></i>
                     </button>
                   </td>
                   <td>
-                    <input type="text" readonly class="form-control transparent-input"
-                           value="{{row['id']}}">
-                  </td>
-                  <td>
-                    <input type="text" readonly class="form-control transparent-input"
+                    <input type="text" readonly class="form-control transparent-input"style="border: 1px solid {{row['color']}}"
                            value="{{row['title']}}">
                   </td>
                 </tr>

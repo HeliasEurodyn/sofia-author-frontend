@@ -47,7 +47,6 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   };
 
   public components: any;
-  public tagList: Array<TagDTO>;
   public selectedFilterField: ListComponentFieldDTO;
 
   public dto: ListDTO;
@@ -67,6 +66,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   public selectedActionButton: ListActionButton;
   public selectedListComponentActionField: ListComponentFieldDTO;
   private selectedSecurityRow: AccessControlDto;
+  public tagsList: Array<TagDTO>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private tableComponentService: TableComponentDesignerService,
@@ -215,8 +215,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     });
 
     this.tagDesignerService.get().subscribe(data => {
-      this.tagList = data;
-      console.log(this.tagList);
+      this.tagsList = data;
     });
   }
 
@@ -376,7 +375,11 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectTag(selectedTag: TagDTO) {
-    this.dto.tag = selectedTag?.title;
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+    this.dto.tags.push(tag);
   }
 
   hideChildren(item) {
@@ -902,6 +905,11 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
     securityList.push(dto);
 
     return securityList;
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
   }
 
 }

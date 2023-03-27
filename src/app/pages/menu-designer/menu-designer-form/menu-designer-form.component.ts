@@ -8,6 +8,8 @@ import {BaseDTO} from '../../../dtos/common/base-dto';
 import {Location} from '@angular/common'
 import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 @Component({
   selector: 'app-menu-designer-form',
@@ -17,8 +19,6 @@ import {RoleService} from '../../../services/crud/role.service';
 export class MenuDesignerFormComponent extends PageComponent implements OnInit {
 
   public menuComponent: MenuDTO;
-  // public dto: MenuDTO = new MenuDTO();
-
   public menuFieldComponent: MenuFieldDTO;
   public selectedParentMenuFieldComponent: MenuFieldDTO;
   linecounter = 0;
@@ -32,13 +32,15 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
   public users: any;
   public userGroups: any;
   public roles: any;
+  public tagsList: Array<TagDTO>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private menuDesignerService: MenuService,
               private router: Router,
               private location: Location,
               private navigatorService: CommandNavigatorService,
-              private roleService: RoleService) {
+              private roleService: RoleService,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -48,7 +50,7 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     let id = '0';
     this.mode = 'new-record';
     this.menuComponent = new MenuDTO();
-    this.menuFieldComponent = new MenuFieldDTO;
+    this.menuFieldComponent = new MenuFieldDTO();
 
     const locateParams = this.getLocateParams();
     if (locateParams.has('ID')) {
@@ -67,6 +69,10 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
   refreshComponents() {
     this.roleService.get().subscribe(data => {
       this.roles = data;
+    });
+
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
   cleanIdsIfCloneEnabled() {
@@ -291,5 +297,18 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     securityList =
       securityList.filter(item => item !== column);
     return securityList;
+  }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.menuComponent.tags == null){
+      this.menuComponent.tags = [];
+    }
+    this.menuComponent.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.menuComponent.tags =
+      this.menuComponent.tags.filter(item => item !== tag);
   }
 }

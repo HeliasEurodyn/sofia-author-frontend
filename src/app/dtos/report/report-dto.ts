@@ -1,6 +1,7 @@
 import {BaseDTO} from '../common/base-dto';
 import {ReportParameterDTO} from './report-parameter-dto';
 import {AccessControlDto} from '../security/access-control-dto';
+import { TagDTO } from '../tag/tag-dto';
 
 export class ReportDTO extends BaseDTO {
   code: string;
@@ -12,6 +13,7 @@ export class ReportDTO extends BaseDTO {
   reportType: string;
   subreports: ReportDTO[];
   accessControls: AccessControlDto[] = [];
+  public tags: TagDTO[] = [];
 
   constructor() {
     super();

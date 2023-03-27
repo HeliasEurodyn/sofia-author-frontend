@@ -17,6 +17,8 @@ import 'brace';
 import 'brace/mode/html'
 import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 @Component({
   selector: 'app-xls-import-designer-form',
@@ -31,6 +33,7 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
   public visibleSection = 'general';
   private selectedSecurityRow: AccessControlDto;
   public roles: any;
+  public tagsList: Array<TagDTO>;
 
   public aceHtmlEditorConfig: AceConfigInterface = {
     mode: 'html',
@@ -42,7 +45,8 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
               private service: XlsImportDesignerService,
               private location: Location,
               private roleService: RoleService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -94,6 +98,10 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
 
     this.roleService.get().subscribe(data => {
       this.roles = data;
+    });
+
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -239,5 +247,19 @@ export class XlsImportDesignerFormComponent extends PageComponent implements OnI
   selectRole(role) {
     this.selectedSecurityRow.role = role;
   }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+    this.dto.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
+  }
+
 
 }

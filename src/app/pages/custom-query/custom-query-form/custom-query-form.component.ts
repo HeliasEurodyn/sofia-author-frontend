@@ -10,6 +10,8 @@ import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';
 import 'brace/mode/sql';
 import 'brace/theme/sqlserver';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
 @Component({
   selector: 'app-custom-query-form',
@@ -23,6 +25,7 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
   public visibleSection = 'general';
   private selectedSecurityRow: AccessControlDto;
   public roles: any;
+  public tagsList: Array<TagDTO>;
 
   public aceSQLEditorConfig: AceConfigInterface = {
     mode: 'sql',
@@ -33,7 +36,8 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private service: CustomQueryDesignerService,
               private roleService: RoleService,
-              private location: Location) {
+              private location: Location,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -64,6 +68,10 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
   refreshComponents() {
     this.roleService.get().subscribe(data => {
       this.roles = data;
+    });
+
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -138,5 +146,19 @@ export class CustomQueryFormComponent extends PageComponent implements OnInit {
       }
     }
   }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+    this.dto.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
+  }
+
 
 }

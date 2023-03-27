@@ -1,0 +1,18 @@
+.btn.btn-icon, .navbar .navbar-nav > a.btn.btn-icon {
+    height: 1.775rem;
+    min-width: 1.775rem;
+    width: 1.775rem;
+  }
+  
+  .btn-chips{
+    margin: 1px;
+    padding: 8px;
+  }
+  
+  .btn-delete-node{
+    color: red;
+  }
+  
+  .btn-delete-node:hover{
+    color: #b60000;
+  }

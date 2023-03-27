@@ -13,6 +13,9 @@ import {
 } from '../../../modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {RemoveForeignKeyConstrainDTO} from '../../../dtos/table/remove-foreign-key-constrain-dto';
+import { TagDTO } from 'app/dtos/tag/tag-dto';
+import { TagDesignerService } from 'app/services/crud/tag-designer.service';
+import { PersistEntityDTO } from 'app/dtos/persistEntity/persist-entity-dto';
 
 @Component({
   selector: 'app-table-designer-form',
@@ -35,6 +38,7 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
 
   public listOfTables: Array<TableDTO>;
   public removeForeignKeyConstrainDTO: RemoveForeignKeyConstrainDTO;
+  public tagsList: Array<TagDTO>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: TableService,
@@ -42,7 +46,8 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
               private location: Location,
               private notificationService: NotificationService,
               private navigatorService: CommandNavigatorService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private tagDesignerService: TagDesignerService) {
     super();
   }
 
@@ -84,6 +89,10 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   getTables() {
     this.service.get().subscribe(data => {
       this.listOfTables = data;
+    });
+
+    this.tagDesignerService.get().subscribe(data => {
+      this.tagsList = data;
     });
   }
 
@@ -365,5 +374,20 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   compareReferredTable(referredTable1: TableDTO, referredTable2: TableDTO): boolean {
     return referredTable1 && referredTable2 ? referredTable1.id === referredTable2.id : referredTable1 === referredTable2;
   }
+
+  selectTag(selectedTag: TagDTO) {
+    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+    if(this.dto.tags == null){
+      this.dto.tags = [];
+    }
+
+    this.dto.tags.push(tag);
+  }
+
+  deleteTagChipsLine(tag: TagDTO) {
+    this.dto.tags =
+      this.dto.tags.filter(item => item !== tag);
+  }
+
 
 }
