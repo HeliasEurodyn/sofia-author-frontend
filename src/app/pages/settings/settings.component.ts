@@ -5,9 +5,7 @@ import {SettingsService} from '../../services/crud/settings.service';
 import {Location} from '@angular/common';
 import {NotificationService} from '../../services/system/notification.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {TagDesignerService} from "../../services/crud/tag-designer.service";
 import {UserService} from "../../services/crud/user.service";
-import {TagDTO} from "../../dtos/tag/tag-dto";
 import {UserDto} from "../../dtos/user/user-dto";
 
 @Component({

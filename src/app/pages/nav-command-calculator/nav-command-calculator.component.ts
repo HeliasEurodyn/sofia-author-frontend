@@ -37,6 +37,16 @@ export class NavCommandCalculatorComponent implements OnInit {
     '    "HIDE-DELETE": "YES"\n' +
     '}';
 
+  navSamplePlugin: string =
+  '{\n' +
+    '  "COMMAND-TYPE": "STATICPAGE",\n' +
+    '  "NAME": "ui-plugin",\n' +
+    '  "CONTEXT": "demo",\n' +
+    '  "HTML": ["mypage.html"],\n' +
+    '  "JS": ["mypage.js","mypage2.js"]\n' +
+    '}';
+
+
   resultValue: string;
 
   constructor() {
@@ -63,8 +73,10 @@ export class NavCommandCalculatorComponent implements OnInit {
   addSampleCommand(sample: string) {
     if(sample == 'menu'){
       this.expressionValue = this.navSampleMenu;
-    } else if (sample = 'selector'){
+    } else if (sample == 'selector'){
       this.expressionValue = this.navSampleSelector;
+    } else if(sample == 'plugin'){
+      this.expressionValue = this.navSamplePlugin;
     }
   }
 }

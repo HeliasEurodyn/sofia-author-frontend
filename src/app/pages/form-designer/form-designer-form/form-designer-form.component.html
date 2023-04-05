@@ -319,6 +319,7 @@
     <div class="pull-left">
 
       <div *ngFor="let formTab of this.dto?.formTabs" class="btn-group">
+
         <button (click)="removeFormTabs(formTab)"
                 style="margin-top: 0px;margin-bottom: 0px;padding: 0px 6px 0px 6px;"
                 title="Delete Tab"
@@ -343,6 +344,20 @@
                 type="button"
                 class="btn btn-outline-success btn-round green-tab">
           <i class="fa fa-plus"></i>
+        </button>
+        <button (click)="moveUp(formTab,this.dto.formTabs);"
+                style="margin-top: 0px;margin-bottom: 0px;padding: 0px 6px 0px 6px;"
+                title="Move"
+                type="button"
+                class="btn btn-outline-warning btn-round green-tab">
+          <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button (click)="moveDown(formTab,this.dto.formTabs);"
+                style="margin-top: 0px;margin-bottom: 0px;padding: 0px 6px 0px 6px;"
+                title="Move"
+                type="button"
+                class="btn btn-outline-warning btn-round green-tab">
+          <i class="fa fa-angle-double-right"></i>
         </button>
         <button (click)="selectFormSection(formTab)"
                 style="margin-top: 0px;margin-bottom: 0px;padding: 10px;" type="button"
@@ -455,6 +470,15 @@
                       data-toggle="modal"
                       type="button" class="btn btn-outline-success">
                 <i class="fa fa-plus-circle"></i> Add Table
+              </button>
+
+              <button (click)="moveUp(formArea,this.selectedFormSection.formAreas)"
+                      type="button" class="btn btn-outline-warning">
+                <i class="fa fa-angle-double-left"></i> Move
+              </button>
+              <button (click)="moveDown(formArea,this.selectedFormSection.formAreas)"
+                      type="button" class="btn btn-outline-warning">
+                <i class="fa fa-angle-double-right"></i> Move
               </button>
             </div>
 
@@ -1326,6 +1350,7 @@
               <option value="datetime_det">Datetime</option>
               <option value="varchar">Varchar</option>
               <option value="text">Text</option>
+              <option value="longtext">Long Text</option>
               <option value="list">List</option>
               <option value="combo">Combo</option>
               <option value="chips">Chips</option>
@@ -1333,7 +1358,7 @@
               <option value="checkbox">Checkbox</option>
               <option value="password">Password</option>
               <option value="file-selector">File Selector</option>
-              <option value="cve">Cve</option>
+              <option value="image">Image</option>
             </select>
           </div>
         </div>
