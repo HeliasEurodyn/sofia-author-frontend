@@ -300,11 +300,10 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
     if(this.menuComponent.tags == null){
       this.menuComponent.tags = [];
     }
-    this.menuComponent.tags.push(tag);
+    this.menuComponent.tags.push(selectedTag);
   }
 
   deleteTagChipsLine(tag: TagDTO) {

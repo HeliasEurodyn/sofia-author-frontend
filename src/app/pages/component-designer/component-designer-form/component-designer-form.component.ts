@@ -458,12 +458,11 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
-    if(this.componentDTO.tags == null){
-      this.componentDTO.tags = [];
+      if(this.componentDTO.tags == null){
+        this.componentDTO.tags = [];
+      }
+      this.componentDTO.tags.push(selectedTag);
     }
-    this.componentDTO.tags.push(tag);
-  }
 
   deleteTagChipsLine(tag: TagDTO) {
     this.componentDTO.tags =

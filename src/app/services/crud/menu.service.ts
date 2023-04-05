@@ -21,4 +21,12 @@ export class MenuService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-id?id=${id}&language-id=${languageId}`);
   }
 
+  getTags(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/tag`);
+  }
+
+  getDataByTag(tag: any): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-tag?tag=${tag}`);
+  }
+
 }

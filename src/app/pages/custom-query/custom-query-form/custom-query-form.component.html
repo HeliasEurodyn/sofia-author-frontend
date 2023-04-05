@@ -75,7 +75,7 @@
                 <label>Tags</label>
   
                  <div>
-                  <button *ngFor="let tag of this.dto?.tags" class="btn btn-outline-primary btn-round btn-chips">
+                  <button *ngFor="let tag of this.dto?.tags" class="btn btn-outline-primary btn-round btn-chips"style="border-color: {{tag.color}} !important">
                     <i class="fa fa-times btn-delete-node" (click)="deleteTagChipsLine(tag)"></i>
                     {{tag.title}}
                   </button>

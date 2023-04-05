@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {SearchDesignerService} from '../../../services/crud/search-designer.service';
+import { SearchDTO } from 'app/dtos/search/search-dto';
 
 @Component({
   selector: 'app-search-designer-list',
@@ -10,7 +11,11 @@ import {SearchDesignerService} from '../../../services/crud/search-designer.serv
 })
 export class SearchDesignerListComponent extends PageComponent implements OnInit {
 
-  public tableData: any;
+  public tableData: Array<SearchDTO>;
+  public filteredTableData: Array<SearchDTO>;
+  public tags: Array<String>
+  public showTagGrouping: Boolean;
+  public showTagButtonTitle: String;
 
   constructor(private service: SearchDesignerService,
               private navigatorService: CommandNavigatorService) {
@@ -18,13 +23,23 @@ export class SearchDesignerListComponent extends PageComponent implements OnInit
   }
 
   ngOnInit(): void {
+    this.tags = new Array<String>();
+    this.showTagButtonTitle = 'Show Grouping'
+    this.showTagGrouping = false;
+    this.refreshTag();
     this.refresh();
   }
 
   refresh() {
     this.service.get().subscribe(data => {
       this.tableData = data;
+      this.filteredTableData = this?.tableData
     });
+  }
+  refreshTag(){
+    this.service.getTags().subscribe(data => {
+      this.tags = data;
+    }); 
   }
 
   delete(row: any) {
@@ -53,6 +68,26 @@ export class SearchDesignerListComponent extends PageComponent implements OnInit
     let command = 'STATICPAGE[NAME:search-designer-form,TYPE:CLONE,LOCATE:(ID=' + id + '),PARENT-PAGEID:$PAGEID]';
     command = command.replace('$PAGEID', this.pageId);
     this.navigatorService.navigate(command);
+  }
+
+  filterGroup(item: any) {
+    this.service.getDataByTag(item.title).subscribe(data => {
+      this.filteredTableData = data;
+    });
+  }
+
+  clearFilterGroup() {
+    this.filteredTableData = this?.tableData;
+   
+ }
+
+  showTagsGrouping() {
+    this.showTagGrouping = !this.showTagGrouping
+    if (this.showTagGrouping === true) {
+      this.showTagButtonTitle = 'Hide Grouping'
+    } else {
+      this.showTagButtonTitle = 'Show Grouping'
+    }
   }
 
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuService} from '../../../services/crud/menu.service';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
+import { MenuDTO } from 'app/dtos/menu/menuDTO';
 
 @Component({
   selector: 'app-menu-designer-list',
@@ -9,7 +10,11 @@ import {CommandNavigatorService} from '../../../services/system/command-navigato
   styleUrls: ['./menu-designer-list.component.css']
 })
 export class MenuDesignerListComponent extends PageComponent implements OnInit {
-  public tableData: any;
+  public tableData: Array<MenuDTO>;
+  public filteredTableData: Array<MenuDTO>;
+  public tags: Array<String>
+  public showTagGrouping: Boolean;
+  public showTagButtonTitle: String;
 
   constructor(private menuDesignerService: MenuService,
               private navigatorService: CommandNavigatorService) {
@@ -17,6 +22,10 @@ export class MenuDesignerListComponent extends PageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tags = new Array<String>();
+    this.showTagButtonTitle = 'Show Grouping'
+    this.showTagGrouping = false;
+    this.refreshTag();
     this.refresh();
   }
 
@@ -27,6 +36,13 @@ export class MenuDesignerListComponent extends PageComponent implements OnInit {
   refresh() {
     this.menuDesignerService.get().subscribe(data => {
       this.tableData = data;
+      this.filteredTableData = this?.tableData
+    });
+  }
+
+  refreshTag(){
+    this.menuDesignerService.getTags().subscribe(data => {
+      this.tags = data;
     });
   }
 
@@ -58,6 +74,26 @@ export class MenuDesignerListComponent extends PageComponent implements OnInit {
     let command = 'STATICPAGE[NAME:menu-designer-form,TITLE:Form,TYPE:CLONE,LOCATE:(ID=' + id + '),PARENT-PAGEID:$PAGEID]';
     command = command.replace('$PAGEID', this.pageId);
     this.navigatorService.navigate(command);
+  }
+
+  filterGroup(item: any) {
+    this.menuDesignerService.getDataByTag(item.title).subscribe(data => {
+      this.filteredTableData = data;
+    });
+  }
+
+  clearFilterGroup() {
+     this.filteredTableData = this?.tableData;
+    
+  }
+
+  showTagsGrouping() {
+    this.showTagGrouping = !this.showTagGrouping
+    if (this.showTagGrouping === true) {
+      this.showTagButtonTitle = 'Hide Grouping'
+    } else {
+      this.showTagButtonTitle = 'Show Grouping'
+    }
   }
 
 }

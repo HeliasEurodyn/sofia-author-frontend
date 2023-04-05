@@ -1,3 +1,13 @@
 .btn{
   margin-left: 2px;
 }
+
+ul {
+  padding-left: 7px;
+}
+
+li { /* styles all li elements*/
+  list-style-type: none;
+  padding-left: 0px;
+  text-align: left;
+}

@@ -8,6 +8,7 @@ import {Location} from "@angular/common";
 import {ViewFieldDTO} from "../../../dtos/view/view-field-dto";
 import { TagDTO } from 'app/dtos/tag/tag-dto';
 import { TagDesignerService } from 'app/services/crud/tag-designer.service';
+import { AceConfigInterface } from 'ngx-ace-wrapper';
 
 @Component({
   selector: 'app-view-designer-form',
@@ -22,6 +23,12 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
   public customTableNameMask = '0*';
   public customTableNamePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
   public tagsList: Array<TagDTO>;
+
+  public aceSQLEditorConfig: AceConfigInterface = {
+    mode: 'sql',
+    theme: 'sqlserver',
+    readOnly : false
+  };
   
   constructor(private activatedRoute: ActivatedRoute,
               private service: ViewService,
@@ -137,11 +144,10 @@ export class ViewDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
     if(this.dto.tags == null){
       this.dto.tags = [];
     }
-    this.dto.tags.push(tag);
+    this.dto.tags.push(selectedTag);
   }
 
   deleteTagChipsLine(tag: TagDTO) {

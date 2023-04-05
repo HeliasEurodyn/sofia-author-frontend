@@ -12,10 +12,9 @@ import {FormDto} from '../../../dtos/form/form-dto';
 })
 export class FormDesignerListComponent extends PageComponent implements OnInit {
 
-  public tableData: any
+  public tableData: Array<FormDto>;
   public filteredTableData: Array<FormDto>;
   public tags: Array<String>
-  public selectedTag: String;
   public showTagGrouping: Boolean;
   public showTagButtonTitle: String;
 
@@ -95,16 +94,14 @@ export class FormDesignerListComponent extends PageComponent implements OnInit {
     }
   }
 
-  filterGroup(item: String) {
-    this.selectedTag = item;
-    this.filteredTableData = this.tableData.filter(list => {
-      return list.tag === item;
-    })
+  filterGroup(item: any) {
+    this.service.getDataByTag(item.title).subscribe(data =>{
+      this.filteredTableData = data;
+    });
   }
 
   clearFilterGroup() {
     this.filteredTableData = this?.tableData;
-    this.selectedTag = null;
   }
 
   showTagsGrouping() {

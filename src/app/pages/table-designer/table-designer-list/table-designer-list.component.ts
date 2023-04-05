@@ -3,6 +3,8 @@ import {TableService} from '../../../services/crud/table.service';
 import {PageComponent} from '../../page/page-component';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {NotificationService} from '../../../services/system/notification.service';
+import { ListDTO } from 'app/dtos/list/list-dto';
+import { TableDTO } from 'app/dtos/table/tableDTO';
 
 @Component({
   selector: 'app-table-designer-list',
@@ -10,7 +12,11 @@ import {NotificationService} from '../../../services/system/notification.service
   styleUrls: ['./table-designer-list.component.css']
 })
 export class TableDesignerListComponent extends PageComponent implements OnInit {
-  public tableData: any;
+  public tableData: Array<TableDTO>;
+  public filteredTableData: Array<TableDTO>;
+  public tags: Array<String>
+  public showTagGrouping: Boolean;
+  public showTagButtonTitle: String;
 
   constructor(private service: TableService,
               private navigatorService: CommandNavigatorService,
@@ -20,8 +26,12 @@ export class TableDesignerListComponent extends PageComponent implements OnInit 
   }
 
   ngOnInit(): void {
+    this.tags = new Array<String>();
+    this.showTagButtonTitle = 'Show Grouping'
+    this.showTagGrouping = false;
     this.setTitle('Table Designer List');
     this.refresh();
+    this.refreshTag();
   }
 
   onFocusIn() {
@@ -56,6 +66,13 @@ export class TableDesignerListComponent extends PageComponent implements OnInit 
   refresh() {
     this.service.get().subscribe(data => {
       this.tableData = data;
+      this.filteredTableData = this?.tableData
+    });
+  }
+
+  refreshTag() {
+    this.service.getTags().subscribe(data => {
+      this.tags = data;
     });
   }
 
@@ -94,4 +111,24 @@ export class TableDesignerListComponent extends PageComponent implements OnInit 
   showNotification() {
     this.notificationService.showNotification('top', 'center', 'alert-danger', 'fa-id-card', '<b>Error 500</b> Something Went Wrong');
   }
+
+  filterGroup(item: any) {
+    this.service.getDataByTag(item.title).subscribe(data => {
+      this.filteredTableData = data;
+    });
+  }
+
+  clearFilterGroup() {
+    this.filteredTableData = this?.tableData;
+   
+ }
+
+ showTagsGrouping() {
+   this.showTagGrouping = !this.showTagGrouping
+   if (this.showTagGrouping === true) {
+     this.showTagButtonTitle = 'Hide Grouping'
+   } else {
+     this.showTagButtonTitle = 'Show Grouping'
+   }
+ }
 }

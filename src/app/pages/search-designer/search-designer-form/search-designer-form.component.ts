@@ -149,11 +149,10 @@ export class SearchDesignerFormComponent extends PageComponent implements OnInit
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
     if(this.dto.tags == null){
       this.dto.tags = [];
     }
-    this.dto.tags.push(tag);
+    this.dto.tags.push(selectedTag);
   }
 
   deleteTagChipsLine(tag: TagDTO) {

@@ -8,6 +8,7 @@ import {Location} from '@angular/common';
 import {AppViewFieldDTO} from '../../../dtos/appview/app-view-field-dto';
 import { TagDTO } from 'app/dtos/tag/tag-dto';
 import { TagDesignerService } from 'app/services/crud/tag-designer.service';
+import { AceConfigInterface } from 'ngx-ace-wrapper';
 
 @Component({
   selector: 'app-app-view-designer-form',
@@ -23,6 +24,12 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
   public customTableNameMask = '0*';
   public customTableNamePattern = { '0': { pattern: new RegExp('\[a-z0-9_\]')} };
   public tagsList: Array<TagDTO>
+
+  public aceSQLEditorConfig: AceConfigInterface = {
+    mode: 'sql',
+    theme: 'sqlserver',
+    readOnly : false
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private service: AppViewService,
@@ -81,17 +88,18 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
   }
 
   save() {
-    const base64Query = btoa(encodeURIComponent(this.dto?.query));
-    this.dto.query = base64Query;
+    const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
+    const base64Query = btoa(encodeURIComponent(dtoToBeSaved?.query));
+    dtoToBeSaved.query = base64Query;
 
     if (this.mode === 'edit-record') {
 
-      this.service.update(this.dto).subscribe(data => {
+      this.service.update(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
 
     } else {
-      this.service.save(this.dto).subscribe(data => {
+      this.service.save(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
     }
@@ -148,11 +156,10 @@ export class AppViewDesignerFormComponent extends PageComponent implements OnIni
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
     if(this.dto.tags == null){
       this.dto.tags = [];
     }
-    this.dto.tags.push(tag);
+    this.dto.tags.push(selectedTag);
   }
 
   deleteTagChipsLine(tag: TagDTO) {

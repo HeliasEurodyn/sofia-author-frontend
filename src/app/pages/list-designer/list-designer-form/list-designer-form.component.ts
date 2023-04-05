@@ -375,11 +375,11 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
   }
 
   selectTag(selectedTag: TagDTO) {
-    const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
+  //  const tag: TagDTO = new TagDTO(selectedTag.title, selectedTag.color);
     if(this.dto.tags == null){
       this.dto.tags = [];
     }
-    this.dto.tags.push(tag);
+    this.dto.tags.push(selectedTag);
   }
 
   hideChildren(item) {

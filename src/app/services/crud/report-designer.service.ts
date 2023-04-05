@@ -71,4 +71,12 @@ export class ReportDesignerService extends CrudService<any> {
     });
   }
 
+  getTags(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/tag`);
+  }
+
+  getDataByTag(tag: any): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-tag?tag=${tag}`);
+  }
+
 }

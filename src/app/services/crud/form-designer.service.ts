@@ -25,5 +25,9 @@ export class FormDesignerService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/10-latest`);
   }
 
+  getDataByTag(tag: any): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-tag?tag=${tag}`);
+  }
+
 
 }

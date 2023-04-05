@@ -22,4 +22,12 @@ export class ViewService extends CrudService<any> {
     return this.http.post<any>(`${environment.serverUrl}/${this.endpoint}/generate-view-fields`,{ query: btoa(encodeURIComponent(query)) } );
   }
 
+  getDataByTag(tag: any): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-tag?tag=${tag}`);
+  }
+
+  getTags(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/tag`);
+  }
+
 }

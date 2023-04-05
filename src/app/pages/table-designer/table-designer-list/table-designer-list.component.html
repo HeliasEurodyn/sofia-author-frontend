@@ -17,85 +17,138 @@
         <button (click)="refresh()" class="btn btn-outline-primary">
           <i class="fa fa-refresh"></i> Refresh
         </button>
+        <button (click)="showTagsGrouping()" class="btn btn-outline-primary">
+          <i class="fa fa-tags"></i> {{showTagButtonTitle}}
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row form-area">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="numbers pull-left"></div>
+<div class="tab-pane form-area">
+  <div class="row">
+    <div class="col">
+      <div class="row" style="padding-right: 10px;padding-left: 10px;">
+
+        <!-- Groups -->
+        <div *ngIf="showTagGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
+             style="padding-right: 5px;padding-left: 5px;">
+          <div class="row">
+            <div style="margin-bottom: 10px;" class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row formnav">
+                    <div class="col-12">
+                      <div class="pull-left">
+                        <h5 class="card-title" style="margin-bottom: 0px;">
+                          <i class="fas fa-tags"></i>
+                          Categorization By Tags
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul *ngIf="tags?.length > 0">
+                    <li *ngFor="let item of tags">
+                      <div class="btn-group">
+                        <button 
+                        (click)="filterGroup(item)"
+                        class="btn btn-outline-primary btn-round"style="border-color: {{item.color}} !important;color: {{item.color}};margin: 2px;padding: 7px; ">
+                          <i  class="fa fa-tag"></i>  {{item.title}} 
+                        </button>
+
+                      
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="row" >
+                    <div class="col-12">
+                      <h6 class="float-left"> Selected Tag: {{selectedTag}}
+                        <div (click)="clearFilterGroup()"
+                              style="color: #ff733e;cursor: pointer;">
+                      <i class="fas fa-trash"></i> Clear
+                    </div>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- List -->
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="numbers pull-left"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="">
+                <table class="table table-striped">
+                  <thead class=" text-primary">
+                  <tr>
+                    <th class="text-left">Actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Modified On</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    *ngIf="filteredTableData == undefined || filteredTableData.length === 0 ">
+                    <td class="empty-table-row" colspan="12">Empty!</td>
+                  </tr>
+                  <tr *ngFor="let row of filteredTableData ; ">
+                    <td>
+                      <button (click)="openPage( row['id'])" class="btn btn-outline-success btn-icon btn-sm"
+                              title="Edit"
+                              type="button">
+                        <i class="fa fa-pencil-alt"></i>
+                      </button>
+                      <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                           style="margin-top: 4px;display:none;">
+                        <button (click)="myDrop.open();"
+                                class="btn btn-outline-default btn-icon btn-sm"
+                                title="More">
+                          <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div ngbDropdownMenu>
+                          <button ngbDropdownAnchor (click)="delete(row)"
+                                  class="text-danger menu-button">
+                            <i class="fa fa-times"></i> Delete
+                          </button>
+                          <div ngbDropdownAnchor class="dropdown-divider"></div>
+                          <button (click)="clone( row['id'])"
+                                  class="text-success menu-button">
+                            <i class="fa fa-clone"></i> Copy As New
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input value="{{row['name']}}" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="">
-          <table class="table table-striped">
-            <thead class=" text-primary">
-            <tr>
-              <th class="text-left">Actions</th>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Modified On</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr
-              *ngIf="tableData == undefined || tableData.length === 0 ">
-              <td class="empty-table-row" colspan="12">Empty!</td>
-            </tr>
-            <tr *ngFor="let row of tableData">
-              <td>
-                <button (click)="openPage( row['id'])" class="btn btn-outline-success btn-icon btn-sm" title="Edit"
-                        type="button">
-                  <i class="fa fa-pencil-alt"></i>
-                </button>
-                <button (click)="openPageInNewTab( row['id'])" class="btn btn-outline-success btn-icon btn-sm" title="Edit"
-                        type="button">
-                  <i class="fa fa-share"></i>
-                </button>
-                <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
-                     style="margin-top: 4px;">
-                  <button (click)="myDrop.open();"
-                          class="btn btn-outline-default btn-icon btn-sm"
-                          title="More">
-                    <i class="fa fa-ellipsis-v"></i>
-                  </button>
-                  <div ngbDropdownMenu>
-                    <button (click)="delete(row)"
-                            class="text-danger menu-button"
-                            ngbDropdownAnchor>
-                      <i class="fa fa-times"></i> Delete
-                    </button>
-                    <div ngbDropdownAnchor class="dropdown-divider"></div>
-                    <button (click)="clone( row['id'])"
-                            class="text-success menu-button"
-                            ngbDropdownAnchor>
-                      <i class="fa fa-clone"></i> Copy As New
-                    </button>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
-              </td>
-              <td>
-                <input value="{{row['name']}}" class="form-control transparent-input" readonly type="text">
-              </td>
-              <td>
-                <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-
     </div>
   </div>
 </div>

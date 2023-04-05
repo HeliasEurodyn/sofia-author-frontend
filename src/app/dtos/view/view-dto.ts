@@ -12,4 +12,6 @@ export class ViewDTO extends PersistEntityDTO {
 
   public tags: TagDTO[] = [];
 
+  public tag: string;
+
 }

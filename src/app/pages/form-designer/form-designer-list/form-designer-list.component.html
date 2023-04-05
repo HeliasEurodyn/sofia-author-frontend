@@ -16,8 +16,8 @@
       <button (click)="openNewPage()" class="btn btn-outline-primary">
         <i class="fa fa-plus-circle"></i> New
       </button>
-      <button (click)="showTagsGrouping()" class="btn btn-outline-primary " [hidden]="tags.length==0" >
-        <i class="fa fa-layer-group"></i> {{showTagButtonTitle}}
+      <button (click)="showTagsGrouping()" class="btn btn-outline-primary">
+        <i class="fa fa-tags"></i> {{showTagButtonTitle}}
       </button>
     </div>
   </div>
@@ -30,17 +30,17 @@
       <div class="row" style="padding-right: 10px;padding-left: 10px;">
 
         <!-- Groups -->
-        <div *ngIf="isGroupContentDivVisible()  && showTagGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
-             style="padding-right: 5px;padding-left: 5px;">
+       <div *ngIf="showTagGrouping" class="col-md-2 col-sm-12 col-12 entity-parent-col"
+              style="padding-right: 5px;padding-left: 5px;">
           <div class="row">
-            <div *ngIf="isGroupContentDivVisible()" style="margin-bottom: 10px;" class="col-12">
+            <div style="margin-bottom: 10px;" class="col-12">
               <div class="card">
                 <div class="card-header">
                   <div class="row formnav">
                     <div class="col-12">
                       <div class="pull-left">
                         <h5 class="card-title" style="margin-bottom: 0px;">
-                          <i class="fas fa-briefcase"></i>
+                          <i class="fas fa-tags"></i>
                           Categorization By Tags
                         </h5>
                       </div>
@@ -50,35 +50,32 @@
                 <div class="card-body">
                   <ul *ngIf="tags?.length > 0">
                     <li *ngFor="let item of tags">
-                      <div class="btn-group">
-                        <button type="button"
-                                class="btn left-group-button btn-outline-default active-header"
-                                style="padding: 2px;font-size: 10px;border: 2px solid #959494 !important; color: #959494;">
-                          <i class="fas fa-circle" style="color: #959494;"></i>
-                        </button>
-                        <button (click)="filterGroup(item)"
-                                class="btn left-group-button btn-outline-default"
-                                style="border: 1px solid #66615b !important; text-align: left;">
-                          {{item}}
-                        </button>
-                      </div>
-                    </li>
-                  </ul>
-                  <div class="row" *ngIf="selectedTag!=null">
-                    <div class="col-12">
-                      <h6 class="float-left"> Selected Tag: {{selectedTag}}
-                        <div (click)="clearFilterGroup()"
-                             style="color: #ff733e;cursor: pointer;">
-                          <i class="fas fa-trash"></i> Clear
-                        </div>
-                      </h6>
+                     <div class="btn-group">
+                      <button 
+                      (click)="filterGroup(item)"
+                      class="btn btn-outline-primary btn-round"style="border-color: {{item.color}} !important;color: {{item.color}};margin: 2px;padding: 7px; ">
+                        <i  class="fa fa-tag"></i>  {{item.title}} 
+                      </button>
+
+         
                     </div>
+                  </li>
+                </ul>
+                <div class="row" >
+                  <div class="col-12">
+                    <h6 class="float-left"> Selected Tag: {{selectedTag}}
+                      <div (click)="clearFilterGroup()"
+                             style="color: #ff733e;cursor: pointer;">
+                    <i class="fas fa-trash"></i> Clear
+                  </div>
+                    </h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+       </div>
 
         <!-- List -->
         <div class="col">

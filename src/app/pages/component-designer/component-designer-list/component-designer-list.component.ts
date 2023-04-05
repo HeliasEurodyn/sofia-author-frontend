@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommandNavigatorService} from '../../../services/system/command-navigator.service';
 import {PageComponent} from '../../page/page-component';
 import {TableComponentDesignerService} from '../../../services/crud/table-component-designer.service';
+import { ComponentDTO } from 'app/dtos/component/componentDTO';
 
 @Component({
   selector: 'app-component-designer-list',
@@ -9,7 +10,11 @@ import {TableComponentDesignerService} from '../../../services/crud/table-compon
   styleUrls: ['./component-designer-list.component.css']
 })
 export class ComponentDesignerListComponent extends PageComponent implements OnInit {
-  public tableData: any;
+  public tableData: Array<ComponentDTO>;
+  public tags: Array<String>
+  public filteredTableData: Array<ComponentDTO>;
+  public showTagGrouping: Boolean;
+  public showTagButtonTitle: String;
 
   constructor(private service: TableComponentDesignerService,
               private navigatorService: CommandNavigatorService) {
@@ -17,16 +22,27 @@ export class ComponentDesignerListComponent extends PageComponent implements OnI
   }
 
   ngOnInit(): void {
+    this.tags = new Array<String>();
+    this.showTagButtonTitle = 'Show Grouping'
+    this.showTagGrouping = false;
     this.refresh();
+    this.refreshTag();
   }
 
   onFocusIn() {
     this.refresh();
   }
 
+  refreshTag() {
+    this.service.getTags().subscribe(data => {
+      this.tags = data;
+    });
+  }
+
   refresh() {
     this.service.get().subscribe(data => {
       this.tableData = data;
+      this.filteredTableData = this?.tableData
     });
   }
 
@@ -54,5 +70,33 @@ export class ComponentDesignerListComponent extends PageComponent implements OnI
     command = command.replace('$PAGEID', this.pageId);
     this.navigatorService.navigate(command);
   }
+
+  isGroupContentDivVisible() {
+    if (this?.tags?.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  filterGroup(item: any) {
+    this.service.getDataByTag(item.title).subscribe(data => {
+      this.filteredTableData = data;
+    });
+  }
+
+  clearFilterGroup() {
+    this.filteredTableData = this?.tableData;
+   
+ }
+
+ showTagsGrouping() {
+  this.showTagGrouping = !this.showTagGrouping
+  if (this.showTagGrouping === true) {
+    this.showTagButtonTitle = 'Hide Grouping'
+  } else {
+    this.showTagButtonTitle = 'Show Grouping'
+  }
+}
 
 }
