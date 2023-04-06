@@ -6,6 +6,7 @@ import {UserService} from '../../services/crud/user.service';
 import {CommandNavigatorService} from '../../services/system/command-navigator.service';
 import {FormDesignerService} from '../../services/crud/form-designer.service';
 import {ListDesignerService} from '../../services/crud/list-designer.service';
+import { AuthorDashboardService } from 'app/services/crud/author-dashboard.service';
 
 @Component({
   selector: 'app-author-dashboard',
@@ -23,13 +24,15 @@ export class AuthorDashboardComponent extends PageComponent implements OnInit {
   public usersList: any;
   public formsList: any;
   public listsList: any;
+  public totals: any;
 
   constructor(private dataTransferService: DataTransferService,
               private userService: UserService,
               private listDesignerService: ListDesignerService,
               private formDesignerService: FormDesignerService,
               private notificationService: NotificationService,
-              private navigatorService: CommandNavigatorService) {
+              private navigatorService: CommandNavigatorService,
+              private authorDashboardService: AuthorDashboardService) {
     super();
   }
 
@@ -39,7 +42,9 @@ export class AuthorDashboardComponent extends PageComponent implements OnInit {
 
   refresh() {
 
-   
+    this.authorDashboardService.getComponentsTotals().subscribe(data =>{
+      this.totals = data;
+    })
 
     this.userService.get10LatestUsers().subscribe(data => {
       this.usersList = data;
