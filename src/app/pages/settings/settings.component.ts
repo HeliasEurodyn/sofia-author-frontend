@@ -18,6 +18,8 @@ export class SettingsComponent extends PageComponent implements OnInit {
   public dto: SettingsDto = new SettingsDto();
   public usersList: Array<UserDto>;
 
+  public visibleSection = 'general_settings';
+
   constructor(private service: SettingsService,
               private location: Location,
               private userService: UserService,
@@ -49,6 +51,10 @@ export class SettingsComponent extends PageComponent implements OnInit {
     this.userService.get().subscribe(data => {
       this.usersList = data;
     });
+  }
+
+  setVisibleSection(visibleSection: string) {
+    this.visibleSection = visibleSection;
   }
 
   selectUser(user: UserDto) {

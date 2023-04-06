@@ -1,3 +1,7 @@
 img{
   border: 1px solid #51cbce;
 }
+
+.is-hidden {
+  display: none;
+}

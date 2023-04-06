@@ -13,4 +13,12 @@ export class SettingsDto extends BaseDTO {
   oauthPrototypeUserId: string;
 
   oauthPrototypeUserName: string;
+
+  mailSenderHost: string;
+
+  mailSenderPort: string;
+
+  mailSenderUsername: string;
+
+  mailSenderPassword: string;
 }
