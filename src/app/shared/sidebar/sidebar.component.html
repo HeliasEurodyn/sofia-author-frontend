@@ -29,6 +29,7 @@
       <li *ngFor="let menuItem of list" routerLinkActive="active">
 
         <a (click)="navigate(menuItem);"
+           (contextmenu)="rightClickNavigate(menuItem,$event)"
            *ngIf="menuItem.command !== '#parent-menu#' && menuItem.command !== '#parent-collapse#' ">
           <i class="fa {{menuItem.icon}}"></i>
           <p>{{menuItem.name}}</p>

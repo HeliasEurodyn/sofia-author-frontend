@@ -137,7 +137,7 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     this.fieldListMode = 'insert';
   }
 
-  addParentMenuField() {
+  addMenuField() {
     this.linecounter++;
     this.selectedParentMenuFieldComponent = null;
     this.menuFieldComponent = new MenuFieldDTO();
@@ -145,6 +145,7 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     this.menuFieldComponent.shortOrder = this.linecounter;
     this.fieldListMode = 'insert';
   }
+
 
   editExistingMenuField(selectedMenuFieldComponent: MenuFieldDTO) {
     this.selectedParentMenuFieldComponent = null;
@@ -310,4 +311,93 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     this.menuComponent.tags =
       this.menuComponent.tags.filter(item => item !== tag);
   }
+
+  addLogoutMenuField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'Logout';
+    this.menuFieldComponent.icon = 'fa-power-off';
+    this.menuFieldComponent.command = '#logout#';
+    this.fieldListMode = 'insert';
+  }
+
+  addSearchMenuField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'Search';
+    this.menuFieldComponent.icon = 'fa-search';
+    this.menuFieldComponent.command = '{"COMMAND-TYPE":"POPUPPAGE","NAME":"search","POPUPTITLE":"Search For #Entities of the Application by code","LOCATE":{"ID":"search_uuid"},"VALUE":"##search##"}';
+    this.fieldListMode = 'insert';
+  }
+
+  addLoaderMenuField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'Loader';
+    this.menuFieldComponent.icon = 'fa-spinner';
+    this.menuFieldComponent.command = '#hidden-loader#';
+    this.fieldListMode = 'insert';
+  }
+
+  addParrentMenuField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'Folder';
+    this.menuFieldComponent.icon = 'fa-folder';
+    this.menuFieldComponent.command = '#parent-menu#';
+    this.fieldListMode = 'insert';
+  }
+
+  addParrentMenuCollapseField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'Folder Scroll';
+    this.menuFieldComponent.icon = 'fa-folder';
+    this.menuFieldComponent.command = '#parent-collapse#';
+    this.fieldListMode = 'insert';
+  }
+
+  addListMenuCollapseField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'List';
+    this.menuFieldComponent.icon = 'fa-list';
+    this.menuFieldComponent.command = '{"COMMAND-TYPE":"LIST","LOCATE":{"ID":"list_uuid"}}';
+    this.fieldListMode = 'insert';
+  }
+
+  addFormMenuCollapseField() {
+    this.linecounter++;
+    this.selectedParentMenuFieldComponent = null;
+    this.menuFieldComponent = new MenuFieldDTO();
+    this.menuFieldComponent.menuFieldList = [];
+    this.menuFieldComponent.shortOrder = this.linecounter;
+    this.menuFieldComponent.name = 'Form';
+    this.menuFieldComponent.icon = 'fa-object-group';
+    this.menuFieldComponent.command = '{"COMMAND-TYPE":"FORM","LOCATE":{"ID":"form_uuid"}}';
+    this.fieldListMode = 'insert';
+  }
+
+
+
+
+
 }

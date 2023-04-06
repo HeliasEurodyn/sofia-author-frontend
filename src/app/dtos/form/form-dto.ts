@@ -12,7 +12,7 @@ import {TagDTO} from "../tag/tag-dto";
 export class FormDto extends BaseDTO {
   public name: string;
   public title: string;
-  public description: string;
+  public description: string = '<b>Create</b> a new Entity or <i class="fa fa-pencil-alt"></i> <b>Edit</b> the existing one.';
   public icon: string;
   public jsonUrl: string;
   public accessControlEnabled: Boolean;

@@ -120,7 +120,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
 
     this.dto.listActionButtons = [];
     const dto = new ListActionButton();
-    dto.editor = 'FORM[LOCATE:(ID=0)]';
+    dto.editor = '{"COMMAND-TYPE":"FORM","LOCATE":{"ID":"form_id"}}';
     dto.visible = true;
     dto.description = 'New';
     dto.cssClass = 'btn-outline-success';

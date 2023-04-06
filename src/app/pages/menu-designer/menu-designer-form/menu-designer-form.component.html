@@ -63,7 +63,7 @@
               </div>
               <div class="form-group">
                 <label>Tags</label>
-  
+
                  <div>
                   <button *ngFor="let tag of this.menuComponent?.tags" class="btn btn-outline-primary btn-round btn-chips"style="border-color: {{tag.color}} !important">
                     <i class="fa fa-times btn-delete-node" (click)="deleteTagChipsLine(tag)"></i>
@@ -94,9 +94,30 @@
           </div>
           <div class="col-sm-5">
             <div class="pull-right">
-              <button class="btn btn-outline-primary" (click)="addParentMenuField()" data-target="#menuModal" data-toggle="modal">
+              <button class="btn btn-outline-default" (click)="addLogoutMenuField()" data-target="#menuModal" data-toggle="modal">
                 <i class="fa fa-plus-circle"></i>
-                New Menu </button>
+                Logout (Header)  </button>
+              <button class="btn btn-outline-default" (click)="addSearchMenuField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                Search (Header)  </button>
+              <button class="btn btn-outline-default" (click)="addLoaderMenuField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                Loader (Header)  </button>
+              <button class="btn btn-outline-default" (click)="addParrentMenuCollapseField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                Folder Collapse (Side)  </button>
+              <button class="btn btn-outline-default" (click)="addParrentMenuField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                Folder </button>
+              <button class="btn btn-outline-default" (click)="addListMenuCollapseField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                List </button>
+              <button class="btn btn-outline-default" (click)="addFormMenuCollapseField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                Form </button>
+              <button class="btn btn-outline-primary" (click)="addMenuField()" data-target="#menuModal" data-toggle="modal">
+                <i class="fa fa-plus-circle"></i>
+                New  </button>
             </div>
           </div>
         </div>

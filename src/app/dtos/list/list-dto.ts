@@ -12,12 +12,12 @@ export class ListDTO extends BaseDTO {
   public code = '';
   public name = '';
   public headerTitle = '';
-  public headerDescription = '';
+  public headerDescription = '<b>Navigate</b> to Entities, <i class="fa fa-pencil-alt"></i> <b>Edit </b>, <i class="fa fa-times"></i> <b>Delete </b> or <b>Create </b>  <i class="fa fa-plus-circle"></i> a new Entity.';
   public headerIcon = '';
   public groupingTitle = '';
   public groupingDescription = '';
   public title = '';
-  public description = '';
+  public description  = '';
   public icon = '';
   public selector = '';
   public filterFieldStructure: String = '';

@@ -25,7 +25,7 @@
                 <i class="fa fa-code" style="padding-right: 5px;"></i>
                 Expression Section
               </h3>
-              <p style=" margin-bottom: 5px;"> Write your json nav command on the area below and click Stringify </p>
+              <p style=" margin-bottom: 5px;"> Write your json nav command <b>from Scratch</b> or <b>using the Samples</b> on the Menu. Finally stringify it, copy and use it.</p>
             </div>
             <div class="pull-right">
               <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
@@ -38,22 +38,40 @@
                 <div ngbDropdownMenu class="dropdown-menu-right">
                   <button ngbDropdownAnchor (click)="addSampleCommand('menu')"
                           class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i> Menu Sample
+                    <i class="fa fa-plus-circle"></i> Static Page
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('form')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Form
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('list')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> List
                   </button>
                   <div ngbDropdownAnchor class="dropdown-divider"></div>
                   <button ngbDropdownAnchor (click)="addSampleCommand('selector')"
                           class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i> Selector Sample
+                    <i class="fa fa-plus-circle"></i> Selector
                   </button>
                   <div ngbDropdownAnchor class="dropdown-divider"></div>
                   <button ngbDropdownAnchor (click)="addSampleCommand('plugin')"
                           class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i> Plugin Sample
+                    <i class="fa fa-plus-circle"></i> Plugin
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('popup_search')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Popup Search
                   </button>
 
                 </div>
               </div>
-              <button (click)="run()" class="btn btn-outline-primary">
+              <button (click)="beautify()" class="btn btn-outline-success">
+                <i class="fa fa-play"></i> Beautify
+              </button>
+              <button style="margin-left: 5px" (click)="stringify()" class="btn btn-outline-primary">
                 <i class="fa fa-play"></i> Stringify
               </button>
             </div>
@@ -68,35 +86,6 @@
                    [config]="aceJavascriptEditorConfig"
                    [(value)]="expressionValue"></ace>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row form-area">
-  <div class="col-md-12">
-    <div class="card card-user">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="pull-left">
-              <h5 class="card-title pull-left">
-                <i class="fa fa-play"></i> Result String
-              </h5>
-            </div>
-            <div class="pull-right">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-12">
-            <input type="text"
-                   readonly class="form-control"
-                   value="{{resultValue}}">
           </div>
         </div>
       </div>

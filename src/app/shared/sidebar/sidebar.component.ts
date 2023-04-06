@@ -161,8 +161,34 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.navigatorService.navigate(menuItem.command);
   }
 
+  rightClickNavigate(menuItem, event){
+      event.preventDefault();
+
+    const parsedCommand = this.tryParseJSONObject(menuItem.command);
+    if(parsedCommand != false){
+      parsedCommand['TAB'] = 'new';
+      parsedCommand['SIDEBAR-STATUS'] = 'minimized';
+      this.navigatorService.navigate(JSON.stringify(parsedCommand));
+    } else {
+      this.navigatorService.navigate(menuItem.command);
+    }
+  }
+
   trustResource(resource) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(resource);
+  }
+
+  private tryParseJSONObject(jsonString){
+    try {
+      var o = JSON.parse(jsonString);
+
+      if (o && typeof o === "object") {
+        return o;
+      }
+    }
+    catch (e) { }
+
+    return false;
   }
 
 }

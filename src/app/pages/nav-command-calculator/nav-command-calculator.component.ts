@@ -3,13 +3,16 @@ import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';
 import 'brace/mode/json';
 import 'brace/theme/github';
+import {PageComponent} from "../page/page-component";
+import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-expression-viewer',
   templateUrl: './nav-command-calculator.component.html',
   styleUrls: ['./nav-command-calculator.component.css']
 })
-export class NavCommandCalculatorComponent implements OnInit {
+export class NavCommandCalculatorComponent extends PageComponent implements OnInit {
 
   public aceJavascriptEditorConfig: AceConfigInterface = {
     mode: 'json',
@@ -46,20 +49,56 @@ export class NavCommandCalculatorComponent implements OnInit {
     '  "JS": ["mypage.js","mypage2.js"]\n' +
     '}';
 
+  navSampleForm: string =
+    '{\n' +
+    '    "COMMAND-TYPE": "FORM",\n' +
+    '    "LOCATE": {\n' +
+    '        "ID":"form_uuid", \n' +
+    '        "SELECTION-ID":"#cf_id"\n' +
+    '    }\n' +
+    '}';
 
-  resultValue: string;
+  navSampleList: string =
+    '{\n' +
+    '    "COMMAND-TYPE": "LIST",\n' +
+    '    "LOCATE": {\n' +
+    '        "ID":"list_uuid", \n' +
+    '        "SELECTION-ID":"#cf_id"\n' +
+    '    }\n' +
+    '}';
 
-  constructor() {
+  navSamplePopupsearch: string =
+    '{\n' +
+    '    "COMMAND-TYPE": "POPUPPAGE",\n' +
+    '    "NAME": "search",\n' +
+    '    "POPUPTITLE": "Search For #Entities of the Application by code",\n' +
+    '    "LOCATE": {\n' +
+    '        "ID": "search_uuid"\n' +
+    '    },\n' +
+    '    "VALUE": "##search##"\n' +
+    '}';
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private title: Title) {
+    super();
   }
 
   ngOnInit(): void {
+    this.initNav(this.activatedRoute);
+
+    if (this.params.has('TITLE')) {
+      this.title.setTitle(this.params.get('TITLE'));
+    }
   }
 
-  run() {
-    this.resultValue = '';
-    console.log(this.expressionValue);
+  stringify() {
     var parsedJson = JSON.parse(this.expressionValue);
-    this.resultValue = JSON.stringify(parsedJson);
+    this.expressionValue = JSON.stringify(parsedJson);
+  }
+
+  beautify() {
+    var parsedJson = JSON.parse(this.expressionValue);
+    this.expressionValue = JSON.stringify(parsedJson, null, 4);
   }
 
   hideChildren(exprUnit: any) {
@@ -77,6 +116,15 @@ export class NavCommandCalculatorComponent implements OnInit {
       this.expressionValue = this.navSampleSelector;
     } else if(sample == 'plugin'){
       this.expressionValue = this.navSamplePlugin;
+    } else if(sample == 'form'){
+      this.expressionValue = this.navSampleForm;
+    }else if(sample == 'list'){
+      this.expressionValue = this.navSampleList;
+    }else if(sample == 'popup_search'){
+      this.expressionValue = this.navSamplePopupsearch;
     }
+
+
   }
+
 }

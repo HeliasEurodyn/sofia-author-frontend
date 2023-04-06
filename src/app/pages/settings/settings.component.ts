@@ -36,12 +36,13 @@ export class SettingsComponent extends PageComponent implements OnInit {
     this.service.get().subscribe(dto => {
       if (dto != null) {
         this.dto = dto;
-      } else {
-        this.dto.name = 'Sofia';
-        this.dto.sidebarImage = './assets/img/sofia.png';
-        this.dto.loginImage = './assets/img/sofia.png';
-        this.dto.icon = './assets/img/sofia_icon.png';
       }
+
+      if(this.dto.name == null) this.dto.name = 'Sofia';
+      if(this.dto.sidebarImage == null) this.dto.sidebarImage = './assets/img/sofia.png';
+      if(this.dto.loginImage == null) this.dto.loginImage = './assets/img/sofia.png';
+      if(this.dto.icon == null) this.dto.icon = './assets/img/sofia_icon.png';
+
     });
 
     this.refreshUsers();

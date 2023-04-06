@@ -162,18 +162,18 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     return headers;
   }
 
-  getTitle() {
-    let titlee = this.location.prepareExternalUrl(this.location.path());
-    if (titlee.charAt(0) === '#') {
-      titlee = titlee.slice(1);
-    }
-    for (let item = 0; item < this.listTitles.length; item++) {
-      if (this.listTitles[item].path === titlee) {
-        return this.listTitles[item].getTitle();
-      }
-    }
-    return 'Dashboard';
-  }
+  // getTitle() {
+  //   let titlee = this.location.prepareExternalUrl(this.location.path());
+  //   if (titlee.charAt(0) === '#') {
+  //     titlee = titlee.slice(1);
+  //   }
+  //   for (let item = 0; item < this.listTitles.length; item++) {
+  //     if (this.listTitles[item].path === titlee) {
+  //       return this.listTitles[item].getTitle();
+  //     }
+  //   }
+  //   return 'Dashboard';
+  // }
 
   sidebarToggle() {
     if (this.sidebarVisible === false) {

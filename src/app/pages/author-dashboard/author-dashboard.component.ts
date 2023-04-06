@@ -55,7 +55,7 @@ export class AuthorDashboardComponent extends PageComponent implements OnInit {
       this.listsList = data;
     });
 
-  
+
 
     this.formDesignerService.get10LatestForms().subscribe(data => {
       this.formsList = data;

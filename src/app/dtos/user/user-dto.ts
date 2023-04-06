@@ -8,11 +8,11 @@ export class UserDto extends BaseDTO {
   email: string;
   password: string;
   repeatPassword: string;
-  status: string;
+  status: string = 'enabled';
   dateFormat: string;
   sidebarMenu: MenuDTO = new MenuDTO();
   headerMenu: MenuDTO = new MenuDTO();
-  loginNavCommand: string;
+  loginNavCommand: string = '{"COMMAND-TYPE":"STATICPAGE","NAME":"default"}';
   searchNavCommand: string;
   provider: string;
   roles: RoleDTO[] = [];
