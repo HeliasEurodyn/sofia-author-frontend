@@ -107,6 +107,20 @@
               </h3>
             </div>
             <div class="pull-right">
+              <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                   style="margin-top: 4px;display:none;">
+                <button (click)="myDrop.open();"
+                        class="btn btn-outline-default btn-icon btn-sm"
+                        title="Sample Commands" style="margin-right: 6px;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </button>
+              <div ngbDropdownMenu class="dropdown-menu-right">
+                <button ngbDropdownAnchor (click)="loadTemplate('HtmlTemplate1')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Html Template1
+                </button>
+              </div>
+              </div>
               <button class="btn btn-outline-primary" data-target="#insertFieldsModal" data-toggle="modal">
                 <i class="fa fa-plus-circle"></i> Insert Fields
               </button>

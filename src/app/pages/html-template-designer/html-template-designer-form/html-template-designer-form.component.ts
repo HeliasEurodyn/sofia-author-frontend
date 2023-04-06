@@ -13,6 +13,7 @@ import { ComponentPersistEntityDTO } from 'app/dtos/component/component-persist-
 import { ComponentPersistEntityFieldAssignmentDTO } from 'app/dtos/component/component-persist-entity-field-assignment-dto';
 import { RoleService } from 'app/services/crud/role.service';
 import { NotificationService } from 'app/services/system/notification.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-html-template-designer-form',
@@ -26,6 +27,8 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
   public mode : string;
   public components: any;
   public roles: any;
+  //public template1: String;
+  public templateValue: String;
 
   public aceHTMLEditorConfig: AceConfigInterface = {
     mode: 'html',
@@ -39,7 +42,8 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     private service: HtmlTemplateDesignerService,
     private roleService: RoleService,
     private location: Location,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+    private httpClient: HttpClient) {
     super();
   }
 
@@ -64,6 +68,8 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     }
 
     this.refreshComponents();
+    console.log(this.template1);
+   
   }
 
   save() {
@@ -131,7 +137,14 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
 
   refreshComponents() {
     this.tableComponentService.get().subscribe(data => {
-      this.components = data;
+      this.components = data; 
+    });
+  }
+
+  loadTemplate(template: string){
+    this.httpClient.get(`assets/html/${template}.html`, {responseType: 'text'})
+    .subscribe(data => {
+      this.dto.html = data
     });
   }
 
@@ -173,6 +186,5 @@ export class HtmlTemplateDesignerFormComponent extends PageComponent implements 
     // this.dto.html += fieldString;
 
   }
-
 
 }
