@@ -13,10 +13,6 @@ export class MenuService extends CrudService<any> {
     super(http, 'menu');
   }
 
-  // tableExists(name: string): Observable<any> {
-  //   return this.http.get<any>('http://localhost:15502/api/menu/table-exists?name=' + name);
-  // }
-
   getMenuFromBackend(id: any, languageId: any): Observable<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-id?id=${id}&language-id=${languageId}`);
   }

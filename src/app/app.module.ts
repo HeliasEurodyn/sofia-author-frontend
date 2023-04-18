@@ -142,6 +142,7 @@ import { RemoveElementModalComponent } from './modals/remove_element_modal/remov
 import { TagDesignerListComponent } from './pages/tag-designer/tag-designer-list/tag-designer-list.component';
 import { TagDesignerFormComponent } from './pages/tag-designer/tag-designer-form/tag-designer-form.component';
 import {NavCommandCalculatorComponent} from "./pages/nav-command-calculator/nav-command-calculator.component";
+import { RuleDesignerComponent } from './pages/rule-designer/rule-designer.component';
 
 @NgModule({
   declarations: [
@@ -218,7 +219,8 @@ import {NavCommandCalculatorComponent} from "./pages/nav-command-calculator/nav-
     HtmlTemplateDesignerFormComponent,
     AccessControlComponent,
     ShortByOrderPipe,
-    RemoveElementModalComponent
+    RemoveElementModalComponent,
+    RuleDesignerComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -3,16 +3,13 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 import {HttpErrorResponceService} from './services/system/http-error-responce.service';
 import {NotificationService} from './services/system/notification.service';
-import {SettingsService} from './services/crud/settings.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-export class AppComponent implements OnInit {
-
+export class AppComponent implements OnInit{
 
   appTitle = 'Sofia';
 

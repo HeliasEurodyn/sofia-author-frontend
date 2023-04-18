@@ -396,8 +396,4 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     this.fieldListMode = 'insert';
   }
 
-
-
-
-
 }
