@@ -1,0 +1,98 @@
+.modal-title{
+  margin: 0px;
+}
+
+.code-textarea {
+  min-height: 800px;
+  padding: 1px 5px 1px 5px;
+  font-family: 'Tahoma';
+  max-height: 400px;
+  line-height: 1.4;
+}
+
+li { /* styles all li elements*/
+  list-style-type: none;
+}
+
+
+/*.last-sidebarMenu-item-button { !* styles all li elements*!*/
+/*  margin-right: 10px;*/
+/*}*/
+
+.checkbox{background-color:#fff;display:inline-block;height:28px;margin:4px;width:28px;border-radius:4px;border:1px solid #ccc;cursor: pointer;}
+.checkbox span{display:block;height:28px;position:relative;width:28px;padding:0}
+.checkbox span:after{-moz-transform:scaleX(-1) rotate(135deg);-ms-transform:scaleX(-1) rotate(135deg);-webkit-transform:scaleX(-1) rotate(135deg);transform:scaleX(-1) rotate(135deg);-moz-transform-origin:left top;-ms-transform-origin:left top;-webkit-transform-origin:left top;transform-origin:left top;border-right:4px solid #fff;border-top:4px solid #fff;content:'';display:block;height:20px;left:3px;position:absolute;top:15px;width:10px}
+.checkbox span:hover:after{border-color:#999}
+.checkbox input{display:none}
+.checkbox input:checked + span:after{-webkit-animation:check .8s;-moz-animation:check .8s;-o-animation:check .8s;animation:check .8s;border-color:#555}
+.checkbox input:checked + .default:after{border-color:#444}
+.checkbox input:checked + .primary:after{border-color:#2196F3}
+.checkbox input:checked + .success:after{border-color:#8bc34a}
+.checkbox input:checked + .info:after{border-color:#3de0f5}
+.checkbox input:checked + .warning:after{border-color:#FFC107}
+.checkbox input:checked + .danger:after{border-color:#f44336}
+
+.btn.btn-icon, .navbar .navbar-nav > a.btn.btn-icon {
+  height: 1.775rem;
+  min-width: 1.775rem;
+  width: 1.775rem;
+}
+
+.btn-chips{
+  margin: 1px;
+  padding: 8px;
+}
+
+.btn-delete-node{
+  color: red;
+}
+
+.btn-delete-node:hover{
+  color: #b60000;
+}
+
+.btn-group .btn {
+  padding: 9px;
+  margin: 0px;
+}
+
+.expr-unit-type{
+  font-size: 11px;
+  color: green;
+  border-right: 1px solid #51cbce;
+  background-color: #ffffff;
+  border-right: 1px solid #51cbce;
+  border-bottom: 1px solid #51cbce;
+  border-top: 1px solid #51cbce;
+}
+
+.expand-button{
+  border-bottom: 1px solid #51cbce;
+  border-top: 1px solid #51cbce;
+  border-left: 1px solid #51cbce;
+}
+
+.expand-button2{
+  border-right: 0px;
+}
+
+.rule-field-icon, .rule-field, .rule-type-icon, .rule-type{
+  cursor: pointer;
+}
+
+.selected-and-or{
+  background-color: #6ec8f1;
+  color: white;
+}
+
+.empty-table-row {
+  padding: 15px !important;
+  text-align: center;
+  background-color: #f1f1f1;
+  border-top: 1px solid #d7d7d7;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.and-or-left-btn{
+  border-left: 0px !important;
+}
