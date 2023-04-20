@@ -1,0 +1,97 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-puzzle-piece" style="padding-right: 5px;"></i>
+          Rule Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Rule Designer List </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button (click)="openNewPage()" class="btn btn-outline-primary">
+        <i class="fa fa-plus-circle"></i> New
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane form-area">
+  <div class="row">
+    <div class="col">
+      <div class="row" style="padding-right: 10px;padding-left: 10px;">
+
+        <!-- List -->
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="numbers pull-left"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="">
+                <table class="table table-striped">
+                  <thead class=" text-primary">
+                  <tr>
+                    <th class="text-left">Actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Modified On</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    *ngIf="filteredTableData == undefined || filteredTableData.length === 0 ">
+                    <td class="empty-table-row" colspan="12">Empty!</td>
+                  </tr>
+                  <tr *ngFor="let row of filteredTableData; ">
+                    <td>
+                      <button (click)="openPage(row['id'])" class="btn btn-outline-success btn-icon btn-sm"
+                              title="Edit"
+                              type="button">
+                        <i class="fa fa-pencil-alt"></i>
+                      </button>
+                      <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                           style="margin-top: 4px;display:none;">
+                        <button (click)="myDrop.open();"
+                                class="btn btn-outline-default btn-icon btn-sm"
+                                title="More">
+                          <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div ngbDropdownMenu>
+                          <button ngbDropdownAnchor (click)="delete(row)"
+                                  class="text-danger menu-button">
+                            <i class="fa fa-times"></i> Delete
+                          </button>
+                          <div ngbDropdownAnchor class="dropdown-divider"></div>
+                          <button (click)="clone(row['id'])"
+                                  class="text-success menu-button">
+                            <i class="fa fa-clone"></i> Copy As New
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <input value="{{row['id']}}" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input value="{{row['name']}}" class="form-control transparent-input" readonly type="text">
+                    </td>
+                    <td>
+                      <input value="{{row['modifiedOn'] | date:'medium'}}" class="form-control transparent-input" readonly type="text">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

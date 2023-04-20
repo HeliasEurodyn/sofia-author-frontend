@@ -97,10 +97,16 @@ export class CommandParserService {
     return this.parseMapPart(params, paramPart);
   }
 
-  public parseMapPart(params: Map<string, string> = new Map(), paramPart: string): Map<string, string> {
+  public parseMapPart(params: Map<string, any> = new Map(), paramPart: string): Map<string, string> {
+
     const locateValuesKeyValMap: Map<string, string> = new Map();
 
     if (params.has(paramPart)) {
+      if( typeof(params.get(paramPart)) === 'object'){
+        console.log(typeof params.get(paramPart))
+        return new Map(Object.entries(params.get(paramPart)));
+      }
+
       const locateValues = params.get(paramPart);
       let locateValuesInsideBrackets = locateValues.replace(/.*\(|\).*/, '');
       locateValuesInsideBrackets = locateValuesInsideBrackets.replace(/.*\(|\).*/, '');

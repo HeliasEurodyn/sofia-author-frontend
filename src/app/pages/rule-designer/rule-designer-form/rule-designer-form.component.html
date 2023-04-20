@@ -1,0 +1,114 @@
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <div class="col-12">
+        <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+          <i class="fa fa-puzzle-piece" style="padding-right: 5px;"></i>
+          Rule Designer
+        </h3>
+        <p style=" margin-bottom: 5px;"> Rule Designer Form </p>
+      </div>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" style="margin-top: 0px;" (click)="save()">
+        <i class="fa fa-save"></i>
+        Save
+      </button>
+      <button class="btn btn-outline-danger" style="margin-top: 0px;" [hidden]="mode === 'new-record'"
+              (click)="delete()">
+        <i class="fa fa-times"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row formnav">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('general');">
+        <i class="fa fa-sliders-h"></i>
+        General
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'general' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Id</label>
+              <input
+                type="text" class="form-control" readonly value="{{dto.id}}">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Name</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.name">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Title</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.title">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea
+                class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Rule Section Title</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.ruleSectionTitle">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group">
+              <label>Rule Section Description</label>
+              <textarea
+                class="form-control textarea" name="description" [(ngModel)]="dto.ruleSectionDescription"></textarea>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Field Command</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.fieldCommand">
+              <code></code>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Operator Command</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.operatorCommand">
+              <code></code>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

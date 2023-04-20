@@ -66,7 +66,6 @@ export class PageComponent {
   }
 
   getReturningDisplayValues(): Map<string, string> {
-
     return this.commandParserService.parseMapPart(this.params, 'RETURN-DISPLAY');
   }
 

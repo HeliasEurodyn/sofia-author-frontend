@@ -1,7 +1,7 @@
-import { RuleDTO } from './rule-dto';
+import { RuleSettingsDTO } from './rule-settings-d-t-o';
 
 describe('RuleDTO', () => {
   it('should create an instance', () => {
-    expect(new RuleDTO()).toBeTruthy();
+    expect(new RuleSettingsDTO()).toBeTruthy();
   });
 });

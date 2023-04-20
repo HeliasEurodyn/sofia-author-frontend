@@ -5,10 +5,10 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class RuleService extends CrudService<any> {
+export class RuleDesignerService extends CrudService<any> {
 
   constructor(public http: HttpClient) {
-    super(http, 'rule');
+    super(http, 'rule-designer');
   }
 
 }
