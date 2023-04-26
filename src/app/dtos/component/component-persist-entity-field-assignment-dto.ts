@@ -4,6 +4,8 @@ export class ComponentPersistEntityFieldAssignmentDTO extends BaseDTO {
 
   editor: string;
 
+  filterEditor: string;
+
   defaultValue: string;
 
   onSaveValue: string;

@@ -11,6 +11,7 @@ export class FormControlFieldDTO extends BaseDTO {
   visible: Boolean;
   editable: Boolean;
   required: Boolean;
+  headerFilter: Boolean;
   css: string;
   mask: string
   public componentPersistEntity: ComponentPersistEntityDTO;

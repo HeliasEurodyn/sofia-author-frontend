@@ -763,6 +763,8 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     formControlFieldDTO.editable = true;
     formControlFieldDTO.visible = true;
     formControlFieldDTO.required = false;
+    formControlFieldDTO.headerFilter = false;
+
     const formControlDto = new FormControlTableControlDTO();
     formControlDto.formControlButton = null;
     formControlDto.formControlField = formControlFieldDTO;
@@ -889,5 +891,73 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   deleteTagChipsLine(tag: TagDTO) {
     this.dto.tags =
       this.dto.tags.filter(item => item !== tag);
+  }
+
+  addSampleScript(menu: string) {
+      if(menu == 'tblNewLine'){
+        this.selectedformScript.script +=
+          '\n\nnativeTableButtonNewLineHandler(table, added){\n' +
+          '    if(table.componentPersistEntity.code == \'your_persist_entity_code\' && added == false){\n' +
+          '                this.formRef.formScriptsService.notificationDialog(\'top\', \'center\', \'alert-info\', \'fa-exclamation-triangle\', \'<b>Empty Fields</b> Field <b> "Your field name" </b> is required, fill it before adding a new line!\');\n' +
+          '    }\n' +
+          '}';
+      } else if (menu == 'tblBtnClick'){
+        this.selectedformScript.script +=
+
+          '\n\ntable_btn_`your_button_code`_click(formControlTable, dataLine){\n}';
+      } else if(menu == 'btnClick'){
+        this.selectedformScript.script +=
+          '\n\nbtn_`your_button_code`_click(){\n}';
+      } else if(menu == 'headerButtonSave'){
+        this.selectedformScript.script +=
+          '\n\nbtn_`your_button_code`_click()\n' +
+          '{\n' +
+          '    /* Required Fields Check */\n'+
+          '\n' +
+          '    var code= this.getFieldValue(\'your_persist_entity.code\');\n' +
+          '    var name= this.getFieldValue(\'your_persist_entity.name\');\n' +
+          '    var type= this.getFieldValue(\'your_persist_entity.type_id\');\n' +
+          '\n' +
+          '    var emptyFieldNames = \'\';  \n' +
+          '\n' +
+          '    if( code == null || code == \'\' || code == 0 ) {\n' +
+          '        var formFields = this.getFormFieldsByCode(\'your_persist_entity.code\');\n' +
+          '        formFields [0][\'formControlField\'][\'message\'] = \'<div class="required-empty">* Required Field</div>\';\n' +
+          '        emptyFieldNames = \'Code\';\n' +
+          '    }\n' +
+          '\n' +
+          '    if( name == null || name == \'\' || name == 0 ) {\n' +
+          '        var formFields = this.getFormFieldsByCode(\'your_persist_entity.name\');\n' +
+          '        formFields [0][\'formControlField\'][\'message\'] = \'<div class="required-empty">* Required Field</div>\';\n' +
+          '        if(emptyFieldNames == \'\') emptyFieldNames = \'Name\';\n' +
+          '        else emptyFieldNames += \' ,Name\';\n' +
+          '    }\n' +
+          '\n' +
+          '    if( type == null || type == \'\' || type == 0 ) {\n' +
+          '        var formFields = this.getFormFieldsByCode(\'your_persist_entity.type_id\');\n' +
+          '        formFields [0][\'formControlField\'][\'message\'] = \'<div class="required-empty">* Required Field</div>\';\n' +
+          '        if(emptyFieldNames == \'\') emptyFieldNames = \'Type\';\n' +
+          '        else emptyFieldNames += \' ,Type\';\n' +
+          '    }\n' +
+          '    \n' +
+          '    if(code == null || code == \'\' || code == 0 || \n' +
+          '       name == null || name == \'\' || name == 0 ||\n' +
+          '       type == null || type == \'\' || type == 0 ) {\n' +
+          '       this.notificationDialogRef(\'top\', \'center\', \'alert-danger\', \'fa-exclamation\',\'<b>Empty Filed(s)!</b>&emsp;Fields  [<b>\'+ emptyFieldNames  + \'</b>] are empty, fill them before you Save!\');\n' +
+          '        return;\n' +
+          '    }\n' +
+          '\n' +
+          '    /* Save */\n'+
+          '\n' +
+          '    this.saveFormData(\n' +
+          '         (newId) => {\n' +
+          '                window.history.back();\n' +
+          '        }\n' +
+          '    );\n' +
+          '}';
+      }else if(menu == 'popup_search'){
+        this.selectedformScript.script += '';
+      }
+
   }
 }

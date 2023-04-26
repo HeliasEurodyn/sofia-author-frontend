@@ -806,6 +806,34 @@
               </h5>
             </div>
             <div class="pull-right">
+              <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                   style="margin-top: 4px;display:none;">
+                <button (click)="myDrop.open();"
+                        class="btn btn-outline-default btn-icon btn-sm"
+                        title="Sample Commands" style="margin-right: 6px;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </button>
+                <div ngbDropdownMenu class="dropdown-menu-right" style="min-width: 200px;">
+                  <button ngbDropdownAnchor (click)="addSampleScript('tblNewLine')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i>  On New (Table) Line
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleScript('tblBtnClick')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> On Click (Table) Button
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleScript('btnClick')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> On Click Button
+                  </button>
+                  <button ngbDropdownAnchor (click)="addSampleScript('headerButtonSave')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Header Button Save
+                  </button>
+                </div>
+              </div>
               <button (click)="addScript()"
                       type="button" class="btn btn-outline-success">
                 <i class="fa fa-plus-circle"></i> New
@@ -1320,7 +1348,6 @@
       </div>
       <div class="modal-body">
 
-
         <div class="row">
           <div class="col-12">
             <label>Table</label>
@@ -1368,6 +1395,14 @@
             <label>Editor</label>
             <textarea class="form-control"
                       [(ngModel)]="this.selectedComponentPersistEntityField.assignment.editor"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Filter Editor</label>
+            <textarea class="form-control"
+                      [(ngModel)]="this.selectedComponentPersistEntityField.assignment.filterEditor"></textarea>
           </div>
         </div>
 
@@ -1582,6 +1617,17 @@
             <label>Editable</label><br>
             <select class="transparent-input"
                     [(ngModel)]="this.selectedFormControlTableControl.formControlField.editable">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <label>Filter Visible</label><br>
+            <select class="transparent-input"
+                    [(ngModel)]="this.selectedFormControlTableControl.formControlField.headerFilter">
               <option value="false">No</option>
               <option value="true">Yes</option>
             </select>

@@ -123,8 +123,6 @@ export class NavCommandCalculatorComponent extends PageComponent implements OnIn
     }else if(sample == 'popup_search'){
       this.expressionValue = this.navSamplePopupsearch;
     }
-
-
   }
 
 }

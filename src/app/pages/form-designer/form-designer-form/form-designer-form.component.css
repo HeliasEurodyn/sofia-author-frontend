@@ -228,3 +228,7 @@ li{
 .btn-delete-node:hover{
   color: #b60000;
 }
+
+.dropdown-menu-right{
+  left: -165px !important;
+}
