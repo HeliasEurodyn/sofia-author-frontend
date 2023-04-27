@@ -66,7 +66,7 @@
               </div>
               <div class="form-group">
                 <label>Tags</label>
-  
+
                  <div>
                   <button *ngFor="let tag of this.componentDTO?.tags" class="btn btn-outline-primary btn-round btn-chips"style="border-color: {{tag.color}} !important">
                     <i class="fa fa-times btn-delete-node" (click)="deleteTagChipsLine(tag)"></i>
@@ -258,6 +258,7 @@
                 class="table table-striped">
                 <thead class=" text-primary">
                 <tr>
+                  <th></th>
                   <th>Field</th>
                   <th>Locate Statement</th>
                   <th>Save Statement</th>
@@ -265,6 +266,20 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let field of componentPersistEntity.componentPersistEntityFieldList">
+                  <td>
+                    <button (click)="moveUp(field, componentPersistEntity.componentPersistEntityFieldList)"
+                      type="button"
+                            class="btn btn-icon btn-outline-warning btn-sm"
+                            title="Up">
+                      <i class="fa fa-angle-up"></i>
+                    </button>
+                    <button (click)="moveDown(field, componentPersistEntity.componentPersistEntityFieldList)"
+                      type="button"
+                      class="btn btn-icon btn-outline-warning btn-sm"
+                      title="Down">
+                      <i class="fa fa-angle-down"></i>
+                    </button>
+                  </td>
                   <td>
                     {{field.persistEntityField?.name}}({{field.persistEntityField.type}})
                   </td>

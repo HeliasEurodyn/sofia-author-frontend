@@ -16,7 +16,6 @@ import {RoleService} from '../../../services/crud/role.service';
 import { TagDTO } from 'app/dtos/tag/tag-dto';
 import { TagDesignerService } from 'app/services/crud/tag-designer.service';
 
-
 @Component({
   selector: 'app-component-designer-form',
   templateUrl: './component-designer-form.component.html',
@@ -43,7 +42,7 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   public componentPersistEntityFieldStatementsMask = '0*';
   public componentPersistEntityFieldStatementsPattern = { '0': { pattern: new RegExp('\\S')} };
   public tagsList: Array<TagDTO>;
-  
+
 
   constructor(private tableService: TableService,
               private viewService: ViewService,
@@ -82,6 +81,8 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   }
 
   save() {
+    this.shortFields(this.componentDTO.componentPersistEntityList);
+
     if (this.mode === 'edit-record') {
       this.service.update(this.componentDTO).subscribe(data => {
         this.location.back();
@@ -468,5 +469,69 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
     this.componentDTO.tags =
       this.componentDTO.tags.filter(item => item !== tag);
   }
+
+  moveUp(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && position > 0) {
+        const prevItem = list[position - 1];
+        list[position] = prevItem;
+        list[position - 1] = listItem;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
+  }
+
+  moveDown(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && (position + 1) < list.length) {
+        const nextItem = list[position + 1];
+        list[position] = nextItem;
+        list[position + 1] = listItem;
+        break;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
+  }
+
+  shortFields(cpeList: ComponentPersistEntityDTO[]) {
+
+    let shortOrder = 0;
+
+    /* Sort CPE */
+    for (const cpe of cpeList) {
+      cpe.shortOrder = shortOrder;
+      shortOrder++;
+    }
+
+    /* Sort CPEF of each CPE */
+    for (const cpe of cpeList) {
+      shortOrder = 0;
+      for (const cpef of cpe.componentPersistEntityFieldList) {
+        cpef.shortOrder = shortOrder;
+        shortOrder++;
+      }
+    }
+
+    /* Run shortFields for children CPEs */
+    for (const cpe of cpeList) {
+      this.shortFields(cpe.componentPersistEntityList);
+    }
+
+  }
+
 
 }
