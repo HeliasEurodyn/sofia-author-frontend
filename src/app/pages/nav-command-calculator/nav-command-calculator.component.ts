@@ -78,6 +78,12 @@ export class NavCommandCalculatorComponent extends PageComponent implements OnIn
     '    "VALUE": "##search##"\n' +
     '}';
 
+  navSampleWsNotification: string =
+    '{\n' +
+    '    "COMMAND-TYPE": "WS-HEADER-NOTIFICATION",\n' +
+    '    "UPDATE-STATUS-ON-CLICK": "YES"\n' +
+    '}';
+
   constructor(private activatedRoute: ActivatedRoute,
               private title: Title) {
     super();
@@ -122,6 +128,8 @@ export class NavCommandCalculatorComponent extends PageComponent implements OnIn
       this.expressionValue = this.navSampleList;
     }else if(sample == 'popup_search'){
       this.expressionValue = this.navSamplePopupsearch;
+    } else if(sample == 'ws_notification'){
+      this.expressionValue =  this.navSampleWsNotification;
     }
   }
 
