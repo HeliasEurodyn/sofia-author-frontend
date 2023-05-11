@@ -957,6 +957,31 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
           '}';
       }else if(menu == 'popup_search'){
         this.selectedformScript.script += '';
+      } else if (menu == 'filter_ip_on_field_typing'){
+        this.selectedformScript.script +=
+          '\n\non_field_input(event){\n' +
+          '    \n' +
+          '    if(event.target.value == null || event.target.value == \'\'){\n' +
+          '        return;\n' +
+          '    }\n' +
+          '    \n' +
+          '    var match = event.target.value.match(/([0-9]|\\.)$/g);\n' +
+          '    if( match == null ) {\n' +
+          '         event.target.value = event.target.value.substring(0, event.target.value.length-1);\n' +
+          '    }\n' +
+          '}\n' +
+          '\n' +
+          'on_field_focusout(event){\n' +
+          '    var formFields = this.getFormFieldsByCode(\'field\');\n' +
+          '    formFields[0][\'formControlField\'][\'message\'] = \'<div>* The ip must be on 000.000.000.000 format.</div>\';\n' +
+          '    \n' +
+          '    var match = event.target.value.match(/^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$/g);\n' +
+          '    if( match == null ) {\n' +
+          '        formFields[0][\'formControlField\'][\'message\'] = \'<div class="ip-not-corrent">* The ip format is not correct. The ip must be on 000.000.000.000 format.</div>\';\n' +
+          '    } else {\n' +
+          '        formFields[0][\'formControlField\'][\'message\'] = \'<div class="ip-corrent">* The ip format is correct.</div>\';\n' +
+          '    }\n' +
+          '}'
       }
 
   }
