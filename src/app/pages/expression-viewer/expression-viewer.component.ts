@@ -58,4 +58,8 @@ export class ExpressionViewerComponent implements OnInit {
   showChildren(exprUnit: any) {
     exprUnit.hideFieldList = false;
   }
+
+  addExpression(test: string) {
+
+  }
 }

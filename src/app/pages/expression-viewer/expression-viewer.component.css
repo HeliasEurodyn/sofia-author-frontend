@@ -13,3 +13,8 @@
   border-top: 1px solid #51cbce;
   border-left: 1px solid #51cbce;
 }
+
+
+.modal-dialog-centered{
+  max-width: 1000px;
+}
