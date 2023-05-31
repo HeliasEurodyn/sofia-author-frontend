@@ -326,12 +326,18 @@ export class TableDesignerFormComponent extends PageComponent implements OnInit 
   }
 
   generateTableFields() {
-    this.service.generateTableFields(this.dto.name).subscribe(data => {
-      if (data.length > 0) {
-        this.dto.tableFieldList = data;
+    this.service.generateTableFields(this.dto.name).subscribe( (dbData: TableFieldDTO[]) => {
+      if (dbData.length > 0) {
+        const newDbData = dbData.filter((item) => !this.dto.tableFieldList.some((dataItem) => dataItem.name === item.name));
+
+        const notOnDbData = this.dto.tableFieldList.filter((item) => !dbData.some((dataItem) => dataItem.name === item.name));
+        console.log(notOnDbData);
+        this.dto.tableFieldList.forEach((item) => item.uiClass = "");
+        notOnDbData.forEach((item) => item.uiClass = "warning");
+
+        this.dto.tableFieldList = this.dto.tableFieldList.concat(newDbData);
       }
     });
-
   }
 
   addForeignKeyConstrain() {

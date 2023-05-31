@@ -30,6 +30,8 @@ select {
   color: #b60000;
 }
 
-
+.warning{
+  border-color: red !important;
+}
 
 

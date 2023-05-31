@@ -132,6 +132,7 @@
             <thead class=" text-primary">
             <tr>
               <th>Actions</th>
+              <th>Id</th>
               <th>Name</th>
               <th>Type</th>
               <th>Size</th>
@@ -151,6 +152,9 @@
                         (click)="removeLine(row)">
                   <i class="fa fa-times"></i>
                 </button>
+              </td>
+              <td>
+                <input type="text" readonly="true" class="form-control transparent-input" [ngClass]="{'warning':  row.uiClass === 'warning'}" value="{{row.id}}">
               </td>
               <td>
                 <input type="text" class="form-control transparent-input" [(ngModel)]="row.name"
