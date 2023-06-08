@@ -146,6 +146,8 @@
                          </span>
                       </div>
 
+
+
                       <div (click)="removeComponentPersistEntity(componentPersistEntity, componentPersistEntityList)"
                            class="input-group-prepend">
                          <span class="input-group-text textfield-button-danger">
@@ -279,6 +281,39 @@
                       title="Down">
                       <i class="fa fa-angle-down"></i>
                     </button>
+
+                    <button (click)="field.locateStatement = ''; field.saveStatement = '';"
+                            type="button"
+                            class="btn btn-icon btn-outline-danger btn-sm"
+                            title="Clear field">
+                      <i class="fa fa-ban"></i>
+                    </button>
+
+                    <button (click)="copyFieldToClipboart(field, componentPersistEntity)"
+                            type="button"
+                            class="btn btn-icon btn-outline-info btn-sm"
+                            title="Copy to Clipboard">
+                      <i class="fa-regular fa-clipboard"></i>
+                    </button>
+
+                    <button (click)="pasteFieldFromClipboart(field)"
+                            type="button"
+                            class="btn btn-icon btn-outline-info btn-sm"
+                            title="Paste from Clipboard">
+                      <i class="fa fa-paste"></i>
+                    </button>
+
+                    <button
+                      *ngIf="showEntryButton(componentPersistEntity)"
+                      (click)="setEntryField(field, componentPersistEntity.componentPersistEntityFieldList)"
+                            type="button"
+                            class="btn btn-icon btn-outline-info btn-sm"
+                           [ngClass]="{'btn-outline-info': field.locateStatement !== '#SELECTIONID',
+                           'btn-outline-success' : field.locateStatement === '#SELECTIONID'}"
+                            title="Entry Field">
+                      <i class="fa fa-circle-dot"></i>
+                    </button>
+
                   </td>
                   <td>
                     {{field.persistEntityField?.name}}({{field.persistEntityField.type}})

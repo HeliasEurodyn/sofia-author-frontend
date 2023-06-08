@@ -1,16 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {AceConfigInterface} from 'ngx-ace-wrapper';
-import 'brace';
-import 'brace/mode/json';
-import 'brace/theme/github';
-import {PageComponent} from "../page/page-component";
+import { Component, OnInit } from '@angular/core';
+import {AceConfigInterface} from "ngx-ace-wrapper";
 import {ActivatedRoute} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import {PageComponent} from "../../page/page-component";
 
 @Component({
-  selector: 'app-expression-viewer',
+  selector: 'app-nav-command-calculator',
   templateUrl: './nav-command-calculator.component.html',
-  styleUrls: ['./nav-command-calculator.component.css']
+  styleUrls: ['./nav-command-calculator.component.scss']
 })
 export class NavCommandCalculatorComponent extends PageComponent implements OnInit {
 
@@ -41,7 +38,7 @@ export class NavCommandCalculatorComponent extends PageComponent implements OnIn
     '}';
 
   navSamplePlugin: string =
-  '{\n' +
+    '{\n' +
     '  "COMMAND-TYPE": "STATICPAGE",\n' +
     '  "NAME": "ui-plugin",\n' +
     '  "CONTEXT": "demo",\n' +
@@ -65,6 +62,16 @@ export class NavCommandCalculatorComponent extends PageComponent implements OnIn
     '        "ID":"list_uuid", \n' +
     '        "SELECTION-ID":"#cf_id"\n' +
     '    }\n' +
+    '}';
+
+  navCloneList: string =
+    '{\n' +
+    '    "COMMAND-TYPE": "LIST",\n' +
+    '    "LOCATE": {\n' +
+    '        "ID":"list_uuid", \n' +
+    '        "SELECTION-ID":"#cf_id"\n' +
+    '    },\n' +
+    '    "TYPE": "CLONE"\n' +
     '}';
 
   navSamplePopupsearch: string =
@@ -126,11 +133,16 @@ export class NavCommandCalculatorComponent extends PageComponent implements OnIn
       this.expressionValue = this.navSampleForm;
     }else if(sample == 'list'){
       this.expressionValue = this.navSampleList;
-    }else if(sample == 'popup_search'){
+    }else if(sample == 'clone-list'){
+      this.expressionValue = this.navCloneList;
+    } else if(sample == 'popup_search'){
       this.expressionValue = this.navSamplePopupsearch;
     } else if(sample == 'ws_notification'){
       this.expressionValue =  this.navSampleWsNotification;
     }
+
+
   }
+
 
 }

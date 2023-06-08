@@ -15,6 +15,7 @@ import {AccessControlDto} from '../../../dtos/security/access-control-dto';
 import {RoleService} from '../../../services/crud/role.service';
 import { TagDTO } from 'app/dtos/tag/tag-dto';
 import { TagDesignerService } from 'app/services/crud/tag-designer.service';
+import {NotificationService} from "../../../services/system/notification.service";
 
 @Component({
   selector: 'app-component-designer-form',
@@ -53,7 +54,8 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
               private location: Location,
               private roleService: RoleService,
               private navigatorService: CommandNavigatorService,
-              private tagDesignerService: TagDesignerService) {
+              private tagDesignerService: TagDesignerService,
+              private notificationService: NotificationService) {
     super();
   }
 
@@ -95,7 +97,7 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
   }
 
   delete() {
-    this.service.delete(this.tableDesign.id).subscribe(data => {
+    this.service.delete(this.componentDTO.id).subscribe(data => {
       this.location.back();
     });
   }
@@ -505,6 +507,56 @@ export class ComponentDesignerFormComponent extends PageComponent implements OnI
       listItem.shortOrder = shortOrder;
       shortOrder++;
     }
+  }
+
+  showEntryButton(componentPersistEntityList: ComponentPersistEntityDTO) {
+    if(this.componentDTO.componentPersistEntityList == undefined){
+    return false;
+    }
+
+    if(this.componentDTO.componentPersistEntityList.length == 0){
+    return false;
+    }
+
+    console.log(componentPersistEntityList);
+    console.log(this.componentDTO.componentPersistEntityList[0]);
+   if(componentPersistEntityList === this.componentDTO.componentPersistEntityList[0]){
+     return true;
+   }
+
+   return false
+  }
+
+  setEntryField(selectedField: ComponentPersistEntityFieldDTO, fields: ComponentPersistEntityFieldDTO[]) {
+    for (const field of fields) {
+      if(field.locateStatement === "#SELECTIONID"){
+        field.locateStatement = "";
+      }
+      if(field.saveStatement === "#SELECTIONID"){
+        field.saveStatement = "";
+      }
+    }
+
+    selectedField.locateStatement = "#SELECTIONID";
+    selectedField.saveStatement = "#SELECTIONID";
+  }
+
+  copyFieldToClipboart(field: ComponentPersistEntityFieldDTO, cpe: ComponentPersistEntityDTO){
+    const fieldCode = '#'+cpe.code + '.'+field.persistEntityField.name;
+    navigator.clipboard.writeText(fieldCode);
+    this.notificationService.showNotification('top', 'center', 'alert-info', 'fa-exclamation', 'Field ' + fieldCode + ' copied to clipboard.');
+  }
+
+  pasteFieldFromClipboart(field: ComponentPersistEntityFieldDTO){
+
+    navigator.clipboard.readText()
+      .then((text) => {
+        field.locateStatement = text;
+        field.saveStatement = text;
+        this.notificationService.showNotification('top', 'center', 'alert-success', 'fa-exclamation', 'Field ' + text + ' pasted from clipboard.')
+      });
+
+
   }
 
   shortFields(cpeList: ComponentPersistEntityDTO[]) {

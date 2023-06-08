@@ -141,9 +141,10 @@ import { ShortByOrderPipe } from './pages/table-designer/table-designer-form/sho
 import { RemoveElementModalComponent } from './modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
 import { TagDesignerListComponent } from './pages/tag-designer/tag-designer-list/tag-designer-list.component';
 import { TagDesignerFormComponent } from './pages/tag-designer/tag-designer-form/tag-designer-form.component';
-import {NavCommandCalculatorComponent} from "./pages/nav-command-calculator/nav-command-calculator.component";
+import { NavCommandCalculatorPageComponent } from "./pages/nav-command-calculator/nav-command-calculator-page.component";
 import { RuleDesignerFormComponent } from './pages/rule-designer/rule-designer-form/rule-designer-form.component';
 import { RuleDesignerListComponent } from './pages/rule-designer/rule-designer-list/rule-designer-list.component';
+import { NavCommandCalculatorComponent } from './pages/nav-command-calculator/nav-command-calculator/nav-command-calculator.component';
 
 @NgModule({
   declarations: [
@@ -197,6 +198,7 @@ import { RuleDesignerListComponent } from './pages/rule-designer/rule-designer-l
     HtmlDashboardDesignerListComponent,
     SafeHtmlPipe,
     ExpressionViewerComponent,
+    NavCommandCalculatorPageComponent,
     NavCommandCalculatorComponent,
     RoleListComponent,
     RoleFormComponent,
@@ -222,7 +224,8 @@ import { RuleDesignerListComponent } from './pages/rule-designer/rule-designer-l
     ShortByOrderPipe,
     RemoveElementModalComponent,
     RuleDesignerFormComponent,
-    RuleDesignerListComponent
+    RuleDesignerListComponent,
+    NavCommandCalculatorComponent
   ],
   imports: [
     BrowserAnimationsModule,
