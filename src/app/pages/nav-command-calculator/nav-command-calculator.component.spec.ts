@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {NavCommandCalculatorComponent} from './nav-command-calculator.component';
+import {NavCommandCalculatorPageComponent} from './nav-command-calculator-page.component';
 
 describe('ExpressionViewerComponent', () => {
-  let component: NavCommandCalculatorComponent;
-  let fixture: ComponentFixture<NavCommandCalculatorComponent>;
+  let component: NavCommandCalculatorPageComponent;
+  let fixture: ComponentFixture<NavCommandCalculatorPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavCommandCalculatorComponent ]
+      declarations: [ NavCommandCalculatorPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavCommandCalculatorComponent);
+    fixture = TestBed.createComponent(NavCommandCalculatorPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

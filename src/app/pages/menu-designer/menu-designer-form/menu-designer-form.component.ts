@@ -396,4 +396,13 @@ export class MenuDesignerFormComponent extends PageComponent implements OnInit {
     this.fieldListMode = 'insert';
   }
 
+  stringify() {
+    var parsedJson = JSON.parse(this.menuFieldComponent.command);
+    this.menuFieldComponent.command = JSON.stringify(parsedJson);
+  }
+
+  beautify() {
+    var parsedJson = JSON.parse(this.menuFieldComponent.command);
+    this.menuFieldComponent.command = JSON.stringify(parsedJson, null, 4);
+  }
 }

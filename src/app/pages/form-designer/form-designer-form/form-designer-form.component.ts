@@ -985,4 +985,19 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
       }
 
   }
+
+  assignPredifinedFieldType(fieldType: string) {
+    if(fieldType == 'combo'){
+      this.selectedComponentPersistEntityField.assignment.type = 'combo';
+      this.selectedComponentPersistEntityField.assignment.editor = '{"data":[{"value":"null","display": "---"},{"value": "value1","display": "value1"}]}';
+    }
+
+    if(fieldType == 'list'){
+      this.selectedComponentPersistEntityField.assignment.type = 'list';
+      this.selectedComponentPersistEntityField.assignment.editor =
+        "{\"COMMAND-TYPE\":\"POPUPLIST\",\"LOCATE\":\"(ID=list_id)\",\"RETURN\":\"cf_id\",\"FOCUS\":\"header-filter-cf_name\",\"DISPLAY\":\"(table_code.name_name)\",\"REFRESH\":\"table_code\",\"HIDE-DELETE\":\"YES\"}";
+
+    }
+
+ }
 }

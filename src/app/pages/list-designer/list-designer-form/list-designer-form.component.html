@@ -17,6 +17,14 @@
               (click)="delete()">
         <i class="fa fa-times"></i> Delete
       </button>
+      <button class="btn btn-outline-info"  data-target="#nav-command-calculator"
+              data-toggle="modal">
+        <i class="fa fa-calculator"></i> Nav Command Editor
+      </button>
+      <button class="btn btn-outline-info" (click)="openExpressionEditor()">
+        <i class="fa fa-calculator"></i> Expression Editor
+      </button>
+
       <button class="btn btn-outline-primary" style="margin-top: 0px;"
               *ngIf="showPreviousPageButton()"
               (click)="navigateToPreviousPage()">
@@ -97,11 +105,12 @@
           </div>
 
         </div>
-        <div class="row">
+
+        <div *ngIf="this.mode === 'new-record'" class="row">
           <div class="col-md-12">
             <div class="form-group">
               <label>Component</label>
-              <div class="input-group input-group-selector no-border">
+              <div class="input-group input-group-selector no-border" style="background-color: #ddedfb;">
                 <div
                   data-target="#selectComponentModal"
                   data-toggle="modal"
@@ -116,16 +125,32 @@
                        type="text" class="form-control"
                        value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
                 <div class="input-group-append" (click)="selectComponent(null)">
-                 <span class="input-group-text input-group-text-rm">
-                    <i class="fa fa-window-close"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="this.mode === 'edit-record'" class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Component</label>
+              <div class="input-group input-group-selector no-border">
+                <div
+                  class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
                  </span>
+                </div>
+                <input readonly
+                       type="text" class="form-control"
+                       value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
+                <div class="input-group-append" (click)="selectComponent(null)">
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        
           <div class="col-md-12">
             <div class="form-group">
               <label>Tags</label>
@@ -143,7 +168,7 @@
               </div>
             </div>
           </div>
-        
+
 
         <div class="row">
           <div class="col-md-10">
@@ -627,6 +652,7 @@
                     <option value="double">double</option>
                     <option value="datetime">date</option>
                     <option value="datetime_det">datetime</option>
+                    <option value="datetime_det_simple">Simple Datetime</option>
                     <option value="varchar">varchar</option>
                     <option value="text">text</option>
                     <option value="list">list</option>
@@ -1012,7 +1038,6 @@
               </tr>
               </tbody>
             </table>
-
           </div>
 
           <div aria-expanded="false" class="tab-pane" id="orderby" role="tabpanel">
@@ -1090,8 +1115,11 @@
                          [(ngModel)]="column.description">
                 </td>
                 <td>
-                  <input type="text" class="form-control transparent-input"
-                         [(ngModel)]="column.editor">
+                  <select [(ngModel)]="column.editor" name="type" class="transparent-input">
+                    <option value=""></option>
+                    <option value="DESC">DESC</option>
+                    <option value="ASC">ASC</option>
+                  </select>
                 </td>
                 <td>
                   <select class="transparent-input" [(ngModel)]="column.visible">
@@ -1105,10 +1133,8 @@
                     <option value="true">Yes</option>
                   </select>
               </tr>
-
               </tbody>
             </table>
-
           </div>
 
           <div aria-expanded="false" class="tab-pane" id="actionButtons" role="tabpanel">
@@ -2462,7 +2488,11 @@
         <div class="row">
           <div class="col-12">
             <label>ASC/DESC</label>
-            <textarea class="form-control" [(ngModel)]="selectedFilterField.editor"></textarea>
+            <select [(ngModel)]="selectedFilterField.editor" name="type" class="transparent-input">
+              <option value=""></option>
+              <option value="DESC">DESC</option>
+              <option value="ASC">ASC</option>
+            </select>
           </div>
         </div>
 
@@ -2812,6 +2842,22 @@
           <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="nav-command-calculator" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Nav Command Calculator</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <app-nav-command-calculator></app-nav-command-calculator>
+      </div>
+
     </div>
   </div>
 </div>

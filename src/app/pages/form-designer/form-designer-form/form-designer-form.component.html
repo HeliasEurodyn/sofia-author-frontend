@@ -20,6 +20,11 @@
         <i class="fa fa-times"></i> Delete
       </button>
 
+      <button class="btn btn-outline-info"  data-target="#nav-command-calculator"
+              data-toggle="modal">
+        <i class="fa fa-calculator"></i> Nav Command Editor
+      </button>
+
       <button class="btn btn-outline-primary"
               *ngIf="showPreviousPageButton()"
               (click)="navigateToPreviousPage()">
@@ -128,10 +133,12 @@
               <code></code>
             </div>
           </div>
-          <div class="col-md-12">
+
+
+          <div *ngIf="this.mode === 'new-record'" class="col-md-12">
             <div class="form-group">
               <label>Component</label>
-              <div class="input-group input-group-selector no-border">
+              <div class="input-group input-group-selector no-border" style="background-color: #ddedfb;">
                 <div
                   data-target="#selectComponentModal"
                   data-toggle="modal"
@@ -146,13 +153,30 @@
                        type="text" class="form-control"
                        value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
                 <div class="input-group-append" (click)="selectComponent(null)">
-                 <span class="input-group-text input-group-text-rm">
-                    <i class="fa fa-window-close"></i>
-                 </span>
                 </div>
               </div>
             </div>
           </div>
+
+          <div *ngIf="this.mode === 'edit-record'" class="col-md-12">
+            <div class="form-group">
+              <label>Component</label>
+              <div class="input-group input-group-selector no-border">
+                <div
+                  class="input-group-prepend">
+                 <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                 </span>
+                </div>
+                <input readonly
+                       type="text" class="form-control"
+                       value="{{this.dto?.component?.id}} {{this.dto?.component?.name}}">
+                <div class="input-group-append" (click)="selectComponent(null)">
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-12">
             <div class="form-group">
               <label>Tags</label>
@@ -1371,6 +1395,38 @@
         <div class="row">
           <div class="col-12">
             <label>Type</label><br>
+
+            <button
+              (click)="assignPredifinedFieldType('list')"
+              class="btn btn-outline-info"
+              type="button">List
+            </button>
+            <button
+              (click)="assignPredifinedFieldType('combo')"
+              class="btn btn-outline-info"
+              type="button">Combo
+            </button>
+            <button
+              (click)="assignPredifinedFieldType('autocomplete_combo')"
+              class="btn btn-outline-info"
+              type="button">Autocomplete Combo
+            </button>
+            <button
+              (click)="assignPredifinedFieldType('file')"
+              class="btn btn-outline-info"
+              type="button">File Selector
+            </button>
+            <button
+              (click)="assignPredifinedFieldType('chips')"
+              class="btn btn-outline-info"
+              type="button">Chips
+            </button>
+            <button
+              (click)="assignPredifinedFieldType('chips')"
+              class="btn btn-outline-info"
+              type="button">Image
+            </button>
+
             <select [(ngModel)]="this.selectedComponentPersistEntityField.assignment.type" name="type"
                     class="transparent-input">
               <option value=""></option>
@@ -1390,7 +1446,9 @@
               <option value="password">Password</option>
               <option value="file-selector">File Selector</option>
               <option value="image">Image</option>
+              <option value="html">Html</option>
             </select>
+
           </div>
         </div>
 
@@ -2375,6 +2433,22 @@
           <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="nav-command-calculator" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 class="title title-up modal-title">Nav Command Calculator</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+      <app-nav-command-calculator></app-nav-command-calculator>
+      </div>
+
     </div>
   </div>
 </div>

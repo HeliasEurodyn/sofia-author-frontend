@@ -4,7 +4,7 @@
       <div class="col-12">
         <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
           <i class="fa fa-calculator" style="padding-right: 5px;"></i>
-          Expression Calculator
+          Expression Editor
         </h3>
         <p style=" margin-bottom: 5px;"> Write Expression & Press Enter </p>
       </div>
@@ -234,6 +234,15 @@
                     @param (number) days: The number of days to add to the provided date.<br>
                     @returns (Date): The date that is 'days' number of days ahead of the provided date.<br>
                     @examples: datePlus(yyyyMmDdHhMmStringToDate('202010200810'),5), datePlus(yyyyMmDdHhMmStringToDate('202010200810')-3)
+                  </td>
+                </tr>
+                <tr style="cursor: pointer;" (click)="addExpression('datePlus')">
+                  <td>
+                    <h5 style="margin-bottom: 0px;">systemParameter(parameter: string)</h5>
+                    Returns the System parameter value by the given parameter name.<br>
+                    @param (string) paraterer: The reference parameter name.<br>
+                    @returns (string): The reference parameter value.<br>
+                    @examples: systemParameter('userId')
                   </td>
                 </tr>
                 </tbody>

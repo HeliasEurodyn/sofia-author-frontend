@@ -912,4 +912,7 @@ export class ListDesignerFormComponent extends PageComponent implements OnInit {
       this.dto.tags.filter(item => item !== tag);
   }
 
+  openExpressionEditor() {
+    window.open("/expression-viewer", '_blank');
+  }
 }

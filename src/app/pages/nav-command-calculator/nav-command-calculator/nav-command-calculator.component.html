@@ -1,0 +1,89 @@
+<div class="row form-area">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-left">
+              <h3 style="margin-top: 20px;margin: 0px;margin-top: 10px;">
+                <i class="fa fa-code" style="padding-right: 5px;"></i>
+                Expression Section
+              </h3>
+              <p style=" margin-bottom: 5px;"> Write your json nav command <b>from Scratch</b> or <b>using the Samples</b> on the Menu. Finally stringify it, copy and use it.</p>
+            </div>
+            <div class="pull-right">
+              <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
+                   style="margin-top: 4px;display:none;">
+                <button (click)="myDrop.open();"
+                        class="btn btn-outline-default btn-icon btn-sm"
+                        title="Sample Commands" style="margin-right: 6px;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </button>
+                <div ngbDropdownMenu class="dropdown-menu-right">
+                  <button ngbDropdownAnchor (click)="addSampleCommand('menu')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Static Page
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('form')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Form
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('list')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> List
+                  </button>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('clone-list')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> List Clone
+                  </button>
+
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('selector')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Selector
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('plugin')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Plugin
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('popup_search')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Popup Search
+                  </button>
+                  <div ngbDropdownAnchor class="dropdown-divider"></div>
+                  <button ngbDropdownAnchor (click)="addSampleCommand('ws_notification')"
+                          class="text-default menu-button">
+                    <i class="fa fa-plus-circle"></i> Header notifications
+                  </button>
+
+
+                </div>
+              </div>
+              <button (click)="beautify()" class="btn btn-outline-success">
+                <i class="fa fa-play"></i> Beautify
+              </button>
+              <button style="margin-left: 5px" (click)="stringify()" class="btn btn-outline-primary">
+                <i class="fa fa-play"></i> Stringify
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <ace style="width: 100%;height: 300px;border: 1px solid #51cbce;"
+                   [config]="aceJavascriptEditorConfig"
+                   [(value)]="expressionValue"></ace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
