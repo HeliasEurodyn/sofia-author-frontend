@@ -67,9 +67,9 @@ export class FormDesignerTranslationFormComponent extends PageComponent implemen
   public selectedButtonFormControl: FormControlDto = new FormControlDto();
   public selectedActionButton: FormActionButton
   public languages: LanguageDTO[];
-  private selectedSecurityRow: AccessControlDto;
-  private translation: FormTranslationDto;
-  private language: LanguageDTO;
+  public selectedSecurityRow: AccessControlDto;
+  public translation: FormTranslationDto;
+  public language: LanguageDTO;
 
   constructor(private service: FormDesignerService,
               private tableComponentService: TableComponentDesignerService,

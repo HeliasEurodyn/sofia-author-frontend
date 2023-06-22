@@ -145,6 +145,10 @@ import { NavCommandCalculatorPageComponent } from "./pages/nav-command-calculato
 import { RuleDesignerFormComponent } from './pages/rule-designer/rule-designer-form/rule-designer-form.component';
 import { RuleDesignerListComponent } from './pages/rule-designer/rule-designer-list/rule-designer-list.component';
 import { NavCommandCalculatorComponent } from './pages/nav-command-calculator/nav-command-calculator/nav-command-calculator.component';
+import { RuleFieldDesignerFormComponent } from './pages/rule-field-designer/rule-field-designer-form/rule-field-designer-form.component';
+import { RuleFieldDesignerListComponent } from './pages/rule-field-designer/rule-field-designer-list/rule-field-designer-list.component';
+import { RuleOperatorDesignerListComponent } from './pages/rule-operator-designer/rule-operator-designer-list/rule-operator-designer-list.component';
+import { RuleOperatorDesignerFormComponent } from './pages/rule-operator-designer/rule-operator-designer-form/rule-operator-designer-form.component';
 
 @NgModule({
   declarations: [
@@ -225,7 +229,11 @@ import { NavCommandCalculatorComponent } from './pages/nav-command-calculator/na
     RemoveElementModalComponent,
     RuleDesignerFormComponent,
     RuleDesignerListComponent,
-    NavCommandCalculatorComponent
+    NavCommandCalculatorComponent,
+    RuleFieldDesignerFormComponent,
+    RuleFieldDesignerListComponent,
+    RuleOperatorDesignerListComponent,
+    RuleOperatorDesignerFormComponent
   ],
   imports: [
     BrowserAnimationsModule,
