@@ -149,6 +149,8 @@ import { RuleFieldDesignerFormComponent } from './pages/rule-field-designer/rule
 import { RuleFieldDesignerListComponent } from './pages/rule-field-designer/rule-field-designer-list/rule-field-designer-list.component';
 import { RuleOperatorDesignerListComponent } from './pages/rule-operator-designer/rule-operator-designer-list/rule-operator-designer-list.component';
 import { RuleOperatorDesignerFormComponent } from './pages/rule-operator-designer/rule-operator-designer-form/rule-operator-designer-form.component';
+import { RestDocumentationDesignerFormComponent } from './pages/rest-documentation-disgner/rest-documentation-designer-form/rest-documentation-designer-form.component';
+import { RestDocumentationDesignerListComponent } from './pages/rest-documentation-disgner/rest-documentation-designer-list/rest-documentation-designer-list.component';
 
 @NgModule({
   declarations: [
@@ -233,7 +235,9 @@ import { RuleOperatorDesignerFormComponent } from './pages/rule-operator-designe
     RuleFieldDesignerFormComponent,
     RuleFieldDesignerListComponent,
     RuleOperatorDesignerListComponent,
-    RuleOperatorDesignerFormComponent
+    RuleOperatorDesignerFormComponent,
+    RestDocumentationDesignerFormComponent,
+    RestDocumentationDesignerListComponent
   ],
   imports: [
     BrowserAnimationsModule,

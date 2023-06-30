@@ -117,6 +117,8 @@ import {AccessControlComponent} from '../../pages/access-control/access-control.
 import {NavCommandCalculatorPageComponent} from "../../pages/nav-command-calculator/nav-command-calculator-page.component";
 import {RuleDesignerFormComponent} from "../../pages/rule-designer/rule-designer-form/rule-designer-form.component";
 import {RuleDesignerListComponent} from "../../pages/rule-designer/rule-designer-list/rule-designer-list.component";
+import { RestDocumentationDesignerFormComponent } from '../../pages/rest-documentation-disgner/rest-documentation-designer-form/rest-documentation-designer-form.component';
+import { RestDocumentationDesignerListComponent } from '../../pages/rest-documentation-disgner/rest-documentation-designer-list/rest-documentation-designer-list.component';
 import {
   RuleOperatorDesignerListComponent
 } from "../../pages/rule-operator-designer/rule-operator-designer-list/rule-operator-designer-list.component";
@@ -200,7 +202,9 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'rule-field-designer-form', component: RuleFieldDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'rule-operator-designer-list', component: RuleOperatorDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'rule-operator-designer-form', component: RuleOperatorDesignerFormComponent, canActivate: [AuthGuard]}
-
+,
+  {path: 'rest-documentation-designer-form', component: RestDocumentationDesignerFormComponent, canActivate: [AuthGuard]},
+  {path: 'rest-documentation-designer-list', component: RestDocumentationDesignerListComponent, canActivate: [AuthGuard]}
 ];
 
 CommandNavigatorService.NavPages = AdminLayoutRoutes;
