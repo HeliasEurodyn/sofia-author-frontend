@@ -6,6 +6,8 @@ export class RuleFieldDTO extends BaseDTO {
 
   code: string;
 
+  cpefCode: string;
+
   description: string;
 
   constructor() {

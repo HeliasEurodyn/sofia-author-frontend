@@ -65,8 +65,15 @@
           </div>
           <div class="col-12">
             <div class="form-group ">
-              <label>Code</label>
+              <label>Sql Code</label>
               <input type="text" class="form-control" [(ngModel)]="dto.code">
+              <code></code>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group ">
+              <label>Sofia Component Code</label>
+              <input type="text" class="form-control" [(ngModel)]="dto.cpefCode">
               <code></code>
             </div>
           </div>
@@ -79,7 +86,7 @@
           </div>
           <div class="col-12">
             <div class="form-group">
-              <label>Description</label>
+              <label>Description (Html)</label>
               <textarea
                 class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
             </div>
