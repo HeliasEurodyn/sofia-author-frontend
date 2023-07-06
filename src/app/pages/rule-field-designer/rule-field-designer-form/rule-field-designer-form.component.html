@@ -31,6 +31,11 @@
         <i class="fa fa-sliders-h"></i>
         General
       </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('codes');">
+        <i class="fa fa-sliders-h"></i>
+        Codes
+      </button>
     </div>
   </div>
 </div>
@@ -72,13 +77,6 @@
           </div>
           <div class="col-12">
             <div class="form-group ">
-              <label>Sofia Component Code</label>
-              <input type="text" class="form-control" [(ngModel)]="dto.cpefCode">
-              <code></code>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="form-group ">
               <label>Name</label>
               <input type="text" class="form-control" [(ngModel)]="dto.name">
               <code></code>
@@ -91,6 +89,79 @@
                 class="form-control textarea" name="description" [(ngModel)]="dto.description"></textarea>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'is-hidden': this.visibleSection !== 'codes' }" class="row form-area">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row formnav">
+          <div class="col">
+            <div class="pull-left">
+              <h5 class="card-title">
+                <i class="fa fa-code"></i> Scripts
+              </h5>
+            </div>
+            <div class="pull-right">
+              <button (click)="addCode()"
+                      type="button" class="btn btn-outline-success">
+                <i class="fa fa-plus-circle"></i> New
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <tr>
+                <th>actions</th>
+                <th>Code</th>
+                <th>Value</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngIf="this.dto?.codeList == undefined || this.dto?.codeList?.length === 0">
+                <td colspan="3" class="empty-table-row">Empty!</td>
+              </tr>
+
+              <tr *ngFor="let ruleCode of this.dto?.codeList">
+                <td>
+
+                  <button title="Remove" (click)="removeRuleCode(ruleCode)" type="button"
+                          class="btn btn-outline-danger btn-icon btn-sm">
+                    <i class="fa fa-times"></i>
+                  </button>
+                  <button (click)="moveUp(ruleCode, this.dto?.codeList)" type="button"
+                          title="Move Up" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-up"></i>
+                  </button>
+                  <button (click)="moveDown(ruleCode, this.dto?.codeList)" type="button"
+                          title="Move Down" class="btn btn-outline-warning btn-icon btn-sm">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="ruleCode.name">
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="ruleCode.value">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
         </div>
       </div>
     </div>

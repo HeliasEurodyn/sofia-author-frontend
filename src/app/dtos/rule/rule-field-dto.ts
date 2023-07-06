@@ -1,4 +1,6 @@
 import {BaseDTO} from "../common/base-dto";
+import {RuleSettingsQueryDTO} from "./rule-settings-query-dto";
+import {RuleCodeDTO} from "./rule-code-dto";
 
 export class RuleFieldDTO extends BaseDTO {
 
@@ -6,9 +8,9 @@ export class RuleFieldDTO extends BaseDTO {
 
   code: string;
 
-  cpefCode: string;
-
   description: string;
+
+  codeList: RuleCodeDTO[] = [];
 
   constructor() {
     super();
