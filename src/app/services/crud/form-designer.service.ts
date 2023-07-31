@@ -29,5 +29,9 @@ export class FormDesignerService extends CrudService<any> {
     return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/by-tag?tag=${tag}`);
   }
 
+  getFormsWithJsonUrl(): Observable<any> {
+    return this.http.get<any>(`${environment.serverUrl}/${this.endpoint}/with-jsonUrl`);
+  }
+
 
 }

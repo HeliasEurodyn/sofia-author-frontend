@@ -76,12 +76,12 @@ super();
       this.components = data;
     });
 
-    this.listService.get().subscribe(data => {
-      this.lists = data;
+    this.formService.getFormsWithJsonUrl().subscribe(data => {
+      this.forms = data;
     });
 
-    this.formService.get().subscribe(data => {
-      this.forms = data;
+    this.listService.getListsWithJsonUrl().subscribe(data => {
+      this.lists = data;
     });
   }
 
