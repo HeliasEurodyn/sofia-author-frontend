@@ -13,6 +13,7 @@ import { TableComponentDesignerService } from 'app/services/crud/table-component
 import { AceConfigInterface } from 'ngx-ace-wrapper';
 import { FormDto } from 'app/dtos/form/form-dto';
 import { FormDesignerService } from 'app/services/crud/form-designer.service';
+import { ExcludeEndpointFieldDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/exclude-endpoint-field-dto';
 
 @Component({
   selector: 'app-rest-documentation-designer-form',
@@ -29,6 +30,8 @@ export class RestDocumentationDesignerFormComponent extends PageComponent implem
   restDocumentationEndpoint: RestDocumentationEndpointDTO = null;
   public mode: string;
   public components: any;
+
+  newExcludeFieldName: string = '';
 
   public textEditorConfig: AceConfigInterface = {
     mode: 'html',
@@ -177,6 +180,21 @@ super();
       if (restDocumentationEndpoint.form.id === form.id) {
         this.restDocumentationEndpoint = restDocumentationEndpoint;
       }
+    }
+  }
+
+  addExcludeField(restDocumentationEndpoint) {
+    if(restDocumentationEndpoint.excludeEndPointFields == null) restDocumentationEndpoint.excludeEndPointFields = [];
+      const newExcludeField = new ExcludeEndpointFieldDTO();
+      restDocumentationEndpoint.excludeEndPointFields.push(newExcludeField);
+      this.newExcludeFieldName = ''; 
+    
+  }
+
+   removeExcludeField(excludeField: ExcludeEndpointFieldDTO) {
+    const index = this.restDocumentationEndpoint.excludeEndPointFields.indexOf(excludeField);
+    if (index !== -1) {
+      this.restDocumentationEndpoint.excludeEndPointFields.splice(index, 1);
     }
   }
 
