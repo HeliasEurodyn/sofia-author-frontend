@@ -832,35 +832,11 @@
             <div class="pull-right">
               <div #myDrop="ngbDropdown" class="d-inline-block" ngbDropdown
                    style="margin-top: 4px;display:none;">
-                <button (click)="myDrop.open();"
-                        class="btn btn-outline-default btn-icon btn-sm"
-                        title="Sample Commands" style="margin-right: 6px;">
-                  <i class="fa fa-ellipsis-v"></i>
+                <button data-target="#dictionary"
+                      data-toggle="modal"
+                      class="btn btn-outline-default">
+                <i class="fa-solid fa-code"></i> Dictionary
                 </button>
-                <div ngbDropdownMenu class="dropdown-menu-right" style="min-width: 200px;">
-                  <button ngbDropdownAnchor (click)="addSampleScript('tblNewLine')"
-                          class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i>  On New (Table) Line
-                  </button>
-                  <div ngbDropdownAnchor class="dropdown-divider"></div>
-                  <button ngbDropdownAnchor (click)="addSampleScript('tblBtnClick')"
-                          class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i> On Click (Table) Button
-                  </button>
-                  <div ngbDropdownAnchor class="dropdown-divider"></div>
-                  <button ngbDropdownAnchor (click)="addSampleScript('btnClick')"
-                          class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i> On Click Button
-                  </button>
-                  <button ngbDropdownAnchor (click)="addSampleScript('headerButtonSave')"
-                                       class="text-default menu-button">
-                  <i class="fa fa-plus-circle"></i> Header Button Save
-                </button>
-                <button ngbDropdownAnchor (click)="addSampleScript('filter_ip_on_field_typing')"
-                          class="text-default menu-button">
-                    <i class="fa fa-plus-circle"></i> filter Ip On Field Typing
-                </button>
-                </div>
               </div>
               <button (click)="addScript()"
                       type="button" class="btn btn-outline-success">
@@ -2450,6 +2426,103 @@
       <app-nav-command-calculator></app-nav-command-calculator>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="ModalLabel" class="modal fade" id="dictionary" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h4 style="margin: 0px;" class="title title-up modal-title">
+          <i class="fa fa-code"></i>
+          Dictionary</h4>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><i
+          class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped table-fixed">
+                <thead class="text-primary">
+                  <tr>
+                    <th class="custom-td">Actions</th>
+                    <th>Scripts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="custom-td">
+                      <button title="Add" data-dismiss="modal" (click)="addSampleScript('tblNewLine')" type="button"
+                              class="btn btn-outline-success btn-icon btn-sm">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <h5 style="margin-bottom: 0px;"> On New (Table) Line</h5>
+                      The new (Table) line script is used to add a new line to table<br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="custom-td">
+                      <button title="Add" data-dismiss="modal" (click)="addSampleScript('tblBtnClick')" type="button"
+                              class="btn btn-outline-success btn-icon btn-sm">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <h5 style="margin-bottom: 0px;">On Click (Table) Button</h5>
+                      The click (Table) button script is used to add a new button to table
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="custom-td">
+                      <button title="Add" data-dismiss="modal" (click)="addSampleScript('btnClick')" type="button"
+                              class="btn btn-outline-success btn-icon btn-sm">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <h5 style="margin-bottom: 0px;">On Click Button</h5>
+                      The click button script is used to add a button general
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="custom-td">
+                      <button title="Add" data-dismiss="modal" (click)="addSampleScript('headerButtonSave')" type="button"
+                              class="btn btn-outline-success btn-icon btn-sm">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <h5 style="margin-bottom: 0px;">Header Button Save</h5>
+                      The header button save script is used to add button to save data
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="custom-td">
+                      <button title="Add" data-dismiss="modal" (click)="addSampleScript('filter_ip_on_field_typing')" type="button"
+                              class="btn btn-outline-success btn-icon btn-sm">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <h5 style="margin-bottom: 0px;">Filter Ip On Field Typing</h5>
+                      The filter ip on field typing script is used to filter the field value as Ip format
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+          <button class="btn btn-outline-danger" data-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

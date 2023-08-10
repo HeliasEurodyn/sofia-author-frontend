@@ -7,8 +7,8 @@ import {Location} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ListDesignerService } from 'app/services/crud/list-designer.service';
 import { ListDTO } from 'app/dtos/list/list-dto';
-import { RestDocumentationEndpoint } from 'app/dtos/rest-documentation/rest-documentation-endpoint';
 import { RestDocumentationEndpointDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/rest-documentation-endpoint-dto';
+// import { RestDocumentationEndpointDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/rest-documentation-endpoint-dto';
 import { TableComponentDesignerService } from 'app/services/crud/table-component-designer.service';
 import { AceConfigInterface } from 'ngx-ace-wrapper';
 import { FormDto } from 'app/dtos/form/form-dto';
@@ -65,6 +65,7 @@ super();
     if (this.mode === 'edit-record') {
       this.service.getById(id).subscribe(data => {
         this.dto = data;
+        this.cleanIdsIfCloneEnabled();
       });
     }
 
@@ -90,9 +91,7 @@ super();
 
   save() {
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
-
     if (this.mode === 'edit-record') {
-      console.log(dtoToBeSaved);
       this.service.update(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
@@ -108,13 +107,21 @@ super();
 
   
   cleanIdsIfCloneEnabled() {
+
     if (this.params.has('TYPE')) {
-
       if (this.params.get('TYPE').toUpperCase() === 'CLONE') {
-
         this.dto.id = null;
         this.dto.version = null;
         this.mode = 'new-record';
+
+        this.dto.restDocumentationEndpoints.forEach((restDocumentationEndpoint) => {
+          restDocumentationEndpoint.id = null;
+          restDocumentationEndpoint.version = null;
+          restDocumentationEndpoint.excludeEndPointFields.forEach((excludeEndpointField) => {
+            excludeEndpointField.id = null;
+            excludeEndpointField.version =null;
+          });
+        });
       }
     }
   }
@@ -145,18 +152,18 @@ super();
       this.dto.restDocumentationEndpoints = [];
     }
 
-    const restDocumentationEndpoint = new RestDocumentationEndpoint();
+    const restDocumentationEndpoint = new RestDocumentationEndpointDTO();
     restDocumentationEndpoint.list = list;
     restDocumentationEndpoint.type = 'list';
     restDocumentationEndpoint.method = 'get';
     this.dto.restDocumentationEndpoints.push(restDocumentationEndpoint);
   }
 
-  selectRestDocumentationEndpoint(restDocumentationEndpoint: RestDocumentationEndpoint) {
+  selectRestDocumentationEndpoint(restDocumentationEndpoint: RestDocumentationEndpointDTO) {
     this.restDocumentationEndpoint = restDocumentationEndpoint;
   }
 
-  removeRestDocumentationEndpoint(restDocumentationEndpoint: RestDocumentationEndpoint) {
+  removeRestDocumentationEndpoint(restDocumentationEndpoint: RestDocumentationEndpointDTO) {
     this.dto.restDocumentationEndpoints = this.dto.restDocumentationEndpoints.filter(item => item !== restDocumentationEndpoint);
   }
 
@@ -166,7 +173,7 @@ super();
       this.dto.restDocumentationEndpoints = [];
     }
 
-    const restDocumentationEndpoint = new RestDocumentationEndpoint();
+    const restDocumentationEndpoint = new RestDocumentationEndpointDTO();
     restDocumentationEndpoint.form = form;
     restDocumentationEndpoint.type = 'form';
     restDocumentationEndpoint.method = 'post';
@@ -195,6 +202,43 @@ super();
     const index = this.restDocumentationEndpoint.excludeEndPointFields.indexOf(excludeField);
     if (index !== -1) {
       this.restDocumentationEndpoint.excludeEndPointFields.splice(index, 1);
+    }
+  }
+
+  moveUp(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && position > 0) {
+        const prevItem = list[position - 1];
+        list[position] = prevItem;
+        list[position - 1] = listItem;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
+  }
+
+  moveDown(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && (position + 1) < list.length) {
+        const nextItem = list[position + 1];
+        list[position] = nextItem;
+        list[position + 1] = listItem;
+        break;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
     }
   }
 

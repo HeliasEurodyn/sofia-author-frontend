@@ -232,3 +232,8 @@ li{
 .dropdown-menu-right{
   left: -165px !important;
 }
+
+.custom-td {
+
+  max-width: 70px !important;
+}

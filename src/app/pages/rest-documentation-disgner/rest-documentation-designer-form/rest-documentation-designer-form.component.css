@@ -1,3 +1,8 @@
 .btn{
     margin: 2px;
   }
+
+  .custom-td {
+    width: 10px;
+    min-width: 10px;
+  }
