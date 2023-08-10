@@ -8,6 +8,9 @@ import {AceConfigInterface} from 'ngx-ace-wrapper';
 import 'brace';
 import 'brace/mode/html';
 import 'brace/theme/chrome';
+import {HtmlDashboardScriptDTO} from "../../../dtos/html-dashboard/html-dashboard-script-dto";
+import {ListScriptDTO} from "../../../dtos/list/list-script-dto";
+import {BaseDTO} from "../../../dtos/common/base-dto";
 
 @Component({
   selector: 'app-html-dashboard-designer-form',
@@ -19,6 +22,7 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
   public dto: HtmlDashboardDTO;
   public mode: string;
   public visibleSection = 'general';
+  public selectedScript: HtmlDashboardScriptDTO;
   public sampleHtml =
     '<div class="card card-stats">\n' +
     '   <div class="card-body">\n' +
@@ -52,8 +56,6 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
     super();
   }
 
-
-
   ngOnInit(): void {
     this.initNav(this.activatedRoute);
 
@@ -72,6 +74,12 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
       this.service.getById(id).subscribe(data => {
         this.dto = data;
         this.dto.html = decodeURIComponent(atob(this.dto?.html));
+
+        this.dto.scripts.forEach(listScript => {
+          const decodedScrypt = decodeURIComponent(atob(listScript.script));
+          listScript.script = decodedScrypt;
+        });
+
         this.cleanIdsIfCloneEnabled();
       });
     }
@@ -79,17 +87,24 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
 
   save() {
 
-    const base64Html = btoa(encodeURIComponent(this.dto?.html));
-    this.dto.html = base64Html;
-    console.log(this.dto);
+    const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
+
+    const base64Html = btoa(encodeURIComponent(dtoToBeSaved?.html));
+    dtoToBeSaved.html = base64Html;
+
+    if(dtoToBeSaved.scripts != null)
+    dtoToBeSaved.scripts.forEach(listScript => {
+      const encodedScrypt = btoa(encodeURIComponent(listScript.script));
+      listScript.script = encodedScrypt;
+    });
 
     if (this.mode === 'edit-record') {
-      this.service.update(this.dto).subscribe(data => {
+      this.service.update(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
 
     } else {
-      this.service.save(this.dto).subscribe(data => {
+      this.service.save(dtoToBeSaved).subscribe(data => {
         this.location.back();
       });
     }
@@ -117,5 +132,83 @@ export class HtmlDashboardDesignerFormComponent extends PageComponent implements
     }
   }
 
+  public addScript() {
+    if (this.dto.scripts == null) {
+      this.dto.scripts = [];
+    }
+    const listScript = new ListScriptDTO();
+    listScript.shortOrder = this.getNextShortOrder(this.dto.scripts);
+    listScript.name = 'Script' + listScript.shortOrder;
+    this.dto.scripts.push(listScript);
+    this.setDefaultSelectedListScript();
+  }
 
+  moveUp(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && position > 0) {
+        const prevItem = list[position - 1];
+        list[position] = prevItem;
+        list[position - 1] = listItem;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
+  }
+
+  moveDown(selectedItem: any, list: any[]) {
+    let position = 0;
+    for (const listItem of list) {
+      if (selectedItem === listItem && (position + 1) < list.length) {
+        const nextItem = list[position + 1];
+        list[position] = nextItem;
+        list[position + 1] = listItem;
+        break;
+      }
+      position++;
+    }
+
+    let shortOrder = 0;
+    for (const listItem of list) {
+      listItem.shortOrder = shortOrder;
+      shortOrder++;
+    }
+  }
+
+  getNextShortOrder(baseDTOs: BaseDTO[]) {
+    if (baseDTOs === null
+      || baseDTOs === undefined
+      || baseDTOs.length === 0) {
+      return 1;
+    }
+
+    const curShortOrderObject = baseDTOs.reduce(function (prev, curr) {
+      return prev.shortOrder < curr.shortOrder ? curr : prev;
+    });
+
+    return (curShortOrderObject.shortOrder + 1);
+  }
+
+  setDefaultSelectedListScript() {
+    if (this.selectedScript != null) {
+      return;
+    }
+    if (this.dto.scripts != null && this.dto.scripts.length > 0) {
+      this.selectedScript = this.dto.scripts[0];
+    }
+  }
+
+  removeScriptByField(script) {
+    this.dto.scripts =
+      this.dto.scripts.filter(item => item !== script);
+  }
+
+  setSelectedScript(script) {
+    this.selectedScript = script;
+  }
 }

@@ -97,21 +97,21 @@
                     <button (click)=" myDrop.open();" class="btn btn-outline-default btn-icon btn-sm" style="height: 2rem; min-width: 2rem;">
                       <i class="fa fa-ellipsis-v" style="font-size: 1rem;"></i>
                     </button>
-
+                    <input type="text" class="form-control textfield" [(ngModel)]="dashboardArea.cssclass">
                     <div ngbDropdownMenu>
-                      <button ngbDropdownAnchor
+                      <button style="color: red;" ngbDropdownAnchor
                               class="menu-button"
                               (click)="dto.dashboardAreaList = removeEntityFormList(dashboardArea,dto.dashboardAreaList)" >
                         <i class="fa fa-times"></i> Delete Area
                       </button>
 
-                      <button ngbDropdownAnchor
+                      <button style="color: #b48b3a;" ngbDropdownAnchor
                               class="menu-button"
                               (click)="moveUp(dashboardArea,dto.dashboardAreaList)">
                         <i class="fa fa-angle-double-left"></i> Move Prev
                       </button>
 
-                      <button ngbDropdownAnchor
+                      <button style="color: #b48b3a;" ngbDropdownAnchor
                               class="menu-button"
                               (click)="moveDown(dashboardArea,dto.dashboardAreaList)">
                         <i class="fa fa-angle-double-right"></i> Move Next
@@ -159,6 +159,7 @@
 
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -188,22 +189,23 @@
                             <button type="button"
                                     (click)="moveUp(dashboardItem,dashboardArea.dashboardItemList)"
                                     title="Move"
-                                    class="btn btn-outline-success btn-icon btn-sm">
+                                    class="btn btn-outline-warning btn-icon btn-sm">
                               <i class="fa fa-angle-double-left"></i>
                             </button>
                             <button type="button"
                                     (click)="moveDown(dashboardItem,dashboardArea.dashboardItemList)"
                                     title="Move"
-                                    class="btn btn-outline-success btn-icon btn-sm">
+                                    class="btn btn-outline-warning btn-icon btn-sm">
                               <i class="fa fa-angle-double-right"></i>
                             </button>
                             <input type="text" class="form-control textfield" [(ngModel)]="dashboardItem.cssclass">
-                            <input type="text" class="form-control textfield" [(ngModel)]="dashboardItem.type">
+
                           </div>
                           <div class="pull-right">
                             <div class="form-group ">
-                              <input type="text" class="form-control" style="margin-top: 7px;width: 80px;" readonly
-                                     value="Id: {{dashboardItem.entityId}}">
+                              <input type="text" class="form-control textfield" style="margin-top: 7px;width: 70px;" readonly value="{{dashboardItem.type}}" >
+                              <input type="text" class="form-control textfield" style="margin-top: 7px;width: 280px;" readonly
+                                     value="{{dashboardItem.entityId}}">
                             </div>
                           </div>
                         </div>

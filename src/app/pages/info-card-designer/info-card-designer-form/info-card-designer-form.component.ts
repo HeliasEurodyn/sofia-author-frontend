@@ -39,7 +39,6 @@ export class InfoCardDesignerFormComponent extends PageComponent implements OnIn
     readOnly : false
   };
 
-
   constructor(private activatedRoute: ActivatedRoute,
               private service: InfoCardDesignerService,
               private navigatorService: CommandNavigatorService,
@@ -80,8 +79,6 @@ export class InfoCardDesignerFormComponent extends PageComponent implements OnIn
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
     const base64Query = btoa(encodeURIComponent(dtoToBeSaved?.query));
     dtoToBeSaved.query = base64Query;
-
-  
 
     dtoToBeSaved.scripts.forEach(listScript => {
       const encodedScrypt = btoa(encodeURIComponent(listScript.script));

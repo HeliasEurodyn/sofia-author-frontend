@@ -4,3 +4,15 @@
   font-family: 'Tahoma';
   line-height: 1.4;
 }
+
+.is-hidden {
+  display: none;
+}
+
+.graph-prev-body {
+  height: 450px;
+}
+
+.btn {
+  margin: 2px;
+}
