@@ -520,8 +520,11 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
 
     this.defineShortOrders(dtoToBeSaved.formTabs);
-    this.defineShortOrders(dtoToBeSaved.form);
+    this.defineShortOrders(dtoToBeSaved.formScripts);
+    this.defineShortOrders(dtoToBeSaved.formBackendActionsList);
+
     const formSections = dtoToBeSaved.formTabs.concat(dtoToBeSaved.formPopups);
+    
     formSections.forEach(formSection => {
       this.defineShortOrders(formSection.formAreas);
       formSection.formAreas.forEach(formArea => {
