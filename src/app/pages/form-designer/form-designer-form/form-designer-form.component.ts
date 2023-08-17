@@ -35,6 +35,7 @@ import 'brace/theme/chrome'
 import {AceConfigInterface} from 'ngx-ace-wrapper';
 import {TagDesignerService} from '../../../services/crud/tag-designer.service';
 import {TagDTO} from '../../../dtos/tag/tag-dto';
+import { FormBackendActions } from 'app/dtos/form/form-backend-actions';
 
 
 @Component({
@@ -63,6 +64,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   public selectedFormArea: FormArea = new FormArea();
   public selectedformScript: FormScript;
   public selectedformCss: FormCss;
+  public selectedformBackendActions: FormBackendActions;
   public selectedFormControl: FormControlDto = new FormControlDto();
   public selectedTableFormControl: FormControlDto = new FormControlDto();
   public selectedTableVisibleComponentPersistEntityList: ComponentPersistEntityDTO[] = [];
@@ -115,6 +117,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
         this.setDefaultSelectedFormScript();
         this.setDefaultSelectedFormCss();
         this.formScriptsFromBase64();
+        this.setDefaultSelectedFormBackendActions();
 
       });
     } else {
@@ -123,6 +126,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
       this.setDefaultSelectedTabs();
       this.setDefaultSelectedFormScript();
       this.setDefaultSelectedFormCss();
+      this.setDefaultSelectedFormBackendActions();
       this.formScriptsFromBase64();
       this.setDefaultActionButtons();
     }
@@ -619,6 +623,17 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     this.setDefaultSelectedFormCss();
   }
 
+  addBackendActions() {
+    if (this.dto.formBackendActionsList == null) {
+      this.dto.formBackendActionsList = [];
+    }
+    const formBackendActions = new FormBackendActions();
+    formBackendActions.shortOrder = this.getNextShortOrder(this.dto.formBackendActionsList);
+    //formBackendActions.editor = 'Backend Actions ' + formBackendActions.shortOrder;
+    this.dto.formBackendActionsList.push(formBackendActions);
+    this.setDefaultSelectedFormBackendActions();
+  }
+
 
   removeEntityFormList(entity: any, list: any[]) {
     list =
@@ -634,6 +649,11 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
   removeFormCssByField(formCss: FormCss) {
     this.dto.formCssList =
       this.dto.formCssList.filter(item => item !== formCss);
+  }
+
+  removeFormBackendActionsByField(formBackendAction: FormBackendActions) {
+    this.dto.formBackendActionsList =
+      this.dto.formBackendActionsList.filter(item => item !== formBackendAction);
   }
 
   setDefaultActionButtons() {
@@ -680,6 +700,15 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     }
   }
 
+  setDefaultSelectedFormBackendActions() {
+    if (this.selectedformBackendActions != null) {
+      return;
+    }
+    if (this.dto.formBackendActionsList != null && this.dto.formBackendActionsList.length > 0) {
+      this.selectedformBackendActions = this.dto.formBackendActionsList[0];
+    }
+  }
+
 
   setSelectedFormScript(formScript: FormScript) {
     this.selectedformScript = formScript;
@@ -687,6 +716,10 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
 
   setSelectedFormCss(formCss: FormCss) {
     this.selectedformCss = formCss;
+  }
+
+  setSelectedFormBackendActions(formBackendActions: FormBackendActions) {
+    this.selectedformBackendActions = formBackendActions;
   }
 
   moveUp(baseDTO: BaseDTO, baseDTOs: BaseDTO[]): any {

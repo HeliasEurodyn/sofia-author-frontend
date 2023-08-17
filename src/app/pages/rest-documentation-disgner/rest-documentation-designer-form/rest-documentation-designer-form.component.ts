@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { ListDesignerService } from 'app/services/crud/list-designer.service';
 import { ListDTO } from 'app/dtos/list/list-dto';
 import { RestDocumentationEndpointDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/rest-documentation-endpoint-dto';
-// import { RestDocumentationEndpointDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/rest-documentation-endpoint-dto';
 import { TableComponentDesignerService } from 'app/services/crud/table-component-designer.service';
 import { AceConfigInterface } from 'ngx-ace-wrapper';
 import { FormDto } from 'app/dtos/form/form-dto';

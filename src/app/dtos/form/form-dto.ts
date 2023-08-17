@@ -8,6 +8,7 @@ import {FormCss} from './form-css';
 import {AccessControlDto} from '../security/access-control-dto';
 import {FormTranslationDto} from "./translation/form-translation-dto";
 import {TagDTO} from "../tag/tag-dto";
+import { FormBackendActions } from './form-backend-actions';
 
 export class FormDto extends BaseDTO {
   public name: string;
@@ -27,4 +28,5 @@ export class FormDto extends BaseDTO {
   public formActionButtons: FormActionButton[] = [];
   public accessControls: AccessControlDto[] = [];
   public translations: FormTranslationDto[] = [];
+  public formBackendActionsList: FormBackendActions[] = [];
 }
