@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { RestDocumentationDTO } from 'app/dtos/rest-documentation/rest-documentation-dto';
-import { PageComponent } from 'app/pages/page/page-component';
-import { RestDocumentationDesignerService } from 'app/services/crud/rest-documentation-designer.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {RestDocumentationDTO} from 'app/dtos/rest-documentation/rest-documentation-dto';
+import {PageComponent} from 'app/pages/page/page-component';
+import {RestDocumentationDesignerService} from 'app/services/crud/rest-documentation-designer.service';
 import {Location} from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ListDesignerService } from 'app/services/crud/list-designer.service';
-import { ListDTO } from 'app/dtos/list/list-dto';
-import { RestDocumentationEndpointDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/rest-documentation-endpoint-dto';
-import { TableComponentDesignerService } from 'app/services/crud/table-component-designer.service';
-import { AceConfigInterface } from 'ngx-ace-wrapper';
-import { FormDto } from 'app/dtos/form/form-dto';
-import { FormDesignerService } from 'app/services/crud/form-designer.service';
-import { ExcludeEndpointFieldDTO } from 'app/dtos/rest-documentation/rest-documentation-endpoint/exclude-endpoint-field-dto';
+import {HttpClient} from '@angular/common/http';
+import {ListDesignerService} from 'app/services/crud/list-designer.service';
+import {ListDTO} from 'app/dtos/list/list-dto';
+import {RestDocumentationEndpointDTO} from 'app/dtos/rest-documentation/rest-documentation-endpoint/rest-documentation-endpoint-dto';
+import {TableComponentDesignerService} from 'app/services/crud/table-component-designer.service';
+import {AceConfigInterface} from 'ngx-ace-wrapper';
+import {FormDto} from 'app/dtos/form/form-dto';
+import {FormDesignerService} from 'app/services/crud/form-designer.service';
+import {ExcludeEndpointFieldDTO} from 'app/dtos/rest-documentation/rest-documentation-endpoint/exclude-endpoint-field-dto';
+import {BaseDTO} from 'app/dtos/common/base-dto';
 
 @Component({
   selector: 'app-rest-documentation-designer-form',
@@ -39,14 +40,14 @@ export class RestDocumentationDesignerFormComponent extends PageComponent implem
   };
 
   constructor(private activatedRoute: ActivatedRoute,
-    private service: RestDocumentationDesignerService,
-    private tableComponentService: TableComponentDesignerService,
-    private location: Location,
-    private listService: ListDesignerService,
-    private formService: FormDesignerService,
-    private httpClient: HttpClient) {
-super();
-}
+              private service: RestDocumentationDesignerService,
+              private tableComponentService: TableComponentDesignerService,
+              private location: Location,
+              private listService: ListDesignerService,
+              private formService: FormDesignerService,
+              private httpClient: HttpClient) {
+    super();
+  }
 
   ngOnInit(): void {
 
@@ -72,7 +73,6 @@ super();
   }
 
 
-
   refreshComponents() {
 
     this.tableComponentService.get().subscribe(data => {
@@ -90,6 +90,12 @@ super();
 
   save() {
     const dtoToBeSaved = JSON.parse(JSON.stringify(this.dto));
+    this.defineShortOrders(dtoToBeSaved.restDocumentationEndpoints);
+
+    dtoToBeSaved.restDocumentationEndpoints.forEach(x => {
+      this.defineShortOrders(x.excludeEndPointFields);
+    });
+
     if (this.mode === 'edit-record') {
       this.service.update(dtoToBeSaved).subscribe(data => {
         this.location.back();
@@ -103,8 +109,19 @@ super();
   }
 
 
+  defineShortOrders(baseDTOs: BaseDTO[]) {
+    if (baseDTOs === null
+      || baseDTOs === undefined
+      || baseDTOs.length === 0) {
+      return;
+    }
+    let shortOrder = 1;
+    baseDTOs.forEach(baseDTO => {
+      baseDTO.shortOrder = shortOrder;
+      shortOrder++;
+    });
+  }
 
-  
   cleanIdsIfCloneEnabled() {
 
     if (this.params.has('TYPE')) {
@@ -118,7 +135,7 @@ super();
           restDocumentationEndpoint.version = null;
           restDocumentationEndpoint.excludeEndPointFields.forEach((excludeEndpointField) => {
             excludeEndpointField.id = null;
-            excludeEndpointField.version =null;
+            excludeEndpointField.version = null;
           });
         });
       }
@@ -179,6 +196,18 @@ super();
     this.dto.restDocumentationEndpoints.push(restDocumentationEndpoint);
   }
 
+  addCustom() {
+
+    if (this.dto.restDocumentationEndpoints == null) {
+      this.dto.restDocumentationEndpoints = [];
+    }
+
+    const restDocumentationEndpoint = new RestDocumentationEndpointDTO();
+    restDocumentationEndpoint.type = 'custom';
+    restDocumentationEndpoint.method = 'post';
+    this.dto.restDocumentationEndpoints.push(restDocumentationEndpoint);
+  }
+
   selectForm(form: FormDto) {
     this.form = form;
 
@@ -190,14 +219,16 @@ super();
   }
 
   addExcludeField(restDocumentationEndpoint) {
-    if(restDocumentationEndpoint.excludeEndPointFields == null) restDocumentationEndpoint.excludeEndPointFields = [];
-      const newExcludeField = new ExcludeEndpointFieldDTO();
-      restDocumentationEndpoint.excludeEndPointFields.push(newExcludeField);
-      this.newExcludeFieldName = ''; 
-    
+    if (restDocumentationEndpoint.excludeEndPointFields == null) {
+      restDocumentationEndpoint.excludeEndPointFields = [];
+    }
+    const newExcludeField = new ExcludeEndpointFieldDTO();
+    restDocumentationEndpoint.excludeEndPointFields.push(newExcludeField);
+    this.newExcludeFieldName = '';
+
   }
 
-   removeExcludeField(excludeField: ExcludeEndpointFieldDTO) {
+  removeExcludeField(excludeField: ExcludeEndpointFieldDTO) {
     const index = this.restDocumentationEndpoint.excludeEndPointFields.indexOf(excludeField);
     if (index !== -1) {
       this.restDocumentationEndpoint.excludeEndPointFields.splice(index, 1);
@@ -240,6 +271,4 @@ super();
       shortOrder++;
     }
   }
-
-
 }

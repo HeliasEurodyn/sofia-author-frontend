@@ -524,7 +524,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     this.defineShortOrders(dtoToBeSaved.formBackendActionsList);
 
     const formSections = dtoToBeSaved.formTabs.concat(dtoToBeSaved.formPopups);
-    
+
     formSections.forEach(formSection => {
       this.defineShortOrders(formSection.formAreas);
       formSection.formAreas.forEach(formArea => {
@@ -632,7 +632,6 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     }
     const formBackendActions = new FormBackendActions();
     formBackendActions.shortOrder = this.getNextShortOrder(this.dto.formBackendActionsList);
-    //formBackendActions.editor = 'Backend Actions ' + formBackendActions.shortOrder;
     this.dto.formBackendActionsList.push(formBackendActions);
     this.setDefaultSelectedFormBackendActions();
   }
