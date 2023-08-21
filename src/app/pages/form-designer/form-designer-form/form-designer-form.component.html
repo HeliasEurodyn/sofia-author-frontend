@@ -1172,6 +1172,7 @@
               <thead class=" text-primary">
               <tr>
                 <th>Actions</th>
+                <th>Title</th>
                 <th>Trigger_On</th>
                 <th>Editor</th>
               </tr>
@@ -1204,6 +1205,9 @@
                     <i class="fa fa-angle-down"></i>
                   </button>
 
+                </td>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="formBackendAction.title">
                 </td>
                 <td>
                 <select [(ngModel)]="formBackendAction.trigger_on" class="form-control" data-style="btn btn-primary btn-round">
