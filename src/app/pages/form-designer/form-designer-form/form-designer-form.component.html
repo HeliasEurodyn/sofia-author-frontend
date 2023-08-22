@@ -76,14 +76,14 @@
         Css
       </button>
       <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
+              (click)="setVisibleSection('backend_actions');">
+        <i class="fa-solid fa-wrench"></i>
+        Backend Actions
+      </button>
+      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
               (click)="setVisibleSection('access_control');">
         <i class="fas fa-key"></i>
         Access Control
-      </button>
-      <button type="button" class="btn btn-outline-default btn-round btn-white header-tab"
-               (click)="setVisibleSection('backend_actions');">
-        <i class="fa-solid fa-radiation"></i>
-        Backend Actions
       </button>
     </div>
 
@@ -1165,15 +1165,13 @@
       </div>
       <div class="card-body">
         <div class="row">
-
           <div class="col-md-12">
-
             <table class="table table-striped">
               <thead class=" text-primary">
               <tr>
                 <th>Actions</th>
                 <th>Title</th>
-                <th>Trigger_On</th>
+                <th>Triggers On</th>
                 <th>Editor</th>
               </tr>
               </thead>
@@ -1182,10 +1180,8 @@
                 *ngIf="this.dto?.formBackendActionsList == undefined || this.dto?.formBackendActionsList?.length === 0">
                 <td colspan="3" class="empty-table-row">Empty!</td>
               </tr>
-
               <tr *ngFor="let formBackendAction of this.dto?.formBackendActionsList">
                 <td>
-
                   <button title="Remove" (click)="removeFormBackendActionsByField(formBackendAction)" type="button"
                           class="btn btn-outline-danger btn-icon btn-sm">
                     <i class="fa fa-times"></i>
@@ -1211,8 +1207,10 @@
                 </td>
                 <td>
                 <select [(ngModel)]="formBackendAction.trigger_on" class="form-control" data-style="btn btn-primary btn-round">
-                  <option class="bs-title-option" value="post">Before Post</option>
-                  <option class="bs-title-option" value="put">After Post</option>
+                  <option class="bs-title-option" value="before_retrieve">Before Retrieve</option>
+                  <option class="bs-title-option" value="after_retrieve">After Retrieve</option>
+                  <option class="bs-title-option" value="before_save">Before Save</option>
+                  <option class="bs-title-option" value="after_save">After Save</option>
                 </select>
                 </td>
                 <td>
@@ -1221,9 +1219,7 @@
               </tr>
               </tbody>
             </table>
-
           </div>
-
         </div>
       </div>
     </div>
@@ -2638,3 +2634,4 @@
     </div>
   </div>
 </div>
+
