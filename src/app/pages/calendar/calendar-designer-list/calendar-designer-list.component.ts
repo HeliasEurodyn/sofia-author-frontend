@@ -4,14 +4,14 @@ import { CalendarDesignerService } from 'app/services/crud/calendar-designer.ser
 import { CommandNavigatorService } from 'app/services/system/command-navigator.service';
 
 @Component({
-  selector: 'app-calendar-desginer-list',
-  templateUrl: './calendar-desginer-list.component.html',
-  styleUrls: ['./calendar-desginer-list.component.css']
+  selector: 'app-calendar-designer-list',
+  templateUrl: './calendar-designer-list.component.html',
+  styleUrls: ['./calendar-designer-list.component.css']
 })
-export class CalendarDesginerListComponent extends PageComponent implements OnInit {
+export class CalendarDesignerListComponent extends PageComponent implements OnInit {
 
   tableData: any[];
-  
+
   constructor(private service: CalendarDesignerService,
     private navigatorService: CommandNavigatorService) {
     super();

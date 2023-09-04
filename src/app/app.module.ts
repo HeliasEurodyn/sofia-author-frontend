@@ -132,8 +132,8 @@ import {
 } from './pages/sse-notification-template/sse-notification-template-form/sse-notification-template-form.component';
 
 import {FormDesignerTranslationFormComponent} from './pages/form-designer/form-designer-translation-form/form-designer-translation-form.component';
-import { CalendarDesginerListComponent } from './pages/calendar/calendar-desginer-list/calendar-desginer-list.component';
-import { CalendarDesginerFormComponent } from './pages/calendar/calendar-desginer-form/calendar-desginer-form.component';
+import { CalendarDesignerListComponent } from './pages/calendar/calendar-designer-list/calendar-designer-list.component';
+import { CalendarDesignerFormComponent } from './pages/calendar/calendar-designer-form/calendar-designer-form.component';
 import { HtmlTemplateDesignerFormComponent } from './pages/html-template-designer/html-template-designer-form/html-template-designer-form.component';
 import { HtmlTemplateDesignerListComponent } from './pages/html-template-designer/html-template-designer-list/html-template-designer-list.component';
 import { AccessControlComponent } from './pages/access-control/access-control.component';
@@ -141,7 +141,7 @@ import { ShortByOrderPipe } from './pages/table-designer/table-designer-form/sho
 import { RemoveElementModalComponent } from './modals/remove_element_modal/remove-element-modal/remove-element-modal.component';
 import { TagDesignerListComponent } from './pages/tag-designer/tag-designer-list/tag-designer-list.component';
 import { TagDesignerFormComponent } from './pages/tag-designer/tag-designer-form/tag-designer-form.component';
-import { NavCommandCalculatorPageComponent } from "./pages/nav-command-calculator/nav-command-calculator-page.component";
+import { NavCommandCalculatorPageComponent } from './pages/nav-command-calculator/nav-command-calculator-page.component';
 import { RuleDesignerFormComponent } from './pages/rule-designer/rule-designer-form/rule-designer-form.component';
 import { RuleDesignerListComponent } from './pages/rule-designer/rule-designer-list/rule-designer-list.component';
 import { NavCommandCalculatorComponent } from './pages/nav-command-calculator/nav-command-calculator/nav-command-calculator.component';
@@ -222,8 +222,8 @@ import { RestDocumentationDesignerListComponent } from './pages/rest-documentati
     SseNotificationTemplateFormComponent,
     TagDesignerFormComponent,
     TagDesignerListComponent,
-    CalendarDesginerFormComponent,
-    CalendarDesginerListComponent,
+    CalendarDesignerFormComponent,
+    CalendarDesignerListComponent,
     HtmlTemplateDesignerListComponent,
     HtmlTemplateDesignerFormComponent,
     AccessControlComponent,

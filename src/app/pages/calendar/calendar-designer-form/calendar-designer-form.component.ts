@@ -10,11 +10,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CalendarDesignerService } from 'app/services/crud/calendar-designer.service';
 
 @Component({
-  selector: 'app-calendar-desginer-form',
-  templateUrl: './calendar-desginer-form.component.html',
-  styleUrls: ['./calendar-desginer-form.component.css']
+  selector: 'app-calendar-designer-form',
+  templateUrl: './calendar-designer-form.component.html',
+  styleUrls: ['./calendar-designer-form.component.css']
 })
-export class CalendarDesginerFormComponent extends PageComponent implements OnInit {
+export class CalendarDesignerFormComponent extends PageComponent implements OnInit {
 
   public dto: CalendarDTO;
   public mode : string;

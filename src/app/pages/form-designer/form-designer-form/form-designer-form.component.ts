@@ -57,6 +57,12 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     readOnly : false
   };
 
+  aceTextEditorConfig: AceConfigInterface = {
+    theme: 'monokai',
+    mode: 'text',
+    fontSize: 14,
+  };
+
   public mode: string;
   public dto: FormDto;
   public description: string;
@@ -1030,7 +1036,7 @@ export class FormDesignerFormComponent extends PageComponent implements OnInit {
     if(fieldType == 'list'){
       this.selectedComponentPersistEntityField.assignment.type = 'list';
       this.selectedComponentPersistEntityField.assignment.editor =
-        "{\"COMMAND-TYPE\":\"POPUPLIST\",\"LOCATE\":\"(ID=list_id)\",\"RETURN\":\"cf_id\",\"FOCUS\":\"header-filter-cf_name\",\"DISPLAY\":\"(table_code.name_name)\",\"REFRESH\":\"table_code\",\"HIDE-DELETE\":\"YES\"}";
+        '{"COMMAND-TYPE":"POPUPLIST","LOCATE":"(ID=list_id)","RETURN":"cf_id","FOCUS":"header-filter-cf_name","DISPLAY":"(table_code.name_name)","REFRESH":"table_code","HIDE-DELETE":"YES"}';
 
     }
 

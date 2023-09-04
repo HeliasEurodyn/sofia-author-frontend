@@ -109,28 +109,28 @@ import {
   TagDesignerListComponent
 } from '../../pages/tag-designer/tag-designer-list/tag-designer-list.component';
 import {FormDesignerTranslationFormComponent} from '../../pages/form-designer/form-designer-translation-form/form-designer-translation-form.component';
-import { CalendarDesginerListComponent } from '../../pages/calendar/calendar-desginer-list/calendar-desginer-list.component';
-import { CalendarDesginerFormComponent } from '../../pages/calendar/calendar-desginer-form/calendar-desginer-form.component';
+import { CalendarDesignerListComponent } from '../../pages/calendar/calendar-designer-list/calendar-designer-list.component';
+import { CalendarDesignerFormComponent } from '../../pages/calendar/calendar-designer-form/calendar-designer-form.component';
 import { HtmlTemplateDesignerFormComponent } from '../../pages/html-template-designer/html-template-designer-form/html-template-designer-form.component';
 import { HtmlTemplateDesignerListComponent } from '../../pages/html-template-designer/html-template-designer-list/html-template-designer-list.component';
 import {AccessControlComponent} from '../../pages/access-control/access-control.component';
-import {NavCommandCalculatorPageComponent} from "../../pages/nav-command-calculator/nav-command-calculator-page.component";
-import {RuleDesignerFormComponent} from "../../pages/rule-designer/rule-designer-form/rule-designer-form.component";
-import {RuleDesignerListComponent} from "../../pages/rule-designer/rule-designer-list/rule-designer-list.component";
+import {NavCommandCalculatorPageComponent} from '../../pages/nav-command-calculator/nav-command-calculator-page.component';
+import {RuleDesignerFormComponent} from '../../pages/rule-designer/rule-designer-form/rule-designer-form.component';
+import {RuleDesignerListComponent} from '../../pages/rule-designer/rule-designer-list/rule-designer-list.component';
 import { RestDocumentationDesignerFormComponent } from '../../pages/rest-documentation-disgner/rest-documentation-designer-form/rest-documentation-designer-form.component';
 import { RestDocumentationDesignerListComponent } from '../../pages/rest-documentation-disgner/rest-documentation-designer-list/rest-documentation-designer-list.component';
 import {
   RuleOperatorDesignerListComponent
-} from "../../pages/rule-operator-designer/rule-operator-designer-list/rule-operator-designer-list.component";
+} from '../../pages/rule-operator-designer/rule-operator-designer-list/rule-operator-designer-list.component';
 import {
   RuleOperatorDesignerFormComponent
-} from "../../pages/rule-operator-designer/rule-operator-designer-form/rule-operator-designer-form.component";
+} from '../../pages/rule-operator-designer/rule-operator-designer-form/rule-operator-designer-form.component';
 import {
   RuleFieldDesignerListComponent
-} from "../../pages/rule-field-designer/rule-field-designer-list/rule-field-designer-list.component";
+} from '../../pages/rule-field-designer/rule-field-designer-list/rule-field-designer-list.component';
 import {
   RuleFieldDesignerFormComponent
-} from "../../pages/rule-field-designer/rule-field-designer-form/rule-field-designer-form.component";
+} from '../../pages/rule-field-designer/rule-field-designer-form/rule-field-designer-form.component';
 
 export const AdminLayoutRoutes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
@@ -189,8 +189,8 @@ export const AdminLayoutRoutes: Routes = [
   {path: 'tag-designer-form', component: TagDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'tag-designer-list', component: TagDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'form-designer-translation-form', component: FormDesignerTranslationFormComponent, canActivate: [AuthGuard]},
-  {path: 'calendar-designer-list', component: CalendarDesginerListComponent, canActivate: [AuthGuard]},
-  {path: 'calendar-designer-form', component: CalendarDesginerFormComponent, canActivate: [AuthGuard]},
+  {path: 'calendar-designer-list', component: CalendarDesignerListComponent, canActivate: [AuthGuard]},
+  {path: 'calendar-designer-form', component: CalendarDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'html-template-designer-list', component: HtmlTemplateDesignerListComponent, canActivate: [AuthGuard]},
   {path: 'html-template-designer-form', component: HtmlTemplateDesignerFormComponent, canActivate: [AuthGuard]},
   {path: 'form-designer-translation-form', component: FormDesignerTranslationFormComponent, canActivate: [AuthGuard]},
