@@ -19,23 +19,23 @@
     "description": "Returns the System parameter value by the given parameter name <br> @param (string) parameter: The reference parameter name <br> @returns (string): The reference parameter value <br> @examples: [systemParameter('userId')]"
   },
   {
-    "name": "numberAddition(parameter: double,double)",
+    "name": "numberAddition(parameter: number,number)",
     "description":"Returns the addition from two numbers <br> @param (Double) parameter: firstNumber <br> @param (Double) parameter: secondNumber <br> @examples: numberAddition(10,2)"
   },
   {
-    "name": "numberDivision(parameter: double,double)",
+    "name": "numberDivision(parameter: number,number)",
     "description":"Returns the division from two numbers <br> @param (Double) parameter: firstNumber <br> @param (Double) parameter: secondNumber <br> @examples: numberDivision(10,2)"
   },
   {
-    "name": "numberMultiplication(parameter: double,double)",
+    "name": "numberMultiplication(parameter: number,number)",
     "description":"Returns the multiplication from two numbers <br> @param (Double) parameter: firstNumber <br> @param (Double) parameter: secondNumber <br> @examples: numberMultiplication(10,2)"
   },
   {
-    "name": "numberSubtraction(parameter: double,double)",
+    "name": "numberSubtraction(parameter: number,number)",
     "description":"Returns the subtraction from two numbers <br> @param (Double) parameter: firstNumber <br> @param (Double) parameter: secondNumber <br> @examples: numberSubtraction(10,2)"
   },
   {
-    "name": "equalsTo(parameter: double,double)",
+    "name": "equalsTo(parameter: number,number)",
     "description":"Returns if first number is equals with second number <br> @param (Double) parameter: firstNumber <br> @param (Double) parameter: secondNumber <br> @examples: equalsTo(10,10)"
   },
   {
@@ -55,7 +55,7 @@
     "description":""
   },
   {
-    "name": "greaterThan(parameter: double,double)",
+    "name": "greaterThan(parameter: number,number)",
     "description":"Returns true if first parameter is greater than second parameter <br> @param (Double) parameter: firstNumber <br> @param (Double) parameter: secondNumber <br> @examples: greaterThan(10,2)"
   },
   {
