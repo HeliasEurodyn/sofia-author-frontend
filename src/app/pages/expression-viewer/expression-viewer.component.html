@@ -194,61 +194,28 @@
         <form>
           <div class="row">
             <div class="col-12">
-              <table class="table table-striped table-fixed">
-                <thead class="text-primary">
-                <tr>
-                  <th>Expression</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr style="cursor: pointer;" (click)="addExpression('+')">
-                  <td>
-                    <h5 style="margin-bottom: 0px;"> + Plus Operator</h5>
-                    Plus operator is used for addition when working with numeric data types, but it also used for string concatenation<br>
-                    @examples: 10 + 3 , 'Hello' + ' ' + 'World!'
-                  </td>
-                </tr>
-                <tr style="cursor: pointer;" (click)="addExpression('dateNowPlus')">
-                  <td>
-                    <h5 style="margin-bottom: 0px;">dateNowPlus(days: number)</h5>
-                    Returns the date that is 'days' number of days ahead of the current date.<br>
-                    @param (number) days: The number of days to add to the current date.<br>
-                    @returns (Date): The date that is 'days' number of days ahead of the current date.<br>
-                    @examples: dateNowPlus(5), dateNowPlus(-3)
-                  </td>
-                </tr>
-                <tr style="cursor: pointer;" (click)="addExpression('dateNowPlus')">
-                  <td>
-                    <h5 style="margin-bottom: 0px;">dateNowPlus(days: number)</h5>
-                    Returns the date that is 'days' number of days ahead of the current date.<br>
-                    @param (number) days: The number of days to add to the current date.<br>
-                    @returns (Date): The date that is 'days' number of days ahead of the current date.<br>
-                    @examples: dateNowPlus(5), dateNowPlus(-3)
-                  </td>
-                </tr>
-                <tr style="cursor: pointer;" (click)="addExpression('datePlus')">
-                  <td>
-                    <h5 style="margin-bottom: 0px;">datePlus(date: Date, days: number)</h5>
-                    Returns the date that is 'days' number of days ahead of the given date.<br>
-                    @param (Date) date: The reference date.<br>
-                    @param (number) days: The number of days to add to the provided date.<br>
-                    @returns (Date): The date that is 'days' number of days ahead of the provided date.<br>
-                    @examples: datePlus(yyyyMmDdHhMmStringToDate('202010200810'),5), datePlus(yyyyMmDdHhMmStringToDate('202010200810')-3)
-                  </td>
-                </tr>
-                <tr style="cursor: pointer;" (click)="addExpression('datePlus')">
-                  <td>
-                    <h5 style="margin-bottom: 0px;">systemParameter(parameter: string)</h5>
-                    Returns the System parameter value by the given parameter name.<br>
-                    @param (string) paraterer: The reference parameter name.<br>
-                    @returns (string): The reference parameter value.<br>
-                    @examples: systemParameter('userId')
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search"
+                       [(ngModel)]="searchTerm" name="searchTerm"
+                       (keyup)="filterExpressions()"
+                       (keyup.enter)="performSearch()" />
+              </div>
             </div>
           </div>
+          <table class="table table-striped table-fixed">
+            <tbody>
+            <tr
+              *ngFor="let expression of filteredExpressions"
+              style="cursor: pointer;"
+              (click)="addExpression(expression.name)"
+            >
+              <td>
+                <h5 style="margin-bottom: 0px;">{{ expression.name }}</h5>
+                <div [innerHTML]="trustResource(expression.description)"></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </form>
       </div>
       <div class="modal-footer">
